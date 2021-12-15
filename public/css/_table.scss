@@ -1,0 +1,46 @@
+@mixin table-scroll {
+    &::-webkit-scrollbar {
+        width: 15px;
+      }
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px #29374b; 
+        border-radius: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #29374b; 
+        border-radius: 10px;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: #29374b; 
+      }
+}
+.table {
+  // background-color: $gray;
+  background-color: #222222;
+  border: none;
+  color: $white;
+  font-size: $font-12;
+  //  font-weight: $font-600;
+   border: 1px solid $black;
+    th {
+        // vertical-align: middle;
+        // border-bottom: none;
+        // color: $white;
+        // // background-color: $blue;
+        // font-size: 14px;
+        // font-weight: $font-400;
+    }
+    td{
+      border: none;
+        vertical-align: middle;
+    }
+    td.green-color {
+      color:$green;
+  }
+  td.red-color{
+    color: $red;
+  }
+  td.gray-color {
+   
+}
+}

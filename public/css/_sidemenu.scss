@@ -1,0 +1,120 @@
+
+.sidemenu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    background-color: $black;
+    overflow-x: hidden;
+    transition: 0.5s;
+    font-family: 'IBM Plex Mono', monospace;
+    ul{
+        @include remove-ul;
+        padding: 20px;
+        li{
+            padding: 5px 0;
+            a{
+                color: $white;
+                font-size: $font-16;
+                font-weight: $font-600;
+                &:hover{
+                    text-decoration: none;
+                    color: $green;
+                }
+                &.active{
+                    color: $green;
+                }
+            }
+            .card.card-body{
+                ul{
+                    padding: 0;
+                    a{
+                        color: $ccc;
+                        font-size: $font-14;
+                    }
+                }
+            }
+            .sidemenu-a {
+                background-color: transparent;
+                border: none;
+                color: $white;
+                padding: 0;
+                width: 100%;
+                font-size: $font-16;
+                font-weight: $font-600;
+                @include flex-between;
+                &:hover{
+                    color: $green;
+                }
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+        small{
+            color: $ccc;
+        }
+        p{
+            color: $ccc;
+            font-size: $font-14;
+            b{
+                font-weight: bold;
+            }
+        }
+        i.fa.fa-moon-o {
+            font-size: 40px;
+            color: $green;
+            padding-left: 20px;
+            cursor: pointer;
+        }
+        i.fa.fa-sun-o{
+            font-size: 40px;
+            padding-left: 20px;
+            cursor: pointer;
+        }
+      
+    }
+  }
+  .sidemenu-a[aria-expanded="true"] i {
+    transform: rotate(
+180deg
+);
+}
+.border-bottom-li {
+    border-bottom: 1px solid $gray;
+}
+  
+a.closebtn {
+    font-size: 30px;
+    padding-left: 20px;
+    color: $white;
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+
+
+/* width */
+.sidemenu::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  /* Track */
+  .sidemenu::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .sidemenu::-webkit-scrollbar-thumb {
+    background: #000; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .sidemenu::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+  }

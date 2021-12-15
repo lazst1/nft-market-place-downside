@@ -1,0 +1,48 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin flex-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+@mixin flex-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@mixin flex-item-center {
+    display: flex;
+    align-items: center;
+}
+@mixin flex-item-start {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+@mixin remove-ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+@mixin form-control {
+    background-color: $gray;
+    border-color: $gray;
+    color: $white;
+    outline: none;
+    box-shadow: none;
+    font-size: 13px;
+    height: 45px !important;
+    font-family: 'IBM Plex Mono', monospace;
+    &:focus{
+        outline: none !important;
+        box-shadow: none !important;
+    } 
+}

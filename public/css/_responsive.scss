@@ -1,0 +1,411 @@
+//  =================================================== screen 1440 =================================================================
+@media (max-width: 1500px) {
+  
+  section.search-section button.btn.btn-green {
+    min-width: 180px !important;
+  }
+  section.user-section img {
+    max-width: 120px;
+    height: 120px;
+  }
+  .by-join button {
+    font-size: 9px !important;
+}
+.sell-section h6 {
+  font-size: 12px;
+}
+.hover-content .mark-content.mark-content2 {
+  font-size: 10px;
+  width: 200px;
+  right: 0px;
+}
+ul.product-ul .product-card .product-contant table label {
+  font-size: 12px;
+}
+}
+//  =================================================== screen 1440 =================================================================
+@media (max-width: 1440px) {
+  .collaction_div .collaction_div1 img {
+    height: 250px;
+  }
+  .collaction_div .collaction_div1 {
+    height: 250px;
+  }
+  .comment-box {
+    position: absolute;
+    background-color: #000000;
+    padding: 15px;
+    line-height: 26px;
+    border: 4px solid;
+    border-color: #19cb58;
+    font-size: 16px;
+    width: 70%;
+    font-family: "IBM Plex Mono", monospace;
+    right: 0;
+    bottom: 100px;
+  }
+  .btn-blue {
+    font-size: 12px;
+}
+}
+//  =================================================== screen 1366 =================================================================
+@media (max-width: 1366px) {
+  .hover-content .mark-content.mark-content2 {
+    width: 170px;
+}
+
+  .collaction_div .collaction_div1 img {
+    height: 220px;
+  }
+  .collaction_div .collaction_div1 {
+    height: 220px;
+  }
+ 
+  .sell-section h5 {
+    font-size: 16px;
+  }
+  .comingsoon-div.comingsoon-div-home .left-cartoon {
+    align-items: flex-end;
+    padding: 10px;
+  }
+  .comingsoon-div.comingsoon-div-home .right-cartoon {
+    align-items: flex-end;
+    padding: 10px;
+  }
+  .comingsoon-div.comingsoon-div-home .comment-box.comment-box2 {
+    padding: 10px;
+  }
+  .comingsoon-div .coming-content {
+    top: 60px;
+  }
+  .collaction_div span {
+    font-size: 9px;
+  }
+}
+//  =================================================== screen 1280 =================================================================
+@media (max-width: 1280px) {
+  section.search-section a.filter-icon {
+    font-size: 20px;
+  }
+  .sell-section h6 {
+    font-size: 11px;
+}
+  .sell-section h5 {
+    font-size: 14px;
+}
+  ul.product-ul .product-card img {
+    height: 200px;
+  }
+  .hover-btn button {
+    font-size: 10px !important;
+  }
+  .comingsoon-div h4 {
+    font-size: 28px;
+  }
+  .sell-section .numbring p {
+    padding: 3px 4px;
+    margin: 0 1px;
+  }
+}
+//  =================================================== screen 1024 =================================================================
+@media (max-width: 1024px) {
+  .sell-section h5 {
+    line-height: 26px;
+}
+  .comment-box {
+    width: 63%;
+    right: 122px;
+  }
+  .comment-box3 {
+    left: 130px;
+  }
+  .comingsoon-div.comingsoon-div-home {
+    height: 700px;
+  }
+  .left-cartoon {
+    width: 100%;
+    bottom: 240px;
+    left: 0px;
+    padding: 20px;
+  }
+  .right-cartoon {
+    width: 100%;
+    right: 0;
+    padding: 20px;
+  }
+  .container-1440 {
+    max-width: 100%;
+  }
+  .check_box {
+    font-size: 13px;
+  }
+}
+//  =================================================== screen 991 =================================================================
+@media (max-width: 991px) {
+  .filter-row {
+    margin-bottom: 20px;
+}
+  .comment-box3 {
+    left: 100px;
+  }
+  .comment-box {
+    right: 71px;
+  }
+  .comingsoon-div.comingsoon-div-home .coming-content {
+    top: 40px;
+  }
+  .hover-btn {
+    display: block;
+    position: initial;
+  }
+  .comingsoon-div h1 {
+    font-size: 50px;
+  }
+  .comingsoon-div h4 {
+    font-size: 20px;
+  }
+  .comingsoon-div .coming-content {
+    top: 50px;
+  }
+  .home-main {
+    display: block;
+  }
+  .home-main .home-left {
+    width: 100%;
+  }
+  .home-main .home-right {
+    width: 100%;
+    margin-top: 50px;
+  }
+  .product-car-header button {
+    font-size: $font-14 !important;
+  }
+  .home-left .table-responsive {
+    height: 400px;
+    overflow-y: scroll;
+  }
+  .my-collaction p {
+    padding: 0;
+}
+.my-collaction h2 {
+  font-size: 20px;
+}
+
+}
+//  =================================================== screen 767 =================================================================
+@media (max-width: 767px) {
+  .image_tabbed ul:first-child {
+    display: block;
+}
+  .filter-row {
+    display: block;
+  }
+  .mrginbottom{
+    margin-bottom: 10px;
+  }
+  body {
+    padding-top: 100px;
+}
+  .slider-card figure img {
+    height: 250px;
+    object-fit: cover;
+}
+  .right-cartoon {
+    display: block;
+  }
+  .comingsoon-div.comingsoon-div-home {
+    height: 700px;
+  }
+  section.user-section h2 {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  .slider-card {
+    display: block;
+    height: auto;
+  }
+  .slider-card figure {
+    width: 100%;
+  }
+  .slider-card .slider-contant {
+    width: 100%;
+  }
+  section.marketer-section h3 {
+    font-size: 20px;
+  }
+  section.marketer-section .col-md-4 {
+    margin-bottom: 25px;
+  }
+  footer .footer-content {
+    display: block;
+  }
+  .image_tabbed {
+    li {
+      font-size: 12px !important;
+    }
+  }
+  .left-cartoon {
+    bottom: 260px;
+  }
+  nav.navbar.navbar-expand-lg.navbar-light.justify-content-between {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .current_auction .newheader {
+    padding: 10px 35px;
+    text-align: center;
+  }
+  .total_value span {
+    font-size: 12px !important;
+  }
+  .divComponent {
+    h3 {
+      font-size: 22px !important;
+    }
+  }
+  section.nftmx-section h2 {
+    font-size: 22px;
+  }
+  .filter-row {
+    margin-bottom: 20px;
+    h4 {
+      font-size: 14px;
+    margin-bottom: 10px;
+    }
+    .select-div {
+      min-width: 128px;
+      margin: 0;
+      display: inline-block;
+      margin-right: 5px;
+    }
+  }
+  select.form-control {
+    margin: 4px 0;
+  }
+  .slider-card {
+    h6 {
+      font-size: 14px;
+      margin-bottom: 4px !important;
+    }
+    p {
+      margin-top: 4px !important;
+    }
+  }
+  .btn {
+    height: 45px;
+  }
+  .slectText {
+    width: 100%;
+    display: block !important;
+    align-items: center;
+    select {
+      margin: 10px auto 0 !important;
+      width: 100% !important;
+    }
+  }
+  .image_tabbed {
+    display: block !important;
+    ul {
+      @include flex-center;
+      margin-bottom: 10px;
+    }
+  }
+  .comingsoon-div {
+    padding: 10px 10px 10px 10px;
+  }
+  .right-cartoon img {
+    width: 120px;
+    margin-left: 10px;
+    margin-top: 20px;
+  }
+  .right-cartoon {
+    align-items: flex-end;
+  }
+  .left-cartoon {
+    display: block;
+    margin-bottom: 20px;
+  }
+  .comment-box {
+    width: 100%;
+    padding: 5px;
+    position: initial;
+    font-size: 12px;
+  }
+  span.digit.static {
+    line-height: 25px;
+  }
+  .comment-box3::after {
+    display: none;
+  }
+  .comment-box3::before {
+    display: none;
+  }
+  .comment-box2::after {
+    display: none;
+  }
+  .comment-box2::before {
+    display: none;
+  }
+  .left-cartoon img {
+    width: 120px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+  }
+  .comingsoon-div .coming-content {
+    width: 100%;
+    padding: 15px;
+    top: 0;
+  }
+  .comingsoon-div h1 {
+    font-size: 30px;
+  }
+  .comingsoon-div h4 {
+    font-size: 16px;
+    line-height: 25px;
+  }
+  .comingsoon-div {
+    height: 110vh;
+  }
+  .coming-content button {
+    margin: 0 !important;
+    margin-bottom: 15px !important;
+  }
+  .collaction_div .collaction_div1 img {
+    height: 270px;
+  }
+  .collaction_div .collaction_div1 {
+    height: 270px;
+  }
+}
+
+@media (max-width: 481px) {
+  .slider-card {
+    h5 {
+      font-size: 14px;
+      margin-bottom: 4px !important;
+    }
+    p {
+      font-size: 12px;
+      margin-top: 4px !important;
+    }
+    span {
+      font-size: 10px;
+      margin-top: 4px !important;
+    }
+  }
+  .btn {
+    // font-size: 8px;
+    width: 100% !important;
+    min-width: auto;
+  }
+}
+
+
+
+@media screen and (max-width: 1320px) and (min-width: 1180px) {
+  .custom-xl {
+    width: 33.33% !important;
+    max-width: 33.33% !important;
+    flex: 0 0 33.33%;
+}
+}

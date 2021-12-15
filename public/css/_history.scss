@@ -1,0 +1,69 @@
+section.user-section {
+    background-image: url(../images/user-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 50px 0;
+    font-family: 'Press Start 2P', cursive;
+    label{
+        font-size: 12px;
+        font-weight: 400;
+        word-break: break-all;
+    }
+    a{
+        color: $white;
+        font-size: 12px;
+        font-weight: 400;
+    } 
+    img{
+        width: 100%;
+        max-width: 200px;
+        height: 200px;
+        border-radius: 50%;
+    }
+}
+
+.ledger-div {
+    padding: 20px 10px;
+    border-bottom: 1px solid #000;
+    font-family: 'IBM Plex Mono', monospace;
+    a{
+        font-size:16px ;
+        font-weight: 700;
+        color: $white;
+        padding-right: 50px;
+        &.active{
+            color: $green; 
+        }
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+a.nav-link {
+    font-size: $font-16;
+    font-weight: $font-600;
+    color: $white;
+    font-family: 'IBM Plex Mono', monospace;
+    &.active{
+        color: $green !important;
+        background-color: transparent !important;
+    }
+    &:hover{
+        color: $green !important; 
+    }
+}
+
+img.table-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+.BottomTable2 tr td{
+    width: auto !important;
+    padding: 10px !important;
+}
+td.offer-td {
+    height: 200px;
+    font-size: 22px;
+    font-weight: 600;
+}

@@ -1,0 +1,12 @@
+footer {
+    background-color: $black;
+    padding: 10px 0px;
+    .footer-content {
+        @include flex-between;
+        color: $gray;
+        font-weight: bold;
+        img{
+          margin-left: 20px;
+        }
+    }
+}
