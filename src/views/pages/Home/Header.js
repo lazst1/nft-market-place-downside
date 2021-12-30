@@ -2,9 +2,8 @@ export default function Header() {
   return (
     <div className="comingsoon-div comingsoon-div-home">
       <div className="coming-head-title">
-        <h4>Buy NFTs and <br/>
-          Virtual Lands with <br/>
-          100% Downside Protection
+        <h4>Buy NFTs with 100% <br/>
+Downside Protection 
         </h4>
       </div>
       {/* <div className="coming-content">

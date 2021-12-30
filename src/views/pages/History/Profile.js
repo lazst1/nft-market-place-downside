@@ -10,7 +10,7 @@ export default function Profile() {
               <img src="images/user.png" alt="" />
             </div>
 
-            <div className="col-md-8 col-lg-10">
+            <div className="col-md-8 col-lg-10 text-mb-center">
               <h2 className="mb-3">Kyle white</h2>
               <label className="mb-3">
                 0x20f7c7e4b410af0d7309a04792fc22c7b4c7f46e

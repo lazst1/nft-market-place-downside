@@ -135,7 +135,7 @@ export default function Details() {
     <Page title="NFT Details">
       {listData && orderDetails && (
         <>
-          <section className="mt-5">
+          <section className="mt-5 mb-5">
             <div className="container-1440">
               <div className="row">
                 <div className="col-lg-5">
@@ -166,7 +166,7 @@ export default function Details() {
               </div>
               <div className="row">
                 <div className="col-sm-12">
-                  <div className="current_auction p-0  bg-transparent">
+                  <div className="current_auction p-0  bg-transparent border-0">
                     <div id="accordion">
                       <HistoryGraph />
                       {bidList && (

@@ -103,9 +103,9 @@ export default function HistoryTable({
   };
 
   return (
-    <div className="card bg-grey mb-10 ">
+    <div className="card bg-grey">
       <div
-        className="card-header product-car-header borderAll border-bottom0"
+        className="card-header product-car-header borderAll"
         id="headingOne"
       >
         <button
@@ -116,7 +116,7 @@ export default function HistoryTable({
           aria-controls="collapse2"
         >
           <div className="slectText">
-            <p>History</p>
+            <p>Listings</p>
           </div>
           <i className="fa fa-caret-down" aria-hidden="true"></i>
         </button>
@@ -132,10 +132,10 @@ export default function HistoryTable({
           <div className="table-responsive">
             <table className="topTable">
               <tr>
-                <td>Current Owner</td>
-                <td>Price</td>
-                {/* <td>Expiration</td> */}
-                <td></td>
+                <th>From</th>
+                <th>Price</th>
+                <th>Expiration</th>
+                <th></th>
               </tr>
               {bidList &&
                 bidList.map((data, i) => {

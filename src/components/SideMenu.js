@@ -331,22 +331,20 @@ export default function SideMenu() {
             Terms of service
           </a>
         </li>
-        <li className=" mt-2 mb-2 ">
+        <li className="mt-3 mb-3">
           <FaMoon className="active"/>
           <FaSun/>
         </li>
+        <hr/>
         <div className="mt-3">
           <img src="images/Logo.png" />
           <br />
           <small>© 2021 NFT.mx All rights reserved</small>
           <p className="mt-3">
-            <b>Powered by Atom Foundation</b> <br />
-            Atom Foundation is a Decentralized Financial (DeFi) liquidity
-            ecosystem powered by proprietary protocols which underlines IDO
-            (Initial Dex Offerings) Auction technology, a NFT (Non-fungible
-            token) marketplace with downside protection, multiple swap
-            exchanges, cross network aggregation, as well as staking and pooling
-            in a decentralized way.
+            <b className="mr-3">Powered by</b>
+            <img src="images/footer-logo-2.png" alt="" />
+            <br /><br/>
+            Atom Foundation is a Decentralized Financial (DeFi) liquidity ecosystem powered by proprietary protocols which underlines zero volatility platforms, a NFT (Non-fungible token) and altcoin marketplace with downside protection, post dex offerings (PDO), a dynamic AMM with multiple swap exchanges, cross network aggregation, as well as a CBDC alternative and price support game theoretic model.
           </p>
         </div>
       </ul>

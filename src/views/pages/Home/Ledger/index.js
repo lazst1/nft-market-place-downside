@@ -74,7 +74,7 @@ export default function Ledger({ listData }) {
       <section className="search-section">
         <div className="container-1440">
           <div className="row">
-            <div className="col-md-12 col-lg-5 col-xl-5">
+            <div className="col-md-12 col-lg-12 col-xl-5">
               <div className="search-box">
                 <FaSearch/>
                 <input
@@ -88,7 +88,7 @@ export default function Ledger({ listData }) {
                 />
               </div>
             </div>
-            <div className="col-md-12 col-lg-7 col-xl-7 text-right button-list">
+            <div className="col-md-12 col-lg-12 col-xl-7 text-right button-list">
               <a
                 className="filter-icon collapsed"
                 data-toggle="collapse"
@@ -103,17 +103,17 @@ export default function Ledger({ listData }) {
                 Launch your DVC
               </button>
               <button
-                className="btn btn-green mr-3"
+                className="btn btn-green"
                 onClick={() => history.push("/nft-list")}
               >
                 STAKE/SELL YOUR NFT
               </button>
-              <button className="btn btn-green">
+              {/* <button className="btn btn-green">
                 STAKE/SELL YOUR LAND
-              </button>
+              </button> */}
             </div>
           </div>
-          <div className="collapse" id="collapseExample12">
+          <div className="collapse ml-2" id="collapseExample12">
             <div className="card card-body checkbox_div pb-0">
               <div className="row">
                 <div className="col-md-12 col-lg-10 p-0 row mb-3">

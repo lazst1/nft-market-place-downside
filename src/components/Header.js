@@ -38,7 +38,7 @@ export default function Header() {
                 <div className="hover-content">
                   <HiQuestionMarkCircle/>
                   <div className="mark-content mark-content3">
-                    If you are a seller, NFT.mx allows you to increase your success rate by offering buyers downside protection all while gaining profits from the APY in leveraging other people's money.
+                  If you are a seller, NFT.mx allows you to increase your success rate by offering buyers downside protection all while gaining profits from the APY in leveraging other people's money. 
                   </div>
                 </div>
               </sup>

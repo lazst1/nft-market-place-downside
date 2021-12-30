@@ -55,7 +55,7 @@ function SliderCard({ index, data, history }) {
           <div className="p-30">
             <h5 className="mb-3">{data.name}</h5>
             <p>
-              Syndication type{" "}
+              Syndication type
               <sup>
                 <div className="hover-content">
                   <HiQuestionMarkCircle/>
@@ -69,7 +69,7 @@ function SliderCard({ index, data, history }) {
               {data.orderType === "AUCTION_TYPE" ? "Auction" : "Sale"}
             </span>
             <p className="mt-1">
-              Total locked value{" "}
+              Total locked value
               <sup>
                 <div className="hover-content">
                   <HiQuestionMarkCircle/>
@@ -112,7 +112,7 @@ function SliderCard({ index, data, history }) {
             }
             className="btn btn-blue btn-block"
           >
-            {" "}
+            
             JOIN SYNDICATION
           </button>
         </div>

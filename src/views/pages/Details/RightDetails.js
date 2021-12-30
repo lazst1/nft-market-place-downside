@@ -17,6 +17,10 @@ import { Formik } from 'formik';
 import * as yep from 'yup';
 import axios from 'axios';
 import apiConfig from 'src/config/ApiConfig';
+import { FaSearch, FaFilter, FaCaretDown, FaWindowClose } from 'react-icons/fa';
+import { HiQuestionMarkCircle } from "react-icons/hi";
+import Collapse from "@kunukn/react-collapse";
+import { MdOutlineClose } from "react-icons/md";
 
 export default function RightDetails({
   apiname,
@@ -318,35 +322,64 @@ export default function RightDetails({
     }
   };
 
+  const [isOpen2, setIsOpen2] = React.useState(false);
+  const onInit = ({ state, style, node }) => {
+    setIsOpen2(false);
+  };
+
   return (
-    <div className="slider-contant">
-      <div className="p-3">
-        <h3 className="mb-2">{apiname} </h3>
+    <div className="slider-contant pb-0">
+      <div className="pl-3 pr-3 pt-35">
+        <div className='d-flex justify-content-between align-items-center'>
+          <h3 className="mb-2">{apiname} </h3>
+          <div className="like">
+              <i className="fa fa-thumbs-up" aria-hidden="true"></i>
+          </div>
+        </div>
         <div className="auctionValue">
           <p>
-            created by <span>{createdBy && sortAddress(createdBy)}</span> owned
+            Created by <span>{createdBy && sortAddress(createdBy)}</span>&nbsp;&nbsp;Owned
             by <span>{ownerOf && sortAddress(ownerOf)}</span>
           </p>
           <h6>{orderType === 'AUCTION_TYPE' ? 'Auction' : 'Sale'}</h6>
         </div>
 
         <div className="current_auction">
-          <div className="row">
+          <div className="row align-items-center">
             <div className="col-sm-6">
-              <div className="time mt-3">
-                <h6 className="mb-3">Current auction ends on</h6>
-                <div className="countdown">{expiresAt}</div>
+              <div className="time">
+                <h6 className="mb-3">Current auction ends in</h6>
+                <span>
+                  <label>$0.4781</label> Ξ 0.00125
+                </span>
+                {/* <div className="countdown">{expiresAt}</div> */}
+                <div className="countdown"></div>
               </div>
             </div>
             <div className="col-sm-6">
-              <form action="">
+              {/* <form action="">
                 <select name="" id="" className="form-control">
                   <option value="d">Ethereum</option>
-                  {/* <option value="d">fvedg</option>
                   <option value="d">fvedg</option>
-                  <option value="d">fvedg</option> */}
+                  <option value="d">fvedg</option>
+                  <option value="d">fvedg</option>
                 </select>
-              </form>
+              </form> */}
+              <div className="c-select c-select-2">
+                  <button onClick={() => setIsOpen2(state => !state)}>
+                    <span><img src="images/curr-1.png" alt=""/> ETH </span>
+                    <FaCaretDown/>
+                  </button>
+                  <Collapse onInit={onInit} isOpen={isOpen2} transition={true}>
+                    <ul>
+                      <li><img src="images/curr-2.png" alt=""/> USDT</li>
+                      <li><img src="images/curr-3.png" alt=""/> DAI</li>
+                      <li><img src="images/curr-4.png" alt=""/> USDC</li>
+                      <li><img src="images/curr-5.png" alt=""/> f/ETH</li>
+                      <li><img src="images/curr-6.png" alt=""/> f/BNB</li>
+                    </ul>
+                  </Collapse>
+                </div>
               {orderType !== 'AUCTION_TYPE' && (
                 <button
                   className="btn btn-green btn-block"
@@ -368,13 +401,18 @@ export default function RightDetails({
           <h3>
             Total locked value{' '}
             <sup>
-              <i className="fa fa-question-circle" aria-hidden="true"></i>
-            </sup>
+                <div className="hover-content">
+                  <HiQuestionMarkCircle/>
+                  <div className="mark-content">
+                    test
+                  </div>
+                </div>
+              </sup>
           </h3>
           <span>
             <label>${apiprice}</label> (Ξ {apiprice})
           </span>
-          <div className="progress my-3">
+          <div className="progress mb-4">
             <div
               className="progress-bar"
               role="progressbar"
@@ -425,7 +463,7 @@ export default function RightDetails({
             aria-hidden="true"
           >
             <div
-              className="modal-dialog modal-dialog-centered width995"
+              className="modal-dialog modal-dialog-centered width995 js-table"
               role="document"
             >
               <div className="modal-content">
@@ -436,7 +474,7 @@ export default function RightDetails({
                     data-dismiss="modal"
                     aria-label="Close"
                   >
-                    <span aria-hidden="true">&times;</span>
+                    <span><MdOutlineClose/></span>
                   </button>
                 </div>
                 <div className="modal-body">
@@ -447,58 +485,61 @@ export default function RightDetails({
                   <div className="table-responsive">
                     <table className="BottomTable">
                       <tr>
-                        <td>Date</td>
-                        <td>Wallet Address</td>
-                        <td>ETH Amount</td>
-                        <td>Ownerships %</td>
-                        <td>Proof</td>
+                        <th>Date</th>
+                        <th>Wallet Address</th>
+                        <th>ETH Amount</th>
+                        <th>Ownerships %</th>
+                        <th>Proof</th>
                       </tr>
                       <tr>
                         <td>19 Hour ago</td>
-                        <td className="green">$12.1651</td>
-                        <td>684516468</td>
+                        <td className="green">0x495f...7b5e</td>
+                        <td>512</td>
                         <td>50%</td>
 
-                        <td className="purple">3423432</td>
+                        <td className="blue">0xf9c...c4c3</td>
                       </tr>
                       <tr>
                         <td>19 Hour ago</td>
-                        <td className="green">$12.1651</td>
-                        <td>684516468</td>
+                        <td className="green">0x495f...7b5e</td>
+                        <td>512</td>
                         <td>50%</td>
 
-                        <td className="purple">3423432</td>
+                        <td className="blue">0xf9c...c4c3</td>
                       </tr>
                       <tr>
                         <td>19 Hour ago</td>
-                        <td className="green">$12.1651</td>
-                        <td>684516468</td>
+                        <td className="green">0x495f...7b5e</td>
+                        <td>512</td>
                         <td>50%</td>
 
-                        <td className="purple">3423432</td>
+                        <td className="blue">0xf9c...c4c3</td>
                       </tr>
                     </table>
                   </div>
                   <form action="">
-                    <div className="input-group mt-5">
+                    <div className="input-group mt-35">
                       <div className="input-group-d">
                         <img src="images/ether.png" alt="" />
                       </div>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Username"
-                        aria-label="Username"
+                        placeholder="Type of amout"
+                        aria-label="Type of amout"
                         aria-describedby="basic-addon1"
                       />
                     </div>
                   </form>
-                </div>
-                <div className="modal-footer text-center flex-center">
-                  <button className="btn btn-blue btn-block">
+                  <button className="btn btn-blue btn-block mt-5">
                     JOIN SYNDICATION
                   </button>
                 </div>
+                {/* <div className="modal-footer text-center flex-center">
+                  <button className="btn btn-blue btn-block">
+                    JOIN SYNDICATION
+                  </button>
+                </div> */}
               </div>
             </div>
           </div>
@@ -512,7 +553,7 @@ export default function RightDetails({
             aria-labelledby="exampleModalCenterTitle"
             aria-hidden="true"
           >
-            <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-dialog modal-dialog-centered bn-table" role="document">
               <div className="modal-content">
                 <div className="modal-header">
                   <button
@@ -521,7 +562,7 @@ export default function RightDetails({
                     data-dismiss="modal"
                     aria-label="Close"
                   >
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true"><MdOutlineClose/></span>
                   </button>
                 </div>
                 <div className="modal-body">
@@ -535,8 +576,8 @@ export default function RightDetails({
                   <div className="cart_item">
                     <table>
                       <tr>
-                        <td>Items</td>
-                        <td>Subtotal</td>
+                        <th>Items</th>
+                        <th className='text-right'>Subtotal</th>
                       </tr>
                       <tr>
                         <td>
@@ -544,7 +585,6 @@ export default function RightDetails({
                             <img
                               src={apiimage ? apiimage : 'images/image.png'}
                               alt=""
-                              width="30px"
                             />
                             <div className="itemname">
                               <h6 className="green">{apiname}</h6>
@@ -557,14 +597,13 @@ export default function RightDetails({
                             <h5>{apiprice}</h5>
                             <h6>{apiprice}</h6>
                             <a className="closeButton">
-                              <i className="fa fa-times"></i>
+                              <MdOutlineClose/>
                             </a>
                           </div>
                         </td>
                       </tr>
                       <tr>
-                        <td>Total</td>
-
+                        <td className='text-left total-text d-flex align-items-start'>Total</td>
                         <td>
                           <div className="subtotal">
                             <h5 className="green">{apiprice}</h5>
@@ -574,16 +613,6 @@ export default function RightDetails({
                       </tr>
                     </table>
                   </div>
-                </div>
-                <div className="text-center">
-                  {buyError !== '' && (
-                    <p style={{ color: 'red' }}>{buyError}</p>
-                  )}
-                  {successBuy && (
-                    <p style={{ color: '#19cb58' }}>Successfully Executed</p>
-                  )}
-                </div>
-                <div className="modal-footer text-center flex-center">
                   <button
                     type="button"
                     className="btn btn-green"
@@ -596,7 +625,30 @@ export default function RightDetails({
                       ? 'PENDING...'
                       : 'BUY NOW'}
                   </button>
-                </div>
+                  <div className="text-center msg-text">
+                      {buyError !== '' && (
+                        <p style={{ color: '#e12a18' }}>{buyError}</p>
+                      )}
+                      {successBuy && (
+                        <p style={{ color: '#19cb58' }}>Successfully Executed</p>
+                      )}
+                    </div>
+                  </div>
+                
+                {/* <div className="modal-footer text-center flex-center">
+                  <button
+                    type="button"
+                    className="btn btn-green"
+                    onClick={buyNowHandler}
+                    disabled={isApproving || isSending || isLoading}
+                  >
+                    {isApproving
+                      ? 'APPROVING...'
+                      : isSending
+                      ? 'PENDING...'
+                      : 'BUY NOW'}
+                  </button>
+                </div> */}
               </div>
             </div>
           </div>

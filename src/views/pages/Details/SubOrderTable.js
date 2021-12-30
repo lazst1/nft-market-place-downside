@@ -72,33 +72,39 @@ export default function SubOrderTable({ subOrders, listData, orderDetails }) {
   };
 
   return (
-    <div className="card bg-grey mb-10 ">
+    <div className="card bg-grey">
       <div
-        className="card-header product-car-header borderAll border-bottom0"
-        id="headingOne"
+        className="card-header product-car-header borderAll"
+        id="headingThree"
       >
         <button
           className="btn btn-link"
           data-toggle="collapse"
-          data-target="#collapse2"
+          data-target="#collapse3"
           aria-expanded="true"
-          aria-controls="collapse2"
+          aria-controls="collapse3"
         >
           <div className="slectText">
-            <p>Sub Order List</p>
+            <p>Offers</p>
           </div>
           <i className="fa fa-caret-down" aria-hidden="true"></i>
         </button>
       </div>
 
       <div
-        id="collapse2"
+        id="collapse3"
         className="collapse show "
-        aria-labelledby="headingOne"
-        data-parent="#accordion2"
+        aria-labelledby="headingThree"
+        data-parent="#accordion3"
       >
         <div className="card-body product-card-body p-0">
-          <div className="table-responsive">
+          <div className='no-offer borderAll border-top-0'>
+            <h1>No offers yet</h1>
+          </div>
+          <div className='make-offer borderAll border-top-0'>
+            <button>make offer</button>
+          </div>
+          {/* <div className="table-responsive">
             <table className="topTable">
               <tr>
                 <td>Buyer Address</td>
@@ -146,7 +152,7 @@ export default function SubOrderTable({ subOrders, listData, orderDetails }) {
                   );
                 })}
             </table>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

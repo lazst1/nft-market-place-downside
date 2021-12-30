@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { MdOutlineClose } from "react-icons/md";
+
 function customJS() {
   window.$(".modalLi li").click(function () {
     window.$(this).addClass("active");
@@ -30,16 +32,15 @@ export default function DownsideProtection(prop) {
     <>
       <div className="image_Holder">
         <figure>
-          <div className="product-discount">
-            {" "}
-            90% / 365 <br />
-            <span>Downside protection</span>
+          <div className="green-badge">
+            <h4>90% / 365</h4>
+            <p>Downside Protection</p>
           </div>
           <img src={prop.apiimage} alt="" className="img-responsive" />
         </figure>
         <div className="modalContent detailsModal hide">
           <a className="closeButton">
-            <i className="fa fa-times"></i>
+            <MdOutlineClose/>
           </a>
           <div className="card">
             <div className="card-header">
@@ -47,16 +48,15 @@ export default function DownsideProtection(prop) {
             </div>
             <div className="card-body">
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Incidunt molestias voluptates eaque illum architecto recusandae
-                sed voluptate minima sit atque.
+                Created by <span>45856...45e5</span>
               </p>
+              <p className="gre-text">3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1</p>
             </div>
           </div>
         </div>
         <div className="modalContent aboutmodal hide">
           <a className="closeButton">
-            <i className="fa fa-times"></i>
+            <MdOutlineClose/>
           </a>
           <div className="card">
             <div className="card-header">
@@ -65,17 +65,14 @@ export default function DownsideProtection(prop) {
             <div className="card-body">
               <div className="aboutcreature">
                 <img src="images/cartoon-3.png" alt="" />
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet
-                  obcaecati enim dignissimos error recusandae saepe inventore,
-                  nostrum ipsum quisquam excepturi corrupti distinctio dolore
-                  ipsa deserunt!
+                <p className="gre-text">
+                  3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1. This project is not affiliated with Larva Labs
                 </p>
               </div>
-              <a className="naked_button">
+              <a href="/" className="naked_button">
                 <i className="fa fa-user"></i>Activity
               </a>
-              <a className="naked_button">
+              <a href="/" className="naked_button">
                 <i className="fa fa-twitter"></i>Twitter
               </a>
             </div>
@@ -83,7 +80,7 @@ export default function DownsideProtection(prop) {
         </div>
         <div className="modalContent chainmodal hide">
           <a className="closeButton">
-            <i className="fa fa-times"></i>
+            <MdOutlineClose/>
           </a>
           <div className="card">
             <div className="card-header">
@@ -93,15 +90,15 @@ export default function DownsideProtection(prop) {
               <table>
                 <tr>
                   <td>Contact Address</td>
-                  <td className="green">3243tret23432</td>
+                  <td className="green">0x495f...7b5e</td>
                 </tr>
                 <tr>
                   <td>Token ID</td>
-                  <td>3243tret23432</td>
+                  <td>1088956575031775...</td>
                 </tr>
                 <tr>
                   <td>BlockChain</td>
-                  <td>Etherium</td>
+                  <td>Ethereum</td>
                 </tr>
               </table>
             </div>
@@ -109,7 +106,7 @@ export default function DownsideProtection(prop) {
         </div>
         <div className="modalContent protectionmodal hide">
           <a className="closeButton">
-            <i className="fa fa-times"></i>
+            <MdOutlineClose/>
           </a>
           <div className="card">
             <div className="card-header">
@@ -117,23 +114,23 @@ export default function DownsideProtection(prop) {
             </div>
             <div className="card-body">
               <h6 className="">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem,
-                temporibus!
+                Your Investment Automatically Includes 100% Downside Protection for 365 days
               </h6>
               <p className="light">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Incidunt molestias voluptates eaque illum architecto recusandae
-                sed voluptate minima sit atque.
+                If you are a buyer, think of NFT.mx as a new strategic staking program with upside from selling the NFT, while also providing the option to cancel your investment and get a 100% refund with your original tokens.
               </p>
               <div className="datatab">
                 <div className="row">
                   <div className="col-sm-6 text-center">
                     <h6>Days Left</h6>
-                    <h3>56/365</h3>
+                    <h3>58/365</h3>
                   </div>
                   <div className="col-sm-6 text-center">
-                    <h6>Days Left</h6>
-                    <h3>56/365</h3>
+                    <h6>Protection</h6>
+                    <h3>100%</h3>
+                  </div>
+                  <div className="col-md-12 cancel-text">
+                    <a href="/">Cancel NFT investment </a>
                   </div>
                 </div>
               </div>

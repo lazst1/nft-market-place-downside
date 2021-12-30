@@ -48,17 +48,17 @@ export default function Ledger({ account, contractAddress, address }) {
   }, [account, contractAddress, address]);
 
   return (
-    <div className="card bg-grey mb-10 ">
+    <div className="card bg-grey">
       <div
-        className="card-header product-car-header borderAll border-bottom0"
-        id="headingOne"
+        className="card-header product-car-header borderAll"
+        id="headingFour"
       >
         <button
           className="btn btn-link"
           data-toggle="collapse"
-          data-target="#collapse3"
+          data-target="#collapse4"
           aria-expanded="true"
-          aria-controls="collapse3"
+          aria-controls="collapse4"
         >
           <div className="slectText">
             <p>Ledger</p>
@@ -68,21 +68,21 @@ export default function Ledger({ account, contractAddress, address }) {
       </div>
 
       <div
-        id="collapse3"
+        id="collapse4"
         className="collapse show "
-        aria-labelledby="headingOne"
-        data-parent="#accordion3"
+        aria-labelledby="headingFour"
+        data-parent="#accordion4"
       >
         <div className="card-body product-card-body p-0">
           <div className="table-responsive">
             <table className="BottomTable">
               <tr>
-                {/* <td>Event</td> */}
-                <td>Price</td>
-                <td>from</td>
-                <td>To</td>
-                <td>Date</td>
-                <td>Tran Hash</td>
+                <th>Event</th>
+                <th>Price</th>
+                <th>from</th>
+                <th>To</th>
+                <th>Date</th>
+                <th>Tran Hash</th>
               </tr>
               {dataToDisplay &&
                 dataToDisplay.map((data, i) => {
@@ -106,7 +106,7 @@ export default function Ledger({ account, contractAddress, address }) {
                   );
                 })}
             </table>
-            <table
+            {/* <table
               className="table mb-0 tred-history-div"
               style={{
                 borderRadius: 0,
@@ -130,7 +130,7 @@ export default function Ledger({ account, contractAddress, address }) {
                   </td>
                 </tr>
               </thead>
-            </table>
+            </table> */}
           </div>
         </div>
       </div>
