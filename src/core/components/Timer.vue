@@ -1,0 +1,28 @@
+<script setup>
+import NumberBlock from './NumberBlock.vue';
+
+defineProps({
+    size: {
+        type: String,
+        default: "small"
+    },
+    color: {
+        type: String,
+        default: "tertiary-900"
+    }
+})
+
+</script>
+
+<template>
+    <div class="flex w-full gap-x-0.5" :class="{'text-2xl':size==='big'}">
+        <number-block :color="color" :size="size"></number-block>
+        <number-block :color="color" :size="size"></number-block>:
+        <number-block :color="color" :size="size"></number-block>
+        <number-block :color="color" :size="size"></number-block>:
+        <number-block :color="color" :size="size"></number-block>
+        <number-block :color="color" :size="size"></number-block>:
+        <number-block :color="color" :size="size"></number-block>
+        <number-block :color="color" :size="size"></number-block>
+    </div>
+</template>

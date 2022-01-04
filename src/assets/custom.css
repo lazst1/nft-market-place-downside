@@ -1,0 +1,43 @@
+/* custom scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #343434; 
+    border: 4px solid transparent;
+    background-clip: content-box;
+}
+
+@font-face {
+    font-family: "fontawesome";
+    src: url(./fonts/fontawesome-webfont.ttf);
+}
+
+@font-face {
+    font-family: "ibm";
+    src: url(./fonts/IBMPlexMono-Regular.otf);
+}
+
+@font-face {
+    font-family: "ibm-bold";
+    src: url(./fonts/IBMPlexMono-Bold.otf);
+}
+
+@font-face {
+    font-family: "ibm-light";
+    src: url(./fonts/IBMPlexMono-Light.otf);
+}
+
+@font-face {
+    font-family: "press";
+    src: url(./fonts/PressStart2P-Regular.ttf);
+}
