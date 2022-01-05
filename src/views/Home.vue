@@ -18,9 +18,9 @@ import NftmxTr from '@/core/components/NftmxTr.vue';
 
 <template>
     <body-container :searchAble="true">
-        <div class="flex py-4 border-b border-b-black">
+        <div class="flex py-4 border-b border-b-black font-ibm-medium">
             <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
+            <checkbox-cell><span class="text-xs">Domain Names</span></checkbox-cell>
             <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
             <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
             <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>

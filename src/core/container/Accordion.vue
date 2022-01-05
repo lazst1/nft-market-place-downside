@@ -36,9 +36,11 @@ export default {
 
 <template>
     <div class="bg-tertiary-800 font-ibm border border-black">
-        <div @click="clickMenu" class="flex px-8 py-2 text-xl text-white border-b border-black font-bold cursor-pointer">
-            <div class="flex-1">{{caption}}</div>
-            <div v-if="accordion">
+        <div class="flex px-5 text-xl text-white border-b border-black font-bold">
+            <div class="flex-1">
+                <slot name="caption"></slot>
+            </div>
+            <div v-if="accordion" class="self-center cursor-pointer" @click="clickMenu">
                 <svg v-if="!open" style="width:24px;height:24px" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M7,10L12,15L17,10H7Z" />
                 </svg>

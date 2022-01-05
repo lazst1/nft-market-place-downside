@@ -34,6 +34,7 @@ module.exports = {
       fontFamily: {
         'awesome': ['fontawesome'],
         'ibm': ['ibm'],
+        'ibm-medium': ['ibm-medium'],
         'ibm-bold': ['ibm-bold'],
         'ibm-light': ['ibm-light'],
         'press': ['press']

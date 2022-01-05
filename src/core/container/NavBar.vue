@@ -2,7 +2,8 @@
 import { computed, ref } from 'vue'
 import NavBarItem from '@/core/components/NavBarItem.vue'
 import TopBar from '@/core/components/TopBar.vue';
-
+import Icon from '@/core/components/Icon.vue'
+import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 </script>
 
 
@@ -22,15 +23,41 @@ import TopBar from '@/core/components/TopBar.vue';
       >
         <nav-bar-item>
           <router-link to="/activity">
-            Seller             
+            <div class="">
+              <span class="text-sm font-ibm-bold">
+                Seller
+              </span>
+              <icon
+                class="-ml-1"
+                :path="mdiHelpCircle"
+                w="w-3"
+                h="h-3"
+                size="30"
+                color="white"
+              />
+            </div>
           </router-link>
         </nav-bar-item>
         <nav-bar-item>
-          Buyer
+          <div class="">
+            <span class="text-sm font-ibm-bold">
+              Buyer
+            </span>
+            <icon
+              class="-ml-1"
+              :path="mdiHelpCircle"
+              w="w-3"
+              h="h-3"
+              size="30"
+              color="white"
+            />
+          </div>
         </nav-bar-item>
         <nav-bar-item>
-           0x291A...H1RS
-        </nav-bar-item> 
+          <span class="text-sm font-ibm-bold pt-1">
+            0x291A...H1RS
+          </span>
+        </nav-bar-item>
       </div>
     </div>
   </top-bar>

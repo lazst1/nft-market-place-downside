@@ -10,14 +10,14 @@ import TopBar from '@/core/components/TopBar.vue';
 
 
 <template>
-  <top-bar class="mt-70px bg-tertiary-700 font-ibm">
-    <div class="flex-grow items-stretch flex h-95px">
+  <top-bar class="mt-70px font-ibm-medium">
+    <div class="flex-grow items-stretch flex h-95px bg-tertiary-800">
         <nav-bar-item class="w-full">
-            <nav-bar-search-input class="w-full" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
+            <nav-bar-search-input class="w-full font-ibm-medium" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
         </nav-bar-item>
     </div>
     <div
-      class="absolute w-screen top-14 left-0 shadow hidden
+      class="absolute w-screen top-14 left-0 shadow hidden bg-tertiary-800
         lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none dark:bg-gray-900"
     >
       <div
