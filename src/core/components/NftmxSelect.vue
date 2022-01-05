@@ -2,7 +2,7 @@
 <template>
   <Listbox as="div" v-model="selected">
     <div class="mt-1 relative">
-      <ListboxButton :class="{'pl-0 py-2': small}" class="relative w-full bg-black border border-black shadow-sm pl-6 py-4 text-left cursor-default focus:outline-none">
+      <ListboxButton :class="[small?'pl-0 py-2':'pl-6 py-4', 'relative w-full bg-black border border-black shadow-sm text-left cursor-default focus:outline-none']">
         <span class="flex items-center">
             <img v-if="selected.image" :src="selected.image" alt="" class="flex-shrink-0 h-7 w-7 rounded-full" />
             <span class="ml-3 block truncate">{{ selected.name }}</span>
