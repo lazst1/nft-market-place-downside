@@ -48,6 +48,11 @@
 }
 
 @font-face {
+    font-family: "ibm-thin";
+    src: url(./fonts/IBMPlexMono-Thin.otf);
+}
+
+@font-face {
     font-family: "press";
     src: url(./fonts/PressStart2P-Regular.ttf);
 }

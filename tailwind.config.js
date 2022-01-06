@@ -38,6 +38,7 @@ module.exports = {
         'ibm-bold': ['ibm-bold'],
         'ibm-semi-bold': ['ibm-semi-bold'],
         'ibm-light': ['ibm-light'],
+        'ibm-thin': ['ibm-thin'],
         'press': ['press']
       },
     },

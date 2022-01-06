@@ -123,7 +123,7 @@
             </div>
         </div>
     </body-container>
-    <nftmx-footer />
+    <nftmx-footer :devs="true" />
 </template>
 
 <style>
