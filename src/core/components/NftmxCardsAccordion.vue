@@ -15,6 +15,9 @@
                 <nftmx-sale-card v-for="index in 2" :key="index" :bought="true"></nftmx-sale-card>
             </div>
         </div>
+        <div v-if="more" class="text-sm text-right px-6 text-primary-900 font-ibm-bold mt-3">
+            <span class="cursor-pointer">See More</span>
+        </div>
     </accordion>
 </template>
 
@@ -28,10 +31,17 @@ export default {
         NftmxSaleCard
     },
     props: {
-        
+        more: {
+            type: Boolean,
+            default: false
+        }
     },
-    setup() {
-        
+    setup(props) {
+        const more = props.more;
+
+        return {
+            props
+        }
     },
 }
 </script>

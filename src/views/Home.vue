@@ -99,8 +99,8 @@
             </div>
             <div class="flex-1">
                 <div class="font-press text-white">
-                    <nftmx-cards-accordion></nftmx-cards-accordion>
-                    <nftmx-divider class="mt-16 mb-6 mx-6"></nftmx-divider>
+                    <nftmx-cards-accordion more></nftmx-cards-accordion>
+                    <nftmx-divider class="mt-8 mb-6 mx-6"></nftmx-divider>
                     <accordion :border="false">
                         <template v-slot:caption>
                             <div class="flex items-center w-full">
