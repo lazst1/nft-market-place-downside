@@ -51,7 +51,7 @@ import NftmxTr from '@/core/components/NftmxTr.vue';
                 <drop-down
                     title="Event type"
                 >
-                    <nav-bar-search-input placeholder="Filter" fontSize="text-xs"></nav-bar-search-input>
+                    <nav-bar-search-input small></nav-bar-search-input>
                     <drop-down-item>
                         <checkbox-cell><span class="text-xs">ETH Address</span></checkbox-cell>
                     </drop-down-item>
