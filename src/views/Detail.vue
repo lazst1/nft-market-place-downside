@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import Ribbon from '@/core/components/Ribbon.vue';
 import DetailButton from '@/core/components/DetailButton.vue';
@@ -10,6 +11,7 @@ import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import Accordion from '@/core/container/Accordion.vue';
 import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
+import NftmxModal from '@/core/components/NftmxModal.vue';
 
 const people = [
   {
@@ -90,6 +92,9 @@ const props = defineProps({
         default: 365
     },
 })
+
+const modalActive = ref(false);
+
 </script>
 
 <template>
@@ -164,6 +169,7 @@ const props = defineProps({
                             color="primary"
                             label="BUY NOW"
                             class="font-press w-full text-lg"
+                            @click="modalActive = true"
                         />
                     </div>
                 </div>
@@ -211,6 +217,16 @@ const props = defineProps({
         </accordion>
     </body-container>
     <nftmx-footer />
+    <nftmx-modal v-model="modalActive" hasCancel>
+        <div class="text-center">
+            <div class="font-press text-2xl">
+                Buy
+            </div>
+            <div class="font-ibm-semi-bold text-sm items-center py-4">
+                Balance: $1,548.85 <span class="text-xxs font-ibm text-tertiary-400">(322.4445)</span>
+            </div>
+        </div>
+    </nftmx-modal>
 </template>
 
 <style scoped>
