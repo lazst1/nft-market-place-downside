@@ -46,10 +46,9 @@ import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
                 <drop-down
                     title="Event type"
                 >
-                    <nav-bar-search-input fontSize="text-xs" placeholder="Filter"></nav-bar-search-input>
+                    <nav-bar-search-input small></nav-bar-search-input>
                     <drop-down-item>
-                        <checkbox-cell>ETH</checkbox-cell>
-                        
+                        <checkbox-cell><div class="text-xs pt-1">ETH Address</div></checkbox-cell>
                     </drop-down-item>
                 </drop-down>
             </div>

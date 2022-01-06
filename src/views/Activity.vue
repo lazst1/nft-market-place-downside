@@ -35,7 +35,7 @@ import NftmxTr from '@/core/components/NftmxTr.vue';
                     :iconAfter="mdiCloseBox"
                 />
                 <nav-bar-item>
-                    <span class="text-primary-900 mx-2">Clear All</span>
+                    <span class="text-sm text-primary-900 mx-2">Clear All</span>
                 </nav-bar-item>
             </div>
             <div class="hidden md:block">
@@ -53,13 +53,13 @@ import NftmxTr from '@/core/components/NftmxTr.vue';
                 >
                     <nav-bar-search-input small></nav-bar-search-input>
                     <drop-down-item>
-                        <checkbox-cell><span class="text-xs">ETH Address</span></checkbox-cell>
+                        <checkbox-cell><div class="text-xs pt-1">ETH Address</div></checkbox-cell>
                     </drop-down-item>
                     <drop-down-item>
-                        <checkbox-cell><span class="text-xs">ETH</span></checkbox-cell>
+                        <checkbox-cell><div class="text-xs pt-1">ETH</div></checkbox-cell>
                     </drop-down-item>
                     <drop-down-item>
-                        <checkbox-cell><span class="text-xs">ETH</span></checkbox-cell>
+                        <checkbox-cell><div class="text-xs pt-1">ETH</div></checkbox-cell>
                     </drop-down-item>
                 </drop-down>
             </div>
