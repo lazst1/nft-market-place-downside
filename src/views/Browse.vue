@@ -8,6 +8,7 @@ import NavBarItem from '@/core/components/NavBarItem.vue'
 import DropDownItem from '@/core/components/DropDownItem.vue';
 import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
+import NftmxFooter from '@/core/container/NftmxFooter.vue';
 </script>
 
 <template>
@@ -60,6 +61,7 @@ import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
             <nftmx-sale-card v-for="index in 2" :key="index" :bought="true"></nftmx-sale-card>
         </div>
     </body-container>
+    <nftmx-footer />
 </template>
 
 <style>

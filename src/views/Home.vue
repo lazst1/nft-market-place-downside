@@ -123,6 +123,7 @@
             </div>
         </div>
     </body-container>
+    <nftmx-footer />
 </template>
 
 <style>
@@ -155,6 +156,7 @@ import Accordion from '@/core/container/Accordion.vue';
 import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import { defineComponent } from 'vue';
 import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
+import NftmxFooter from '@/core/container/NftmxFooter.vue';
 
 const items = [
     {
@@ -177,19 +179,20 @@ const items = [
 
 export default defineComponent({
     components: {
-    BodyContainer,
-    NftmxCarousel,
-    NftmxDivider,
-    NftmxHelp,
-    NftmxPrice,
-    NavBarSearchInput,
-    Icon,
-    NftmxButton,
-    CheckboxCell,
-    Accordion,
-    NftmxSaleCard,
-    NftmxCardsAccordion
-},
+        BodyContainer,
+        NftmxCarousel,
+        NftmxDivider,
+        NftmxHelp,
+        NftmxPrice,
+        NavBarSearchInput,
+        Icon,
+        NftmxButton,
+        CheckboxCell,
+        Accordion,
+        NftmxSaleCard,
+        NftmxCardsAccordion,
+        NftmxFooter
+    },
     data() {
         return {
             filterActive: false,

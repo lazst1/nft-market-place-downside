@@ -9,6 +9,7 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import Accordion from '@/core/container/Accordion.vue';
 import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
+import NftmxFooter from '@/core/container/NftmxFooter.vue';
 
 const people = [
   {
@@ -209,6 +210,7 @@ const props = defineProps({
             </div>
         </accordion>
     </body-container>
+    <nftmx-footer />
 </template>
 
 <style scoped>
