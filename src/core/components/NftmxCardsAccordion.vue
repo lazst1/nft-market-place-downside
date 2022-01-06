@@ -5,8 +5,6 @@
                 <div class="flex-1 text-sm font-press py-4 mr-24">
                     Trending Collections
                 </div>
-                <nftmx-select class="font-ibm font-thin w-full max-w-lg text-sm" :data="items" small>
-                </nftmx-select>
             </div>
         </template>
         <div class="px-6 pt-2">
@@ -22,9 +20,16 @@
 
 <script>
 import Accordion from '@/core/container/Accordion.vue';
-
+import NftmxSaleCard from './NftmxSaleCard.vue';
 
 export default {
+    components: {
+        Accordion,
+        NftmxSaleCard
+    },
+    props: {
+        
+    },
     setup() {
         
     },

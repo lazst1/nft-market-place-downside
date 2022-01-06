@@ -99,34 +99,14 @@
             </div>
             <div class="flex-1">
                 <div class="font-press text-white">
-                    <accordion :border="false">
-                        <template v-slot:caption>
-                            <div class="flex items-center w-full">
-                                <div class="flex-1 text-sm font-press py-4 mr-24">
-                                    Trending Collections
-                                </div>
-                                <nftmx-select class="font-ibm font-thin w-full max-w-lg text-sm" :data="items" small>
-                                </nftmx-select>
-                            </div>
-                        </template>
-                        <div class="px-6 pt-2">
-                            <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
-                                <nftmx-sale-card :auction="true"></nftmx-sale-card>
-                                <nftmx-sale-card></nftmx-sale-card>
-                                <nftmx-sale-card :syndication="false"></nftmx-sale-card>
-                                <nftmx-sale-card v-for="index in 2" :key="index" :bought="true"></nftmx-sale-card>
-                            </div>
-                        </div>
-                    </accordion>
-                    <nftmx-divider class="mt-16 mb-6"></nftmx-divider>
+                    <nftmx-cards-accordion></nftmx-cards-accordion>
+                    <nftmx-divider class="mt-16 mb-6 mx-6"></nftmx-divider>
                     <accordion :border="false">
                         <template v-slot:caption>
                             <div class="flex items-center w-full">
                                 <div class="flex-1 text-sm font-press py-4 mr-24">
                                     Digital Art
                                 </div>
-                                <nftmx-select class="font-ibm font-thin w-full max-w-lg text-sm" :data="items" small>
-                                </nftmx-select>
                             </div>
                         </template>
                         <div class="px-6 pt-2">
@@ -174,6 +154,7 @@ import CheckboxCell from '@/core/components/CheckboxCell.vue';
 import Accordion from '@/core/container/Accordion.vue';
 import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import { defineComponent } from 'vue';
+import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
 
 const items = [
     {
@@ -196,8 +177,19 @@ const items = [
 
 export default defineComponent({
     components: {
-        BodyContainer, NftmxCarousel, NftmxDivider, NftmxHelp, NftmxPrice, NavBarSearchInput, Icon, NftmxButton, CheckboxCell, Accordion, NftmxSaleCard
-    },
+    BodyContainer,
+    NftmxCarousel,
+    NftmxDivider,
+    NftmxHelp,
+    NftmxPrice,
+    NavBarSearchInput,
+    Icon,
+    NftmxButton,
+    CheckboxCell,
+    Accordion,
+    NftmxSaleCard,
+    NftmxCardsAccordion
+},
     data() {
         return {
             filterActive: false,
