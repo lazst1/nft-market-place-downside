@@ -6,31 +6,36 @@ import CheckboxCell from '@/core/components/CheckboxCell.vue';
 import DropDown from '../core/components/DropDown.vue';
 import NavBarItem from '@/core/components/NavBarItem.vue'
 import DropDownItem from '@/core/components/DropDownItem.vue';
-import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
+import Accordion from '@/core/container/Accordion.vue';
+import NftmxTable from '@/core/components/NftmxTable.vue';
+import NftmxThead from '@/core/components/NftmxThead.vue';
+import NftmxTh from '@/core/components/NftmxTh.vue';
+import NftmxTbody from '@/core/components/NftmxTbody.vue';
+import NftmxTd from '@/core/components/NftmxTd.vue';
+import NftmxTr from '@/core/components/NftmxTr.vue';
 </script>
 
 <template>
     <body-container :searchAble="true">
-        <div class="flex py-4 border-b border-b-black">
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
+        <div class="flex py-4 border-b border-b-black font-ibm-medium">
+            <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
+            <checkbox-cell><span class="text-xs relative -top-0.5">Domain Names</span></checkbox-cell>
+            <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
+            <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
+            <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
         </div>
         <div class="flex py-4">
-            <div class="flex-1 flex items-center">
-                <span class="text-white font-ibm-bold mr-4 text-xl">1,291,029 results</span>
+            <div class="flex-1 items-stretch flex">
                 <nftmx-button
                     :outline="true"
                     color="primary"
-                    label="Buy Now"
+                    label="Listings"
                     :small="true"
                     :iconAfter="mdiCloseBox"
                 />
                 <nav-bar-item>
-                    <span class="text-primary-900 text-sm">Clear All</span>
+                    <span class="text-primary-900 mx-2">Clear All</span>
                 </nav-bar-item>
             </div>
             <div class="hidden md:block">
@@ -46,31 +51,58 @@ import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
                 <drop-down
                     title="Event type"
                 >
-                    <nav-bar-search-input fontSize="text-xs" placeholder="Filter"></nav-bar-search-input>
+                    <nav-bar-search-input placeholder="Filter" fontSize="text-xs"></nav-bar-search-input>
                     <drop-down-item>
-                        <checkbox-cell>ETH</checkbox-cell>
-                        
+                        <checkbox-cell><span class="text-xs">ETH Address</span></checkbox-cell>
+                    </drop-down-item>
+                    <drop-down-item>
+                        <checkbox-cell><span class="text-xs">ETH</span></checkbox-cell>
+                    </drop-down-item>
+                    <drop-down-item>
+                        <checkbox-cell><span class="text-xs">ETH</span></checkbox-cell>
                     </drop-down-item>
                 </drop-down>
             </div>
         </div>
-        <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 c-grid-cols-6">
-            <nftmx-sale-card v-for="index in 2" :key="index"></nftmx-sale-card>
-            <nftmx-sale-card v-for="index in 2" :key="index" :syndication="false"></nftmx-sale-card>
-            <nftmx-sale-card v-for="index in 2" :key="index" :auction="true"></nftmx-sale-card>
-            <nftmx-sale-card v-for="index in 2" :key="index" :bought="true"></nftmx-sale-card>
-        </div>
+        <accordion :accordion="false">
+            <template v-slot:caption>
+                <div class="flex items-center">
+                    <div class="text-lg font-ibm-bold py-4 mr-24">
+                        Trading History
+                    </div>
+                </div>
+            </template>
+            <nftmx-table height="80%">
+                <nftmx-thead>
+                    <nftmx-tr>
+                        <nftmx-th>Event</nftmx-th>
+                        <nftmx-th>Item</nftmx-th>
+                        <nftmx-th>Unit Price</nftmx-th>
+                        <nftmx-th>Quantity</nftmx-th>
+                        <nftmx-th>From</nftmx-th>
+                        <nftmx-th :border="false">To</nftmx-th>
+                    </nftmx-tr>
+                </nftmx-thead>
+                <nftmx-tbody>
+                    <nftmx-tr v-for="index in 10" :key="index" :border="index===10 ? false : true">
+                        <nftmx-td>Name</nftmx-td>
+                        <nftmx-td class="flex">
+                            Item
+                        </nftmx-td>
+                        <nftmx-td>Unit Price</nftmx-td>
+                        <nftmx-td>Quantity</nftmx-td>
+                        <nftmx-td>From</nftmx-td>
+                        <nftmx-td :border="false">To</nftmx-td>
+                    </nftmx-tr>
+                </nftmx-tbody>
+            </nftmx-table>
+        </accordion>
     </body-container>
 </template>
 
 <style>
-.p3 {
-    margin: -12px;
-}
-
-@media (min-width: 1920px) {
-    .c-grid-cols-6 {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-    }
+.px-22 {
+    padding-left: 88px;
+    padding-right: 88px;
 }
 </style>

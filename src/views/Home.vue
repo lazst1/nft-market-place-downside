@@ -1,95 +1,147 @@
-<script setup>
-import BodyContainer from '@/core/container/BodyContainer.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import { mdiFilter, mdiCloseBox } from '@mdi/js'
-import CheckboxCell from '@/core/components/CheckboxCell.vue';
-import DropDown from '../core/components/DropDown.vue';
-import NavBarItem from '@/core/components/NavBarItem.vue'
-import DropDownItem from '@/core/components/DropDownItem.vue';
-import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
-import Accordion from '@/core/container/Accordion.vue';
-import NftmxTable from '@/core/components/NftmxTable.vue';
-import NftmxThead from '@/core/components/NftmxThead.vue';
-import NftmxTh from '@/core/components/NftmxTh.vue';
-import NftmxTbody from '@/core/components/NftmxTbody.vue';
-import NftmxTd from '@/core/components/NftmxTd.vue';
-import NftmxTr from '@/core/components/NftmxTr.vue';
-</script>
-
 <template>
-    <body-container :searchAble="true">
-        <div class="flex py-4 border-b border-b-black font-ibm-medium">
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
-            <checkbox-cell><span class="text-xs">Domain Names</span></checkbox-cell>
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
-            <checkbox-cell><span class="text-xs">Art</span></checkbox-cell>
+    <body-container :padding="false">
+        <div class="bg-[url('@/assets/test.jpg')] h-96 font-press line-h text-3xl leading-loose text-white py-36 px-24">
+            Buy NFTs and<br/>Virtual Lands with<br/>100% Downside Protection
         </div>
-        <div class="flex py-4">
-            <div class="flex-1 items-stretch flex">
+        <nftmx-carousel></nftmx-carousel>
+        <nftmx-divider class="mt-10"></nftmx-divider>
+        <div class="grid grid-cols-2 lg:grid-cols-4">
+            <div class="px-10 py-10 text-white text-center font-press text-sm">
+                Decentralized Venture Capital
+                <nftmx-help></nftmx-help>
+                <div class="font-ibm-semi-bold text-xl text-center pt-4">
+                    <nftmx-price :price="1548985.53" color="secondary"></nftmx-price>
+                </div>
+            </div>
+            <div class="px-10 py-10 text-white text-center font-press text-sm">
+                Decentralized Venture Capital
+                <nftmx-help></nftmx-help>
+                <div class="font-ibm-semi-bold text-xl text-center pt-4">
+                    <nftmx-price :price="6452653.3248"></nftmx-price>
+                </div>
+            </div>
+            <div class="px-10 py-10 text-white text-center font-press text-sm">
+                Decentralized Venture Capital
+                <nftmx-help></nftmx-help>
+                <div class="font-ibm-semi-bold text-xl text-center pt-4">
+                    <nftmx-price :price="1256859.6559"></nftmx-price>
+                </div>
+            </div>
+            <div class="px-10 py-10 text-white text-center font-press text-sm">
+                Decentralized Venture Capital
+                <nftmx-help></nftmx-help>
+                <div class="font-ibm-semi-bold text-xl text-center pt-4">
+                    <nftmx-price :price="25689963.3289"></nftmx-price>
+                </div>
+            </div>
+        </div>
+        <div class="bg-tertiary-800 border-t border-b border-black py-5 px-10 lg:px-20">
+            <div class="flex items-center">
+                <nav-bar-search-input class="w-full font-ibm-medium text-sm" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
+                <font-awesome-icon @click="clickFilter" :icon="['fas', 'filter']" :class="[filterActive?'text-primary-900':'text-white', 'text-lg hover:text-primary-900 cursor-pointer']" />
                 <nftmx-button
-                    :outline="true"
-                    color="primary"
-                    label="Listings"
-                    :small="true"
-                    :iconAfter="mdiCloseBox"
+                    color="secondary"
+                    label="LAUNCH YOUR DVC"
+                    class="font-press w-full max-w-search text-xs leading-5 mx-2.5"
                 />
-                <nav-bar-item>
-                    <span class="text-primary-900 mx-2">Clear All</span>
-                </nav-bar-item>
+                <nftmx-button
+                    color="primary"
+                    label="STAKE/SELL YOUR NFT"
+                    class="font-press w-full max-w-search text-xs leading-5 mx-2.5"
+                />
+                <nftmx-button
+                    color="primary"
+                    label="STAKE/SELL YOUR LAND"
+                    class="font-press w-full max-w-search text-xs leading-5 mx-2.5"
+                />
             </div>
-            <div class="hidden md:block">
-                <drop-down
-                    title="Event type"
-                >
-                    <drop-down-item>
-                        DropDown Item
-                    </drop-down-item>
-                </drop-down>
-            </div>
-            <div class="ml-3 hidden md:block">
-                <drop-down
-                    title="Event type"
-                >
-                    <nav-bar-search-input placeholder="Filter" fontSize="text-xs"></nav-bar-search-input>
-                    <drop-down-item>
-                        <checkbox-cell><span class="text-xs">ETH Address</span></checkbox-cell>
-                    </drop-down-item>
-                    <drop-down-item>
-                        <checkbox-cell><span class="text-xs">ETH</span></checkbox-cell>
-                    </drop-down-item>
-                    <drop-down-item>
-                        <checkbox-cell><span class="text-xs">ETH</span></checkbox-cell>
-                    </drop-down-item>
-                </drop-down>
+            <div v-if="filterActive" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 pt-6">
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">List Price Available</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Open Offer Available</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Creator Owned</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Sold</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Reverse Price Set</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Music</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Most Popular</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Domain Names</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Virtual Worlds</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Trading Cards</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Collectibles</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Sports</span></checkbox-cell>
+                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Utility</span></checkbox-cell>
             </div>
         </div>
-        <accordion caption="Trading History" :accordion="false">
-            <nftmx-table height="80%">
-                <nftmx-thead>
-                    <nftmx-tr>
-                        <nftmx-th>Event</nftmx-th>
-                        <nftmx-th>Item</nftmx-th>
-                        <nftmx-th>Unit Price</nftmx-th>
-                        <nftmx-th>Quantity</nftmx-th>
-                        <nftmx-th>From</nftmx-th>
-                        <nftmx-th :border="false">To</nftmx-th>
-                    </nftmx-tr>
-                </nftmx-thead>
-                <nftmx-tbody>
-                    <nftmx-tr v-for="index in 10" :key="index" :border="index===10 ? false : true">
-                        <nftmx-td>Name</nftmx-td>
-                        <nftmx-td class="flex">
-                            Item
-                        </nftmx-td>
-                        <nftmx-td>Unit Price</nftmx-td>
-                        <nftmx-td>Quantity</nftmx-td>
-                        <nftmx-td>From</nftmx-td>
-                        <nftmx-td :border="false">To</nftmx-td>
-                    </nftmx-tr>
-                </nftmx-tbody>
-            </nftmx-table>
-        </accordion>
+        <div class="flex px-10 py-6 lg:px-20">
+            <div class="w-68 pt-2">
+                <div class="flex font-press text-white">
+                    <span class="flex-1">Ledger</span>
+                    <font-awesome-icon :icon="['fas', 'external-link-alt']" class="text-primary-900 cursor-pointer" />
+                </div>
+                <div class="border border-black my-7">
+                    <div class="grid grid-cols-4 border-b border-black">
+                        <div class="font-ibm-semi-bold text-xxs text-primary-900 border-r border-black py-4 text-center">SOLD</div>
+                        <div class="font-ibm-semi-bold text-xxs text-red-700 border-r border-black py-4 text-center">CANCELED</div>
+                        <div class="font-ibm-semi-bold text-xxs text-white border-r border-black py-4 text-center">LISTED</div>
+                        <div class="font-ibm-semi-bold text-xxs text-tertiary-500 py-4 text-center">CREATED</div>
+                    </div>
+                    <div class="grid grid-cols-2 border-b border-black">
+                        <div class="font-ibm-medium text-xs text-tertiary-500 border-r border-black py-3 pl-3">Items</div>
+                        <div class="font-ibm-medium text-xs text-tertiary-500 py-3 pl-3">Price (USD)</div>
+                    </div>
+                    <div class="grid grid-cols-2 border-black">
+                        <template v-for="(item, index) in items" :key="index">
+                            <div class="font-ibm-medium text-xs text-white border-r border-black py-4 pl-3">{{item.name}}</div>
+                            <div :class="[item.price>300?'text-red-700':item.price<1?'text-white':'text-primary-900', 'font-ibm-medium text-xs py-4 pl-3']">{{item.price}}</div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div class="font-press text-white">
+                    <accordion :border="false">
+                        <template v-slot:caption>
+                            <div class="flex items-center w-full">
+                                <div class="flex-1 text-sm font-press py-4 mr-24">
+                                    Trending Collections
+                                </div>
+                                <nftmx-select class="font-ibm font-thin w-full max-w-lg text-sm" :data="items" small>
+                                </nftmx-select>
+                            </div>
+                        </template>
+                        <div class="px-6 pt-2">
+                            <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+                                <nftmx-sale-card :auction="true"></nftmx-sale-card>
+                                <nftmx-sale-card></nftmx-sale-card>
+                                <nftmx-sale-card :syndication="false"></nftmx-sale-card>
+                                <nftmx-sale-card v-for="index in 2" :key="index" :bought="true"></nftmx-sale-card>
+                            </div>
+                        </div>
+                    </accordion>
+                    <nftmx-divider class="mt-16 mb-6"></nftmx-divider>
+                    <accordion :border="false">
+                        <template v-slot:caption>
+                            <div class="flex items-center w-full">
+                                <div class="flex-1 text-sm font-press py-4 mr-24">
+                                    Digital Art
+                                </div>
+                                <nftmx-select class="font-ibm font-thin w-full max-w-lg text-sm" :data="items" small>
+                                </nftmx-select>
+                            </div>
+                        </template>
+                        <div class="px-6 pt-2">
+                            <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+                                <nftmx-sale-card :connect="true"></nftmx-sale-card>
+                                <nftmx-sale-card></nftmx-sale-card>
+                                <nftmx-sale-card :bought="true"></nftmx-sale-card>
+                                <nftmx-sale-card :sold="true"></nftmx-sale-card>
+                                <nftmx-sale-card :closed="true"></nftmx-sale-card>
+                            </div>
+                        </div>
+                    </accordion>
+                </div>
+            </div>
+        </div>
     </body-container>
 </template>
 
@@ -98,4 +150,65 @@ import NftmxTr from '@/core/components/NftmxTr.vue';
     padding-left: 88px;
     padding-right: 88px;
 }
+.text-center {
+    text-align: -webkit-center;
+}
+.max-w-search {
+    max-width: 23em;
+}
+.w-68 {
+    width: 17rem/* 260px */;
+}
 </style>
+
+<script>
+import BodyContainer from '@/core/container/BodyContainer.vue';
+import NftmxCarousel from '@/core/components/NftmxCarousel.vue';
+import NftmxDivider from '@/core/components/NftmxDivider.vue';
+import NftmxHelp from '@/core/components/NftmxHelp.vue';
+import NftmxPrice from '@/core/components/NftmxPrice.vue';
+import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
+import Icon from '@/core/components/Icon.vue'
+import NftmxButton from '@/core/components/NftmxButton.vue';
+import CheckboxCell from '@/core/components/CheckboxCell.vue';
+import Accordion from '@/core/container/Accordion.vue';
+import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
+import { defineComponent } from 'vue';
+
+const items = [
+    {
+        name: "Hashtasks #21",
+        price: 55
+    },
+    {
+        name: "Hashtasks #21",
+        price: 322.4445
+    },
+    {
+        name: "Hashtasks #21",
+        price:0.291
+    },
+    {
+        name: "Hashtasks #21",
+        price: 78.220
+    }
+]
+
+export default defineComponent({
+    components: {
+        BodyContainer, NftmxCarousel, NftmxDivider, NftmxHelp, NftmxPrice, NavBarSearchInput, Icon, NftmxButton, CheckboxCell, Accordion, NftmxSaleCard
+    },
+    data() {
+        return {
+            filterActive: false,
+            items: items
+        }
+    },
+    methods: {
+        clickFilter() {
+            this.filterActive = !this.filterActive;
+        }
+    }
+})
+
+</script>

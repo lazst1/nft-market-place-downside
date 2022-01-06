@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory,  } from 'vue-router'
 import Home from '@/views/Home.vue'
+import Browse from '@/views/Browse.vue'
 import Activity from '@/views/Activity.vue'
 import Detail from '@/views/Detail.vue'
 
@@ -11,6 +12,14 @@ const routes = [
         path: '/',
         name: 'home',
         component: Home
+    },
+    {
+        meta: {
+            title: 'Browse'
+        },
+        path: '/browse',
+        name: 'browse',
+        component: Browse
     },
     {
         meta: {

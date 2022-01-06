@@ -38,6 +38,11 @@
 }
 
 @font-face {
+    font-family: "ibm-semi-bold";
+    src: url(./fonts/IBMPlexMono-SemiBold.otf);
+}
+
+@font-face {
     font-family: "ibm-light";
     src: url(./fonts/IBMPlexMono-Light.otf);
 }

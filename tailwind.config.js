@@ -15,7 +15,7 @@ module.exports = {
         },
         secondary: {
           900: '#1969cb',
-          800: '#1969cb',
+          800: '#2d7cde',
           700: '#4191f2'
         },
         tertiary: {
@@ -29,13 +29,14 @@ module.exports = {
         }
       },
       fontSize: {
-        xxs: ['10px', '14px']
+        xxs: ['11px', '14px']
       },
       fontFamily: {
         'awesome': ['fontawesome'],
         'ibm': ['ibm'],
         'ibm-medium': ['ibm-medium'],
         'ibm-bold': ['ibm-bold'],
+        'ibm-semi-bold': ['ibm-semi-bold'],
         'ibm-light': ['ibm-light'],
         'press': ['press']
       },

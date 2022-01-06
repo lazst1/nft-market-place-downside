@@ -25,7 +25,7 @@ const props = defineProps({
 })
 
 const spanClass = computed(() => `inline-flex justify-center items-center ${props.w} ${props.h}`)
-const iconColor = computed(() => `inline-block text-${props.color}`)
+const iconColor = computed(() => `inline-block text-${props.color} hover:text-primary-900`)
 </script>
 
 <template>

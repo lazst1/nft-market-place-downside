@@ -81,7 +81,6 @@ const componentClass = computed(() => {
     'whitespace-nowrap',
     'focus:outline-none',
     'transition-colors',
-    'focus:ring',
     'duration-150',
     'text-xs',
     props.small ? 'p-2' : 'p-4 px-14',

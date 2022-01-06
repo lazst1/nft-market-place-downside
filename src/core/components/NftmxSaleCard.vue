@@ -47,6 +47,18 @@ const props = defineProps({
     bought: {
         type: Boolean,
         default: false
+    },
+    connect: {
+        type: Boolean,
+        default: false
+    },
+    sold: {
+        type: Boolean,
+        default: false
+    },
+    closed: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -101,12 +113,27 @@ const boughtCSS = computed(() => {
                 <timer />
             </div>
             </div>
-            <div v-if="!bought" class="grid grid-cols-2 relative font-press">
+            <div v-if="!bought&&!connect&&!sold&&!closed" class="grid grid-cols-2 relative font-press">
                 <button :class="syndicationCSS">
                     START SYNDICATION
                 </button>
                 <button class="bg-gradient-to-r from-primary-900 to-primary-700 text-white text-sm">
                     BUY NOW
+                </button>
+            </div>
+            <div v-if="connect" class="grid grid-cols-1 relative font-press">
+                <button class="bg-black py-6 text-xs">
+                    CONNECT WALLET
+                </button>
+            </div>
+            <div v-if="sold" class="grid grid-cols-1 relative font-press">
+                <button class="bg-black py-6 text-xs text-red-700">
+                    SOLD OUT
+                </button>
+            </div>
+            <div v-if="closed" class="grid grid-cols-1 relative font-press">
+                <button class="bg-black py-6 text-xs text-red-700">
+                    AUCTION CLOSED
                 </button>
             </div>
         </div>

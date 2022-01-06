@@ -3,7 +3,7 @@ import { computed } from 'vue'
 const props = defineProps({
     color: {
         type: String,
-        default: 'primary-900'
+        default: 'tertiary-800'
     },
     size: {
         type: String,
@@ -16,7 +16,7 @@ const blockCss = computed(() => `text-white border text-center font-bold border-
 </script>
 
 <template>
-    <div :class="blockCss">
-        1
+    <div :class="[blockCss, color==='primary-900'?'bg-primary-900':'']">
+        <slot />
     </div>
 </template>

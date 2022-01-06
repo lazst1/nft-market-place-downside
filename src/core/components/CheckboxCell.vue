@@ -62,8 +62,8 @@ watch(checked, newVal => {
   position: absolute;
   top: 2px;
   left: 0;
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
   background-color: #343434;
 }
 
@@ -91,10 +91,10 @@ watch(checked, newVal => {
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
-  left: 10px;
+  left: 6px;
   top: -6px;
   width: 10px;
-  height: 20px;
+  height: 16px;
   border: solid #19cb58;
   border-width: 0 4px 4px 0;
   -webkit-transform: rotate(45deg);

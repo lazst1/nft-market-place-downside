@@ -10,6 +10,10 @@ export default {
             type: Boolean,
             default: true
         },
+        border: {
+            type: Boolean,
+            default: true
+        }
     },
     setup(props) {
         const caption = props.caption;
@@ -35,8 +39,8 @@ export default {
 
 
 <template>
-    <div class="bg-tertiary-800 font-ibm border border-black">
-        <div class="flex px-5 text-xl text-white border-b border-black font-bold">
+    <div :class="[border?'border border-black bg-tertiary-800':'', 'font-ibm']">
+        <div :class="[border?'border-b border-black':'', 'flex px-5 text-xl text-white font-bold']">
             <div class="flex-1">
                 <slot name="caption"></slot>
             </div>
