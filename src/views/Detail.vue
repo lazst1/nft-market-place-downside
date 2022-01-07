@@ -12,6 +12,13 @@ import Accordion from '@/core/container/Accordion.vue';
 import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import NftmxModal from '@/core/components/NftmxModal.vue';
+import { mdiClose } from '@mdi/js'
+import NftmxTable from '@/core/components/NftmxTable.vue';
+import NftmxThead from '@/core/components/NftmxThead.vue';
+import NftmxTh from '@/core/components/NftmxTh.vue';
+import NftmxTbody from '@/core/components/NftmxTbody.vue';
+import NftmxTd from '@/core/components/NftmxTd.vue';
+import NftmxTr from '@/core/components/NftmxTr.vue';
 
 const people = [
   {
@@ -93,7 +100,9 @@ const props = defineProps({
     },
 })
 
-const modalActive = ref(false);
+const buyModalActive = ref(false);
+const syndicationModalActive = ref(false);
+const fundError = ref(false);
 
 </script>
 
@@ -169,7 +178,7 @@ const modalActive = ref(false);
                             color="primary"
                             label="BUY NOW"
                             class="font-press w-full text-lg"
-                            @click="modalActive = true"
+                            @click="buyModalActive = true"
                         />
                     </div>
                 </div>
@@ -196,6 +205,7 @@ const modalActive = ref(false);
                             color="secondary"
                             label="JOIN SYNDICATION"
                             class="font-press w-full text-lg py-5"
+                            @click="syndicationModalActive = true"
                         />
                     </div>
                 </div>
@@ -217,13 +227,107 @@ const modalActive = ref(false);
         </accordion>
     </body-container>
     <nftmx-footer />
-    <nftmx-modal v-model="modalActive" hasCancel>
-        <div class="text-center">
+    <nftmx-modal v-model="buyModalActive" width="md:w-3/5 lg:w-5/12">
+        <div class="text-center relative -top-2">
             <div class="font-press text-2xl">
                 Buy
             </div>
             <div class="font-ibm-semi-bold text-sm items-center py-4">
                 Balance: $1,548.85 <span class="text-xxs font-ibm text-tertiary-400">(322.4445)</span>
+            </div>
+        </div>
+        <div class="px-4 md:px-16 pb-10">
+            <table class="w-full">
+                <thead class="text-tertiary-400 font-ibm-light text-xs border-b border-black">
+                    <th class="py-6 px-5 text-left">Items</th>
+                    <th class="text-right">Subtotal</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr v-for="index in 2" :key="index" class="border-b border-black">
+                        <td class="p-4 text-left flex">
+                            <div class="bg-[url('@/assets/test.jpg')] w-13 h-13">
+                            </div>
+                            <div class="pt-0.5 px-4">
+                                <div class="text-primary-900 font-ibm text-xs leading-6">Kyle White</div>
+                                <div class="font-ibm-medium text-sm">Play Quiet #10/10</div>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="font-ibm text-xs leading-6">$458,658.92</div>
+                            <div class="font-ibm text-xxs text-tertiary-400 leading-6">( 322.4445)</div>
+                        </td>
+                        <td class="text-center items-start">
+                            <icon
+                                :path="mdiClose"
+                                :size="16"
+                                class="cursor-pointer relative -top-3"
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="text-tertiary-400 font-ibm-light text-xs">
+                    <th class="py-6 px-5 text-left">Total</th>
+                    <th class="text-right">
+                        <div class="font-ibm text-sm text-primary-900 leading-10">$917,658.92</div>
+                        <div class="font-ibm text-xxs text-tertiary-400">( 644.889)</div>
+                    </th>
+                    <th></th>
+                </tfoot>
+            </table>
+            <div class="w-full text-center pt-6 pb-5">
+                <nftmx-button
+                    color="primary"
+                    label="BUY NOW"
+                    class="font-press w-full text-sm my-3 max-w-xs"
+                    @click="fundError = true"
+                />
+                <div v-if="fundError" class="h-0 text-center font-ibm-medium text-xxs text-red-600">Add fund to your wallet</div>
+            </div>
+        </div>
+    </nftmx-modal>
+    <nftmx-modal v-model="syndicationModalActive" width="md:w-3/5">
+        <div class="text-center">
+            <div class="font-press text-2xl leading-5">
+                Total Locked Value
+            </div>
+            <div class="font-ibm-semi-bold text-3xl text-primary-900 items-center py-4">
+                $1,548,548.65
+            </div>
+        </div>
+        <div class="px-4 md:px-16 pb-14 mt-14">
+            <table class="border border-black bg-tertiary-800 w-full text-left">
+                <thead class="text-xs font-ibm-light text-tertiary-400">
+                    <tr class="border-b border-black">
+                        <th class="py-4 border-r border-black w-1/5 pl-4">Date</th>
+                        <th class="border-r border-black w-1/5 pl-4">Wallet Address</th>
+                        <th class="border-r border-black w-1/5 pl-4">ETH amount</th>
+                        <th class="border-r border-black w-1/5 pl-4">Ownership %</th>
+                        <th class="pl-4">Proof</th>
+                    </tr>
+                </thead>
+                <tbody class="font-ibm-light text-xs">
+                    <tr v-for="index in 2" :key="index" class="border-b border-black">
+                        <td class="py-4 border-r border-black w-1/5 pl-4">19 hours ago</td>
+                        <td class="py-4 border-r border-black w-1/5 pl-4 text-primary-900">
+                            0x495f...7b5e
+                        </td>
+                        <td class="py-4 border-r border-black w-1/5 pl-4">512</td>
+                        <td class="py-4 border-r border-black w-1/5 pl-4">50%</td>
+                        <td class="py-4 border-r border-black w-1/5 pl-4 text-secondary-600 font-ibm-medium">0x495f...7b5e</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="flex mt-14 mb-6">
+                <input class="focus:outline-none border-2 h-14 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-20 font-ibm text-sm" placeholder="Type of amount" />
+                <div class="w-14 h-14 bg-black absolute bg-[url('/images/curr-1.png')] bg-no-repeat bg-center" />
+            </div>
+            <div class="w-full text-center">
+                <nftmx-button
+                    color="secondary"
+                    label="JOIN SYNDICATION"
+                    class="font-press w-full text-sm py-5 leading-6"
+                />
             </div>
         </div>
     </nftmx-modal>
@@ -236,5 +340,11 @@ const modalActive = ref(false);
 .text-5\/2xl {
     font-size: 1.75rem/* 20px */;
     line-height: 2.15rem/* 28px */;
+}
+.w-13 {
+    width: 3.25em
+}
+.h-13 {
+    height: 3.25em
 }
 </style>

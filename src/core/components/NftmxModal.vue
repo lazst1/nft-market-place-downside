@@ -25,6 +25,10 @@ const props = defineProps({
   modelValue: {
     type: [String, Number, Boolean],
     default: null
+  },
+  width: {
+    type: String,
+    default: ''
   }
 })
 
@@ -50,7 +54,7 @@ const cancel = () => confirmCancel('cancel')
     v-show="value"
     @overlay-click="cancel"
   >
-    <div class="text-white shadow-lg w-full max-h-modal md:w-3/5 lg:w-5/12 z-50 bg-tertiary-900">
+    <div :class="[width, 'text-white shadow-lg w-full max-h-modal z-50 bg-tertiary-900']">
       <div class="text-right text-xl p-5">
         <icon
           :path="mdiClose"

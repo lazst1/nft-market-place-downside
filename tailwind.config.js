@@ -16,7 +16,8 @@ module.exports = {
         secondary: {
           900: '#1969cb',
           800: '#2d7cde',
-          700: '#4191f2'
+          700: '#4191f2',
+          600: '#2e2eff'
         },
         tertiary: {
           900: '#151515',
