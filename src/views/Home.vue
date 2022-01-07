@@ -5,31 +5,42 @@
         </div>
         <nftmx-carousel></nftmx-carousel>
         <nftmx-divider class="mt-10"></nftmx-divider>
-        <div class="grid grid-cols-2 lg:grid-cols-4">
-            <div class="px-10 py-10 text-white text-center font-press text-sm">
-                Decentralized Venture Capital
-                <nftmx-help></nftmx-help>
+        <div class="grid grid-cols-2 2xl:grid-cols-4 px-20 gap-12">
+            <div class="pt-12 pb-4 text-white text-center font-press text-sm">
+                <div class="h-10">
+                    Decentralized Venture Capital
+                    <nftmx-help></nftmx-help>
+                </div>
                 <div class="font-ibm-semi-bold text-xl text-center pt-4">
                     <nftmx-price :price="1548985.53" color="secondary"></nftmx-price>
                 </div>
+                <div class="text-xxs font-ibm text-tertiary-400 py-2">
+                    <span>
+                        Avg ROI 125.52%
+                    </span>
+                    <span class="font-ibm-bold text-secondary-700">Become A Baker</span>
+                    |
+                    <span class="font-ibm-bold text-secondary-700">see more DVCs</span>
+                </div>
             </div>
-            <div class="px-10 py-10 text-white text-center font-press text-sm">
-                Decentralized Venture Capital
-                <nftmx-help></nftmx-help>
+            <div class="pt-10 pb-4 text-white text-center font-press text-sm">
+                <div class="h-10 flex justify-center items-center">
+                    Total downside protection locked value
+                </div>
                 <div class="font-ibm-semi-bold text-xl text-center pt-4">
                     <nftmx-price :price="6452653.3248"></nftmx-price>
                 </div>
             </div>
-            <div class="px-10 py-10 text-white text-center font-press text-sm">
-                Decentralized Venture Capital
-                <nftmx-help></nftmx-help>
+            <div class="pt-10 pb-4 text-white text-center font-press text-sm">
+                <div class="h-10 flex justify-center items-center">Total sales to Date</div>
                 <div class="font-ibm-semi-bold text-xl text-center pt-4">
                     <nftmx-price :price="1256859.6559"></nftmx-price>
                 </div>
             </div>
-            <div class="px-10 py-10 text-white text-center font-press text-sm">
-                Decentralized Venture Capital
-                <nftmx-help></nftmx-help>
+            <div class="pt-10 pb-4 text-white text-center font-press text-sm">
+                <div class="h-10 flex justify-center items-center">
+                    Total staking Collected
+                </div>
                 <div class="font-ibm-semi-bold text-xl text-center pt-4">
                     <nftmx-price :price="25689963.3289"></nftmx-price>
                 </div>

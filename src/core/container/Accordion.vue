@@ -2,10 +2,6 @@
 
 export default {
     props: {
-        caption: {
-            type: String,
-            required: true
-        },
         accordion: {
             type: Boolean,
             default: true
@@ -16,11 +12,9 @@ export default {
         }
     },
     setup(props) {
-        const caption = props.caption;
         const accordion = props.accordion;
 
         return {
-            caption,
             accordion
         }
     },

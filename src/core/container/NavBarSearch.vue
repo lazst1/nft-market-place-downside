@@ -8,7 +8,6 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 import TopBar from '@/core/components/TopBar.vue';
 </script>
 
-
 <template>
   <top-bar class="mt-70px font-ibm-medium">
     <div class="pl-16 flex-grow items-stretch flex h-95px bg-tertiary-800">

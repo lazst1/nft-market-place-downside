@@ -12,6 +12,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "@headlessui/vue": "^1.4.2",
     "@mdi/js": "^6.5.95",
+    "@popperjs/core": "^2.11.2",
     "@themesberg/flowbite": "^1.2.0",
     "click-outside-vue3": "^4.0.1",
     "postcss-import": "^14.0.2",

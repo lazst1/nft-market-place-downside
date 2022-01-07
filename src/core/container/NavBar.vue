@@ -4,6 +4,7 @@ import NavBarItem from '@/core/components/NavBarItem.vue'
 import TopBar from '@/core/components/TopBar.vue';
 import Icon from '@/core/components/Icon.vue'
 import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
+import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
 </script>
 
 
@@ -51,6 +52,7 @@ import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
               size="30"
               color="white"
             />
+            <nftmx-tooltip></nftmx-tooltip>
           </div>
         </nav-bar-item>
         <nav-bar-item>
