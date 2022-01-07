@@ -1,14 +1,14 @@
 <template>
-    <Carousel :items-to-show="itemsToShow" :wrap-around="true">
+    <Carousel :items-to-show="itemsToShow" :wrap-around="true" class="mt-4">
         <Slide v-for="slide in 10" :key="slide">
             <div class="carousel__item" :style="{marginLeft: marginLeft+'em'}">
                 <div class="grid grid-cols-2 m-4 cursor-pointer hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700">
-                    <div class="relative w-80 h-80 overflow-hidden bg-[url('@/assets/test.jpg')] bg-cover">
+                    <div class="relative w-81 h-81 overflow-hidden bg-[url('@/assets/test.jpg')] bg-cover">
                         <ribbon :percent="100" :period="256" />
                     </div>
-                    <div class="relative w-80 overflow-hidden bg-black text-white">
-                        <div class="py-6 px-8 text-left font-ibm-bold leading-10">
-                            <div class="text-xl pb-2">Syndication</div>
+                    <div class="relative w-81 overflow-hidden bg-black text-white">
+                        <div class="py-6 px-8 text-left font-ibm-bold">
+                            <div class="text-xl pb-2 leading-10">Syndication</div>
                             <div class="text-xs font-ibm-semi-bold">
                                 <nftmx-help>
                                     Syndication type
@@ -74,7 +74,7 @@ export default defineComponent({
                 width: 0,
                 height: 0
             },
-            itemsToShow: 2.9,
+            itemsToShow: 2.6,
             marginLeft: -42
         }
     },
@@ -90,11 +90,11 @@ export default defineComponent({
             this.window.width = window.innerWidth;
             this.window.height = window.innerHeight;
             if (this.window.width >= 1920) {
-                this.itemsToShow = 2.9
+                this.itemsToShow = 2.7
             } else if (this.window.width <= 720) {
                 this.itemsToShow = 1
             } else {
-                this.itemsToShow = (this.window.width - 720) / 620 + 1;
+                this.itemsToShow = (this.window.width - 720) / 700 + 1;
                 if (this.itemsToShow > 2) {
                     this.marginLeft = -42
                 } else {
@@ -107,8 +107,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.carousel__item {
-    /* margin-left: -42em; */
+.w-81 {
+    width: 21em;
+}
+.h-81 {
+    height: 21em;
 }
 /deep/ .carousel__slide--prev {
     display: none;

@@ -9,10 +9,10 @@ import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
 
 
 <template>
-  <top-bar>
+  <top-bar class="px-2">
     <div class="flex-1 items-stretch flex h-70px font-ibm">
       <nav-bar-item>
-        <img src="" alt="NFT mx" />
+        <img src="/images/nftmx-logo.png" alt="NFT mx" />
       </nav-bar-item>
     </div>
     <div

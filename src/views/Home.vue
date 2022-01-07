@@ -1,7 +1,7 @@
 <template>
     <body-container :padding="false">
-        <div class="bg-[url('@/assets/test.jpg')] h-96 font-press line-h text-3xl leading-loose text-white py-36 px-24">
-            Buy NFTs and<br/>Virtual Lands with<br/>100% Downside Protection
+        <div class="bg-[url('/images/hero-image-1920.png')] h-background bg-no-repeat bg-cover font-press line-h text-3xl leading-loose text-white py-44 px-24">
+            Buy NFTs with 100%<br/>Downside Protection
         </div>
         <nftmx-carousel></nftmx-carousel>
         <nftmx-divider class="mt-10"></nftmx-divider>
@@ -150,6 +150,9 @@
 }
 .w-68 {
     width: 17rem/* 260px */;
+}
+.h-background {
+    height: 16em;
 }
 </style>
 
