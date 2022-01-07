@@ -23,42 +23,32 @@ import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
         class="max-h-screen-menu overflow-y-auto lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
       >
         <nav-bar-item>
-          <router-link to="/activity">
-            <div class="">
-              <span class="text-sm font-ibm-bold">
-                Seller
-              </span>
-              <icon
-                class="-ml-1"
-                :path="mdiHelpCircle"
-                w="w-3"
-                h="h-3"
-                size="30"
-                color="white"
-              />
-            </div>
-          </router-link>
+          <div class="">
+            <span class="text-sm font-ibm-bold">
+              Seller
+            </span>
+            <nftmx-tooltip class="-top-2 -left-1" text="If you are a seller, NFT.mx allows you to increase your success rate by offering buyers downside protection all while gaining profits from the APY in leveraging other people's money.">
+              <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs" />
+            </nftmx-tooltip>
+          </div>
         </nav-bar-item>
         <nav-bar-item>
           <div class="">
             <span class="text-sm font-ibm-bold">
               Buyer
             </span>
-            <icon
-              class="-ml-1"
-              :path="mdiHelpCircle"
-              w="w-3"
-              h="h-3"
-              size="30"
-              color="white"
-            />
-            <nftmx-tooltip></nftmx-tooltip>
+            <nftmx-tooltip class="-top-2 -left-1" text="If you are a buyer, think of NFT.mx as a new strategic staking program with upside from selling the NFT, while also providing the option to cancel your investment and get a 100% refund with your original tokens.">
+              <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs" />
+            </nftmx-tooltip>
           </div>
         </nav-bar-item>
         <nav-bar-item>
           <span class="text-sm font-ibm-bold pt-1">
             0x291A...H1RS
           </span>
+        </nav-bar-item>
+        <nav-bar-item>
+          <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5"></div>
         </nav-bar-item>
       </div>
     </div>

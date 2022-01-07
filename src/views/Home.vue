@@ -1,15 +1,18 @@
 <template>
     <body-container :padding="false">
-        <div class="bg-[url('/images/hero-image-1920.png')] h-background bg-no-repeat bg-cover font-press line-h text-3xl leading-loose text-white py-44 px-24">
+        <div class="bg-[url('/images/hero-image-1920.png')] h-96 2xl:h-full bg-no-repeat bg-cover font-press line-h text-3xl leading-loose text-white py-32 2xl:py-48 px-24">
             Buy NFTs with 100%<br/>Downside Protection
         </div>
         <nftmx-carousel></nftmx-carousel>
-        <nftmx-divider class="mt-10"></nftmx-divider>
+        <nftmx-divider class="mt-9"></nftmx-divider>
         <div class="grid grid-cols-2 2xl:grid-cols-4 px-20 gap-12">
             <div class="pt-12 pb-4 text-white text-center font-press text-sm">
                 <div class="h-10">
                     Decentralized Venture Capital
                     <nftmx-help></nftmx-help>
+                    <nftmx-tooltip text="Difficulty">
+                        <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs" />
+                    </nftmx-tooltip>
                 </div>
                 <div class="font-ibm-semi-bold text-xl text-center pt-4">
                     <nftmx-price :price="1548985.53" color="secondary"></nftmx-price>
@@ -151,9 +154,6 @@
 .w-68 {
     width: 17rem/* 260px */;
 }
-.h-background {
-    height: 16em;
-}
 </style>
 
 <script>
@@ -171,6 +171,7 @@ import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import { defineComponent } from 'vue';
 import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
+import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
 
 const items = [
     {
@@ -205,7 +206,8 @@ export default defineComponent({
         Accordion,
         NftmxSaleCard,
         NftmxCardsAccordion,
-        NftmxFooter
+        NftmxFooter,
+        NftmxTooltip
     },
     data() {
         return {

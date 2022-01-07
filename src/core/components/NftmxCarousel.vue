@@ -41,7 +41,6 @@
 
         <template #addons>
             <Pagination />
-            <!-- <Navigation /> -->
         </template>
     </Carousel>
 </template>
@@ -121,8 +120,12 @@ export default defineComponent({
     height: var(--vc-pgn-width);
     border-radius: 0;
     background-color: #535353;
+    width: 11px;
+    height: 11px;
 }
 /deep/ .carousel__pagination-button--active {
     background-color: #19cb58;
+    width: 11px;
+    height: 11px;
 }
 </style>

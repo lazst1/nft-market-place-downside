@@ -1,38 +1,40 @@
 <template>
-    <span ref="btnRef" v-on:mouseenter="toggleTooltip()" v-on:mouseleave="toggleTooltip()" class="">
-        <font-awesome-icon :icon="['fas', 'question-circle']" class="" />
-    </span>
-    <div ref="tooltipRef" v-bind:class="{'hidden': !tooltipShow, 'block': tooltipShow}" class="bg-pink-600 border-0 mt-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words">
-        <div>
-            <div class="text-white p-3">
-                And here's some amazing content. It's very engaging. Right?
-            </div>
-        </div>
+  <div class="tooltip-box" @mouseover="tooltip = true" @mouseout="tooltip = false">
+    <slot />
+    <div v-if="tooltip"
+      class="tooltip absolute bg-black text-white font-ibm-light leading-5 z-50 text-xxs shadow-[0_-2px_15px_-2px_rgb(0_0_0_/_0.1),_0_2px_6px_-4px_rgb(0_0_0_/_0.1);] shadow-primary-900 p-4 w-96 right-1 top-3"
+    >
+      {{text}}
     </div>
+  </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
 
-import { createPopper } from "@popperjs/core";
-
-export default {
-  name: "bottom-pink-tooltip",
-  data() {
-    return {
-      tooltipShow: false
-    }
-  },
-  methods: {
-    toggleTooltip: function(){
-      if(this.tooltipShow){
-        this.tooltipShow = false;
-      } else {
-        this.tooltipShow = true;
-        createPopper(this.$refs.btnRef, this.$refs.tooltipRef, {
-          placement: "bottom"
-        });
-      }
-    }
+defineProps({
+  text: {
+    type: String,
+    required: true
   }
-}
+})
+
+const tooltip = ref(false)
+
 </script>
+
+<style scoped>
+.tooltip-box { 
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-box:hover .tooltip{
+  opacity: 1;
+}
+
+.tooltip { 
+  opacity: 0;
+}
+
+</style>
