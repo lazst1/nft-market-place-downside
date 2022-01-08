@@ -11,7 +11,7 @@ import NftmxDivider from './NftmxDivider.vue';
         <div class="font-ibm-semi-bold text-secondary-900">Free license</div>
         <accordion :border="false" :sidebar="true" class="mt-4">
             <template v-slot:caption>
-                <div class="text-white font-ibm text-xs mt-0.5">
+                <div class="text-white font-ibm text-xs mt-1">
                     Marketplace
                 </div>
             </template>
@@ -28,7 +28,7 @@ import NftmxDivider from './NftmxDivider.vue';
         </accordion>
         <accordion :border="false" :sidebar="true" class="mt-4">
             <template v-slot:caption>
-                <div class="text-white font-ibm text-xs mt-0.5">
+                <div class="text-white font-ibm text-xs mt-1">
                     Community
                 </div>
             </template>
@@ -39,27 +39,29 @@ import NftmxDivider from './NftmxDivider.vue';
                 <div>Blog</div>
             </div>
         </accordion>
-        <div class="font-ibm-semi-bold pt-4">Developers</div>
-        <div class="font-ibm-semi-bold">Affiliate program</div>
-        <div class="font-ibm-semi-bold">Docs</div>
+        <div class="font-ibm-semi-bold leading-9 pt-2.5">Developers</div>
+        <div class="font-ibm-semi-bold leading-9">Affiliate program</div>
+        <div class="font-ibm-semi-bold leading-9">Docs</div>
 
         <nftmx-divider class="border-tertiary-900 my-4"></nftmx-divider>
         
-        <div class="font-ibm-semi-bold">New</div>
-        <div class="font-ibm-semi-bold">Art</div>
-        <div class="font-ibm-semi-bold">Domain names</div>
-        <div class="font-ibm-semi-bold">Virtual worlds</div>
-        <div class="font-ibm-semi-bold">Trading cards</div>
-        <div class="font-ibm-semi-bold">Collectibles</div>
-        <div class="font-ibm-semi-bold">Sports</div>
-        <div class="font-ibm-semi-bold">Utility</div>
-        <div class="font-ibm-semi-bold">LootBoxes</div>
+        <div class="font-ibm-semi-bold leading-9 py-0.5">
+            <div>New</div>
+            <div>Art</div>
+            <div>Domain names</div>
+            <div>Virtual worlds</div>
+            <div>Trading cards</div>
+            <div>Collectibles</div>
+            <div>Sports</div>
+            <div>Utility</div>
+            <div>LootBoxes</div>
+        </div>
         
         <nftmx-divider class="border-tertiary-900 my-4"></nftmx-divider>
         
-        <accordion :border="false" :sidebar="true" class="mt-4">
+        <accordion :border="false" :sidebar="true" class="mt-6">
             <template v-slot:caption>
-                <div class="text-white font-ibm text-xs mt-0.5">
+                <div class="text-white font-ibm text-xs mt-1">
                     My Account
                 </div>
             </template>
@@ -96,7 +98,7 @@ import NftmxDivider from './NftmxDivider.vue';
                 <div class="flex"><div class="w-3 mr-4 text-center"><font-awesome-icon :icon="['fab', 'medium-m']" /></div>Medium</div>
             </div>
         </accordion>
-        <div class="font-ibm-semi-bold pt-4">Privacy of policy</div>
+        <div class="font-ibm-semi-bold pt-3.5">Privacy of policy</div>
         <div class="font-ibm-semi-bold">Terms of service</div>
         <div class="py-4 flex gap-6">
             <font-awesome-icon :icon="['fas', 'moon']" class="text-lg text-primary-900"></font-awesome-icon>
@@ -108,7 +110,7 @@ import NftmxDivider from './NftmxDivider.vue';
             <div class="leading-5">
                 <font-awesome-icon :icon="['far', 'copyright']" /> 2021 NFT.mx All rights reserved
             </div>
-            <div class="flex items-center font-ibm-bold my-px">
+            <div class="flex items-center font-ibm-bold my-0.5">
                 Powered by
                 <img src="/images/atom-logo-footer.png" alt="" />
             </div>

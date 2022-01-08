@@ -43,12 +43,8 @@ export default {
                 <slot name="caption"></slot>
             </div>
             <div v-if="accordion" class="self-center cursor-pointer" @click="clickMenu">
-                <svg v-if="!open" style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M7,10L12,15L17,10H7Z" />
-                </svg>
-                <svg v-if="open" style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M7,15L12,10L17,15H7Z" />
-                </svg>
+                <font-awesome-icon v-if="!open" :icon="['fas', 'sort-down']" :class="{'text-sm':sidebar}" />
+                <font-awesome-icon v-if="open" :icon="['fas', 'sort-up']" :class="{'text-sm':sidebar}" />
             </div>
         </div>
         <div v-if="open">
