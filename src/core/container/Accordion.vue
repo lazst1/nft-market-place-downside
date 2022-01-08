@@ -9,6 +9,10 @@ export default {
         border: {
             type: Boolean,
             default: true
+        },
+        sidebar: {
+            type: Boolean,
+            default: false
         }
     },
     setup(props) {
@@ -34,7 +38,7 @@ export default {
 
 <template>
     <div :class="[border?'border border-black bg-tertiary-800':'', 'font-ibm']">
-        <div :class="[border?'border-b border-black':'', 'flex px-5 text-xl text-white font-bold']">
+        <div :class="[border?'border-b border-black':'', sidebar?'':'px-5', 'flex text-xl text-white font-bold']">
             <div class="flex-1">
                 <slot name="caption"></slot>
             </div>

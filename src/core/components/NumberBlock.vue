@@ -16,7 +16,7 @@ const blockCss = computed(() => `text-white border text-center font-bold border-
 </script>
 
 <template>
-    <div :class="[blockCss, color==='primary-900'?'bg-primary-900':'']">
+    <div :class="[blockCss, color==='primary-900'?'bg-primary-900':color==='secondary-800'?'bg-secondary-800':'']">
         <slot />
     </div>
 </template>

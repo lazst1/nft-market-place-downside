@@ -1,6 +1,6 @@
 <template>
     <body-container :padding="false">
-        <div class="bg-[url('/images/hero-image-1920.png')] h-96 2xl:h-full bg-no-repeat bg-cover font-press line-h text-3xl leading-loose text-white py-32 2xl:py-48 px-24">
+        <div class="bg-[url('/images/hero-image-1920.png')] h-96 2xl:h-full bg-no-repeat bg-cover bg-right font-press line-h text-3xl leading-loose text-white py-32 2xl:py-48 px-24">
             Buy NFTs with 100%<br/>Downside Protection
         </div>
         <nftmx-carousel></nftmx-carousel>
@@ -154,6 +154,12 @@
 .w-68 {
     width: 17rem/* 260px */;
 }
+.leading-7\.5 {
+    line-height: 30px;
+}
+.leading-4\.5 {
+    line-height: 18px;
+}
 </style>
 
 <script>
@@ -172,7 +178,6 @@ import { defineComponent } from 'vue';
 import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
-
 const items = [
     {
         name: "Hashtasks #21",

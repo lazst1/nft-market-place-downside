@@ -5,8 +5,10 @@ import TopBar from '@/core/components/TopBar.vue';
 import Icon from '@/core/components/Icon.vue'
 import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
-</script>
+import Sidebar from '@/core/components/Sidebar.vue';
 
+const sidebar = ref(false);
+</script>
 
 <template>
   <top-bar class="px-2">
@@ -42,7 +44,7 @@ import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
             </nftmx-tooltip>
           </div>
         </nav-bar-item>
-        <nav-bar-item>
+        <nav-bar-item @click="sidebar = !sidebar">
           <span class="text-sm font-ibm-bold pt-1">
             0x291A...H1RS
           </span>
@@ -53,6 +55,7 @@ import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
       </div>
     </div>
   </top-bar>
+  <sidebar v-if="sidebar" />
 </template>
 
 <style scoped>
