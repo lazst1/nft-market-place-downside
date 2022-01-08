@@ -5,48 +5,56 @@
         </div>
         <nftmx-carousel></nftmx-carousel>
         <nftmx-divider class="mt-9"></nftmx-divider>
-        <div class="grid grid-cols-2 2xl:grid-cols-4 px-20 gap-12">
-            <div class="pt-12 pb-4 text-white text-center font-press text-sm">
-                <div class="h-10">
-                    Decentralized Venture Capital
-                    <nftmx-help></nftmx-help>
-                </div>
-                <div class="font-ibm-semi-bold text-xl text-center pt-2">
-                    <nftmx-price :price="1548985.53" color="secondary"></nftmx-price>
-                </div>
-                <div class="text-xxs font-ibm text-tertiary-400 pt-2.5 pb-3">
-                    <span>
-                        Avg ROI 125.52%
-                    </span>
-                    <span class="font-ibm-bold text-secondary-700">Become A Baker</span>
-                    |
-                    <span class="font-ibm-bold text-secondary-700">see more DVCs</span>
-                </div>
-            </div>
-            <div class="pt-12 pb-4 text-white text-center font-press text-sm">
-                <div class="h-10 flex justify-center items-center">
-                    Total downside protection locked value
-                </div>
-                <div class="font-ibm-semi-bold text-xl text-center pt-2">
-                    <nftmx-price :price="6452653.3248"></nftmx-price>
+        <div class="flex justify-between px-22">
+            <div class="pt-12 pb-4 text-white text-center font-press text-sm flex">
+                <div class="w-min">
+                    <div class="h-10">
+                        Decentralized Venture Capital
+                        <nftmx-help></nftmx-help>
+                    </div>
+                    <div class="font-ibm-semi-bold text-xl text-center pt-2">
+                        <nftmx-price :price="1548985.53" color="secondary"></nftmx-price>
+                    </div>
+                    <div class="text-xxs font-ibm text-tertiary-400 pt-2.5 pb-3">
+                        <span>
+                            Avg ROI 125.52%
+                        </span>
+                        <span class="font-ibm-bold text-secondary-700">Become A Baker</span>
+                        |
+                        <span class="font-ibm-bold text-secondary-700">see more DVCs</span>
+                    </div>
                 </div>
             </div>
-            <div class="pt-12 pb-4 text-white text-center font-press text-sm">
-                <div class="h-10 flex justify-center items-center">Total sales to Date</div>
-                <div class="font-ibm-semi-bold text-xl text-center pt-2">
-                    <nftmx-price :price="1256859.6559"></nftmx-price>
+            <div class="pt-12 pb-4 text-white text-center font-press text-sm flex">
+                <div class="w-min">
+                    <div class="h-10 flex justify-center items-center">
+                        Total downside protection locked value
+                    </div>
+                    <div class="font-ibm-semi-bold text-xl text-center pt-2">
+                        <nftmx-price :price="6452653.3248"></nftmx-price>
+                    </div>
                 </div>
             </div>
-            <div class="pt-12 pb-4 text-white text-center font-press text-sm">
-                <div class="h-10 flex justify-center items-center">
-                    Total staking Collected
+            <div class="pt-12 pb-4 text-white text-center font-press text-sm flex justify-start">
+                <div class="w-min">
+                    <div class="h-10 flex justify-center items-center">Total sales to Date</div>
+                    <div class="font-ibm-semi-bold text-xl text-center pt-2">
+                        <nftmx-price :price="1256859.6559"></nftmx-price>
+                    </div>
                 </div>
-                <div class="font-ibm-semi-bold text-xl text-center pt-2">
-                    <nftmx-price :price="25689963.3289"></nftmx-price>
+            </div>
+            <div class="pt-12 pb-4 text-white text-center font-press text-sm flex justify-end">
+                <div class="w-min">
+                    <div class="h-10 flex justify-center items-center">
+                        Total staking Collected
+                    </div>
+                    <div class="font-ibm-semi-bold text-xl text-center pt-2">
+                        <nftmx-price :price="25689963.3289"></nftmx-price>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="bg-tertiary-800 border-t border-b border-black py-5 px-10 lg:px-20">
+        <div class="bg-tertiary-800 border-t border-b border-black py-5 px-10 lg:px-22">
             <div class="flex items-center">
                 <nav-bar-search-input class="w-full font-ibm-medium text-sm" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
                 <font-awesome-icon @click="clickFilter" :icon="['fas', 'filter']" :class="[filterActive?'text-primary-900':'text-white', 'text-lg hover:text-primary-900 cursor-pointer']" />
@@ -63,7 +71,7 @@
                 <nftmx-button
                     color="primary"
                     label="STAKE/SELL YOUR LAND"
-                    class="font-press w-full max-w-search text-xs leading-5 mx-2.5"
+                    class="font-press w-full max-w-search text-xs leading-5 ml-2.5"
                 />
             </div>
             <div v-if="filterActive" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 pt-6">
@@ -121,7 +129,7 @@
                             </div>
                         </template>
                         <div class="px-6 pt-2">
-                            <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+                            <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5">
                                 <nftmx-sale-card :connect="true"></nftmx-sale-card>
                                 <nftmx-sale-card></nftmx-sale-card>
                                 <nftmx-sale-card :bought="true"></nftmx-sale-card>
@@ -138,10 +146,6 @@
 </template>
 
 <style>
-.px-22 {
-    padding-left: 88px;
-    padding-right: 88px;
-}
 .text-center {
     text-align: -webkit-center;
 }

@@ -8,7 +8,7 @@
             </div>
         </template>
         <div class="px-6 pt-2">
-            <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+            <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5">
                 <nftmx-sale-card :auction="true"></nftmx-sale-card>
                 <nftmx-sale-card></nftmx-sale-card>
                 <nftmx-sale-card :syndication="false"></nftmx-sale-card>

@@ -42,6 +42,12 @@ module.exports = {
         'ibm-thin': ['ibm-thin'],
         'press': ['press']
       },
+      screens: {
+        '3xl': '1920px'
+      },
+      spacing: {
+        '22': '88px'
+      }
     },
   },
   plugins: [

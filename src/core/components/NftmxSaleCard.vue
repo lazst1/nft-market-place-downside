@@ -64,14 +64,14 @@ const props = defineProps({
 
 const syndicationCSS = computed(() => {
     const base = [
-        'py-4', 'text-xxs', 'leading-4', props.syndication ? 'bg-gradient-to-r from-secondary-900 to-secondary-700 text-white' : 'bg-tertiary-600 text-tertiary-500'
+        'py-3.5', 'text-xxs', 'leading-4', props.syndication ? 'bg-gradient-to-r from-secondary-900 to-secondary-700 text-white' : 'bg-tertiary-600 text-tertiary-500'
     ]
 
     return base
 })
 const boughtCSS = computed(() => {
     const base = [
-        'bg-tertiary-700', 'px-5', 'py-7', props.bought ? 'h-72' : 'h-56'
+        'bg-tertiary-700', 'px-5', 'py-5', props.bought ? 'h-73' : 'h-56'
     ]
 
     return base
@@ -80,14 +80,14 @@ const boughtCSS = computed(() => {
 </script>
 
 <template>
-    <div class="w-full">
+    <div class="w-full max-w-max">
         <div class="hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700">
-            <div class="relative h-52 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover">
+            <div class="relative h-50 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover">
                 <ribbon :percent="percent" :period="period" />
             </div>
             <div :class="boughtCSS">
                 <div class="flex text-white">
-                    <div class="flex-1 text-base font-ibm-bold leading-4 pr-2 h-8">
+                    <div class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16">
                         Love in the city new nork
                     </div>
                     <div class="text-xs flex">
@@ -106,16 +106,16 @@ const boughtCSS = computed(() => {
                     :roi="roi"
                     :value="value"
                 />
-                <div class="text-tertiary-400 text-xxs text-center relative">
+                <div class="text-tertiary-400 text-xxs text-center relative mt-6.5">
                     Current auction ends in
                 </div>
-            <div v-if="bought" class="py-3">
-                <timer />
-            </div>
+                <div v-if="bought" class="py-3">
+                    <timer />
+                </div>
             </div>
             <div v-if="!bought&&!connect&&!sold&&!closed" class="grid grid-cols-2 relative font-press">
                 <button :class="syndicationCSS">
-                    START SYNDICATION
+                    START<br />SYNDICATION
                 </button>
                 <button class="bg-gradient-to-r from-primary-900 to-primary-700 text-white text-sm">
                     BUY NOW
@@ -145,3 +145,18 @@ const boughtCSS = computed(() => {
         </div>
     </div>
 </template>
+
+<style scoped>
+.h-50 {
+    height: 202px;
+}
+.h-56 {
+    height: 232px;
+}
+.h-73 {
+    height: 292px;
+}
+.mt-6\.5 {
+    margin-top: 26px;
+}
+</style>
