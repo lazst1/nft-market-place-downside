@@ -3,57 +3,13 @@
         <div class="bg-[url('/images/hero-image-1920.png')] h-96 2xl:h-full bg-no-repeat bg-cover bg-right font-press line-h text-3xl leading-loose text-white py-32 2xl:py-48 px-24">
             Buy NFTs with 100%<br/>Downside Protection
         </div>
+
         <nftmx-carousel></nftmx-carousel>
+
         <nftmx-divider class="mt-9"></nftmx-divider>
-        <div class="flex justify-between px-22">
-            <div class="pt-12 pb-4 text-white text-center font-press text-sm flex">
-                <div class="w-min">
-                    <div class="h-10">
-                        Decentralized Venture Capital
-                        <nftmx-help></nftmx-help>
-                    </div>
-                    <div class="font-ibm-semi-bold text-xl text-center pt-2">
-                        <nftmx-price :price="1548985.53" color="secondary"></nftmx-price>
-                    </div>
-                    <div class="text-xxs font-ibm text-tertiary-400 pt-2.5 pb-3">
-                        <span>
-                            Avg ROI 125.52%
-                        </span>
-                        <span class="font-ibm-bold text-secondary-700">Become A Baker</span>
-                        |
-                        <span class="font-ibm-bold text-secondary-700">see more DVCs</span>
-                    </div>
-                </div>
-            </div>
-            <div class="pt-12 pb-4 text-white text-center font-press text-sm flex">
-                <div class="w-min">
-                    <div class="h-10 flex justify-center items-center">
-                        Total downside protection locked value
-                    </div>
-                    <div class="font-ibm-semi-bold text-xl text-center pt-2">
-                        <nftmx-price :price="6452653.3248"></nftmx-price>
-                    </div>
-                </div>
-            </div>
-            <div class="pt-12 pb-4 text-white text-center font-press text-sm flex justify-start">
-                <div class="w-min">
-                    <div class="h-10 flex justify-center items-center">Total sales to Date</div>
-                    <div class="font-ibm-semi-bold text-xl text-center pt-2">
-                        <nftmx-price :price="1256859.6559"></nftmx-price>
-                    </div>
-                </div>
-            </div>
-            <div class="pt-12 pb-4 text-white text-center font-press text-sm flex justify-end">
-                <div class="w-min">
-                    <div class="h-10 flex justify-center items-center">
-                        Total staking Collected
-                    </div>
-                    <div class="font-ibm-semi-bold text-xl text-center pt-2">
-                        <nftmx-price :price="25689963.3289"></nftmx-price>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <nftmx-analyzer />
+
         <div class="bg-tertiary-800 border-t border-b border-black py-5 px-10 lg:px-22">
             <div class="flex items-center">
                 <nav-bar-search-input class="w-full font-ibm-medium text-sm" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
@@ -179,6 +135,7 @@ import { defineComponent } from 'vue';
 import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
+import NftmxAnalyzer from '../core/components/NftmxAnalyzer.vue';
 const items = [
     {
         name: "Hashtasks #21",
@@ -200,21 +157,22 @@ const items = [
 
 export default defineComponent({
     components: {
-        BodyContainer,
-        NftmxCarousel,
-        NftmxDivider,
-        NftmxHelp,
-        NftmxPrice,
-        NavBarSearchInput,
-        Icon,
-        NftmxButton,
-        CheckboxCell,
-        Accordion,
-        NftmxSaleCard,
-        NftmxCardsAccordion,
-        NftmxFooter,
-        NftmxTooltip
-    },
+    BodyContainer,
+    NftmxCarousel,
+    NftmxDivider,
+    NftmxHelp,
+    NftmxPrice,
+    NavBarSearchInput,
+    Icon,
+    NftmxButton,
+    CheckboxCell,
+    Accordion,
+    NftmxSaleCard,
+    NftmxCardsAccordion,
+    NftmxFooter,
+    NftmxTooltip,
+    NftmxAnalyzer
+},
     data() {
         return {
             filterActive: false,
