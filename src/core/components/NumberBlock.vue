@@ -11,7 +11,7 @@ const props = defineProps({
     }
 })
 
-const blockCss = computed(() => `text-white border text-center font-bold border-black bg-${props.color} ${props.size === 'small' ? 'h-8 w-6' : 'h-10 w-8'}`)
+const blockCss = computed(() => `text-white border text-center font-bold border-black bg-${props.color} ${props.size === 'small' ? 'h-8.5 w-6.5' : 'h-10 w-8'}`)
 
 </script>
 
@@ -20,3 +20,12 @@ const blockCss = computed(() => `text-white border text-center font-bold border-
         <slot />
     </div>
 </template>
+
+<style scoped>
+    .h-8\.5 {
+        height: 34px;
+    }
+    .w-6\.5 {
+        width: 26px;
+    }
+</style>
