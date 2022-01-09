@@ -1,3 +1,14 @@
+<script setup>
+defineProps({
+    vertical: {
+        type: Boolean,
+        default: false
+    }
+})
+
+</script>
+
+
 <template>
-    <div class="border-t border-black"></div>
+    <div :class="[vertical?'border-r':'border-t', 'border-black']"></div>
 </template>

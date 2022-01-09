@@ -1,5 +1,5 @@
 <template>
-    <accordion :border="false">
+    <accordion :border="false" :sidebar="true">
         <template v-slot:caption>
             <div class="flex items-center w-full">
                 <div class="flex-1 text-sm font-press py-4 mr-24">
@@ -7,7 +7,7 @@
                 </div>
             </div>
         </template>
-        <div class="px-6 pt-2">
+        <div class="pt-2">
             <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5">
                 <nftmx-sale-card :auction="true"></nftmx-sale-card>
                 <nftmx-sale-card></nftmx-sale-card>

@@ -21,7 +21,7 @@ defineProps({
 
 <template>
   <div v-if="small">
-    <input class="text-xs text-white pl-12 py-2 hover:bg-tertiary-700 max-w-full font-ibm placeholder-tertiary-500 w-full border-0 focus:outline-none bg-black" placeholder="Filter" />
+    <input class="text-xs text-white pl-12 py-2 hover:bg-tertiary-700 font-ibm placeholder-tertiary-500 w-full border-0 focus:outline-none bg-black" placeholder="Filter" />
     <font-awesome-icon :icon="['fas', 'search']" class="text-white cursor-pointer absolute top-3 left-4 z-10 pointer-events-none" />
   </div>
   <control

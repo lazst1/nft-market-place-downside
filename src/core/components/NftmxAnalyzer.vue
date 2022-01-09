@@ -5,7 +5,7 @@ import NftmxPrice from './NftmxPrice.vue';
 
 
 <template>
-    <div class="flex justify-between px-22">
+    <div class="flex flex-wrap justify-between px-22">
         <div class="pt-12 pb-4 text-white text-center font-press text-sm flex">
             <div class="w-min">
                 <div class="h-10">
@@ -35,7 +35,7 @@ import NftmxPrice from './NftmxPrice.vue';
                 </div>
             </div>
         </div>
-        <div class="pt-12 pb-4 text-white text-center font-press text-sm flex justify-start">
+        <div class="pt-12 pb-4 text-white text-center font-press text-sm flex">
             <div class="w-min">
                 <div class="h-10 flex justify-center items-center">Total sales to Date</div>
                 <div class="font-ibm-semi-bold text-xl text-center pt-2">
@@ -43,7 +43,7 @@ import NftmxPrice from './NftmxPrice.vue';
                 </div>
             </div>
         </div>
-        <div class="pt-12 pb-4 text-white text-center font-press text-sm flex justify-end">
+        <div class="pt-12 pb-4 text-white text-center font-press text-sm flex">
             <div class="w-min">
                 <div class="h-10 flex justify-center items-center">
                     Total staking Collected
