@@ -44,11 +44,11 @@
                                     </div>
                                 </div>
                             </template>
-                            <div class="flex flex-wrap pt-2 gap-y-2 justify-between">
-                                <nftmx-button1>Buy Now</nftmx-button1>
-                                <nftmx-button1>On Auction</nftmx-button1>
-                                <nftmx-button1>New</nftmx-button1>
-                                <nftmx-button1>Has Offers</nftmx-button1>
+                            <div class="flex flex-wrap pt-2 gap-y-2 justify-between text-xs">
+                                <nftmx-button1 width="w-28" align="text-left pl-4" outline>Buy Now</nftmx-button1>
+                                <nftmx-button1 width="w-28" align="text-left pl-4" outline>On Auction</nftmx-button1>
+                                <nftmx-button1 width="w-28" align="text-left pl-4" outline>New</nftmx-button1>
+                                <nftmx-button1 width="w-28" align="text-left pl-4" outline>Has Offers</nftmx-button1>
                             </div>
                         </accordion>
                     </div>

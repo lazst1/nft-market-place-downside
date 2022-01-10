@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue'
 import Browse from '@/views/Browse.vue'
 import Activity from '@/views/Activity.vue'
 import Detail from '@/views/Detail.vue'
+import Login from '@/views/Login.vue'
 
 const routes = [
     {
@@ -36,6 +37,14 @@ const routes = [
         path: '/detail',
         name: 'detail',
         component: Detail
+    },
+    {
+        meta: {
+            title: 'Login'
+        },
+        path: '/login',
+        name: 'login',
+        component: Login
     },
 ]
 
