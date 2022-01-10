@@ -30,7 +30,8 @@ module.exports = {
         }
       },
       fontSize: {
-        xxs: ['11px', '14px']
+        xxs: ['11px', '14px'],
+        xg: ['19px', '28px']
       },
       fontFamily: {
         'awesome': ['fontawesome'],

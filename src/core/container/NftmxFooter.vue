@@ -10,7 +10,7 @@ defineProps({
 <template>
     <div class="bottom-0 w-full font-ibm">
         <div class="bg-black text-white pt-6 pb-7 border-b border-tertiary-800 px-8">
-            <p class="text-center text-xb text-primary-900 font-press leading-9">
+            <p class="text-center text-sm sm:text-xg text-primary-900 font-press leading-6 sm:leading-9">
                 NFT.mx is a fully centralized protocol
             </p>
             <p class="text-center text-sm">
@@ -46,16 +46,20 @@ defineProps({
             </div>
         </div>
         <div
-            class="flex bg-black text-white px-8 py-2 text-xs"
+            class="sm:flex bg-black px-8 py-2 text-xs font-ibm-bold"
         >
-            <div class="flex-1 flex items-center text-tertiary-400">
-                Powered by:
-                <img src="/images/atom-logo-footer.png" class="" />
+            <div class="flex-1 flex text-tertiary-600 justify-center sm:justify-start">
+                <div class="w-fit flex items-center">
+                    <div class="">Powered by:</div>
+                    <img src="/images/atom-logo-footer.png" class="" />
+                </div>
             </div>
-            <div class="flex">
-                <img src="/images/eth-logo-footer.png" class="" />
-                <div class="border-r border-tertiary-800 my-2 mx-2"></div>
-                <img src="/images/bsc-logo-footer.png" class="" />
+            <div class="flex justify-center sm:justify-start">
+                <div class="w-fit flex">
+                    <img src="/images/eth-logo-footer.png" class="" />
+                    <div class="border-r border-tertiary-800 my-2 mx-2"></div>
+                    <img src="/images/bsc-logo-footer.png" class="" />
+                </div>
             </div>
         </div>
     </div>
