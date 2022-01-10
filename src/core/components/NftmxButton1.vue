@@ -27,7 +27,6 @@ const props = defineProps({
 })
     
 const buttonColor = getButtonColor(props.color, props.outline, !props.disabled)
-console.log(buttonColor)
 
 </script>
 

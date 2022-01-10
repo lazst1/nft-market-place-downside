@@ -3,7 +3,7 @@ import NftmxButton1 from './NftmxButton1.vue';
 
 const props = defineProps({
     wallet: {
-        type: String,
+        type: Object,
         required: true
     }
 });
