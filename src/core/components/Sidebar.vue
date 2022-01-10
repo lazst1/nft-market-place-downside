@@ -4,7 +4,7 @@ import NftmxDivider from './NftmxDivider.vue';
 </script>
 
 <template>
-    <div class="absolute z-20 w-72 top-0 right-0 bg-black text-white pt-20 pl-8 pr-2 font-ibm text-xs leading-7.5">
+    <div class="absolute z-20 w-full sm:w-72 top-0 right-0 bg-black text-white pt-20 pl-8 pr-2 font-ibm text-xs leading-7.5">
         <div class="font-ibm-semi-bold text-primary-900"><router-link to="">Create NFT</router-link></div>
         <div class="font-ibm-semi-bold text-primary-900">Stake / Sell NFT</div>
         <div class="font-ibm-semi-bold text-primary-900">Stake / Sell Land</div>
