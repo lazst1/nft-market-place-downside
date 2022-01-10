@@ -18,14 +18,14 @@ const sidebar = ref(false);
       </nav-bar-item>
     </div>
     <div
-      class="hidden absolute w-screen top-14 left-0 shadow
-        lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none dark:bg-gray-900"
+      class="top-14 left-0
+        w-auto items-stretch flex grow static border-b-0 overflow-visible shadow-none dark:bg-gray-900"
     >
       <div
-        class="max-h-screen-menu overflow-y-auto lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
+        class="max-h-screen-menu overflow-y-auto overflow-visible flex items-stretch justify-end ml-auto"
       >
         <nav-bar-item>
-          <div class="">
+          <div class="hidden lg:block">
             <span class="text-sm font-ibm-bold">
               Seller
             </span>
@@ -35,7 +35,7 @@ const sidebar = ref(false);
           </div>
         </nav-bar-item>
         <nav-bar-item>
-          <div class="">
+          <div class="hidden lg:block">
             <span class="text-sm font-ibm-bold">
               Buyer
             </span>
