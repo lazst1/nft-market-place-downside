@@ -1,21 +1,12 @@
 <script setup>
 import NftmxButton1 from './NftmxButton1.vue';
 
-const walletList = [
-    {
-        name: 'metamask',
-        imgUrl: '/images/wallet_logo/metamask.png'
-    }
-]
-
 const props = defineProps({
     wallet: {
         type: String,
         required: true
     }
 });
-
-const wallet = walletList.find(item => item.name === props.wallet);
 
 </script>
 

@@ -16,7 +16,7 @@ export const colorsBg = {
     danger: 'hover:bg-red-600',
     warning: 'hover:bg-yellow-600',
     info: 'hover:bg-blue-600',
-    primary: 'hover:bg-primary-900'
+    primary: 'hover:bg-primary-900 hover:outline outline-primary-700 focus:outline-none'
   }
   
   export const colorsBorders = {
@@ -25,7 +25,8 @@ export const colorsBg = {
     success: 'border-emerald-600',
     danger: 'border-red-600',
     warning: 'border-yellow-600',
-    info: 'border-blue-600'
+    info: 'border-blue-600',
+    primary: 'border-primary-900'
   }
   
   export const colorsText = {

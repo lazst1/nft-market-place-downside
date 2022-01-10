@@ -27,11 +27,12 @@ const props = defineProps({
 })
     
 const buttonColor = getButtonColor(props.color, props.outline, !props.disabled)
+console.log(buttonColor)
 
 </script>
 
 <template>
-    <button :class="[active?'bg-primary-900':'', width?width:'w-full', align?align:'text-center', size==='small'?'h-9':'h-13.5', outline?'border border-black':'', buttonColor, 'hover:bg-primary-900 text-white']">
+    <button :class="[active?'bg-primary-900':'', width?width:'w-full', align?align:'text-center', size==='small'?'h-9':'h-13.5', outline?'border border-black':'', buttonColor, 'text-white']">
         <slot />
     </button>
 </template>
