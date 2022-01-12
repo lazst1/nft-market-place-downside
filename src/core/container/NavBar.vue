@@ -28,7 +28,7 @@ console.log('user', store.state.auth.user);
         w-auto items-stretch flex grow static border-b-0 overflow-visible shadow-none dark:bg-gray-900"
     >
       <div
-        class="max-h-screen-menu overflow-y-auto overflow-visible flex items-stretch justify-end ml-auto"
+        class="max-h-screen-menu overflow-visible flex items-stretch justify-end ml-auto"
       >
         <nav-bar-item>
           <div class="hidden lg:block">
