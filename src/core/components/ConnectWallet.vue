@@ -37,7 +37,6 @@ export default {
             provider: {},
             web3: null,
             currentAccount: null,
-            listings: [],
             abi: null,
         }
     },
@@ -58,6 +57,7 @@ export default {
                 this.currentAccount = this.web3.utils.toChecksumAddress(accounts[0]);
                 console.log("this.currentAccount", this.currentAccount);
                 this.setAbi();
+                this.handleLogin(this.currentAccount);
             }
         },
         setAbi() {
@@ -80,9 +80,18 @@ export default {
                     console.error(err);
                 }
             })
+        },
+        handleLogin(walletAddress) {
+            this.$store.dispatch("auth/login", walletAddress).then(
+                () => {
+                    this.$router.push("/");
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
         }
     }
 }
 
 </script>
-

@@ -35,4 +35,6 @@ export const walletList = [
         imgUrl: '/images/wallet_logo/gnosis.png',
         s_imgUrl: '/images/wallet_logo/small/gnosis.png'
     },
-]
+];
+
+export const baseURL = "http://localhost:1837/api/v1/";
