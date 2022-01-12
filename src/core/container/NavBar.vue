@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
 import NavBarItem from '@/core/components/NavBarItem.vue'
 import TopBar from '@/core/components/TopBar.vue';
 import Icon from '@/core/components/Icon.vue'
@@ -9,8 +10,9 @@ import Sidebar from '@/core/components/Sidebar.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 
 const sidebar = ref(false);
+const store = useStore();
 
-// console.log('user', this.$store.state.auth.user);
+console.log('user', store.state.auth.user);
 
 </script>
 
@@ -49,9 +51,7 @@ const sidebar = ref(false);
           </div>
         </nav-bar-item>
         <nav-bar-item @click="sidebar = !sidebar">
-          <div class="text-sm font-ibm-bold pt-1">
-            0x291A...H1RS
-          </div>
+          <nftmx-wallet-address class="text-sm font-ibm-bold pt-1" address="0xB29265736dcc20867F6b3c0f5aa8E5A64942b816" />
         </nav-bar-item>
         <nav-bar-item>
           <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5"></div>
