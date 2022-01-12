@@ -6,8 +6,12 @@ import Icon from '@/core/components/Icon.vue'
 import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
 import Sidebar from '@/core/components/Sidebar.vue';
+import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 
 const sidebar = ref(false);
+
+// console.log('user', this.$store.state.auth.user);
+
 </script>
 
 <template>
@@ -45,9 +49,9 @@ const sidebar = ref(false);
           </div>
         </nav-bar-item>
         <nav-bar-item @click="sidebar = !sidebar">
-          <span class="text-sm font-ibm-bold pt-1">
+          <div class="text-sm font-ibm-bold pt-1">
             0x291A...H1RS
-          </span>
+          </div>
         </nav-bar-item>
         <nav-bar-item>
           <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5"></div>

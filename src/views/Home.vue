@@ -323,9 +323,15 @@ export default defineComponent({
             people: people
         }
     },
+    computed: {
+        user() {
+            return this.$store.state.auth.user;
+        }
+    },
     methods: {
         clickFilter() {
             this.filterActive = !this.filterActive;
+            console.log(this.user)
         }
     }
 })
