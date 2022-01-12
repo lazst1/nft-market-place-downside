@@ -11,8 +11,7 @@ import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 
 const sidebar = ref(false);
 const store = useStore();
-
-console.log('user', store.state.auth.user);
+const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 
 </script>
 
@@ -51,7 +50,7 @@ console.log('user', store.state.auth.user);
           </div>
         </nav-bar-item>
         <nav-bar-item @click="sidebar = !sidebar">
-          <nftmx-wallet-address class="text-sm font-ibm-bold pt-1" address="0xB29265736dcc20867F6b3c0f5aa8E5A64942b816" />
+          <nftmx-wallet-address class="text-sm font-ibm-bold pt-1" :address="walletAddress" />
         </nav-bar-item>
         <nav-bar-item>
           <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5"></div>

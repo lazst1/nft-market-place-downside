@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue'
 const props = defineProps({
     address: {
         type: String,
@@ -6,7 +7,7 @@ const props = defineProps({
     }
 });
 
-const walletAddress = props.address.slice(0, 6)+'...'+props.address.slice(-4);
+const walletAddress = computed(() => props.address.slice(0, 6)+'...'+props.address.slice(-4));
 
 </script>
 
