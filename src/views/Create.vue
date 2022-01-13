@@ -4,6 +4,7 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import NftmxSellGrid from '@/core/components/NftmxSellGrid.vue';
+import NftmxFileUploader from '@/core/components/NftmxFileUploader.vue';
 const people = [
     {
         name: 'Wade Cooper',
@@ -47,8 +48,18 @@ const people = [
                 </div>
             </template>
             <template v-slot:value>
-                <div class="font-ibm text-sm text-tertiary-400">
-                    <nftmx-select-network />
+                <div class="grid grid-cols-3 text-tertiary-500">
+                    <div class="col-span-2 pr-10">
+                        <nftmx-file-uploader></nftmx-file-uploader>
+                    </div>
+                    <div class="col-span-1 border-2 border-black text-center pt-28">
+                        <div class="font-ibm-bold text-2xl leading-9">
+                            Preview your NFT
+                        </div>
+                        <div class="text-sm">
+                            upload file to preview your new NFT
+                        </div>
+                    </div>
                 </div>
             </template>
         </nftmx-sell-grid>
