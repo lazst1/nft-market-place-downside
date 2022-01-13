@@ -38,3 +38,10 @@ export const walletList = [
 ];
 
 export const baseURL = "http://localhost:1837/api/v1/";
+
+export const networks = [
+    {
+        name: "Ethereum",
+        icon: "/images/i-eth.png"
+    }
+]

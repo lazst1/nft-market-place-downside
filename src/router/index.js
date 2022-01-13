@@ -4,6 +4,7 @@ import Browse from '@/views/Browse.vue'
 import Activity from '@/views/Activity.vue'
 import Detail from '@/views/Detail.vue'
 import Login from '@/views/Login.vue'
+import Create from '@/views/Create.vue'
 
 const routes = [
     {
@@ -45,6 +46,14 @@ const routes = [
         path: '/login',
         name: 'login',
         component: Login
+    },
+    {
+        meta: {
+            title: 'Create'
+        },
+        path: '/create',
+        name: 'create',
+        component: Create
     },
 ]
 
