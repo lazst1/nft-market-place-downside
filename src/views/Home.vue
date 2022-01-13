@@ -10,7 +10,7 @@
 
         <nftmx-analyzer />
 
-        <div class="bg-tertiary-800 border-t border-b border-black py-5 px-10 lg:px-22">
+        <div class="bg-tertiary-800 border-t border-b border-black pt-5 pb-4 px-10 lg:px-22">
             <div class="flex flex-wrap justify-between items-center">
                 <div class="flex flex-1 w-full min-w-max items-center">
                     <nav-bar-search-input class="w-full font-ibm-medium text-sm" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
@@ -25,16 +25,12 @@
                     DOWNSIDE PROTECTION BENEFITS
                 </button>
             </div>
-            <div>
-                <div class="font-ibm-bold text-white text-xs mt-8 mb-7">
-                    <button class="bg-black w-30 h-9">
-                        All NFTs
-                    </button>
-                    <button class="bg-primary-900 w-30 h-9">
-                        Collections
-                    </button>
+            <div v-if="filterActive">
+                <div class="grid grid-cols-2 text-center text-lg font-ibm-semi-bold mt-5">
+                    <div @click="clickFilterBy('collection')" :class="[filterBy==='collection'?'text-primary-900 border-primary-900':'text-white border-black', 'hover:text-primary-900 border-b-2 hover:border-primary-900 py-4']">Collections</div>
+                    <div @click="clickFilterBy('all')" :class="[filterBy==='all'?'text-primary-900 border-primary-900':'text-white border-black', 'hover:text-primary-900 border-b-2 hover:border-primary-900 py-4']">All NFTs</div>
                 </div>
-                <div class="flex my-2">
+                <div v-if="filterBy==='all'" class="flex my-2">
                     <div class="border border-black w-fit px-5 h-42.5">
                         <accordion :border="false" :sidebar="true" class="w-58">
                             <template v-slot:caption>
@@ -104,22 +100,22 @@
                         </accordion>
                     </div>
                 </div>
-            </div>
-            <div v-if="filterActive" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 pt-6">
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">List Price Available</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Open Offer Available</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Creator Owned</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Sold</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Reverse Price Set</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Music</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Most Popular</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Domain Names</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Virtual Worlds</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Trading Cards</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Collectibles</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Sports</span></checkbox-cell>
-                <checkbox-cell class="pb-4"><span class="text-xs relative -top-0.5">Utility</span></checkbox-cell>
+                <div v-if="filterBy==='collection'" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 pt-6">
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">List Price Available</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Open Offer Available</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Creator Owned</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Sold</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Domain Names</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Music</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Collectibles</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Virtual Worlds</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Utility</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Most Popular</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Trading Cards</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Reverse Price Set</span></checkbox-cell>
+                    <checkbox-cell class="pb-3.5"><span class="text-xs relative -top-0.5">Sports</span></checkbox-cell>
+                </div>
             </div>
         </div>
 
@@ -129,12 +125,12 @@
                     <span class="flex-1">Ledger</span>
                     <font-awesome-icon :icon="['fas', 'external-link-alt']" class="text-primary-900 cursor-pointer" />
                 </div>
-                <div class="border border-black my-7">
+                <div class="border border-black my-7 bg-tertiary-800">
                     <div class="grid grid-cols-4 border-b border-black">
-                        <div class="font-ibm-semi-bold text-xxs text-primary-900 border-r border-black py-4 text-center">SOLD</div>
-                        <div class="font-ibm-semi-bold text-xxs text-red-700 border-r border-black py-4 text-center">CANCELED</div>
-                        <div class="font-ibm-semi-bold text-xxs text-white border-r border-black py-4 text-center">LISTED</div>
-                        <div class="font-ibm-semi-bold text-xxs text-tertiary-500 py-4 text-center">CREATED</div>
+                        <div class="font-ibm-semi-bold text-xxs text-primary-900 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer">SOLD</div>
+                        <div class="font-ibm-semi-bold text-xxs text-red-700 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer">CANCELED</div>
+                        <div class="font-ibm-semi-bold text-xxs text-white border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer">LISTED</div>
+                        <div class="font-ibm-semi-bold text-xxs text-tertiary-500 py-4 text-center hover:bg-tertiary-900 cursor-pointer">CREATED</div>
                     </div>
                     <div class="grid grid-cols-2 border-b border-black">
                         <div class="font-ibm-medium text-xs text-tertiary-500 border-r border-black py-3 pl-3">Items</div>
@@ -320,7 +316,8 @@ export default defineComponent({
         return {
             filterActive: false,
             items: items,
-            people: people
+            people: people,
+            filterBy: 'collection'
         }
     },
     computed: {
@@ -332,6 +329,9 @@ export default defineComponent({
         clickFilter() {
             this.filterActive = !this.filterActive;
             console.log(this.user)
+        },
+        clickFilterBy(value) {
+            this.filterBy = value;
         }
     }
 })
