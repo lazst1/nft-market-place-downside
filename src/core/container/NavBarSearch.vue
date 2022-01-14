@@ -9,7 +9,7 @@ import TopBar from '@/core/components/TopBar.vue';
 </script>
 
 <template>
-  <top-bar class="font-ibm-medium">
+  <top-bar class="font-ibm-medium" :search="true">
     <div class="pl-16 flex-grow items-stretch flex h-95px bg-tertiary-800">
         <nav-bar-item class="w-full">
             <nav-bar-search-input class="w-full font-ibm-medium" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
