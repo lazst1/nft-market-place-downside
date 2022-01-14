@@ -1,5 +1,5 @@
 <template>
-    <Carousel :items-to-show="itemsToShow" :wrap-around="true" class="mt-4">
+    <Carousel :items-to-show="itemsToShow" :wrap-around="true">
         <Slide v-for="(item, index) in items" :key="index">
             <div class="carousel__item" :style="{marginLeft: marginLeft+'em'}">
                 <div class="grid grid-cols-2 m-4 cursor-pointer hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700">

@@ -108,7 +108,7 @@ const fundError = ref(false);
 
 <template>
     <body-container>
-        <div class="grid grid-cols-7 text-white gap-8">
+        <div class="grid grid-cols-7 text-white gap-8 mt-9">
             <div class="col-span-7 lg:col-span-3">
                 <div class="relative h-520 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover">
                     <ribbon :percent="percent" :period="period" />
@@ -211,20 +211,22 @@ const fundError = ref(false);
                 </div>
             </div>
         </div>
-        <accordion>
-            <template v-slot:caption>
-                <div class="flex items-center">
-                    <div class="text-lg font-ibm-bold py-4 mr-24">
-                        History
+        <div class="mb-10">
+            <accordion>
+                <template v-slot:caption>
+                    <div class="flex items-center">
+                        <div class="text-lg font-ibm-bold py-4 mr-24">
+                            History
+                        </div>
+                        <nftmx-select class="font-ibm font-thin w-full max-w-lg text-sm" :data="items" small>
+                        </nftmx-select>
                     </div>
-                    <nftmx-select class="font-ibm font-thin w-full max-w-lg text-sm" :data="items" small>
-                    </nftmx-select>
+                </template>
+                <div class="p-6">
+                    <nftmx-line-chart></nftmx-line-chart>
                 </div>
-            </template>
-            <div class="p-6">
-                <nftmx-line-chart></nftmx-line-chart>
-            </div>
-        </accordion>
+            </accordion>
+        </div>
     </body-container>
     <nftmx-footer />
     <nftmx-modal v-model="buyModalActive" width="md:w-3/5 lg:w-5/12">

@@ -5,6 +5,7 @@ import Activity from '@/views/Activity.vue'
 import Detail from '@/views/Detail.vue'
 import Login from '@/views/Login.vue'
 import Create from '@/views/Create.vue'
+import Profile from '@/views/Profile.vue'
 
 const routes = [
     {
@@ -54,6 +55,14 @@ const routes = [
         path: '/create',
         name: 'create',
         component: Create
+    },
+    {
+        meta: {
+            title: 'Profile'
+        },
+        path: '/profile',
+        name: 'profile',
+        component: Profile
     },
 ]
 

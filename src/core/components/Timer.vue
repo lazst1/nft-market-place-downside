@@ -8,7 +8,7 @@ defineProps({
     },
     color: {
         type: String,
-        default: "tertiary-900"
+        default: "tertiary-800"
     }
 })
 

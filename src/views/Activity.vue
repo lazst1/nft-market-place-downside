@@ -19,7 +19,7 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
 
 <template>
     <body-container :searchAble="true">
-        <div class="flex py-4 border-b border-b-black font-ibm-medium">
+        <div class="flex pt-4 pb-3 mt-px border-b border-b-black font-ibm-medium">
             <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
             <checkbox-cell><span class="text-xs relative -top-0.5">Domain Names</span></checkbox-cell>
             <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>

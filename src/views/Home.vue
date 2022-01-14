@@ -1,10 +1,11 @@
 <template>
+    <div class="bg-[url('/images/hero-image-1920.png')] h-96 2xl:h-full bg-no-repeat bg-cover bg-right font-press line-h text-3xl leading-loose text-white py-32 2xl:pt-47 2xl:pb-50 px-24">
+        Buy NFTs with 100%<br/>Downside Protection
+    </div>
     <body-container :padding="false">
-        <div class="bg-[url('/images/hero-image-1920.png')] h-96 2xl:h-full bg-no-repeat bg-cover bg-right font-press line-h text-3xl leading-loose text-white py-32 2xl:pt-47 2xl:pb-50 px-24">
-            Buy NFTs with 100%<br/>Downside Protection
+        <div class="pt-4">
+            <nftmx-carousel></nftmx-carousel>
         </div>
-
-        <nftmx-carousel></nftmx-carousel>
 
         <nftmx-divider class="mt-9"></nftmx-divider>
 
