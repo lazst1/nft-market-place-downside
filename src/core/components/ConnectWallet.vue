@@ -51,7 +51,7 @@ export default {
             } else if (accounts[0] !== this.$store.state.auth.currentAccount) {
                 this.$store.dispatch("auth/login", accounts[0]).then(
                     () => {
-                        // this.$router.push("/");
+                        this.$router.push("/profile");
                     },
                     (error) => {
                         console.log(error);

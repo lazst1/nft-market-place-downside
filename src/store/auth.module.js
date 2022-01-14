@@ -6,7 +6,6 @@ export const auth = {
     namespaced: true,
     state: {
         user: {},
-        currentAccount: "",
         web3: new Web3(Web3.givenProvider),
         abi: null
     },
@@ -33,12 +32,11 @@ export const auth = {
     getters: {
         getWalletAddress: state => {
             console.log(state)
-            return state.currentAccount
+            return state.user && state.user.walletAddress ? state.user.walletAddress : ''
         }
     },
     mutations: {
         setAbi(state, walletAddress) {
-            state.currentAccount = walletAddress;
             state.abi = new state.web3.eth.Contract(
                 abiJSON,
                 state.web3.utils.toChecksumAddress(state.contractAddress),
@@ -52,7 +50,6 @@ export const auth = {
         },
         loginFailure(state) {
             state.user = null;
-            state.currentAccount = "";
         },
     }
 }
