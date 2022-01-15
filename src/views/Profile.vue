@@ -5,6 +5,8 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex'
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
+import NftmxItemCard from '@/core/components/NftmxItemCard.vue';
+import CardsContainer from '../core/container/CardsContainer.vue';
 
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
@@ -75,9 +77,14 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
                 <input class="text-white pl-6 py-2 font-ibm placeholder-tertiary-500 w-full border-0 focus:outline-none bg-tertiary-900" placeholder="Search" />
             </div>
         </div>
-        <div>
-            
-        </div>
+        <cards-container class="my-12 place-items-center">
+            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
+            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
+            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
+            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
+            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
+            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
+        </cards-container>
     </body-container>
     <nftmx-footer />
 </template>

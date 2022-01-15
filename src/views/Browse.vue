@@ -54,7 +54,7 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
                 </drop-down>
             </div>
         </div>
-        <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 c-grid-cols-6 mb-11 pb-0.5">
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5">
             <nftmx-sale-card v-for="index in 2" :key="index"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :syndication="false"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :auction="true"></nftmx-sale-card>

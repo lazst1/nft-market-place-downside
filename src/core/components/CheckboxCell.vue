@@ -10,6 +10,8 @@ defineProps({
     type: String,
     default: ''
   },
+  border: String,
+  small: Boolean
 })
 
 const emit = defineEmits(['checked'])
@@ -26,10 +28,10 @@ watch(checked, newVal => {
         :is="type"
         class="checkbox-cell mr-4 my-1"
     >
-      <label class="container text-base text-white">
+      <label :class="[text?text:'text-white', 'container']">
         <slot />
         <input v-model="checked" type="checkbox" checked="checked">
-        <span class="checkmark border-2 border-black text-primary-700"></span>
+        <span :class="[border?border:'border-black', small?'w-4 h-4':'w-4.5 h-4.5', 'checkmark border-2 text-primary-700']"></span>
       </label>
     </component>
 </template>
@@ -41,7 +43,6 @@ watch(checked, newVal => {
   position: relative;
   padding-left: 32px;
   cursor: pointer;
-  font-size: 16px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -62,19 +63,6 @@ watch(checked, newVal => {
   position: absolute;
   top: 2px;
   left: 0;
-  height: 18px;
-  width: 18px;
-  background-color: #343434;
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #343434;
-}
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #343434;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
