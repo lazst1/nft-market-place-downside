@@ -9,7 +9,7 @@ defineProps({
 
 <template>
     <div class="bottom-0 w-full font-ibm">
-        <div class="bg-black text-white pt-6 pb-7 border-b border-tertiary-800 px-8">
+        <div class="bg-black text-white pt-5.25 pb-8 border-b border-tertiary-800 px-8">
             <p class="text-center text-sm sm:text-xg text-primary-900 font-press leading-6 sm:leading-9">
                 NFT.mx is a fully centralized protocol
             </p>

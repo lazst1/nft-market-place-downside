@@ -56,7 +56,8 @@ const props = defineProps({
     closed: {
         type: Boolean,
         default: false
-    }
+    },
+    forMore: Boolean
 })
 
 const syndicationCSS = computed(() => {
@@ -77,25 +78,25 @@ const boughtCSS = computed(() => {
 </script>
 
 <template>
-    <nftmx-card-container>
-        <div class="h-32">
-            <div class="h-24 mb-0.5">
+    <nftmx-card-container :forMore="forMore">
+        <div class="h-">
+            <div :class="[forMore?'h-17':'h-24', 'mb-0.5']">
                 <div class="text-tertiary-400 text-xxs">
                     Enigma Economy
                 </div>
                 <div class="text-white font-ibm-medium text-sm leading-5.25 my-0.75">
-                    Play Quiet #10/10 
+                    Play Quiet #10/10 lay Quiet #10/10 
                 </div>
-                <div class="text-tertiary-400 font-ibm-light text-xxs leading-5.25">
+                <div v-if="!forMore" class="text-tertiary-400 font-ibm-light text-xxs leading-5.25">
                     For sale | Private collection bundle of 3
                 </div>
             </div>
-            <div class="flex items-center font-ibm-semi-bold">
+            <div class="flex items-center font-ibm-semi-bold mt-1">
                 <div class="text-sm flex flex-1 items-center">
                     <font-awesome-icon :icon="['fas', 'ellipsis-v']" class="text-white text-lg mr-2" />
-                    <checkbox-cell border="border-tertiary-500" small><span class="text-xs relative text-tertiary-500 -ml-2">Sell</span></checkbox-cell>
+                    <checkbox-cell v-if="!forMore" border="border-tertiary-500" small><span class="text-xs relative text-tertiary-500 -ml-2">Sell</span></checkbox-cell>
                 </div>
-                <div class="text-xs text-tertiary-500 flex items-end">
+                <div class="text-xs text-tertiary-500 flex items-end font-ibm-medium">
                     <span style="line-height: 0.75" class="pr-2">124</span>
                     <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-primary-900" />
                 </div>
@@ -103,3 +104,9 @@ const boughtCSS = computed(() => {
         </div>
     </nftmx-card-container>
 </template>
+
+<style scoped>
+.h-17 {
+    height: 68px;
+}
+</style>
