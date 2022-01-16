@@ -6,6 +6,7 @@ import Detail from '@/views/Detail.vue'
 import Login from '@/views/Login.vue'
 import Create from '@/views/Create.vue'
 import Profile from '@/views/Profile.vue'
+import SellDetail from '@/views/SellDetail.vue'
 
 const routes = [
     {
@@ -39,6 +40,14 @@ const routes = [
         path: '/detail',
         name: 'detail',
         component: Detail
+    },
+    {
+        meta: {
+            title: 'SellDetail'
+        },
+        path: '/sell-detail',
+        name: 'sell-detail',
+        component: SellDetail
     },
     {
         meta: {

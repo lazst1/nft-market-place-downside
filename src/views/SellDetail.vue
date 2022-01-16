@@ -19,6 +19,7 @@ import NftmxTh from '@/core/components/NftmxTh.vue';
 import NftmxTbody from '@/core/components/NftmxTbody.vue';
 import NftmxTd from '@/core/components/NftmxTd.vue';
 import NftmxTr from '@/core/components/NftmxTr.vue';
+import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 
 const people = [
   {
@@ -135,95 +136,98 @@ const fundError = ref(false);
                     </div>
                 </div>
             </div>
-            <div class="col-span-7 lg:col-span-4 relative h-520">
-                <div class="flex py-6 text-5/2xl">
-                    <div class="flex-1 font-ibm-bold">
+            <div class="col-span-7 lg:col-span-4 relative">
+                <div class="pt-6 font-ibm-bold text-primary-900 text-lg">
+                    Kyle White
+                </div>
+                <div class="flex pb-6 text-5/2xl">
+                    <div class="flex-1 font-ibm-bold mt-1.5 pb-2">
                         Play Quiet #10/10
                     </div>
-                    <div class="">
-                        <icon
-                            :path="mdiThumbUp"
-                            w="w-6"
-                            h="h-6"
-                            size="24"
-                            color="tertiary-400"
-                        />
+                    <div class="text-base text-tertiary-400 flex items-end font-ibm-semi-bold py-2">
+                        <span class="pr-2 leading-4">124</span>
+                        <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-2xl text-primary-900" />
                     </div>
                 </div>
                 <div class="flex text-xs pb-12">
                     <div class="flex-1">
                         Created by <span class="text-primary-900">234...293</span> | Owned by <span class="text-primary-900">234...293</span>
                     </div>
-                    <div class="text-primary-900 font-ibm-bold">
-                        AUCTION
-                    </div>
                 </div>
 
-                <div class="grid grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold">
-                    <div class="h-44 items-center p-4">
-                        <div class="py-4">
-                            <div class="pt-3 pb-4 text-base">
-                                Current auction ends in
-                            </div>
-                            <timer size="big" color="tertiary-800" />
-                        </div>
-                    </div>
-                    
-                    <div class="h-44 items-center pr-7 py-4">
-                        <nftmx-select class="font-ibm-bold w-full text-sm mb-3" :data="people">
-                        </nftmx-select>
-                        <nftmx-button
-                            color="primary"
-                            label="BUY NOW"
-                            class="font-press w-full text-lg"
-                            @click="buyModalActive = true"
-                        />
-                    </div>
+                <div class="bg-tertiary-800 border border-black p-6">
+                    <nftmx-button
+                        color="primary"
+                        label="SELL"
+                        class="font-press w-full text-lg py-4"
+                        @click="syndicationModalActive = true"
+                    />
                 </div>
-                
-                <div class="bg-tertiary-800 border border-black mt-4">
-                    <div class="h-56 items-center p-4 text-center">
-                        <div class="pt-2 text-lg font-ibm-bold">
-                            Total locked value
-                            <icon
-                                class="-ml-2"
-                                :path="mdiHelpCircle"
-                                w="w-4"
-                                h="h-4"
-                                size="36"
-                                color="white"
-                            />
+                <div class="mt-5">
+                    <accordion>
+                        <template v-slot:caption>
+                            <div class="flex items-center">
+                                <div class="text-lg font-ibm-bold py-4 mr-24">
+                                    History
+                                </div>
+                                <nftmx-select class="font-ibm font-thin w-full max-w-lg text-sm" :data="items" small>
+                                </nftmx-select>
+                            </div>
+                        </template>
+                        <div class="p-6">
+                            <nftmx-line-chart></nftmx-line-chart>
                         </div>
-                        <div class="pt-2 pb-6 text-3xl">
-                            <span class="text-primary-900 font-ibm-bold">$1.548,548.65 </span>
-                            <span class="text-tertiary-400">( 458,6645)
-                            </span>
+                    </accordion>
+                </div>
+                <div class="mt-5">
+                    <accordion>
+                        <template v-slot:caption>
+                            <div class="flex items-center">
+                                <div class="text-lg font-ibm-bold py-4 mr-24">
+                                    Listings
+                                </div>
+                            </div>
+                        </template>
+                        <nftmx-table height="80%">
+                            <nftmx-thead>
+                                <nftmx-tr>
+                                    <nftmx-th>From</nftmx-th>
+                                    <nftmx-th>Price</nftmx-th>
+                                    <nftmx-th>Downside Protection</nftmx-th>
+                                    <nftmx-th>Expiration</nftmx-th>
+                                    <nftmx-th :border="false"></nftmx-th>
+                                </nftmx-tr>
+                            </nftmx-thead>
+                            <nftmx-tbody>
+                                <nftmx-tr v-for="index in 1" :key="index" :border="index===10 ? false : true">
+                                    <nftmx-td>
+                                        <nftmx-wallet-address class="text-primary-900" address="0xB29265736dcc20867F6b3c0f5aa8E5A64942b816"></nftmx-wallet-address>
+                                    </nftmx-td>
+                                    <nftmx-td class="flex">$0.4781</nftmx-td>
+                                    <nftmx-td>Unit Price</nftmx-td>
+                                    <nftmx-td>Quantity</nftmx-td>
+                                    <nftmx-td>From</nftmx-td>
+                                    <nftmx-td :border="false">To</nftmx-td>
+                                </nftmx-tr>
+                            </nftmx-tbody>
+                        </nftmx-table>
+                    </accordion>
+                </div>
+                <div class="mt-5">
+                    <accordion>
+                        <template v-slot:caption>
+                            <div class="flex items-center">
+                                <div class="text-lg font-ibm-bold py-4 mr-24">
+                                    Offers
+                                </div>
+                            </div>
+                        </template>
+                        <div class="min-h-[50px] text-center">
+                            No offers yet
                         </div>
-                        <nftmx-button
-                            color="secondary"
-                            label="JOIN SYNDICATION"
-                            class="font-press w-full text-lg py-5"
-                            @click="syndicationModalActive = true"
-                        />
-                    </div>
+                    </accordion>
                 </div>
             </div>
-        </div>
-        <div class="mb-10">
-            <accordion>
-                <template v-slot:caption>
-                    <div class="flex items-center">
-                        <div class="text-lg font-ibm-bold py-4 mr-24">
-                            History
-                        </div>
-                        <nftmx-select class="font-ibm font-thin w-full max-w-lg text-sm" :data="items" small>
-                        </nftmx-select>
-                    </div>
-                </template>
-                <div class="p-6">
-                    <nftmx-line-chart></nftmx-line-chart>
-                </div>
-            </accordion>
         </div>
     </body-container>
     <nftmx-footer />
