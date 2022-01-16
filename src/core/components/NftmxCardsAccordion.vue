@@ -1,5 +1,5 @@
 <template>
-    <accordion :border="false" :sidebar="true">
+    <accordion :border="false" :sidebar="true" :bIcon="true">
         <template v-slot:caption>
             <div class="flex items-center w-full">
                 <div class="flex-1 text-sm font-press py-4 mr-24">

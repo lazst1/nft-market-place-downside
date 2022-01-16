@@ -229,12 +229,12 @@ const fundError = ref(false);
                     <accordion>
                         <template v-slot:caption>
                             <div class="flex items-center">
-                                <div class="text-lg font-ibm-bold py-4 mr-24">
+                                <div class="text-lg font-ibm-bold pt-4 pb-3.5 mr-24">
                                     Offers
                                 </div>
                             </div>
                         </template>
-                        <div class="min-h-[50px] text-center border-b border-black">
+                        <div class="min-h-[50px] text-center border-b border-black text-2xl py-10">
                             No offers yet
                         </div>
                         <div class="px-4 py-3">
@@ -242,7 +242,7 @@ const fundError = ref(false);
                                 outline
                                 color="primary"
                                 label="MAKE OFFER"
-                                class="font-press w-40 text-xs py-2 text-primary-700"
+                                class="font-press w-37 text-small py-1.5 text-primary-900 mt-px mb-0.5"
                                 @click="syndicationModalActive = true"
                             />
                         </div>
@@ -374,5 +374,8 @@ const fundError = ref(false);
 }
 .text-smallest {
     font-size: 8px;
+}
+.text-small {
+    font-size: 10px;
 }
 </style>

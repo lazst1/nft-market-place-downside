@@ -149,7 +149,7 @@
                 <div class="font-press text-white">
                     <nftmx-cards-accordion more></nftmx-cards-accordion>
                     <nftmx-divider class="mt-8 mb-6"></nftmx-divider>
-                    <accordion :border="false" :sidebar="true">
+                    <accordion :border="false" :sidebar="true" :bIcon="true">
                         <template v-slot:caption>
                             <div class="flex items-center w-full">
                                 <div class="flex-1 text-sm font-press py-4 mr-24">

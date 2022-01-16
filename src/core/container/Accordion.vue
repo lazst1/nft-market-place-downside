@@ -13,6 +13,10 @@ export default {
         sidebar: {
             type: Boolean,
             default: false
+        },
+        bIcon: {
+            type: Boolean,
+            default: false
         }
     },
     setup(props) {
@@ -43,8 +47,8 @@ export default {
                 <slot name="caption"></slot>
             </div>
             <div v-if="accordion" class="self-center cursor-pointer" @click="clickMenu">
-                <font-awesome-icon v-if="!open" :icon="['fas', 'sort-down']" :class="{'text-sm':sidebar}" />
-                <font-awesome-icon v-if="open" :icon="['fas', 'sort-up']" :class="{'text-sm':sidebar}" />
+                <font-awesome-icon v-if="!open" :icon="['fas', 'sort-down']" :class="[bIcon?'text-2xl':'text-sm', '-translate-y-1/3']" />
+                <font-awesome-icon v-if="open" :icon="['fas', 'sort-up']" :class="[bIcon?'text-2xl':'text-sm']" />
             </div>
         </div>
         <div v-if="open">
