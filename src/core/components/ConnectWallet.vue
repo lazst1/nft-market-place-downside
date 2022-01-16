@@ -2,13 +2,13 @@
     <div class="text-center">
         <div class="w-fit font-press text-sm pt-4 pb-6">
             <img :src="wallet.imgUrl" alt="" class="" />
-            <nftmx-button1
+            <nftmx-button-slot
                 size="big"
                 class="-mt-6"
                 @click="connect()"
             >
                 CONNECT YOUR WALLET
-            </nftmx-button1>
+            </nftmx-button-slot>
         </div>
         <div class="text-white text-sm py-1.25">
             Use a different wallet
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import NftmxButton1 from './NftmxButton1.vue';
+import NftmxButtonSlot from './NftmxButtonSlot.vue';
 
 export default {
     props: {
@@ -27,7 +27,7 @@ export default {
         }
     },
     components: {
-        NftmxButton1
+        NftmxButtonSlot
     },
     methods: {
         connect() {

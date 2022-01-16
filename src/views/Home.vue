@@ -42,10 +42,10 @@
                                 </div>
                             </template>
                             <div class="flex flex-wrap pt-2 gap-y-2 justify-between text-xs">
-                                <nftmx-button1 width="w-28" align="text-left pl-4" outline>Buy Now</nftmx-button1>
-                                <nftmx-button1 width="w-28" align="text-left pl-4" outline>On Auction</nftmx-button1>
-                                <nftmx-button1 width="w-28" align="text-left pl-4" outline>New</nftmx-button1>
-                                <nftmx-button1 width="w-28" align="text-left pl-4" outline>Has Offers</nftmx-button1>
+                                <nftmx-button-slot width="w-28" align="text-left pl-4" outline>Buy Now</nftmx-button-slot>
+                                <nftmx-button-slot width="w-28" align="text-left pl-4" outline>On Auction</nftmx-button-slot>
+                                <nftmx-button-slot width="w-28" align="text-left pl-4" outline>New</nftmx-button-slot>
+                                <nftmx-button-slot width="w-28" align="text-left pl-4" outline>Has Offers</nftmx-button-slot>
                             </div>
                         </accordion>
                     </div>
@@ -209,7 +209,7 @@ import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
 import NftmxAnalyzer from '@/core/components/NftmxAnalyzer.vue';
-import NftmxButton1 from '@/core/components/NftmxButton1.vue';
+import NftmxButtonSlot from '@/core/components/NftmxButtonSlot.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';
 const items = [
     {
@@ -310,7 +310,7 @@ export default defineComponent({
     NftmxFooter,
     NftmxTooltip,
     NftmxAnalyzer,
-    NftmxButton1,
+    NftmxButtonSlot,
     NftmxSelect
 },
     data() {

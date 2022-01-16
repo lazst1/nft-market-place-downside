@@ -1,5 +1,5 @@
 <script setup>
-import NftmxButton1 from './NftmxButton1.vue';
+import NftmxButtonSlot from './NftmxButtonSlot.vue';
 
 const props = defineProps({
     wallet: {

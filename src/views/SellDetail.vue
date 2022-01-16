@@ -207,7 +207,18 @@ const fundError = ref(false);
                                     <nftmx-td ps>100%</nftmx-td>
                                     <nftmx-td ps></nftmx-td>
                                     <nftmx-td :border="false">
-                                        
+                                        <nftmx-button
+                                            color="primary"
+                                            label="BUY NOW"
+                                            class="font-press w-37 text-smallest py-1.5 mr-5"
+                                            @click="syndicationModalActive = true"
+                                        />
+                                        <nftmx-button
+                                            color="secondary"
+                                            label="JOIN SYNDICATION"
+                                            class="font-press w-37 text-smallest py-1.5"
+                                            @click="syndicationModalActive = true"
+                                        />
                                     </nftmx-td>
                                 </nftmx-tr>
                             </nftmx-tbody>
@@ -223,8 +234,17 @@ const fundError = ref(false);
                                 </div>
                             </div>
                         </template>
-                        <div class="min-h-[50px] text-center">
+                        <div class="min-h-[50px] text-center border-b border-black">
                             No offers yet
+                        </div>
+                        <div class="px-4 py-3">
+                            <nftmx-button
+                                outline
+                                color="primary"
+                                label="MAKE OFFER"
+                                class="font-press w-40 text-xs py-2 text-primary-700"
+                                @click="syndicationModalActive = true"
+                            />
                         </div>
                     </accordion>
                 </div>
@@ -351,5 +371,8 @@ const fundError = ref(false);
 }
 .h-13 {
     height: 3.25em
+}
+.text-smallest {
+    font-size: 8px;
 }
 </style>
