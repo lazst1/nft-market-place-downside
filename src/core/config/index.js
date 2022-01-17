@@ -45,3 +45,15 @@ export const networks = [
         icon: "/images/i-eth.png"
     }
 ]
+
+export const saleType = {
+    FIX_SALE: 'FIX-SALE',
+    AUCTION: 'AUCTION'
+}
+
+export const currencies = [
+    {
+        name: "ETH",
+        icon: "/images/i-eth.png"
+    }
+]

@@ -22,6 +22,8 @@ import NftmxTr from '@/core/components/NftmxTr.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 import CardsContainer from '@/core/container/CardsContainer.vue';
 import NftmxItemCard from '@/core/components/NftmxItemCard.vue';
+import { saleType, currencies } from '@/core/config'
+import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 
 const people = [
   {
@@ -103,9 +105,10 @@ const props = defineProps({
     },
 })
 
-const buyModalActive = ref(false);
+const sellyModalActive = ref(false);
 const syndicationModalActive = ref(false);
 const fundError = ref(false);
+const sale = ref(saleType.FIX_SALE);
 
 </script>
 
@@ -162,7 +165,7 @@ const fundError = ref(false);
                         color="primary"
                         label="SELL"
                         class="font-press w-full text-lg py-4"
-                        @click="syndicationModalActive = true"
+                        @click="sellyModalActive = true"
                     />
                 </div>
                 <div class="mt-5">
@@ -321,62 +324,76 @@ const fundError = ref(false);
         </div>
     </body-container>
     <nftmx-footer />
-    <nftmx-modal v-model="buyModalActive" width="md:w-3/5 lg:w-5/12">
-        <div class="text-center relative -top-2">
+    <nftmx-modal v-model="sellyModalActive" width="md:w-9/12">
+        <div class="text-center relative mt-1.75 pb-2.5">
             <div class="font-press text-2xl">
-                Buy
-            </div>
-            <div class="font-ibm-semi-bold text-sm items-center py-4">
-                Balance: $1,548.85 <span class="text-xxs font-ibm text-tertiary-400">(322.4445)</span>
+                List Item for Sale
             </div>
         </div>
-        <div class="px-4 md:px-16 pb-10">
-            <table class="w-full">
-                <thead class="text-tertiary-400 font-ibm-light text-xs border-b border-black">
-                    <th class="py-6 px-5 text-left">Items</th>
-                    <th class="text-right">Subtotal</th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    <tr v-for="index in 2" :key="index" class="border-b border-black">
-                        <td class="p-4 text-left flex">
-                            <div class="bg-[url('@/assets/test.jpg')] w-13 h-13">
-                            </div>
-                            <div class="pt-0.5 px-4">
-                                <div class="text-primary-900 font-ibm text-xs leading-6">Kyle White</div>
-                                <div class="font-ibm-medium text-sm">Play Quiet #10/10</div>
-                            </div>
-                        </td>
-                        <td class="text-right">
-                            <div class="font-ibm text-xs leading-6">$458,658.92</div>
-                            <div class="font-ibm text-xxs text-tertiary-400 leading-6">( 322.4445)</div>
-                        </td>
-                        <td class="text-center items-start">
-                            <icon
-                                :path="mdiClose"
-                                :size="16"
-                                class="cursor-pointer relative -top-3"
-                            />
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot class="text-tertiary-400 font-ibm-light text-xs">
-                    <th class="py-6 px-5 text-left">Total</th>
-                    <th class="text-right">
-                        <div class="font-ibm text-sm text-primary-900 leading-10">$917,658.92</div>
-                        <div class="font-ibm text-xxs text-tertiary-400">( 644.889)</div>
-                    </th>
-                    <th></th>
-                </tfoot>
-            </table>
-            <div class="w-full text-center pt-6 pb-5">
-                <nftmx-button
-                    color="primary"
-                    label="BUY NOW"
-                    class="font-press w-full text-sm my-3 max-w-xs"
-                    @click="fundError = true"
-                />
-                <div v-if="fundError" class="h-0 text-center font-ibm-medium text-xxs text-red-600">Add fund to your wallet</div>
+        <div class="grid grid-cols-24 text-white gap-10 mt-9 px-16">
+            <div class="col-span-3 lg:col-span-9">
+                <div class="relative h-90.75 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover border border-black">
+                    <ribbon :percent="percent" :period="period" />
+                </div>
+                <div class="flex w-full items-center text-sm font-ibm-bold mt-8">
+                    <detail-button class="text-primary-900">Kyle White</detail-button>
+                    <div class="grow"></div>
+                    <div class="">
+                        Price
+                    </div>
+                </div>
+                <div class="flex w-full items-center font-ibm-bold mt-1.5">
+                    <detail-button class="text-2xl">Play Quiet #10/10</detail-button>
+                    <div class="grow"></div>
+                    <div class="text-sm font-ibm-light flex items-center">
+                        <img src="/images/curr-1.png" class="w-4 h-4 mr-2.5" />
+                        0
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-3 lg:col-span-15 relative text-lg font-ibm-medium">
+                <div class="flex">
+                    Type
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                </div>
+                <div class="flex my-3">
+                    <nftmx-button
+                        outline
+                        color="primary-900"
+                        label="FIX SALE"
+                        :class="[sale===saleType.FIX_SALE?'bg-tertiary-700':'', 'font-ibm-bold text-sm pt-3.5 pb-4 border-2 border-black w-1/2 hover:bg-tertiary-700 text-primary-900 tracking-wide']"
+                        @click="sale = saleType.FIX_SALE"
+                    />
+                    <nftmx-button
+                        outline
+                        color="primary-900"
+                        label="AUCTION"
+                        :class="[sale===saleType.AUCTION?'bg-tertiary-700':'', 'font-ibm-bold text-sm pt-3.5 pb-4 border-2 border-black border-l-0 w-1/2 text-primary-900 hover:bg-tertiary-700 tracking-wide']"
+                        @click="sale = saleType.AUCTION"
+                    />
+                </div>
+                <div class="flex mt-7">
+                    Price
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                </div>
+                <div class="flex mt-3.5 mb-6 font-ibm text-sm">
+                    <nftmx-select-network color="black" :data="currencies" class="w-1/3" />
+                    <input class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-4.75 font-ibm text-sm" placeholder="Type of amount" />
+                </div>
+                <div class="flex pt-0.75">
+                    Duration
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                </div>
+                <div class="flex mt-3.5 mb-7 font-ibm text-sm">
+                    <div class="flex items-center gap-5 border-2 h-13.5 border-black text-white bg-tertiary-700 w-full pl-5 font-ibm-light text-sm">
+                        <font-awesome-icon :icon="['fas', 'calendar-alt']" class="text-lg ml-0.75 mr-0.5" />
+                        6 Months
+                    </div>
+                </div>
+                <div class="flex pt-0.5">
+                    Amount of Downside Protection to Offer
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                </div>
             </div>
         </div>
     </nftmx-modal>
@@ -446,5 +463,13 @@ const fundError = ref(false);
 }
 .text-small {
     font-size: 10px;
+}
+.grid-cols-24 {
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+}
+@media (min-width: 1024px) {
+    .lg\:col-span-15 {
+        grid-column: span 15 / span 15;
+    }
 }
 </style>

@@ -5,16 +5,7 @@ import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import NftmxSellGrid from '@/core/components/NftmxSellGrid.vue';
 import NftmxFileUploader from '@/core/components/NftmxFileUploader.vue';
-const people = [
-    {
-        name: 'Wade Cooper',
-        icon: '/images/i-eth.png',
-    },
-    {
-        name: 'Wade Cooper',
-        icon: '/images/i-eth.png',
-    },
-]
+
 </script>
 
 <template>

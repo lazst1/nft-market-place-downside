@@ -1,8 +1,8 @@
 <template>
-    <div class="custom-select" :tabindex="tabindex" @blur="open = false">
-        <div class="selected flex items-center" :class="{ open: open }" @click="open = !open">
+    <div class="custom-select relative w-full text-left leading-12.5" :tabindex="tabindex" @blur="open = false">
+        <div :class="[bgColor?bgColor+' pl-3':'bg-tertiary-800 pl-3.5', 'selected border-2 border-black flex items-center cursor-pointer']" @click="open = !open">
             <img :src="selected.icon" class="mr-3" />
-            {{ selected.name }}
+            <span :class="[bgColor?'ml-0.75':'ml-px']">{{ selected.name }}</span>
         </div>
         <div class="items" :class="{ selectHide: !open }">
             <div
@@ -37,12 +37,15 @@ export default {
       required: false,
       default: 0,
     },
+    data: Array,
+    color: String
   },
   data() {
     return {
       open: false,
-      options: networks,
-      selected: networks[0]
+      options: this.data || networks,
+      selected: this.data ? this.data[0] : networks[0],
+      bgColor: this.color ? 'bg-'+this.color : null
     };
   },
   mounted() {
@@ -52,23 +55,6 @@ export default {
 </script>
 
 <style scoped>
-
-.custom-select {
-  position: relative;
-  width: 100%;
-  text-align: left;
-  outline: none;
-  line-height: 50px;
-}
-
-.custom-select .selected {
-  background-color: #343434;
-  border: 2px solid black;
-  padding-left: 1em;
-  cursor: pointer;
-  user-select: none;
-}
-
 .custom-select .selected:after {
   position: absolute;
   content: "";
@@ -81,7 +67,6 @@ export default {
 }
 
 .custom-select .items {
-  border-radius: 0px 0px 6px 6px;
   overflow: hidden;
   border-right: 1px solid black;
   border-left: 1px solid black;
