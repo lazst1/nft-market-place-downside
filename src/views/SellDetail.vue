@@ -24,6 +24,7 @@ import CardsContainer from '@/core/container/CardsContainer.vue';
 import NftmxItemCard from '@/core/components/NftmxItemCard.vue';
 import { saleType, currencies } from '@/core/config'
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
+import NftmxDivider from '@/core/components/NftmxDivider.vue';
 
 const people = [
   {
@@ -106,7 +107,6 @@ const props = defineProps({
 })
 
 const sellyModalActive = ref(false);
-const syndicationModalActive = ref(false);
 const fundError = ref(false);
 const sale = ref(saleType.FIX_SALE);
 
@@ -216,13 +216,11 @@ const sale = ref(saleType.FIX_SALE);
                                             color="primary"
                                             label="BUY NOW"
                                             class="font-press w-37 text-smallest py-1.5 mr-5"
-                                            @click="syndicationModalActive = true"
                                         />
                                         <nftmx-button
                                             color="secondary"
                                             label="JOIN SYNDICATION"
                                             class="font-press w-37 text-smallest py-1.5"
-                                            @click="syndicationModalActive = true"
                                         />
                                     </nftmx-td>
                                 </nftmx-tr>
@@ -248,7 +246,6 @@ const sale = ref(saleType.FIX_SALE);
                                 color="primary"
                                 label="MAKE OFFER"
                                 class="font-press w-37 text-small py-1.5 text-primary-900 mt-px mb-0.5"
-                                @click="syndicationModalActive = true"
                             />
                         </div>
                     </accordion>
@@ -319,39 +316,39 @@ const sale = ref(saleType.FIX_SALE);
                 color="primary"
                 label="VIEW COLLECTIONS"
                 class="font-ibm-bold text-lg pt-2.5 pb-3 text-primary-900"
-                @click="syndicationModalActive = true"
             />
         </div>
     </body-container>
     <nftmx-footer />
-    <nftmx-modal v-model="sellyModalActive" width="md:w-9/12">
+    <nftmx-modal v-model="sellyModalActive" big>
         <div class="text-center relative mt-1.75 pb-2.5">
             <div class="font-press text-2xl">
                 List Item for Sale
             </div>
         </div>
-        <div class="grid grid-cols-24 text-white gap-10 mt-9 px-16">
-            <div class="col-span-3 lg:col-span-9">
-                <div class="relative h-90.75 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover border border-black">
+        <div class="grid grid-cols-24 text-white my-9 pl-17.5 pr-17">
+            <div class="col-span-3 lg:col-span-9 pr-2.25">
+                <div class="relative h-90.75 overflow-hidden p-6 bg-[url('/images/img10.png')] bg-cover border border-black">
                     <ribbon :percent="percent" :period="period" />
                 </div>
-                <div class="flex w-full items-center text-sm font-ibm-bold mt-8">
-                    <detail-button class="text-primary-900">Kyle White</detail-button>
-                    <div class="grow"></div>
-                    <div class="">
-                        Price
+                <div class="flex w-full text-sm font-ibm-bold mt-7">
+                    <div class="pt-0.75">
+                        <detail-button class="text-primary-900">Kyle White</detail-button>
+                        <detail-button class="text-2xl mt-1.5">Play Quiet #10/10</detail-button>
                     </div>
-                </div>
-                <div class="flex w-full items-center font-ibm-bold mt-1.5">
-                    <detail-button class="text-2xl">Play Quiet #10/10</detail-button>
                     <div class="grow"></div>
-                    <div class="text-sm font-ibm-light flex items-center">
-                        <img src="/images/curr-1.png" class="w-4 h-4 mr-2.5" />
-                        0
+                    <div class="py-0.5">
+                        <div>
+                            Price
+                        </div>
+                        <div class="text-sm font-ibm-light flex items-center mt-3">
+                            <img src="/images/curr-1.png" class="w-4 h-4 mr-2.5" />
+                            0
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-span-3 lg:col-span-15 relative text-lg font-ibm-medium">
+            <div class="col-span-3 lg:col-span-15 relative text-lg font-ibm-medium mr-px pl-9">
                 <div class="flex">
                     Type
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
@@ -394,51 +391,43 @@ const sale = ref(saleType.FIX_SALE);
                     Amount of Downside Protection to Offer
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
                 </div>
-            </div>
-        </div>
-    </nftmx-modal>
-    <nftmx-modal v-model="syndicationModalActive" width="md:w-3/5">
-        <div class="text-center">
-            <div class="font-press text-2xl leading-5">
-                Total Locked Value
-            </div>
-            <div class="font-ibm-semi-bold text-3xl text-primary-900 items-center py-4">
-                $1,548,548.65
-            </div>
-        </div>
-        <div class="px-4 md:px-16 pb-14 mt-14">
-            <table class="border border-black bg-tertiary-800 w-full text-left">
-                <thead class="text-xs font-ibm-light text-tertiary-400">
-                    <tr class="border-b border-black">
-                        <th class="py-4 border-r border-black w-1/5 pl-4">Date</th>
-                        <th class="border-r border-black w-1/5 pl-4">Wallet Address</th>
-                        <th class="border-r border-black w-1/5 pl-4">ETH amount</th>
-                        <th class="border-r border-black w-1/5 pl-4">Ownership %</th>
-                        <th class="pl-4">Proof</th>
-                    </tr>
-                </thead>
-                <tbody class="font-ibm-light text-xs">
-                    <tr v-for="index in 2" :key="index" class="border-b border-black">
-                        <td class="py-4 border-r border-black w-1/5 pl-4">19 hours ago</td>
-                        <td class="py-4 border-r border-black w-1/5 pl-4 text-primary-900">
-                            0x495f...7b5e
-                        </td>
-                        <td class="py-4 border-r border-black w-1/5 pl-4">512</td>
-                        <td class="py-4 border-r border-black w-1/5 pl-4">50%</td>
-                        <td class="py-4 border-r border-black w-1/5 pl-4 text-secondary-600 font-ibm-medium">0x495f...7b5e</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="flex mt-14 mb-6">
-                <input class="focus:outline-none border-2 h-14 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-20 font-ibm text-sm" placeholder="Type of amount" />
-                <div class="w-14 h-14 bg-black absolute bg-[url('/images/curr-1.png')] bg-no-repeat bg-center" />
-            </div>
-            <div class="w-full text-center">
-                <nftmx-button
-                    color="secondary"
-                    label="JOIN SYNDICATION"
-                    class="font-press w-full text-sm py-5 leading-6"
-                />
+                <div class="flex mt-3.5 mb-4 font-ibm text-sm">
+                    <input class="text-right focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pr-6 font-ibm text-sm" placeholder="100" />
+                    <div class="w-14 h-13.5 px-4 bg-black flex items-center justify-center">
+                        %
+                    </div>
+                </div>
+                <div class="flex text-xs font-ibm-semi-bold text-primary-900 pt-0.75 pb-0.5">
+                    More options
+                    <div class="self-center cursor-pointer ml-5.25">
+                        <font-awesome-icon v-if="!open" :icon="['fas', 'sort-down']" class="" />
+                        <font-awesome-icon v-if="open" :icon="['fas', 'sort-up']" class="" />
+                    </div>
+                </div>
+                <nftmx-divider class="mt-9 mb-6" />
+                <div class="flex pt-0.75">
+                    Fees
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                </div>
+                <div class="mt-4">
+                    <div class="flex py-1 text-xs font-ibm-medium text-tertiary-500">
+                        <div>Service Fee</div>
+                        <div class="grow"></div>
+                        <div>2.5%</div>
+                    </div>
+                    <div class="flex py-2.5 text-xs font-ibm-medium text-tertiary-500">
+                        <div>Creator Company</div>
+                        <div class="grow"></div>
+                        <div>2.5%</div>
+                    </div>
+                </div>
+                <div class="w-full mt-9 pt-0.5 pb-2.5 mb-17">
+                    <nftmx-button
+                        color="primary"
+                        label="COMPLETE LISTING"
+                        class="w-full font-press text-sm pt-4.5 pb-5 text-lg"
+                    />
+                </div>
             </div>
         </div>
     </nftmx-modal>
@@ -472,4 +461,5 @@ const sale = ref(saleType.FIX_SALE);
         grid-column: span 15 / span 15;
     }
 }
+
 </style>

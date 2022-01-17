@@ -26,10 +26,7 @@ const props = defineProps({
     type: [String, Number, Boolean],
     default: null
   },
-  width: {
-    type: String,
-    default: ''
-  }
+  big: Boolean
 })
 
 const emit = defineEmits(['update:modelValue', 'cancel', 'confirm'])
@@ -54,16 +51,23 @@ const cancel = () => confirmCancel('cancel')
     v-show="value"
     @overlay-click="cancel"
   >
-    <div :class="[width, 'text-white shadow-lg w-full max-h-modal z-50 bg-tertiary-900']">
-      <div class="text-right text-xl p-5">
-        <icon
-          :path="mdiClose"
-          :size="24"
-          class="cursor-pointer"
-          @click="cancel"
-        />
+    <div class=" h-full z-50 overflow-auto modal">
+      <div class="h-1/6" />
+      <div :class="[big?'3xl:w-modal-big':'w-full', 'bg-tertiary-900 text-white']">
+        <div class="" />
+        <div class="text-right text-xl p-5">
+          <icon
+            :path="mdiClose"
+            :size="24"
+            class="cursor-pointer"
+            @click="cancel"
+          />
+        </div>
+        <slot />
       </div>
-      <slot />
     </div>
   </overlay>
 </template>
+
+<style scoped>
+</style>

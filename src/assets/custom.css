@@ -5,6 +5,10 @@
     height: 15px;
 }
 
+.modal::-webkit-scrollbar {
+    display: none;
+}
+
 /* Track */
 ::-webkit-scrollbar-track {
     background: black;
