@@ -10,9 +10,9 @@ import TopBar from '@/core/components/TopBar.vue';
 
 <template>
   <top-bar class="font-ibm-medium" :search="true">
-    <div class="pl-16 flex-grow items-stretch flex h-95px bg-tertiary-800">
+    <div class="pl-16 flex-grow items-stretch flex h-94px bg-tertiary-800">
         <nav-bar-item class="w-full">
-            <nav-bar-search-input class="w-full font-ibm-medium" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
+            <nav-bar-search-input class="w-full font-press" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
         </nav-bar-item>
     </div>
     <div
@@ -25,20 +25,20 @@ import TopBar from '@/core/components/TopBar.vue';
         <nav-bar-item class="cursor-auto">
         <font-awesome-icon :icon="['fas', 'filter']" :class="[filterActive?'text-primary-900':'text-white', 'text-lg hover:text-primary-900 cursor-pointer']" />
         </nav-bar-item>
-        <nav-bar-item class="cursor-auto">
+        <!-- <nav-bar-item class="cursor-auto">
           <nftmx-button
             color="primary"
             label="SEARCH"
             class="font-press w-72"
           />
-        </nav-bar-item>
+        </nav-bar-item> -->
       </div>
     </div>
   </top-bar>
 </template>
 
 <style scoped>
-.h-95px {
-  height: 95px;
+.h-94px {
+  height: 94px;
 }
 </style>

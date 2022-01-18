@@ -5,6 +5,12 @@ import NftmxCardContainer from '@/core/container/NftmxCardContainer.vue';
 import CheckboxCell from './CheckboxCell.vue';
 
 const props = defineProps({
+    item: {
+        type: Object,
+        default: {
+            image_url: '/images/img6.png'
+        }
+    },
     percent: {
         type: Number,
         default: 100
@@ -78,7 +84,7 @@ const boughtCSS = computed(() => {
 </script>
 
 <template>
-    <nftmx-card-container :forMore="forMore">
+    <nftmx-card-container :forMore="forMore" :url="item.image_url">
         <div class="h-">
             <div :class="[forMore?'h-17':'h-24', 'mb-0.5']">
                 <div class="text-tertiary-400 text-xxs">

@@ -1,19 +1,22 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, reactive} from 'vue';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex'
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
 import NftmxItemCard from '@/core/components/NftmxItemCard.vue';
-import CardsContainer from '../core/container/CardsContainer.vue';
+import CardsContainer from '@/core/container/CardsContainer.vue';
+import NavBarSearch from '@/core/container/NavbarSearch.vue';
 
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
+const user = computed(() => store.getters['auth/getUser']);
 
 </script>
 
 <template>
+    <nav-bar-search></nav-bar-search>
     <div class="bg-[url('/images/profile-banner-1920.png')] bg-no-repeat bg-cover bg-right font-press line-h text-3xl leading-loose text-white px-22 py-0.5">
         <div class="flex pt-11 pb-13">
             <div>
@@ -48,22 +51,22 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
         <nftmx-divider class="mt-2.5"></nftmx-divider>
         <div class="flex items-center text-white font-ibm-semi-bold text-sm mt-8 py-0.5">
             <div class="mx-4 cursor-pointer hover:text-primary-700">
-                Collected <span class="font-ibm-light">2</span>
+                Collected <span class="font-ibm-light">{{user.assets ? user.assets.length : 0}}</span>
             </div>
             <div class="ml-6 cursor-pointer hover:text-primary-700">
-                On Sale <span class="font-ibm-light">1</span>
+                On Sale <span class="font-ibm-light">0</span>
             </div>
             <div class="ml-11 cursor-pointer hover:text-primary-700">
-                Downside Protection <span class="font-ibm-light">5</span>
+                Downside Protection <span class="font-ibm-light">0</span>
             </div>
             <div class="ml-10 cursor-pointer hover:text-primary-700">
-                Favorited <span class="font-ibm-light">6</span>
+                Favorited <span class="font-ibm-light">0</span>
             </div>
             <div class="ml-11 cursor-pointer hover:text-primary-700">
                 Hidden <span class="font-ibm-light">0</span>
             </div>
             <div class="ml-10 cursor-pointer hover:text-primary-700">
-                Activity <span class="font-ibm-light">1</span>
+                Activity <span class="font-ibm-light">0</span>
             </div>
             <div class="ml-11 cursor-pointer hover:text-primary-700">
                 <span class="mr-4">Offers</span>
@@ -76,11 +79,7 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
             </div>
         </div>
         <cards-container class="mt-12 mb-22 place-items-center">
-            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
-            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
-            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
-            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
-            <nftmx-item-card class="bg-tertiary-800"></nftmx-item-card>
+            <nftmx-item-card v-for="asset in user.assets" :key="asset.id" :item="asset" class="bg-tertiary-800"></nftmx-item-card>
         </cards-container>
     </body-container>
     <nftmx-footer />
