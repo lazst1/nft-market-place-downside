@@ -1,4 +1,5 @@
 import AuthService from "@/core/services/auth.service";
+import OpenseaService from "@/core/services/opensea.service";
 import Web3 from "web3/dist/web3.min.js"
 import abiJSON from '@/core/config/abi';
 
@@ -7,7 +8,7 @@ export const auth = {
     state: {
         user: {},
         web3: new Web3(Web3.givenProvider),
-        abi: null
+        abi: null,
     },
     actions: {
         login({ commit }, walletAddress) {
@@ -47,6 +48,14 @@ export const auth = {
         },
         loginSuccess(state, user) {
             state.user = user;
+            OpenseaService.retrieveAssets(user.walletAddress).then(
+                assets => {
+                    user.assets = assets;
+                },
+                error => {
+                    console.log('error=======', error);
+                }
+            )
         },
         loginFailure(state) {
             state.user = null;
