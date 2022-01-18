@@ -32,7 +32,8 @@ module.exports = {
       fontSize: {
         xxs: ['11px', '14px'],
         xg: ['19px', '28px'],
-        '2.5xl': '26px'
+        '2.5xl': '26px',
+        description: ['13px', '20px']
       },
       fontFamily: {
         'awesome': ['fontawesome'],
@@ -57,6 +58,7 @@ module.exports = {
         '5.25': '21px',
         '13': '52px',
         '13.5': '54px',
+        '15': '60px',
         '17': '68px',
         '17.5': '70px',
         '22': '88px',
@@ -78,10 +80,14 @@ module.exports = {
       lineHeight: {
         '5.25': '21px',
         '5.5': '22px',
-        '12.5': '50px'
+        '12.5': '50px',
+        'relaxed': '1.66'
       },
       letterSpacing: {
         wide: '.2em'
+      },
+      maxWidth: {
+        md: '252px'
       }
     },
   },

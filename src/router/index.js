@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory,  } from 'vue-router'
+import Landing from '@/views/Landing.vue'
 import Home from '@/views/Home.vue'
 import Browse from '@/views/Browse.vue'
 import Activity from '@/views/Activity.vue'
@@ -11,9 +12,17 @@ import SellDetail from '@/views/SellDetail.vue'
 const routes = [
     {
         meta: {
-            title: 'Dashboard'
+            title: 'Landing'
         },
         path: '/',
+        name: 'landing',
+        component: Landing
+    },
+    {
+        meta: {
+            title: 'Home'
+        },
+        path: '/home',
         name: 'home',
         component: Home
     },

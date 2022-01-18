@@ -1,6 +1,8 @@
 <template>
-    <div class="bg-[url('/images/hero-image-1920.png')] h-96 2xl:h-full bg-no-repeat bg-cover bg-right font-press line-h text-3xl leading-loose text-white py-32 2xl:pt-47 2xl:pb-50 px-24">
-        Buy NFTs with 100%<br/>Downside Protection
+    <div class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press text-4xl leading-relaxed text-white py-32 2xl:py-44 px-24">
+        <div class="mt-1.75 mb-5.25">
+            Buy NFTs with 100%<br/>Downside Protection
+        </div>
     </div>
     <body-container :padding="false">
         <div class="pt-4">
