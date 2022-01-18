@@ -48,7 +48,7 @@ export const auth = {
         },
         loginSuccess(state, user) {
             state.user = user;
-            OpenseaService.retrieveAssets(user.walletAddress).then(
+            OpenseaService.retrieveAssetsByWallet(user.walletAddress).then(
                 assets => {
                     user.assets = assets;
                 },
