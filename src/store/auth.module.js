@@ -55,6 +55,7 @@ export const auth = {
                 assets => {
                     state.user.assets = assets;
                     console.log(assets);
+                    localStorage.setItem('user', JSON.stringify(state.user));
                 },
                 error => {
                     console.log('error=======', error);
@@ -63,6 +64,7 @@ export const auth = {
         },
         loginFailure(state) {
             state.user = null;
+            localStorage.removeItem('user');
         },
     }
 }

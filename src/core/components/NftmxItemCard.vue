@@ -99,8 +99,8 @@ const boughtCSS = computed(() => {
             </div>
             <div class="flex items-center font-ibm-semi-bold mt-1">
                 <div class="text-sm flex flex-1 items-center">
-                    <font-awesome-icon :icon="['fas', 'ellipsis-v']" class="text-white text-lg mr-2" />
-                    <checkbox-cell v-if="!forMore" border="border-tertiary-500" small><span class="text-xs relative text-tertiary-500 -ml-2">Sell</span></checkbox-cell>
+                    <font-awesome-icon @click.prevent :icon="['fas', 'ellipsis-v']" class="text-white hover:text-primary-900 text-lg mr-2" />
+                    <checkbox-cell @click.stop v-if="!forMore" border="border-tertiary-500" small><span class="text-xs relative text-tertiary-500 -ml-2">Sell</span></checkbox-cell>
                 </div>
                 <div class="text-xs text-tertiary-500 flex items-end font-ibm-medium">
                     <span style="line-height: 0.75" class="pr-2">124</span>
