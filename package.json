@@ -7,7 +7,32 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/vue-fontawesome": "^3.0.0-5",
+    "@headlessui/vue": "^1.4.2",
+    "@mdi/js": "^6.5.95",
+    "@metamask/detect-provider": "^1.2.0",
+    "@popperjs/core": "^2.11.2",
+    "@themesberg/flowbite": "^1.2.0",
+    "axios": "^0.24.0",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "click-outside-vue3": "^4.0.1",
+    "postcss-import": "^14.0.2",
+    "process": "^0.11.10",
+    "sass": "^1.45.1",
+    "sass-loader": "^12.4.0",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.4",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.12",
+    "vue3-carousel": "^0.1.35",
+    "vue3-charts": "^1.1.27",
+    "vuex": "^4.0.2",
+    "web3": "^1.6.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
