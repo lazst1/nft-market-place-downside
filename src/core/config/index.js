@@ -39,6 +39,7 @@ export const walletList = [
 
 export const baseURL = "http://localhost:1837/api/v1/";
 export const openseaURL = "https://api.opensea.io/api/v1/";
+export const contractAddress = '0x89f09DC648099fE5f12e49a91C0Ff6bA4606AdF3';
 
 export const networks = [
     {
