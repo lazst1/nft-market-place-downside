@@ -59,9 +59,10 @@ export default {
         const sale = ref(saleType.FIX_SALE);
         const assetContractAddress = route.params.assetContractAddress;
         const tokenId = route.params.tokenId;
+        const open = ref(false);
 
         return {
-            assetContractAddress, tokenId, sellyModalActive, fundError, sale
+            assetContractAddress, tokenId, sellyModalActive, fundError, sale, open
         }
     },
     mounted() {
