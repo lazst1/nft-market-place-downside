@@ -1,18 +1,14 @@
-<script setup>
-import { ref } from 'vue'
+<script>
+import { ref, onMounted } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import Ribbon from '@/core/components/Ribbon.vue';
 import DetailButton from '@/core/components/DetailButton.vue';
-import Icon from '@/core/components/Icon.vue'
-import { mdiThumbUp, mdiHelpCircle, mdiMenu } from '@mdi/js'
-import Timer from '@/core/components/Timer.vue'
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import Accordion from '@/core/container/Accordion.vue';
 import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import NftmxModal from '@/core/components/NftmxModal.vue';
-import { mdiClose } from '@mdi/js'
 import NftmxTable from '@/core/components/NftmxTable.vue';
 import NftmxThead from '@/core/components/NftmxThead.vue';
 import NftmxTh from '@/core/components/NftmxTh.vue';
@@ -22,101 +18,72 @@ import NftmxTr from '@/core/components/NftmxTr.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 import CardsContainer from '@/core/container/CardsContainer.vue';
 import NftmxItemCard from '@/core/components/NftmxItemCard.vue';
-import { saleType, currencies } from '@/core/config'
+import { saleType } from '@/core/config'
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
+import { useRoute } from 'vue-router';
+import OpenseaService from "@/core/services/opensea.service";
+import { currencies } from '@/core/config';
 
-const people = [
-  {
-    id: 1,
-    name: 'Wade Cooper',
-    image:
-      'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    id: 2,
-    name: 'Arlene Mccoy',
-    image:
-      'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    id: 3,
-    name: 'Devon Webb',
-    image:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80',
-  },
-  {
-    id: 4,
-    name: 'Tom Cook',
-    image:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    id: 5,
-    name: 'Tanya Fox',
-    image:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    id: 6,
-    name: 'Hellen Schmidt',
-    image:
-      'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    id: 7,
-    name: 'Caroline Schultz',
-    image:
-      'https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    id: 8,
-    name: 'Mason Heaney',
-    image:
-      'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    id: 9,
-    name: 'Claudie Smitham',
-    image:
-      'https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    id: 10,
-    name: 'Emil Schaefer',
-    image:
-      'https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-]
-
-const items = [
-    {
-        name: 'All time'
+export default {
+    props: {
+        percent: {
+            type: Number,
+            default: 100
+        },
+        period: {
+            type: Number,
+            default: 365
+        },
     },
-]
-
-const props = defineProps({
-    percent: {
-        type: Number,
-        default: 100
+    components: {
+        BodyContainer, Ribbon, DetailButton, NftmxButton, NftmxSelect, Accordion, NftmxLineChart, NftmxFooter, NftmxModal, NftmxTable, NftmxThead, NftmxTh, NftmxTbody, NftmxTd, NftmxTr,
+        NftmxWalletAddress, CardsContainer, NftmxItemCard, NftmxSelectNetwork, NftmxDivider,
     },
-    period: {
-        type: Number,
-        default: 365
+    data() {
+        return {
+            asset: {},
+            items: [
+                {
+                    name: 'All time'
+                },
+            ],
+            currencies: currencies,
+            saleType: saleType
+        }
     },
-})
+    setup() {
+        const route = useRoute();
+        const sellyModalActive = ref(false);
+        const fundError = ref(false);
+        const sale = ref(saleType.FIX_SALE);
+        const assetContractAddress = route.params.assetContractAddress;
+        const tokenId = route.params.tokenId;
 
-const sellyModalActive = ref(false);
-const fundError = ref(false);
-const sale = ref(saleType.FIX_SALE);
-
+        return {
+            assetContractAddress, tokenId, sellyModalActive, fundError, sale
+        }
+    },
+    mounted() {
+        OpenseaService.retrieveAsset(this.assetContractAddress, this.tokenId).then(
+            data => {
+                this.asset = data;
+            },
+            error => {
+                console.log('error===', error);
+            }
+        )
+    },
+    methods: {
+    }
+}
 </script>
 
 <template>
     <body-container>
         <div class="grid grid-cols-7 text-white gap-8 mt-9">
             <div class="col-span-7 lg:col-span-3">
-                <div class="relative h-520 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover">
+                <div class="relative h-520 overflow-hidden p-6" :style="{background:'url('+asset.image_url+')', backgroundRepeat:'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center', backgroundColor: '#222222'}">
                     <ribbon :percent="percent" :period="period" />
                 </div>
                 <div class="overflow-hidden overflow-x-auto mt-4 mb-8 items-center">
@@ -301,13 +268,13 @@ const sale = ref(saleType.FIX_SALE);
                     </div>
                 </template>
                 
-                <cards-container class="mt-2 mb-2 place-items-center">
+                <!-- <cards-container class="mt-2 mb-2 place-items-center">
                     <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
                     <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
                     <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
                     <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
                     <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                </cards-container>
+                </cards-container> -->
             </accordion>
         </div>
         <div class="text-center pt-px mb-12">

@@ -35,7 +35,6 @@ export const auth = {
             return state.user && state.user.walletAddress ? state.user.walletAddress : ''
         },
         getUser: state => {
-            console.log('===========', state)
             return state.user ? state.user : {}
         }
     },
@@ -54,7 +53,6 @@ export const auth = {
             OpenseaService.retrieveAssetsByWallet(user.walletAddress).then(
                 assets => {
                     state.user.assets = assets;
-                    console.log(assets);
                     localStorage.setItem('user', JSON.stringify(state.user));
                 },
                 error => {

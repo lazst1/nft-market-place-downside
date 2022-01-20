@@ -7,7 +7,7 @@ import Detail from '@/views/Detail.vue'
 import Login from '@/views/Login.vue'
 import Create from '@/views/Create.vue'
 import Profile from '@/views/Profile.vue'
-import SellDetail from '@/views/SellDetail.vue'
+import Asset from '@/views/Asset.vue'
 
 const routes = [
     {
@@ -52,11 +52,11 @@ const routes = [
     },
     {
         meta: {
-            title: 'SellDetail'
+            title: 'Asset'
         },
-        path: '/sell-detail',
-        name: 'sell-detail',
-        component: SellDetail
+        path: '/asset/:assetContractAddress/:tokenId',
+        name: 'asset',
+        component: Asset
     },
     {
         meta: {

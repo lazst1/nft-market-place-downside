@@ -84,17 +84,18 @@ const boughtCSS = computed(() => {
 </script>
 
 <template>
-    <nftmx-card-container :forMore="forMore" :url="item.image_url">
+    <nftmx-card-container :forMore="forMore" :url="item.image_url" :assetContractAddress="item.asset_contract.address" :tokenId="item.token_id">
         <div class="h-">
             <div :class="[forMore?'h-17':'h-24', 'mb-0.5']">
                 <div class="text-tertiary-400 text-xxs">
-                    Enigma Economy
+                    {{item.collection?item.collection.name:'Enigma Economy'}}
                 </div>
                 <div class="text-white font-ibm-medium text-sm leading-5.25 my-0.75">
-                    Play Quiet #10/10 lay Quiet #10/10 
+                    {{item.name?item.name:'Play Quiet #10/10'}}
                 </div>
                 <div v-if="!forMore" class="text-tertiary-400 font-ibm-light text-xxs leading-5.25">
-                    For sale | Private collection bundle of 3
+                    
+                    {{item.description?item.description:''}}
                 </div>
             </div>
             <div class="flex items-center font-ibm-semi-bold mt-1">

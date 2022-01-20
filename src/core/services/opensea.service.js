@@ -6,6 +6,12 @@ class OpenseaService {
             return res.data.assets;
         })
     }
+    
+    retrieveAsset(assetContractAddress, tokenId) {
+        return http.get(`asset/${assetContractAddress}/${tokenId}`).then(res => {
+            return res.data;
+        })
+    }
 }
 
 export default new OpenseaService();

@@ -250,7 +250,6 @@ export default defineComponent({
     methods: {
         clickFilter() {
             this.filterActive = !this.filterActive;
-            console.log(this.user)
         },
         clickFilterBy(value) {
             this.filterBy = value;
