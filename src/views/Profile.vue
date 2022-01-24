@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, reactive} from 'vue';
+import { computed, ref, reactive, onMounted} from 'vue';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex'
@@ -12,7 +12,6 @@ import NavBarSearch from '@/core/container/NavbarSearch.vue';
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 const user = computed(() => store.getters['auth/getUser']);
-
 </script>
 
 <template>
@@ -51,7 +50,7 @@ const user = computed(() => store.getters['auth/getUser']);
         <nftmx-divider class="mt-2.5"></nftmx-divider>
         <div class="flex items-center text-white font-ibm-semi-bold text-sm mt-8 py-0.5">
             <div class="mx-4 cursor-pointer hover:text-primary-700">
-                Collected <span class="font-ibm-light">{{user.assets ? user.assets.length : 0}}</span>
+                Collected <span class="font-ibm-light">{{user.nftData ? user.nftData.total : 0}}</span>
             </div>
             <div class="ml-6 cursor-pointer hover:text-primary-700">
                 On Sale <span class="font-ibm-light">0</span>
@@ -79,7 +78,7 @@ const user = computed(() => store.getters['auth/getUser']);
             </div>
         </div>
         <cards-container class="mt-12 mb-22 place-items-center">
-            <nftmx-item-card v-for="asset in user.assets" :key="asset.id" :item="asset" class="bg-tertiary-800"></nftmx-item-card>
+            <nftmx-item-card v-for="(nft, index) in user.nftData?user.nftData.result:[]" :key="index" :item="nft" class="bg-tertiary-800"></nftmx-item-card>
         </cards-container>
     </body-container>
     <nftmx-footer />

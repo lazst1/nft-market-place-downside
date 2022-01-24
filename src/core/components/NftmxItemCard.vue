@@ -3,12 +3,27 @@ import NftmxButton from './NftmxButton.vue'
 import { computed } from 'vue';
 import NftmxCardContainer from '@/core/container/NftmxCardContainer.vue';
 import CheckboxCell from './CheckboxCell.vue';
+import TextCompression from './textCompression.vue';
 
 const props = defineProps({
     item: {
         type: Object,
         default: {
-            image_url: '/images/img6.png'
+            amount: "0",
+            block_number: "",
+            block_number_minted: "",
+            contract_type: "",
+            frozen: 0,
+            is_valid: 0,
+            metadata: null,
+            name: "",
+            owner_of: "",
+            symbol: "",
+            synced_at: "",
+            syncing: 2,
+            token_address: "",
+            token_id: "",
+            token_uri: ""
         }
     },
     percent: {
@@ -66,6 +81,8 @@ const props = defineProps({
     forMore: Boolean
 })
 
+const metadata = props.item.metadata ? JSON.parse(props.item.metadata) : {};
+
 const syndicationCSS = computed(() => {
     const base = [
         'py-3.5', 'text-xxs', 'leading-4', props.syndication ? 'bg-gradient-to-r from-secondary-900 to-secondary-700 text-white' : 'bg-tertiary-600 text-tertiary-500'
@@ -84,18 +101,17 @@ const boughtCSS = computed(() => {
 </script>
 
 <template>
-    <nftmx-card-container :forMore="forMore" :url="item.image_url" :assetContractAddress="item.asset_contract.address" :tokenId="item.token_id">
+    <nftmx-card-container :forMore="forMore" :image="metadata?metadata.image:''" :assetContractAddress="item.token_address" :tokenId="item.token_id">
         <div class="h-">
             <div :class="[forMore?'h-17':'h-24', 'mb-0.5']">
                 <div class="text-tertiary-400 text-xxs">
-                    {{item.collection?item.collection.name:'Enigma Economy'}}
+                    {{item.name?item.name:''}}
                 </div>
                 <div class="text-white font-ibm-medium text-sm leading-5.25 my-0.75">
-                    {{item.name?item.name:'Play Quiet #10/10'}}
+                    {{metadata.name?metadata.name:''}}
                 </div>
                 <div v-if="!forMore" class="text-tertiary-400 font-ibm-light text-xxs leading-5.25">
-                    
-                    {{item.description?item.description:''}}
+                    <text-compression :text="metadata.description?metadata.description:''" :length="40" />
                 </div>
             </div>
             <div class="flex items-center font-ibm-semi-bold mt-1">

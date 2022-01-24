@@ -1,6 +1,9 @@
 <script setup>
 import NavBar from './core/container/NavBar.vue';
 import { useStore } from 'vuex';
+import Moralis from 'moralis'
+
+Moralis.start({appId: 'z7cJa6SN0vtK4goTUZUAhAG6sI71kh8a0xfYfgNc', serverUrl: 'https://dr8dwbs8zgqr.usemoralis.com:2053/server'})
 
 const store = useStore();
 

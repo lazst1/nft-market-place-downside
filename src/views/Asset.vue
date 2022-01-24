@@ -22,8 +22,8 @@ import { saleType } from '@/core/config'
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import { useRoute } from 'vue-router';
-import OpenseaService from "@/core/services/opensea.service";
 import { currencies } from '@/core/config';
+import { useStore } from 'vuex';
 
 export default {
     props: {
@@ -60,22 +60,18 @@ export default {
         const assetContractAddress = route.params.assetContractAddress;
         const tokenId = route.params.tokenId;
         const open = ref(false);
+        const store = useStore();
 
         return {
-            assetContractAddress, tokenId, sellyModalActive, fundError, sale, open
+            assetContractAddress, tokenId, sellyModalActive, fundError, sale, open, store
         }
     },
-    mounted() {
-        OpenseaService.retrieveAsset(this.assetContractAddress, this.tokenId).then(
-            data => {
-                this.asset = data;
-            },
-            error => {
-                console.log('error===', error);
-            }
-        )
-    },
+    mounted() {},
     methods: {
+        createOrder() {
+            console.log('===============', this.assetContractAddress, this.tokenId)
+            this.store.dispatch('market/createOrder', {assetContractAddress: this.assetContractAddress, tokenId: this.tokenId})
+        }
     }
 }
 </script>
@@ -394,6 +390,7 @@ export default {
                         color="primary"
                         label="COMPLETE LISTING"
                         class="w-full font-press text-sm pt-4.5 pb-5 text-lg"
+                        @click="createOrder()"
                     />
                 </div>
             </div>
