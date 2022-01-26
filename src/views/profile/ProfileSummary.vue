@@ -22,19 +22,30 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
             </div>
             <div class="ml-5.75 md:ml-13 pt-13 sm:pt-14 mt-px">
                 <div
-                    class="mb-1.75 font-press text-md sm:text-lg md:text-3xl leading-loose text-white"
-                >Kyle White</div>
-                <div class="font-ibm text-sm pb-1.5 md:pb-5 text-primary-900">
-                    <nftmx-wallet-address
-                        :disable="store.state.app.windowWidth > themeConfig.sm"
-                        :address="walletAddress"
+                    class="mb-1.75 font-press text-md sm:text-lg md:text-3xl leading-loose text-white w-max"
+                >
+                    Kyle White
+                    <font-awesome-icon :icon="['fas', 'edit']" class="text-sm mb-1 ml-1" />
+                </div>
+                <div class="flex font-ibm text-sm pb-1.5 md:pb-5">
+                    <div class="text-primary-900">
+                        <nftmx-wallet-address
+                            :disable="store.state.app.windowWidth > themeConfig.sm"
+                            :address="walletAddress"
+                        />
+                    </div>
+                    <font-awesome-icon
+                        :icon="['fas', 'edit']"
+                        class="text-sm text-white ml-5 mt-0.5"
                     />
                 </div>
-                <div
-                    class="font-ibm text-xxs md:text-sm mt-0.75 pb-px text-white"
-                >Joined January 2022</div>
-                <div class="mt-4.75 md:mt-4">
+                <div class="font-ibm text-xxs md:text-sm mt-0.75 pb-px text-white">
+                    Joined January 2022
+                    <font-awesome-icon :icon="['fas', 'edit']" class="text-sm ml-4" />
+                </div>
+                <div class="mt-4.75 md:mt-4 flex">
                     <nftmx-group-icon />
+                    <font-awesome-icon :icon="['fas', 'edit']" class="text-white text-sm mt-2 ml-6" />
                 </div>
             </div>
         </div>

@@ -59,6 +59,7 @@ module.exports = {
         '5.25': '21px',
         '5.5': '22px',
         '5.75': '23px',
+        '7.5': '30px',
         '10.25': '41px',
         '12.5': '50px',
         '13': '52px',
@@ -86,7 +87,7 @@ module.exports = {
         '104': '416px',
         'modal-big': '1444px',
         'summary-xs': '251px',
-        'summary-sm': '299px'
+        'summary-sm': '299px',
       },
       lineHeight: {
         '5.25': '21px',
@@ -99,7 +100,8 @@ module.exports = {
         wide: '.2em'
       },
       maxWidth: {
-        md: '252px'
+        md: '252px',
+        '8xl': '1920px'
       },
     },
   },
