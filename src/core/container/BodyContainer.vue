@@ -15,7 +15,7 @@ defineProps({
 
 <template>
     <nav-bar-search v-if="searchAble"></nav-bar-search>
-    <div :class="[padding?'px-2 sm:px-8 md:px-16 lg:px-22 py-4':'' , 'bg-tertiary-900 font-ibm']">
+    <div :class="[padding?'px-5.5 sm:px-10 md:px-16 lg:px-22 py-4':'' , 'bg-tertiary-900 font-ibm']">
         <div class="max-w-8xl mx-auto">
             <slot />
         </div>

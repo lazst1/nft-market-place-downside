@@ -39,7 +39,7 @@ export const walletList = [
 
 export const moralisChain = 'bsc testnet';
 
-export const baseURL = "http://localhost:1837/api/v1/";
+export const baseURL = "http://localhost:1837/";
 export const contractAddress = '0x89f09DC648099fE5f12e49a91C0Ff6bA4606AdF3';
 
 export const saleType = {
@@ -60,3 +60,10 @@ export const currencies = [
         icon: "/images/i-eth.png"
     }
 ]
+
+export const themeConfig = {
+    xl: 1280,
+    lg: 1024,
+    md: 768,
+    sm: 640
+}
