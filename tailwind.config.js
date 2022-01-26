@@ -88,6 +88,7 @@ module.exports = {
         'modal-big': '1444px',
         'summary-xs': '251px',
         'summary-sm': '299px',
+        'asset-img': '520px'
       },
       lineHeight: {
         '5.25': '21px',

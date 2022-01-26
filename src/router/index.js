@@ -7,7 +7,7 @@ import Detail from '@/views/Detail.vue'
 import Login from '@/views/Login.vue'
 import Create from '@/views/Create.vue'
 import Profile from '@/views/profile/Profile.vue'
-import Asset from '@/views/Asset.vue'
+import Asset from '@/views/asset/Asset.vue'
 
 const routes = [
     {
