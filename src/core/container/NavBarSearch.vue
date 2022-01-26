@@ -6,33 +6,15 @@ import Icon from '@/core/components/Icon.vue'
 import { mdiFilter, mdiCloseBox } from '@mdi/js'
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import TopBar from '@/core/components/TopBar.vue';
+import NftmxSearchInput from '../components/NftmxSearchInput.vue';
 </script>
 
 <template>
   <top-bar class="font-ibm-medium" :search="true">
-    <div class="pl-16 flex-grow items-stretch flex h-94px bg-tertiary-800">
+    <div class="px-16 flex-grow items-stretch flex h-94px bg-tertiary-800">
         <nav-bar-item class="w-full">
-            <nav-bar-search-input class="w-full font-press" placeholder="Search items, collections, and accounts"></nav-bar-search-input>
+          <nftmx-search-input navbar placeholder="Search items, collections, and accounts"></nftmx-search-input>
         </nav-bar-item>
-    </div>
-    <div
-      class="absolute w-screen top-14 left-0 shadow hidden bg-tertiary-800 pr-16
-        lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none dark:bg-gray-900"
-    >
-      <div
-        class="max-h-screen-menu overflow-y-auto lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
-      >
-        <nav-bar-item class="cursor-auto">
-        <font-awesome-icon :icon="['fas', 'filter']" :class="[filterActive?'text-primary-900':'text-white', 'text-lg hover:text-primary-900 cursor-pointer']" />
-        </nav-bar-item>
-        <!-- <nav-bar-item class="cursor-auto">
-          <nftmx-button
-            color="primary"
-            label="SEARCH"
-            class="font-press w-72"
-          />
-        </nav-bar-item> -->
-      </div>
     </div>
   </top-bar>
 </template>

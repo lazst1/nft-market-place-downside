@@ -13,6 +13,10 @@ const sidebar = ref(false);
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 
+function onClickOutside(params) {
+  sidebar.value = false
+}
+
 </script>
 
 <template>
@@ -58,7 +62,7 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
       </div>
     </div>
   </top-bar>
-  <sidebar v-if="sidebar" />
+  <sidebar v-if="sidebar" v-click-outside="onClickOutside" />
 </template>
 
 <style scoped>
