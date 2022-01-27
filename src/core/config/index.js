@@ -39,8 +39,6 @@ export const walletList = [
 
 export const moralisChain = 'bsc testnet';
 
-console.log(process.env.VUE_APP_SERVER_URL)
-export const baseURL = process.env.VUE_APP_SERVER_URL || "http://localhost:5000/";
 export const contractAddress = '0x89f09DC648099fE5f12e49a91C0Ff6bA4606AdF3';
 
 export const saleType = {
