@@ -6,7 +6,7 @@ import { useStore } from 'vuex'
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import NftmxItemCard from '@/core/components/NftmxItemCard.vue';
 import CardsContainer from '@/core/container/CardsContainer.vue';
-import NavBarSearch from '@/core/container/NavbarSearch.vue';
+import NavBarSearch from '../../core/container/NavBarSearch.vue';
 import NftmxSearchInput from '@/core/components/NftmxSearchInput.vue';
 import { themeConfig } from '@/core/config';
 import ProfileSummary from './ProfileSummary.vue';

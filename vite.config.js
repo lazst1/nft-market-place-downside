@@ -13,5 +13,8 @@ export default defineConfig({
       zlib: "browserify-zlib",
       util: 'util'
     }
+  },
+  define: {
+    'process.env': {}
   }
 })

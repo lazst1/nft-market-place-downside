@@ -24,6 +24,9 @@ import { currencies } from '@/core/config';
 import { useStore } from 'vuex';
 import AssetDetail from './AssetDetail.vue';
 import AssetStatistics from './AssetStatistics.vue';
+import AssetUser from './AssetUser.vue';
+import { themeConfig } from '@/core/config';
+import NavBarSearch from '../../core/container/NavBarSearch.vue';
 
 export default {
     components: {
@@ -46,7 +49,9 @@ export default {
     NftmxSelectNetwork,
     NftmxDivider,
     AssetDetail,
-    AssetStatistics
+    AssetStatistics,
+    AssetUser,
+    NavBarSearch
 },
     data() {
         return {
@@ -57,7 +62,8 @@ export default {
                 },
             ],
             currencies: currencies,
-            saleType: saleType
+            saleType: saleType,
+            themeConfig: themeConfig
         }
     },
     setup() {
@@ -88,13 +94,18 @@ export default {
 </script>
 
 <template>
+    <nav-bar-search />
     <body-container>
-        <div class="grid grid-cols-7 text-white gap-8 mt-9">
-            <div class="col-span-7 lg:col-span-3">
+        <div class="grid grid-cols-7 text-white gap-8 mt-4 lg:mt-9">
+            <div class="col-span-7 md:col-span-3">
+                <asset-user v-if="store.state.app.windowWidth < themeConfig.md" />
                 <asset-detail :img_url="asset.image_url" />
             </div>
-            <div class="col-span-7 lg:col-span-4 relative">
-                <asset-statistics />
+            <div class="col-span-7 md:col-span-4 relative">
+                <asset-user v-if="store.state.app.windowWidth >= themeConfig.md" />
+                <div class="mt-px">
+                    <asset-statistics />
+                </div>
             </div>
         </div>
         <div class="mt-5">

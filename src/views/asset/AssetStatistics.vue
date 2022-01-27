@@ -13,6 +13,9 @@ import NftmxTbody from '@/core/components/NftmxTbody.vue';
 import NftmxTd from '@/core/components/NftmxTd.vue';
 import NftmxTr from '@/core/components/NftmxTr.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
+import { useStore } from 'vuex'
+import { themeConfig } from '@/core/config';
+import StatisticAccordion from './StaticticAccordion.vue'
 
 defineProps({})
 
@@ -21,28 +24,13 @@ const items = [
         name: 'All time'
     },
 ]
+const store = useStore();
 
 </script>
 
 
 <template>
-    <div class="pt-6 font-ibm-bold text-primary-900 text-lg">Kyle White</div>
-    <div class="flex pb-6 text-5/2xl">
-        <div class="flex-1 font-ibm-bold mt-1.5 pb-2">Play Quiet #10/10</div>
-        <div class="text-base text-tertiary-400 flex items-end font-ibm-semi-bold py-2">
-            <span class="pr-2 leading-4">124</span>
-            <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-2xl text-primary-900" />
-        </div>
-    </div>
-    <div class="flex text-xs pb-12">
-        <div class="flex-1">
-            Created by
-            <span class="text-primary-900">234...293</span> | Owned by
-            <span class="text-primary-900">234...293</span>
-        </div>
-    </div>
-
-    <div class="bg-tertiary-800 border border-black p-6">
+    <div class="bg-tertiary-800 border border-black px-6 pt-5.5 pb-6.25">
         <nftmx-button
             color="primary"
             label="SELL"
@@ -51,21 +39,20 @@ const items = [
         />
     </div>
     <div class="mt-5">
-        <accordion>
+        <statistic-accordion>
             <template v-slot:caption>
-                <div class="flex items-center">
-                    <div class="text-lg font-ibm-bold py-4 mr-24">History</div>
-                    <nftmx-select
-                        class="font-ibm font-thin w-full max-w-lg text-sm"
-                        :data="items"
-                        small
-                    ></nftmx-select>
-                </div>
+                History
             </template>
-            <div class="p-6">
+            <div class="p-4 lg:p-6">
+                <nftmx-select
+                    v-if="store.state.app.windowWidth < themeConfig.lg"
+                    class="font-ibm font-thin w-full max-w-lg mr-16 text-sm"
+                    :data="items"
+                    small
+                ></nftmx-select>
                 <nftmx-line-chart></nftmx-line-chart>
             </div>
-        </accordion>
+        </statistic-accordion>
     </div>
     <div class="mt-5">
         <accordion>

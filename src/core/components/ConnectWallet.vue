@@ -18,7 +18,6 @@
 
 <script>
 import NftmxButtonSlot from './NftmxButtonSlot.vue';
-import Moralis from 'moralis'
 
 export default {
     props: {

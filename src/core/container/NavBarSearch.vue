@@ -11,7 +11,7 @@ import NftmxSearchInput from '../components/NftmxSearchInput.vue';
 
 <template>
   <top-bar class="font-ibm-medium" :search="true">
-    <div class="px-2 sm:px-8 md:px-16 flex-grow items-stretch flex h-17 md:h-23.5 bg-tertiary-800">
+    <div class="px-2 sm:px-8 md:px-16 flex-grow items-stretch flex h-17.25 md:h-23.5 bg-tertiary-800">
         <nav-bar-item class="w-full">
           <nftmx-search-input navbar placeholder="Search items, collections, and accounts"></nftmx-search-input>
         </nav-bar-item>

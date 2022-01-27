@@ -20,8 +20,8 @@ defineProps({
 
 <template>
     <div
-        class="relative h-asset-img overflow-hidden p-6"
-        :style="{ background: 'url(' + image_url + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center', backgroundColor: '#222222' }"
+        class="relative overflow-hidden p-6 w-full"
+        :style="{ background: 'url(' + image_url + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center', backgroundColor: '#222222', paddingTop: '100%' }"
     >
         <ribbon :percent="percent" :period="period" />
     </div>
