@@ -9,7 +9,7 @@ const user = computed(() => store.getters['auth/getUser']);
 </script>
 
 <template>
-    <div v-if="store.state.app.windowWidth > themeConfig.sm" class="overflow-auto">
+    <div v-if="store.state.app.windowWidth > themeConfig.sm" class="overflow-auto mt-3">
         <div class="flex gap-2.5 py-4 w-max">
             <div class="mx-4 cursor-pointer hover:text-primary-700">
                 Collected

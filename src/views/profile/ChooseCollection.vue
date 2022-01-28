@@ -10,7 +10,7 @@ const store = useStore();
 <template>
     <div
         v-if="store.state.app.windowWidth > themeConfig.sm"
-        class="flex text-white font-ibm-semi-bold text-sm py-3 md:mt-4.75"
+        class="flex text-white font-ibm-semi-bold text-sm pb-4.5 md:mt-4"
     >
         <div class="mx-4 cursor-pointer hover:text-primary-700">My Collection</div>
         <div class="ml-10 cursor-pointer hover:text-primary-700">Ledger</div>

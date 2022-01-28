@@ -64,6 +64,7 @@ module.exports = {
         '7.5': '30px',
         '10.25': '41px',
         '12.5': '50px',
+        '12.75': '51px',
         '13': '52px',
         '13.5': '54px',
         '14.75': '59px',
@@ -90,7 +91,7 @@ module.exports = {
         '104': '416px',
         'modal-big': '1444px',
         'summary-xs': '251px',
-        'summary-sm': '299px',
+        'summary-sm': '300px',
         'asset-img': '520px'
       },
       lineHeight: {

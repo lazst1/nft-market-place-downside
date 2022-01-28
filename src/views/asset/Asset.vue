@@ -333,10 +333,6 @@ export default {
 </template>
 
 <style scoped>
-.text-5\/2xl {
-    font-size: 1.75rem /* 20px */;
-    line-height: 2.15rem /* 28px */;
-}
 .text-smallest {
     font-size: 8px;
 }

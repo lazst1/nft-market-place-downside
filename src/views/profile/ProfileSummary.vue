@@ -17,17 +17,17 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
             <div>
                 <img
                     src="/images/profile-big.png"
-                    class="w-30 h-30 mt-14.75 sm:mt-10.25 sm:w-50 sm:h-50 object-contain object-top"
+                    class="w-30 h-30 mt-14.75 sm:mt-12.75 sm:w-50 sm:h-50 object-contain object-top"
                 />
             </div>
-            <div class="ml-5.75 md:ml-13 pt-13 sm:pt-14 mt-px">
+            <div class="ml-5.75 md:ml-13 mt-17.5">
                 <div
-                    class="mb-1.75 font-press text-md sm:text-lg md:text-3xl leading-loose text-white w-max"
+                    class="font-press text-md sm:text-lg md:text-3xl leading-loose text-white w-max"
                 >
                     Kyle White
-                    <font-awesome-icon :icon="['fas', 'edit']" class="text-sm mb-1 ml-1" />
+                    <font-awesome-icon :icon="['fas', 'edit']" class="text-sm lg:text-lg mb-4 -ml-4 cursor-pointer hover:text-primary-900" />
                 </div>
-                <div class="flex font-ibm text-sm pb-1.5 md:pb-5">
+                <div class="flex font-ibm text-sm pb-1.5 md:pb-5 mt-5">
                     <div class="text-primary-900">
                         <nftmx-wallet-address
                             :disable="store.state.app.windowWidth > themeConfig.sm"
@@ -36,16 +36,19 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
                     </div>
                     <font-awesome-icon
                         :icon="['fas', 'edit']"
-                        class="text-sm text-white ml-5 mt-0.5"
+                        class="text-sm lg:text-lg text-white ml-5 mt-0.5 cursor-pointer hover:text-primary-900"
                     />
                 </div>
-                <div class="font-ibm text-xxs md:text-sm mt-0.75 pb-px text-white">
+                <div class="font-ibm text-xxs md:text-sm mt-0.5 pb-px text-white">
                     Joined January 2022
-                    <font-awesome-icon :icon="['fas', 'edit']" class="text-sm ml-4" />
+                    <font-awesome-icon :icon="['fas', 'edit']" class="text-sm lg:text-lg ml-4 cursor-pointer hover:text-primary-900" />
                 </div>
                 <div class="mt-4.75 md:mt-4 flex">
                     <nftmx-group-icon />
-                    <font-awesome-icon :icon="['fas', 'edit']" class="text-white text-sm mt-2 ml-6" />
+                    <font-awesome-icon
+                        :icon="['fas', 'edit']"
+                        class="text-white text-sm lg:text-lg mt-2 ml-6 cursor-pointer hover:text-primary-900"
+                    />
                 </div>
             </div>
         </div>

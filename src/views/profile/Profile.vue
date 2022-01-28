@@ -29,7 +29,7 @@ const user = computed(() => store.getters['auth/getUser']);
             <nftmx-divider class="mt-4.75 mb-5"></nftmx-divider>
             <nftmx-search-input class="bg-tertiary-800 mt-3.25 2xl:my-0.75 sm:ml-4" />
         </div>
-        <cards-container class="mt-12 2xl:mt-10 mb-22 place-items-center">
+        <cards-container class="mt-12 2xl:mt-11 mb-22 place-items-center">
             <nftmx-item-card
                 v-for="(nft, index) in user.nftData ? user.nftData.result : []"
                 :key="index"
