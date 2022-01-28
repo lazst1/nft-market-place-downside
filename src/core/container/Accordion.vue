@@ -27,7 +27,6 @@ const props = defineProps({
 const emit = defineEmits(['handle-click'])
 
 const handleClick = () => {
-    console.log(props.modelValue, props.accordion ? !props.modelValue : true)
     emit('handle-click', props.accordion ? !props.modelValue : true)
 }
 

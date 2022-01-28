@@ -17,7 +17,12 @@ import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
 import StatisticAccordion from './StaticticAccordion.vue'
 
-defineProps({})
+const props = defineProps({
+    modalValue: {
+        type: Boolean,
+        default: false
+    }
+})
 
 const items = [
     {
@@ -26,6 +31,11 @@ const items = [
 ]
 const store = useStore();
 
+const emit = defineEmits(['handle-modal'])
+
+const handleModal = () => {
+    emit('handle-modal', !props.modelValue)
+}
 </script>
 
 
@@ -35,7 +45,7 @@ const store = useStore();
             color="primary"
             label="SELL"
             class="font-press w-full text-lg py-4"
-            @click="sellyModalActive = true"
+            @click="handleModal"
         />
     </div>
     <div class="mt-5">

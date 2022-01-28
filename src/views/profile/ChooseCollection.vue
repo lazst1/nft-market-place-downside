@@ -8,7 +8,6 @@ const store = useStore();
 
 const open = ref(false);
 const handleClick = (value) => {
-    console.log(value)
     open.value = value
 }
 </script>
