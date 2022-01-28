@@ -6,7 +6,8 @@ import TopBar from '@/core/components/TopBar.vue';
 import Icon from '@/core/components/Icon.vue'
 import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
-import Sidebar from '@/core/components/Sidebar.vue';
+// import Sidebar from '@/core/components/Sidebar.vue';
+import Sidebar from '@/views/sidebar/Sidebar.vue'
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 
 const sidebar = ref(false);
