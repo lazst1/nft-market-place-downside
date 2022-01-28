@@ -22,10 +22,10 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
             </div>
             <div class="ml-5.75 md:ml-13 mt-17.5">
                 <div
-                    class="font-press text-md sm:text-lg md:text-3xl leading-loose text-white w-max"
+                    class="flex font-press text-md sm:text-lg md:text-3xl leading-loose text-white w-max"
                 >
                     Kyle White
-                    <font-awesome-icon :icon="['fas', 'edit']" class="text-sm lg:text-lg mb-4 -ml-4 cursor-pointer hover:text-primary-900" />
+                    <font-awesome-icon :icon="['fas', 'edit']" class="text-sm lg:text-lg mb-4 ml-4 cursor-pointer hover:text-primary-900" />
                 </div>
                 <div class="flex font-ibm text-sm pb-1.5 md:pb-5 mt-5">
                     <div class="text-primary-900">

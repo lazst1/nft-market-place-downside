@@ -1,10 +1,16 @@
 <script setup>
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
 import Accordion from '@/core/container/Accordion.vue';
 
 const store = useStore();
 
+const open = ref(false);
+const handleClick = (value) => {
+    console.log(value)
+    open.value = value
+}
 </script>
 
 <template>
@@ -20,6 +26,8 @@ const store = useStore();
         :border="false"
         :sidebar="true"
         class="-mt-px"
+        v-model="open"
+        @handle-click="handleClick"
     >
         <template v-slot:caption>
             <div class="text-primary-900 font-ibm-light text-description pt-3 mb-1.5">My Collection</div>

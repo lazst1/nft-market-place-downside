@@ -1,11 +1,16 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
 import Accordion from '@/core/container/Accordion.vue';
 
 const store = useStore();
 const user = computed(() => store.getters['auth/getUser']);
+const open = ref(false);
+const handleClick = (value) => {
+    console.log(value)
+    open.value = value
+}
 </script>
 
 <template>
@@ -46,6 +51,8 @@ const user = computed(() => store.getters['auth/getUser']);
         :border="false"
         :sidebar="true"
         class="-mt-px"
+        v-model="open"
+        @handle-click="handleClick"
     >
         <template v-slot:caption>
             <div class="text-primary-900 font-ibm-light text-description pt-3 mb-1.5">
