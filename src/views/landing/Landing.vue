@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press text-4xl leading-relaxed text-white py-32 2xl:py-32 px-24"
+        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press text-xl lg:text-4xl leading-relaxed text-white py-32 2xl:py-32 px-5.5 sm:px-10 md:px-16 lg:px-24"
     >
         <div class="mt-1.25 mb-5">
             Buy NFTs with 100%
@@ -16,24 +16,24 @@
             <nftmx-button
                 color="primary"
                 label="CREATE"
-                class="font-press w-full max-w-md text-sm h-15 ml-11"
+                class="font-press w-full max-w-md text-sm h-15 sm:ml-11"
             />
         </div>
     </div>
     <body-container :padding="false">
         <div class="bg-black text-white pt-24 pb-2.5">
             <div class="font-press text-3xl text-center pt-0.75">Downside Protection</div>
-            <div class="grid grid-cols-2 px-22 gap-10 text-center pt-12 pb-14">
-                <div class="py-0.5">
+            <div class="grid grid-cols-2 px-4 lg:px-22 gap-10 text-center pt-12 pb-14">
+                <div class="py-0.5 col-span-2 sm:col-span-1">
                     <div class="text-2xl font-ibm-bold">For Buyer</div>
                     <div
                         class="text-tertiary-500 py-7 mt-px"
                     >If you are a buyer, think of NFT.mx as a new strategic staking program with upside from selling the NFT, while also providing the option to cancel your investment and get a 100% refund with your original tokens.</div>
                 </div>
-                <div class>
+                <div class="col-span-2 sm:col-span-1">
                     <div class="text-2xl font-ibm-bold">For Seller</div>
                     <div
-                        class="text-tertiary-500"
+                        class="text-tertiary-500 py-7"
                     >If you are a seller, NFT.mx allows you to increase your success rate by offering buyers downside protection all while gaining profits from the APY in leveraging other people's money.</div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
             <div
                 class="font-press text-3xl text-center pt-1 pb-10 text-white"
             >Create and Sell Your NFTs</div>
-            <div class="grid grid-cols-1 lg:grid-cols-4 px-22 gap-10 text-center">
+            <div class="grid grid-cols-1 lg:grid-cols-4 px-4 lg:px-22 gap-10 text-center">
                 <div class="flex flex-col items-center px-1">
                     <img src="/images/free-whitelabel.png" class="py-5" />
                     <div class="text-white font-ibm-medium text-lg py-3">Set up your wallet</div>

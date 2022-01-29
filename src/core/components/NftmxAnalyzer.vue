@@ -5,7 +5,7 @@ import NftmxPrice from './NftmxPrice.vue';
 
 
 <template>
-    <div class="flex flex-wrap justify-between px-22">
+    <div class="flex flex-wrap justify-center lg:justify-between px-22">
         <div class="pt-12 pb-4 text-white text-center font-press text-sm flex">
             <div class="w-min">
                 <div class="h-10">

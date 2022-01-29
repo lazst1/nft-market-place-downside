@@ -16,7 +16,7 @@ import NavBarSearch from '@/core/container/NavBarSearch.vue';
 import Ledger from './Ledger.vue';
 import AssetSell from './AssetSell.vue';
 
-const asset = ref({ image_url: '/public/images/img10.png' })
+const asset = ref({ image_url: '/images/img10.png' })
 const store = useStore();
 
 const sale = ref(saleType.FIX_SALE);

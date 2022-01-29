@@ -21,7 +21,7 @@ defineProps({
             <div class="text-white font-press text-3xl pt-10 pb-16">
                 For developers and marketers
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 px-28 gap-32">
+            <div class="grid grid-cols-1 lg:grid-cols-3 px-5.5 sm:px-10 md:px-16 lg:px-22 gap-32">
                 <div class="flex flex-col items-center px-1">
                     <img src="/images/free-whitelabel.png" class="py-5" />
                     <div class="text-white font-ibm-medium text-lg py-3">Free Whitelabel</div>
