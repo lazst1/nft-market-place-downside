@@ -3,12 +3,16 @@ import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import { mdiFilter, mdiCloseBox } from '@mdi/js'
 import CheckboxCell from '@/core/components/CheckboxCell.vue';
-import DropDown from '../core/components/DropDown.vue';
+import DropDown from '@/core/components/DropDown.vue';
 import NavBarItem from '@/core/components/NavBarItem.vue'
 import DropDownItem from '@/core/components/DropDownItem.vue';
 import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+
 </script>
 
 <template>
@@ -64,15 +68,3 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
     </body-container>
     <nftmx-footer />
 </template>
-
-<style>
-.p3 {
-    margin: -12px;
-}
-
-@media (min-width: 1920px) {
-    .c-grid-cols-6 {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-    }
-}
-</style>

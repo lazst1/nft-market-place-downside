@@ -21,6 +21,7 @@ export const auth = {
     namespaced: true,
     state: {
         user: initialUser,
+        isLoggedIn: false
     },
     actions: {
         login({ commit, rootState }, walletAddress) {
@@ -58,7 +59,7 @@ export const auth = {
     mutations: {
         async loginSuccess(state, user) {
             state.user = user;
-            MoralisService.getNFTs(user.address, 20, 0).then(nftData => {
+            MoralisService.getMyNFTs(user.address, 20, 0).then(nftData => {
                 if(nftData.result.length > 0) {
                     nftData.result.map((nft, index) => {
                         MoralisService.getTokenIdMetadata(nft.token_address, nft.token_id).then(data => {
@@ -69,15 +70,15 @@ export const auth = {
                 state.user.nftData = nftData;
                 console.log('--------state-------', JSON.parse(JSON.stringify(state)));
             })
-            // const nfts = await Moralis.Web3API.account.getNFTs({chain: 'eth', address: '0xc68b91d2e26eb8bc457fc125e86cac1d8e8a9d5f', limit: 20, offset: 570});
+            // const nfts = await Moralis.Web3API.account.getMyNFTs({chain: 'eth', address: '0xc68b91d2e26eb8bc457fc125e86cac1d8e8a9d5f', limit: 20, offset: 570});
             // console.log('--------nfts-------', nfts);
             // const data = await Moralis.Web3API.token.getTokenIdMetadata({chain: 'eth', address: '0x2953399124f0cbb46d2cbacd8a89cf0599974963', token_id: '47535130025658187595672106157508864801694351437970999618307420083085742440449'});
             // console.log('--------data-------', data);
-            localStorage.setItem('user', JSON.stringify(state.user));
+            localStorage.setItem('isLoggedIn', true);
         },
         loginFailure(state) {
             state.user = null;
-            localStorage.removeItem('user');
+            localStorage.removeItem('isLoggedIn');
         },
     }
 }
