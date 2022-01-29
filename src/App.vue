@@ -7,9 +7,9 @@ import { useStore } from 'vuex';
 
 const store = useStore();
 
-window.ethereum.on('accountsChanged', function (accounts) {
-  store.dispatch("auth/login", accounts[0]);
-})
+// window.ethereum.on('accountsChanged', function (accounts) {
+//   store.dispatch("auth/login", accounts[0]);
+// })
 
 if (typeof window.ethereum !== 'undefined') {
   ethereum

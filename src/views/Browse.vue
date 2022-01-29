@@ -29,6 +29,7 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
                     label="Buy Now"
                     :small="true"
                     :iconAfter="mdiCloseBox"
+                    class="hover:bg-tertiary-600 hover:text-primary-900"
                 />
                 <nav-bar-item>
                     <span class="text-primary-900 text-sm">Clear All</span>

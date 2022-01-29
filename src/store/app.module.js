@@ -3,7 +3,8 @@ import { themeConfig } from "@/core/config";
 export const app = {
     namespaced: true,
     state: {
-        windowWidth: 0
+        windowWidth: 0,
+        sidebarOpened: false
     },
     getters: {
         currentBreackPoint: state => {
@@ -18,6 +19,9 @@ export const app = {
     mutations: {
         UPDATE_WINDOW_WIDTH(state, val) {
             state.windowWidth = val
+        },
+        TOGGLE_SIDEBAR(state, val) {
+            state.sidebarOpened = val
         }
     }
 }

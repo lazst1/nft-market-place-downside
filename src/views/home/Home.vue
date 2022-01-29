@@ -54,7 +54,7 @@ function clickFilterBy(value) {
 
 <template>
     <div
-        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press text-4xl leading-relaxed text-white py-32 2xl:py-44 px-24"
+        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press text-xl sm:text-4xl sm:leading-relaxed text-white py-32 2xl:py-44 px-5.5 sm:px-10 md:px-16 lg:px-22"
     >
         <div class="mt-1.75 mb-5.25">
             Buy NFTs with 100%

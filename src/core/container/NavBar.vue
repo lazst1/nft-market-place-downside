@@ -15,7 +15,10 @@ const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 
 function onClickOutside(params) {
-  sidebar.value = false
+  store.commit('app/TOGGLE_SIDEBAR', false)
+}
+function toggleSidebar(params) {
+  store.commit('app/TOGGLE_SIDEBAR', !store.state.app.sidebarOpened)
 }
 
 </script>
@@ -55,7 +58,7 @@ function onClickOutside(params) {
             </nftmx-tooltip>
           </div>
         </nav-bar-item>
-        <nav-bar-item @click="sidebar = !sidebar" class="hover:text-primary-900">
+        <nav-bar-item @click="toggleSidebar" class="hover:text-primary-900">
           <nftmx-wallet-address
             class="text-sm font-ibm-bold pt-1"
             :address="walletAddress"
@@ -65,7 +68,7 @@ function onClickOutside(params) {
       </div>
     </div>
   </top-bar>
-  <sidebar v-if="sidebar" v-click-outside="onClickOutside" />
+  <sidebar v-if="store.state.app.sidebarOpened" v-click-outside="onClickOutside" />
 </template>
 
 <style scoped>
