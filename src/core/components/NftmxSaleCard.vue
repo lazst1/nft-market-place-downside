@@ -8,7 +8,10 @@ import { computed } from 'vue';
 import Timer from './Timer.vue'
 
 const props = defineProps({
-    data: Object,
+    data: {
+        type: Object,
+        default: {}
+    },
 })
 
 const nftItem = {
