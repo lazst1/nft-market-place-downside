@@ -7,6 +7,8 @@ import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import MoreInfo from './MoreInfo.vue';
 import ItemAction from './ItemAction.vue';
+import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
 
 const people = [
     {
@@ -33,7 +35,10 @@ const props = defineProps({
         default: 365
     },
 })
-
+const store = useStore();
+const route = useRoute();
+const tokenAddress = route.params.tokenAddress;
+const tokenId = route.params.tokenId;
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
 const fundError = ref(false);

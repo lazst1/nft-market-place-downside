@@ -14,6 +14,7 @@ import { mdiClose } from '@mdi/js'
 import MoreInfo from './MoreInfo.vue';
 import BuyModal from './BuyModal.vue';
 import SyndicationModal from './SyndicationModal.vue';
+import NftmxSelectNetwork from '../../core/components/NftmxSelectNetwork.vue';
 
 const people = [
     {
@@ -62,7 +63,7 @@ const handleBuyModal = (value) => {
         </div>
 
         <div class="h-44 items-center pr-7 py-4">
-            <nftmx-select class="font-ibm-bold w-full text-sm mb-3" :data="people"></nftmx-select>
+            <nftmx-select-network class="font-ibm-bold w-full text-sm mb-3"></nftmx-select-network>
             <nftmx-button
                 color="primary"
                 label="BUY NOW"
