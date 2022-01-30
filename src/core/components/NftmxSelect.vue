@@ -8,7 +8,7 @@
             <span class="ml-3 block truncate">{{ selected.name }}</span>
         </span>
         <span class="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-            <svg v-if="!open" style="width:24px;height:24px" viewBox="0 0 24 24">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M7,10L12,15L17,10H7Z" />
             </svg>
         </span>
@@ -24,10 +24,6 @@
                   {{ content.name }}
                 </span>
               </div>
-
-              <span v-if="selected" :class="['absolute inset-y-0 right-0 flex items-center pr-4']">
-                <CheckIcon class="h-5 w-5" aria-hidden="true" />
-              </span>
             </li>
           </ListboxOption>
         </ListboxOptions>

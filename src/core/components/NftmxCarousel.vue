@@ -3,10 +3,10 @@
         <Slide v-for="(item, index) in items" :key="index">
             <div class="carousel__item" :style="{marginLeft: marginLeft+'em'}">
                 <div class="grid grid-cols-2 m-4 cursor-pointer hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700">
-                    <div :style="{background:'url('+item.img+')', backgroundRepeat:'no-repeat', backgroundSize:'cover'}" class="relative w-82.5 h-82.5 overflow-hidden">
+                    <div :style="{background:'url('+item.img+')', backgroundRepeat:'no-repeat', backgroundSize:'cover'}" class="relative w-82.5 h-82.5 overflow-hidden col-span-2 sm:col-span-1">
                         <ribbon :percent="100" :period="256" />
                     </div>
-                    <div class="relative w-82.5 overflow-hidden bg-black text-white">
+                    <div class="relative w-82.5 h-82.5 overflow-hidden bg-black text-white col-span-2 sm:col-span-1">
                         <div class="py-4 px-8 text-left font-ibm-bold">
                             <div class="text-xl py-2">Syndication</div>
                             <div class="text-xs font-ibm-semi-bold">

@@ -21,6 +21,13 @@
     background-clip: content-box;
 }
 
+/* Remove Arrows/Spiners */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @font-face {
     font-family: "fontawesome";
     src: url(./fonts/fontawesome-webfont.ttf);

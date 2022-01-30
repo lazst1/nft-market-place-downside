@@ -37,8 +37,15 @@ export const walletList = [
     },
 ];
 
-export const baseURL = "http://localhost:1837/api/v1/";
-export const openseaURL = "https://api.opensea.io/api/v1/";
+export const moralisChain = 'bsc testnet';
+
+export const contractAddress = '0x89f09DC648099fE5f12e49a91C0Ff6bA4606AdF3';
+export const marketAddress = '0x5D95950695055865E17e5EaA5B28532B93DAbC01';
+
+export const saleType = {
+    FIX_SALE: 'FIX-SALE',
+    AUCTION: 'AUCTION'
+}
 
 export const networks = [
     {
@@ -47,14 +54,16 @@ export const networks = [
     }
 ]
 
-export const saleType = {
-    FIX_SALE: 'FIX-SALE',
-    AUCTION: 'AUCTION'
-}
-
 export const currencies = [
     {
         name: "ETH",
         icon: "/images/i-eth.png"
     }
 ]
+
+export const themeConfig = {
+    xl: 1280,
+    lg: 1024,
+    md: 768,
+    sm: 640
+}

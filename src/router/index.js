@@ -1,13 +1,13 @@
-import { createRouter, createWebHistory,  } from 'vue-router'
-import Landing from '@/views/Landing.vue'
-import Home from '@/views/Home.vue'
-import Browse from '@/views/Browse.vue'
+import { createRouter, createWebHistory, } from 'vue-router'
+import Landing from '@/views/landing/Landing.vue'
+import Home from '@/views/home/Home.vue'
+import Browse from '@/views/browse/Browse.vue'
 import Activity from '@/views/Activity.vue'
-import Detail from '@/views/Detail.vue'
+import Detail from '@/views/detail/Detail.vue'
 import Login from '@/views/Login.vue'
 import Create from '@/views/Create.vue'
-import Profile from '@/views/Profile.vue'
-import SellDetail from '@/views/SellDetail.vue'
+import Profile from '@/views/profile/Profile.vue'
+import Asset from '@/views/asset/Asset.vue'
 
 const routes = [
     {
@@ -46,17 +46,17 @@ const routes = [
         meta: {
             title: 'Detail'
         },
-        path: '/detail',
+        path: '/detail/:tokenAddress/:tokenId',
         name: 'detail',
         component: Detail
     },
     {
         meta: {
-            title: 'SellDetail'
+            title: 'Asset'
         },
-        path: '/sell-detail',
-        name: 'sell-detail',
-        component: SellDetail
+        path: '/asset/:assetContractAddress/:tokenId',
+        name: 'asset',
+        component: Asset
     },
     {
         meta: {
@@ -87,23 +87,23 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    scrollBehavior (to, from, savedPosition) {
-      return savedPosition || { top: 0 }
+    scrollBehavior(to, from, savedPosition) {
+        return savedPosition || { top: 0 }
     }
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/register', '/home'];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('user');
+    const publicPages = ['/', '/login', '/register', '/home'];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = localStorage.getItem('isLoggedIn');
 
-  // trying to access a restricted page + not logged in
-  // redirect to login page
-  if (authRequired && !loggedIn) {
-    next('/login');
-  } else {
-    next();
-  }
+    // trying to access a restricted page + not logged in
+    // redirect to login page
+    if (authRequired && !loggedIn) {
+        next('/login');
+    } else {
+        next();
+    }
 });
 
 export default router

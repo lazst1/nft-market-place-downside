@@ -1,20 +1,42 @@
 import AuthService from "@/core/services/auth.service";
-import OpenseaService from "@/core/services/opensea.service";
+import Moralis from 'moralis'
+import MoralisService from "../core/services/moralis.service";
 import Web3 from "web3/dist/web3.min.js"
 import abiJSON from '@/core/config/abi';
+import { contractAddress } from "../core/config";
+
+const initialUser = {
+    address: '',
+    nftData: {
+        page: 0,
+        page_size: 0,
+        result: []
+    },
+    token: '',
+    userId: '',
+    userType: 'USER',
+    allNfts: {}
+}
 
 export const auth = {
     namespaced: true,
     state: {
-        user: {},
-        web3: new Web3(Web3.givenProvider),
-        abi: null,
+        user: initialUser,
+        isLoggedIn: false
     },
     actions: {
-        login({ commit }, walletAddress) {
+        login({ commit, rootState }, walletAddress) {
             if (walletAddress) {
-                commit('setAbi', walletAddress);
-    
+                rootState.contract = new rootState.web3.eth.Contract(
+                    abiJSON,
+                    rootState.web3.utils.toChecksumAddress(contractAddress),
+                    {
+                        from: walletAddress,
+                    }
+                );
+                MoralisService.getAllNFTs(20, 0).then(nftData => {
+                    rootState.allNfts = JSON.parse(JSON.stringify(nftData));
+                })
                 return AuthService.connectWallet(walletAddress).then(
                     user => {
                         commit('loginSuccess', user);
@@ -32,39 +54,23 @@ export const auth = {
     },
     getters: {
         getWalletAddress: state => {
-            return state.user && state.user.walletAddress ? state.user.walletAddress : ''
+            return state.user && state.user.address ? state.user.address : ''
         },
         getUser: state => {
-            console.log('===========', state)
-            return state.user ? state.user : {}
+            return state.user
         }
     },
     mutations: {
-        setAbi(state, walletAddress) {
-            state.abi = new state.web3.eth.Contract(
-                abiJSON,
-                state.web3.utils.toChecksumAddress(state.contractAddress),
-                {
-                    from: walletAddress,
-                }
-            );
-        },
-        loginSuccess(state, user) {
+        async loginSuccess(state, user) {
             state.user = user;
-            OpenseaService.retrieveAssetsByWallet(user.walletAddress).then(
-                assets => {
-                    state.user.assets = assets;
-                    console.log(assets);
-                    localStorage.setItem('user', JSON.stringify(state.user));
-                },
-                error => {
-                    console.log('error=======', error);
-                }
-            )
+            MoralisService.getMyNFTs(user.address, 20, 0).then(nftData => {
+                state.user.nftData = JSON.parse(JSON.stringify(nftData));
+            })
+            localStorage.setItem('isLoggedIn', true);
         },
         loginFailure(state) {
             state.user = null;
-            localStorage.removeItem('user');
+            localStorage.removeItem('isLoggedIn');
         },
     }
 }

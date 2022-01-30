@@ -30,7 +30,18 @@ export default {
         NftmxButtonSlot
     },
     methods: {
-        connect() {
+        async connect() {
+            // const user = await Moralis.authenticate();
+            // console.log('===============', user);
+            // console.log(user.get('ethAddress'))
+            // this.$store.dispatch("auth/login", user.get('ethAddress')).then(
+            //     () => {
+            //         this.$router.push("/profile");
+            //     },
+            //     (error) => {
+            //         console.log(error);
+            //     }
+            // )
             ethereum
                 .request({ method: 'eth_requestAccounts' })
                 .then(this.handleLogin)

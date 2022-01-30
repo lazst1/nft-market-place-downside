@@ -8,7 +8,7 @@ import { walletList } from '@/core/config';
 import { useRouter } from 'vue-router'
 
 const router = useRouter();
-const loggedIn = localStorage.getItem('user');
+const loggedIn = localStorage.getItem('isLoggedIn');
 if (loggedIn) {
     router.push('/profile')
 }
