@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press text-xl lg:text-4xl leading-relaxed text-white py-32 2xl:py-32 px-5.5 sm:px-10 md:px-16 lg:px-24"
+        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press text-2xl lg:text-4xl lg:leading-relaxed text-white py-32 2xl:py-32 px-5.5 sm:px-10 md:px-16 lg:px-24"
     >
         <div class="mt-1.25 mb-5">
             Buy NFTs with 100%
