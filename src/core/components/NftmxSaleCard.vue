@@ -25,7 +25,9 @@ const nftItem = {
     bought: props.data.bought || false,
     connect: props.data.connect || false,
     sold: props.data.sold || false,
-    closed: props.data.closed || false
+    closed: props.data.closed || false,
+    tokenAddress: props.data.token_address || 'tokenAddress',
+    tokenId: props.data.token_id || 'tokenId',
 }
 console.log(nftItem)
 
@@ -47,7 +49,7 @@ const boughtCSS = computed(() => {
 </script>
 
 <template>
-    <router-link :to="{name: 'detail', params: {tokenAddress: nftItem.token_address, tokenId: nftItem.token_id}}" class="w-full max-w-max mx-auto">
+    <router-link :to="{name: 'detail', params: {tokenAddress: nftItem.tokenAddress, tokenId: nftItem.tokenId}}" class="w-full max-w-max mx-auto">
         <div class="hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700">
             <div class="relative h-50 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover">
                 <ribbon :percent="nftItem.percent" :period="nftItem.period" />
