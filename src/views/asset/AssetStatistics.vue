@@ -18,10 +18,10 @@ import { themeConfig } from '@/core/config';
 import StatisticAccordion from './StaticticAccordion.vue'
 
 const props = defineProps({
-    modalValue: {
-        type: Boolean,
-        default: false
-    }
+    // modalValue: {
+    //     type: Boolean,
+    //     default: false
+    // }
 })
 
 const items = [

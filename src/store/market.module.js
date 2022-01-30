@@ -7,13 +7,9 @@ import { contractAddress } from "../core/config";
 
 export const market = {
     namespaced: true,
-    state: {},
+    state: {
+    },
     actions: {
-        async getAllNFTs({commit, state}, data) {
-            MoralisService.getAllNFTs(20, 0).then(data => {
-                console.log('data=====', data)
-            })
-        },
         async createOrder({ commit, rootState }, data) {
             // rootState.contract.methods.createOrder(_tokenAddress, _nftTokenId, 0.1, 5000, 36000, false, 360000).send();
             const web3 = new Web3(window.ethereum);

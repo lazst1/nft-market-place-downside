@@ -3,7 +3,7 @@ import Landing from '@/views/landing/Landing.vue'
 import Home from '@/views/home/Home.vue'
 import Browse from '@/views/browse/Browse.vue'
 import Activity from '@/views/Activity.vue'
-import Detail from '@/views/Detail.vue'
+import Detail from '@/views/detail/Detail.vue'
 import Login from '@/views/Login.vue'
 import Create from '@/views/Create.vue'
 import Profile from '@/views/profile/Profile.vue'
@@ -46,7 +46,7 @@ const routes = [
         meta: {
             title: 'Detail'
         },
-        path: '/detail',
+        path: '/detail/:tokenAddress/:tokenId',
         name: 'detail',
         component: Detail
     },

@@ -14,7 +14,7 @@ import AssetUser from './AssetUser.vue';
 import { themeConfig } from '@/core/config';
 import NavBarSearch from '@/core/container/NavBarSearch.vue';
 import Ledger from './Ledger.vue';
-import AssetSell from './AssetSell.vue';
+import AssetSellModal from './AssetSellModal.vue';
 
 const asset = ref({ image_url: '/images/img10.png' })
 const store = useStore();
@@ -69,7 +69,7 @@ const handleModal = (value) => {
         </div>
     </body-container>
     <nftmx-footer />
-    <asset-sell v-model="sellModalActive" @handle-modal="handleModal" />
+    <asset-sell-modal v-model="sellModalActive" @handle-modal="handleModal" />
 </template>
 
 <style scoped>

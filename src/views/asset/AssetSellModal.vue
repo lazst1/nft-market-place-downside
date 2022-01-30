@@ -9,10 +9,10 @@ import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import { useStore } from 'vuex';
 
 const props = defineProps({
-    modalValue: {
-        type: Boolean,
-        default: false
-    }
+    // modalValue: {
+    //     type: Boolean,
+    //     default: false
+    // }
 })
 
 const store = useStore();
@@ -32,7 +32,7 @@ function createOrder() {
 </script>
 
 <template>
-    <nftmx-modal v-model="props.modalValue" big>
+    <nftmx-modal big>
         <div class="text-center relative mt-1.75 pb-2.5">
             <div class="font-press text-2xl">List Item for Sale</div>
         </div>
@@ -170,7 +170,7 @@ function createOrder() {
                     <nftmx-button
                         color="primary"
                         label="COMPLETE LISTING"
-                        class="w-full font-press text-sm pt-4.5 pb-5 text-lg"
+                        class="w-full font-press text-sm pt-4.5 pb-5 lg:text-lg"
                         @click="createOrder()"
                     />
                 </div>

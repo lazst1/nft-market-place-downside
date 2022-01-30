@@ -32,7 +32,7 @@ defineProps({
         <div>
             Unique
         </div>
-        <div>
+        <div class="w-max">
             Transferred
             <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st" />
         </div>

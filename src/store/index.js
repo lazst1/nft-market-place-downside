@@ -8,6 +8,7 @@ export default createStore({
     state: {
         web3: new Web3(Web3.givenProvider),
         contract: null,
+        allNfts: {}
     },
     mutations: {},
     actions: {},
