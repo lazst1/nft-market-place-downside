@@ -1,5 +1,7 @@
 <script setup>
 import { computed } from 'vue'
+import { networkURL } from '../config';
+
 const props = defineProps({
     address: {
         type: String,
@@ -13,7 +15,7 @@ const walletAddress = computed(() => props.disable?props.address:props.address.s
 </script>
 
 <template>
-    <div>
+    <a :href="networkURL + address" target="_blank">
         {{walletAddress}}
-    </div>
+    </a>
 </template>

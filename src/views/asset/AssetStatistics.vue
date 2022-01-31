@@ -15,7 +15,8 @@ import NftmxTr from '@/core/components/NftmxTr.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
-import StatisticAccordion from './StaticticAccordion.vue'
+import StatisticAccordion from './StatisticAccordion.vue'
+import AssetHistory from './AssetHistory.vue';
 
 const props = defineProps({
     // modalValue: {
@@ -49,20 +50,7 @@ const handleModal = () => {
         />
     </div>
     <div class="mt-5">
-        <statistic-accordion>
-            <template v-slot:caption>
-                History
-            </template>
-            <div class="p-4 lg:p-6">
-                <nftmx-select
-                    v-if="store.state.app.windowWidth < themeConfig.lg"
-                    class="font-ibm font-thin w-full max-w-lg mr-16 text-sm"
-                    :data="items"
-                    small
-                ></nftmx-select>
-                <nftmx-line-chart></nftmx-line-chart>
-            </div>
-        </statistic-accordion>
+        <asset-history />
     </div>
     <div class="mt-5">
         <accordion>
@@ -101,7 +89,7 @@ const handleModal = () => {
                             <nftmx-button
                                 color="secondary"
                                 label="JOIN SYNDICATION"
-                                class="font-press w-37 text-smallest py-1.5"
+                                class="font-press text-smallest py-1.5 px-0.5"
                             />
                         </nftmx-td>
                     </nftmx-tr>

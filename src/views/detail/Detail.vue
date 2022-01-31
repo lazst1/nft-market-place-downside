@@ -9,6 +9,7 @@ import MoreInfo from './MoreInfo.vue';
 import ItemAction from './ItemAction.vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
+import DetailHistory from './DetailHistory.vue';
 
 const people = [
     {
@@ -51,26 +52,12 @@ const fundError = ref(false);
             <div class="col-span-7 lg:col-span-3">
                 <more-info />
             </div>
-            <div class="col-span-7 lg:col-span-4 relative h-asset-img">
+            <div class="col-span-7 mb-4 lg:col-span-4 relative">
                 <item-action />
             </div>
         </div>
         <div class="mb-10">
-            <accordion>
-                <template v-slot:caption>
-                    <div class="flex items-center">
-                        <div class="text-lg font-ibm-bold py-4 mr-24">History</div>
-                        <nftmx-select
-                            class="font-ibm font-thin w-full max-w-lg text-sm"
-                            :data="items"
-                            small
-                        ></nftmx-select>
-                    </div>
-                </template>
-                <div class="p-6">
-                    <nftmx-line-chart></nftmx-line-chart>
-                </div>
-            </accordion>
+            <detail-history />
         </div>
     </body-container>
     <nftmx-footer />

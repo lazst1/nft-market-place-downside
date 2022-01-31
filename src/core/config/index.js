@@ -38,6 +38,7 @@ export const walletList = [
 ];
 
 export const moralisChain = 'bsc testnet';
+export const networkURL = 'https://testnet.bscscan.com/address/'
 
 export const contractAddress = '0x89f09DC648099fE5f12e49a91C0Ff6bA4606AdF3';
 export const marketAddress = '0x5D95950695055865E17e5EaA5B28532B93DAbC01';

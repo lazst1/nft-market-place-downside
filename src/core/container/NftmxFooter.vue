@@ -49,16 +49,20 @@ defineProps({
             class="sm:flex bg-black px-8 py-2 text-xs font-ibm-bold"
         >
             <div class="flex-1 flex text-tertiary-600 justify-center sm:justify-start">
-                <div class="w-fit flex items-center">
+                <a href="https://www.atom.foundation/" class="w-fit flex items-center" target="_blank">
                     <div class="">Powered by:</div>
                     <img src="/images/atom-logo-footer.png" class="" />
-                </div>
+                </a>
             </div>
             <div class="flex justify-center sm:justify-start">
                 <div class="w-fit flex">
-                    <img src="/images/eth-logo-footer.png" class="" />
+                    <a href="https://ethereum.org/en/" target="_blank">
+                        <img src="/images/eth-logo-footer.png" class="" />
+                    </a>
                     <div class="border-r border-tertiary-800 my-2 mx-2"></div>
-                    <img src="/images/bsc-logo-footer.png" class="" />
+                    <a href="https://www.binance.com/en" target="_blank">
+                        <img src="/images/bsc-logo-footer.png" class="" />
+                    </a>
                 </div>
             </div>
         </div>

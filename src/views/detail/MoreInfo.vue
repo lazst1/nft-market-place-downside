@@ -29,22 +29,22 @@ const props = defineProps({
             <detail-button class="min-w-fit">Downside Protection</detail-button>
             <div class="grow"></div>
             <div
-                class="border border-black w-8 h-8 px-2 pt-0.75 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                class="border border-black w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
             >
                 <font-awesome-icon :icon="['fas', 'undo']" />
             </div>
             <div
-                class="border-y border-r border-black w-8 h-8 px-2 pt-0.75 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                class="border-y border-r border-black w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
             >
                 <font-awesome-icon :icon="['fas', 'external-link-alt']" />
             </div>
             <div
-                class="border-y border-black w-8 h-8 px-2 pt-0.75 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                class="border-y border-black w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
             >
                 <font-awesome-icon :icon="['fas', 'share-alt']" />
             </div>
             <div
-                class="border border-black w-8 h-8 px-2 pt-0.75 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                class="border border-black w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
             >
                 <font-awesome-icon :icon="['fas', 'bars']" />
             </div>

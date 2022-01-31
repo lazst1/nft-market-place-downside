@@ -46,7 +46,7 @@ const handleModal = (value) => {
             <accordion :accordion="false" :border="false" :sidebar="true">
                 <template v-slot:caption>
                     <div class="flex items-center">
-                        <div class="text-2xl font-ibm-bold py-4 mr-24">More From This Collections</div>
+                        <div class="text-lg lg:text-2xl font-ibm-bold py-4 mr-24">More From This Collections</div>
                     </div>
                 </template>
 
@@ -64,7 +64,7 @@ const handleModal = (value) => {
                 outline
                 color="primary"
                 label="VIEW COLLECTIONS"
-                class="font-ibm-bold text-lg pt-2.5 pb-3 text-primary-900"
+                class="font-ibm-bold px-0.5 sm:px-17 lg:text-lg pt-2.5 pb-3 text-primary-900"
             />
         </div>
     </body-container>
