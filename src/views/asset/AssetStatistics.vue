@@ -17,6 +17,7 @@ import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
 import StatisticAccordion from './StatisticAccordion.vue'
 import AssetHistory from './AssetHistory.vue';
+import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
 
 const props = defineProps({
     // modalValue: {
@@ -72,10 +73,10 @@ const handleModal = () => {
                 <nftmx-tbody>
                     <nftmx-tr v-for="index in 1" :key="index" :border="index === 1 ? false : true">
                         <nftmx-td>
-                            <nftmx-wallet-address
+                            <nftmx-wallet-address-pop
                                 class="text-primary-900"
                                 address="0xB29265736dcc20867F6b3c0f5aa8E5A64942b816"
-                            ></nftmx-wallet-address>
+                            ></nftmx-wallet-address-pop>
                         </nftmx-td>
                         <nftmx-td ps>$0.4781</nftmx-td>
                         <nftmx-td ps>100%</nftmx-td>
