@@ -12,7 +12,6 @@ export const market = {
     },
     actions: {
         async approve({ commit, rootState }, data) {
-            console.log(data)
             const tokenContract = new rootState.web3.eth.Contract(
                 erc721ABI,
                 rootState.web3.utils.toChecksumAddress(data.contractAddress),
@@ -23,7 +22,6 @@ export const market = {
             });
         },
         async createOrder({ commit, rootState }, data) {
-            console.log(data)
             rootState.marketContract.methods.createOrder(
                 data.assetContractAddress,
                 data.tokenId,
@@ -34,16 +32,10 @@ export const market = {
                 data.downsidePeriod
             ).send({ from: rootState.user.address, gas: 250000 });
         },
-        async buyOrder({ commit, rootState }, data) {
-            console.log(data)
-            rootState.marketContract.methods.createOrder(
-                data.assetContractAddress,
-                data.tokenId,
-                25000,
-                5000,
-                8640000,
-                false,
-                8640000
+        async buyFixedPayOrder({ commit, rootState }, orderID) {
+            console.log(orderID)
+            rootState.marketContract.methods.buyFixedPayOrder(
+                orderID
             ).send({ from: rootState.user.address, gas: 30000 });
         },
     },

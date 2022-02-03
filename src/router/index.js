@@ -46,7 +46,7 @@ const routes = [
         meta: {
             title: 'Detail'
         },
-        path: '/detail/:tokenAddress/:tokenId',
+        path: '/detail/:orderId',
         name: 'detail',
         component: Detail
     },

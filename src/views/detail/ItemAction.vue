@@ -25,6 +25,10 @@ const people = [
     },
 ]
 
+const props = defineProps({
+    orderID: String
+})
+
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
 const fundError = ref(false);
@@ -91,7 +95,7 @@ const handleBuyModal = (value) => {
             />
         </div>
     </div>
-    <buy-modal v-model="buyModalActive" />
+    <buy-modal v-model="buyModalActive" :orderID="orderID" />
     <syndication-modal v-model="syndicationModalActive" />
 </template>
 

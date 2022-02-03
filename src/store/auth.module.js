@@ -3,7 +3,8 @@ import Moralis from 'moralis'
 import MoralisService from "../core/services/moralis.service";
 import Web3 from "web3/dist/web3.min.js"
 import abiJSON from '@/core/config/abi';
-import { marketAddress } from "../core/config";
+import { marketAddress } from "@/core/config";
+import marketService from "@/core/services/market.service";
 
 const initialUser = {
     address: '',
@@ -34,8 +35,11 @@ export const auth = {
                         from: walletAddress,
                     }
                 );
-                MoralisService.getAllNFTs(20, 0).then(nftData => {
-                    rootState.allNfts = JSON.parse(JSON.stringify(nftData));
+                // MoralisService.getAllNFTs(20, 0).then(nftData => {
+                //     rootState.allNfts = JSON.parse(JSON.stringify(nftData));
+                // })
+                marketService.getOrders().then(orders => {
+                    rootState.orders = orders;
                 })
                 return AuthService.connectWallet(walletAddress).then(
                     user => {

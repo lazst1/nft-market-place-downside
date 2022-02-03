@@ -10,6 +10,7 @@ import ItemAction from './ItemAction.vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import DetailHistory from './DetailHistory.vue';
+import marketService from '@/core/services/market.service';
 
 const people = [
     {
@@ -38,8 +39,12 @@ const props = defineProps({
 })
 const store = useStore();
 const route = useRoute();
-const tokenAddress = route.params.tokenAddress;
-const tokenId = route.params.tokenId;
+const orderId = route.params.orderId;
+const order = ref({});
+marketService.getOrder(orderId).then(data => {
+    console.log(data);
+    order.value = data;
+});
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
 const fundError = ref(false);
@@ -53,7 +58,7 @@ const fundError = ref(false);
                 <more-info />
             </div>
             <div class="col-span-7 mb-4 lg:col-span-4 relative">
-                <item-action />
+                <item-action :orderID="order.orderID" />
             </div>
         </div>
         <div class="mb-10">
