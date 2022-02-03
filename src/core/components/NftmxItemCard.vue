@@ -127,16 +127,18 @@ function onClickOutside() {
             </div>
             <div class="flex items-center font-ibm-semi-bold mt-1">
                 <div class="text-sm flex flex-1 items-center">
-                    <div
-                        @click.prevent
-                        v-show="option"
-                        class="absolute -bottom-2.5 -ml-5 px-5.5 py-3.25 bg-black text-white hover:text-primary-900 leading-9.5 font-ibm-light text-xs"
-                    >
-                        <div class="text-white hover:text-primary-700">Copy link</div>
-                        <div class="text-white hover:text-primary-700">Transfer</div>
-                        <div class="text-white hover:text-primary-700">Make profile picture</div>
-                        <div class="text-white hover:text-primary-700">Hide</div>
-                        <div class="text-white hover:text-primary-700">Unbundle</div>
+                    <div class="relative">
+                        <div
+                            @click.prevent
+                            v-show="option"
+                            class="absolute w-52 bottom-5 -ml-5 px-5.5 py-3.25 bg-black text-white hover:text-primary-900 leading-9.5 font-ibm-light text-xs"
+                        >
+                            <div class="text-white hover:text-primary-700">Copy link</div>
+                            <div class="text-white hover:text-primary-700">Transfer</div>
+                            <div class="text-white hover:text-primary-700">Make profile picture</div>
+                            <div class="text-white hover:text-primary-700">Hide</div>
+                            <div class="text-white hover:text-primary-700">Unbundle</div>
+                        </div>
                     </div>
                     <div
                         v-click-outside="onClickOutside"

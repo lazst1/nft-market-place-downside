@@ -23,10 +23,15 @@ const nftPrice = ref();
 const downsidePeriod = ref();
 const downsideRate = ref();
 const sale = ref(saleType.FIX_SALE);
+const openCalendar = ref(false);
 
 function createOrder() {
     console.log('===============', assetContractAddress, tokenId, nftPrice, downsidePeriod, downsideRate)
     this.store.dispatch('market/createOrder', { assetContractAddress: assetContractAddress, tokenId, nftPrice, downsidePeriod, downsideRate })
+}
+
+function handleCalendar() {
+    openCalendar.value = !openCalendar.value;
 }
 
 </script>
@@ -109,24 +114,27 @@ function createOrder() {
                     Days of protection to offer
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
                 </div>
-                <div class="flex mt-3.5 mb-7 font-ibm text-sm">
-                    <div
-                        class="flex items-center gap-5 border-2 h-13.5 border-black text-white bg-tertiary-700 w-full pl-5 font-ibm-light text-sm"
-                    >
-                        <font-awesome-icon
-                            :icon="['fas', 'calendar-alt']"
-                            class="text-lg ml-0.75 mr-0.5"
-                        />6 Months
+                <div class="mb-7">
+                    <div @click="handleCalendar" class="flex mt-3.5 font-ibm text-sm cursor-pointer">
+                        <div
+                            class="flex items-center gap-5 border-2 h-13.5 border-black text-white bg-tertiary-700 w-full pl-5 font-ibm-light text-sm"
+                        >
+                            <font-awesome-icon
+                                :icon="['fas', 'calendar-alt']"
+                                class="text-lg ml-0.75 mr-0.5"
+                            />6 Months
+                        </div>
                     </div>
+                    <v-date-picker
+                        v-if="openCalendar"
+                        v-model="downsidePeriod"
+                        color="red"
+                        is-dark
+                        is-range
+                        is-expanded
+                        :columns="$screens({ default: 1, lg: 2 })"
+                    />
                 </div>
-                <v-date-picker
-                    v-model="downsidePeriod"
-                    color="red"
-                    is-dark
-                    is-range
-                    is-expanded
-                    :columns="$screens({ default: 1, lg: 2 })"
-                />
                 <div class="flex pt-0.5">
                     Downside Protection to Offer
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
