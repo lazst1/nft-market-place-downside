@@ -8,13 +8,6 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import { useStore } from 'vuex';
 
-const props = defineProps({
-    // modalValue: {
-    //     type: Boolean,
-    //     default: false
-    // }
-})
-
 const store = useStore();
 const route = useRoute();
 const assetContractAddress = route.params.assetContractAddress;
@@ -26,8 +19,20 @@ const sale = ref(saleType.FIX_SALE);
 const openCalendar = ref(false);
 
 function createOrder() {
-    console.log('===============', assetContractAddress, tokenId, nftPrice, downsidePeriod, downsideRate)
-    this.store.dispatch('market/createOrder', { assetContractAddress: assetContractAddress, tokenId, nftPrice, downsidePeriod, downsideRate })
+    const token_id = parseInt(tokenId);
+    const price = parseInt(nftPrice.value);
+    const period = parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000);
+    const rate = downsideRate.value * 100;
+    this.store.dispatch(
+        'market/createOrder',
+        {
+            assetContractAddress,
+            tokenId: token_id,
+            nftPrice: price,
+            downsidePeriod: period,
+            downsideRate: rate
+        }
+    )
 }
 
 function handleCalendar() {
@@ -105,9 +110,10 @@ function handleCalendar() {
                 <div class="flex flex-wrap sm:flex-nowrap mt-3.5 mb-6 font-ibm text-sm">
                     <nftmx-select-network color="black" :data="currencies" class="xl:w-1/3" />
                     <input
+                        type="number"
                         v-model="nftPrice"
                         class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-4.75 font-ibm text-sm"
-                        placeholder="Type of amount"
+                        placeholder="Type of amount (wei)"
                     />
                 </div>
                 <div class="flex pt-0.75">
@@ -115,7 +121,10 @@ function handleCalendar() {
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
                 </div>
                 <div class="mb-7">
-                    <div @click="handleCalendar" class="flex mt-3.5 font-ibm text-sm cursor-pointer">
+                    <div
+                        @click="handleCalendar"
+                        class="flex mt-3.5 font-ibm text-sm cursor-pointer"
+                    >
                         <div
                             class="flex items-center gap-5 border-2 h-13.5 border-black text-white bg-tertiary-700 w-full pl-5 font-ibm-light text-sm"
                         >

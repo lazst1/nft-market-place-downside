@@ -26,12 +26,12 @@ export const market = {
             console.log(data)
             rootState.marketContract.methods.createOrder(
                 data.assetContractAddress,
-                parseInt(data.tokenId),
-                250000,
-                5000,
-                8640000,
+                data.tokenId,
+                data.nftPrice,
+                data.downsideRate,
+                data.downsidePeriod,
                 false,
-                8640000
+                data.downsidePeriod
             ).send({ from: rootState.user.address, gas: 250000 });
         },
         async buyOrder({ commit, rootState }, data) {
