@@ -16,6 +16,7 @@ const props = defineProps({
 
 const order = {
     ...props.data,
+    id: props.data.id || 10,
     percent: props.data.percent || 10,
     period: props.data.period || 10,
     unique: props.data.unique || "1:20",
@@ -29,8 +30,6 @@ const order = {
     connect: props.data.connect || false,
     sold: props.data.sold || false,
     closed: props.data.closed || false,
-    tokenAddress: props.data.token_address || 'tokenAddress',
-    tokenId: props.data.token_id || 'tokenId',
 }
 
 const syndicationCSS = computed(() => {
