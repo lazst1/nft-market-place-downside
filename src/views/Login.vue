@@ -22,7 +22,7 @@ const selectedWallet = ref(walletList[0]);
             <connect-wallet :wallet="selectedWallet" />
         </div>
         <div>
-            <div class="mt-7 mb-16 pt-0.5 pb-1.5 gap-6 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-5 3xl:grid-cols-6 justify-between mx-auto w-fit">
+            <div class="flex flex-wrap gap-4">
                 <nftmx-wallet-card
                     v-for="wallet in walletList"
                     :key="wallet.id"
