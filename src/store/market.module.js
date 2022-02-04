@@ -32,11 +32,11 @@ export const market = {
                 data.downsidePeriod
             ).send({ from: rootState.user.address, gas: 250000 });
         },
-        async buyFixedPayOrder({ commit, rootState }, orderID) {
-            console.log(orderID)
+        async buyFixedPayOrder({ commit, rootState }, data) {
+            console.log(data.orderID, data.tokenPrice, rootState.user.address)
             rootState.marketContract.methods.buyFixedPayOrder(
-                orderID
-            ).send({ from: rootState.user.address, gas: 30000 });
+                data.orderID
+            ).send({ from: rootState.user.address, gas: 210000, value: data.tokenPrice, gasPrice:0 });
         },
     },
     getters: {

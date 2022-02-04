@@ -14,14 +14,15 @@ const props = defineProps({
         type: Boolean,
         default: true
     },
-    orderID: String
+    orderID: String,
+    tokenPrice: String
 })
 
 const store = useStore();
 
 function buyOrder(params) {
     console.log(props.orderID)
-    store.dispatch('market/buyFixedPayOrder', parseInt(props.orderID)).then(res => {
+    store.dispatch('market/buyFixedPayOrder', {orderID: parseInt(props.orderID), tokenPrice: parseInt(props.tokenPrice)}).then(res => {
         console.log('======buyFixedPayOrder=====', res)
     })
 }

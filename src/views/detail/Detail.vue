@@ -58,7 +58,7 @@ const fundError = ref(false);
                 <more-info />
             </div>
             <div class="col-span-7 mb-4 lg:col-span-4 relative">
-                <item-action :orderID="order.orderID" />
+                <item-action :orderID="order.orderID" :tokenPrice="order.tokenPrice" />
             </div>
         </div>
         <div class="mb-10">

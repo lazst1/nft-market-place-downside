@@ -26,7 +26,8 @@ const people = [
 ]
 
 const props = defineProps({
-    orderID: String
+    orderID: String,
+    tokenPrice: String
 })
 
 const buyModalActive = ref(false);
@@ -95,7 +96,7 @@ const handleBuyModal = (value) => {
             />
         </div>
     </div>
-    <buy-modal v-model="buyModalActive" :orderID="orderID" />
+    <buy-modal v-model="buyModalActive" :orderID="orderID" :tokenPrice="tokenPrice" />
     <syndication-modal v-model="syndicationModalActive" />
 </template>
 
