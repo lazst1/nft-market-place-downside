@@ -7,6 +7,7 @@ import NftmxTbody from '@/core/components/NftmxTbody.vue';
 import NftmxTd from '@/core/components/NftmxTd.vue';
 import NftmxTr from '@/core/components/NftmxTr.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
+import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
 
 
 </script>
@@ -35,23 +36,23 @@ import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
                         <nftmx-td>Sale</nftmx-td>
                         <nftmx-td ps>$0.4781</nftmx-td>
                         <nftmx-td ps>
-                            <nftmx-wallet-address
+                            <nftmx-wallet-address-pop
                                 class="text-primary-900"
                                 address="0xB29265736dcc20867F6b3c0f5aa8E5A64942b816"
-                            ></nftmx-wallet-address>
+                            ></nftmx-wallet-address-pop>
                         </nftmx-td>
                         <nftmx-td ps>
-                            <nftmx-wallet-address
+                            <nftmx-wallet-address-pop
                                 class="text-primary-900"
                                 address="0xB29265736dcc20867F6b3c0f5aa8E5A64942b816"
-                            ></nftmx-wallet-address>
+                            ></nftmx-wallet-address-pop>
                         </nftmx-td>
                         <nftmx-td ps>17 hours ago</nftmx-td>
                         <nftmx-td ps :border="false">
-                            <nftmx-wallet-address
+                            <nftmx-wallet-address-pop
                                 class="text-secondary-600"
                                 address="0xB29265736dcc20867F6b3c0f5aa8E5A64942b816"
-                            ></nftmx-wallet-address>
+                            ></nftmx-wallet-address-pop>
                         </nftmx-td>
                     </nftmx-tr>
                 </nftmx-tbody>

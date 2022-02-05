@@ -8,13 +8,6 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import { useStore } from 'vuex';
 
-const props = defineProps({
-    // modalValue: {
-    //     type: Boolean,
-    //     default: false
-    // }
-})
-
 const store = useStore();
 const route = useRoute();
 const assetContractAddress = route.params.assetContractAddress;
@@ -23,10 +16,27 @@ const nftPrice = ref();
 const downsidePeriod = ref();
 const downsideRate = ref();
 const sale = ref(saleType.FIX_SALE);
+const openCalendar = ref(false);
 
 function createOrder() {
-    console.log('===============', assetContractAddress, tokenId, nftPrice, downsidePeriod, downsideRate)
-    this.store.dispatch('market/createOrder', { assetContractAddress: assetContractAddress, tokenId, nftPrice, downsidePeriod, downsideRate })
+    const token_id = parseInt(tokenId);
+    const price = parseInt(nftPrice.value);
+    const period = parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000);
+    const rate = downsideRate.value * 100;
+    store.dispatch(
+        'market/createOrder',
+        {
+            assetContractAddress,
+            tokenId: token_id,
+            nftPrice: price,
+            downsidePeriod: period,
+            downsideRate: rate
+        }
+    )
+}
+
+function handleCalendar() {
+    openCalendar.value = !openCalendar.value;
 }
 
 </script>
@@ -36,7 +46,7 @@ function createOrder() {
         <div class="text-center relative mt-1.75 pb-2.5">
             <div class="font-press text-2xl">List Item for Sale</div>
         </div>
-        <div class="grid grid-cols-8 text-white my-9 pl-17.5 pr-17">
+        <div class="grid grid-cols-8 text-white my-9 px-4 lg:pl-17.5 lg:pr-17">
             <div class="col-span-full lg:col-span-3 pr-2.25">
                 <div
                     class="relative h-90.75 overflow-hidden p-6 bg-[url('/images/img10.png')] bg-cover border border-black"
@@ -59,18 +69,18 @@ function createOrder() {
                 </div>
             </div>
             <div
-                class="col-span-full lg:col-span-5 relative text-lg font-ibm-medium mr-0.5 pl-9 ml-px"
+                class="col-span-full lg:col-span-5 relative text-lg font-ibm-medium mr-0.5 lg:pl-9 ml-px"
             >
                 <div class="flex">
                     Choose a collection
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
                 </div>
-                <div class="grid grid-cols-2 mt-3 pb-0.75 gap-4.5">
+                <div class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-4.5">
                     <nftmx-select-network />
                     <nftmx-button
                         color="primary-900"
                         label="CREATE NEW COLLECTION"
-                        :class="['font-press text-sm bg-primary-900 hover:bg-primary-700 focus:bg-primary-800']"
+                        :class="['font-press text-smallest sm:text-xs lg:text-sm bg-primary-900 hover:bg-primary-700 focus:bg-primary-800']"
                     />
                 </div>
                 <div class="flex mt-6">
@@ -97,36 +107,43 @@ function createOrder() {
                     Price
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
                 </div>
-                <div class="flex mt-3.5 mb-6 font-ibm text-sm">
-                    <nftmx-select-network color="black" :data="currencies" class="w-1/3" />
+                <div class="flex flex-wrap sm:flex-nowrap mt-3.5 mb-6 font-ibm text-sm">
+                    <nftmx-select-network color="black" :data="currencies" class="xl:w-1/3" />
                     <input
+                        type="number"
                         v-model="nftPrice"
                         class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-4.75 font-ibm text-sm"
-                        placeholder="Type of amount"
+                        placeholder="Type of amount (wei)"
                     />
                 </div>
                 <div class="flex pt-0.75">
                     Days of protection to offer
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
                 </div>
-                <div class="flex mt-3.5 mb-7 font-ibm text-sm">
+                <div class="mb-7">
                     <div
-                        class="flex items-center gap-5 border-2 h-13.5 border-black text-white bg-tertiary-700 w-full pl-5 font-ibm-light text-sm"
+                        @click="handleCalendar"
+                        class="flex mt-3.5 font-ibm text-sm cursor-pointer"
                     >
-                        <font-awesome-icon
-                            :icon="['fas', 'calendar-alt']"
-                            class="text-lg ml-0.75 mr-0.5"
-                        />6 Months
+                        <div
+                            class="flex items-center gap-5 border-2 h-13.5 border-black text-white bg-tertiary-700 w-full pl-5 font-ibm-light text-sm"
+                        >
+                            <font-awesome-icon
+                                :icon="['fas', 'calendar-alt']"
+                                class="text-lg ml-0.75 mr-0.5"
+                            />6 Months
+                        </div>
                     </div>
+                    <v-date-picker
+                        v-if="openCalendar"
+                        v-model="downsidePeriod"
+                        color="red"
+                        is-dark
+                        is-range
+                        is-expanded
+                        :columns="$screens({ default: 1, lg: 2 })"
+                    />
                 </div>
-                <v-date-picker
-                    v-model="downsidePeriod"
-                    color="red"
-                    is-dark
-                    is-range
-                    is-expanded
-                    :columns="$screens({ default: 1, lg: 2 })"
-                />
                 <div class="flex pt-0.5">
                     Downside Protection to Offer
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />

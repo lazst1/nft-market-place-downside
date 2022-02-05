@@ -4,6 +4,7 @@ import { computed, ref } from 'vue';
 import NftmxCardContainer from '@/core/container/NftmxCardContainer.vue';
 import CheckboxCell from './CheckboxCell.vue';
 import TextCompression from './textCompression.vue';
+import { useStore } from 'vuex';
 
 const props = defineProps({
     item: {
@@ -81,6 +82,8 @@ const props = defineProps({
     forMore: Boolean
 })
 
+const store = useStore();
+
 const option = ref(false)
 const metadata = props.item.metadata ? JSON.parse(props.item.metadata) : {};
 
@@ -101,6 +104,10 @@ const boughtCSS = computed(() => {
 
 function onClickOutside() {
     option.value = false
+}
+
+function approve() {
+    store.dispatch('market/approve', { contractAddress: props.item.token_address, tokenId: props.item.token_id })
 }
 
 </script>
@@ -127,16 +134,19 @@ function onClickOutside() {
             </div>
             <div class="flex items-center font-ibm-semi-bold mt-1">
                 <div class="text-sm flex flex-1 items-center">
-                    <div
-                        @click.prevent
-                        v-show="option"
-                        class="absolute -bottom-2.5 -ml-5 px-5.5 py-3.25 bg-black text-white hover:text-primary-900 leading-9.5 font-ibm-light text-xs"
-                    >
-                        <div class="text-white hover:text-primary-700">Copy link</div>
-                        <div class="text-white hover:text-primary-700">Transfer</div>
-                        <div class="text-white hover:text-primary-700">Make profile picture</div>
-                        <div class="text-white hover:text-primary-700">Hide</div>
-                        <div class="text-white hover:text-primary-700">Unbundle</div>
+                    <div class="relative">
+                        <div
+                            @click.prevent
+                            v-show="option"
+                            class="absolute w-52 bottom-5 -ml-5 px-5.5 py-3.25 bg-black text-white hover:text-primary-900 leading-9.5 font-ibm-light text-xs"
+                        >
+                            <div @click="approve" class="text-white hover:text-primary-700">Approve</div>
+                            <div class="text-white hover:text-primary-700">Copy link</div>
+                            <div class="text-white hover:text-primary-700">Transfer</div>
+                            <div class="text-white hover:text-primary-700">Make profile picture</div>
+                            <div class="text-white hover:text-primary-700">Hide</div>
+                            <div class="text-white hover:text-primary-700">Unbundle</div>
+                        </div>
                     </div>
                     <div
                         v-click-outside="onClickOutside"

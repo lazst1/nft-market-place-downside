@@ -25,6 +25,11 @@ const people = [
     },
 ]
 
+const props = defineProps({
+    orderID: String,
+    tokenPrice: String
+})
+
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
 const fundError = ref(false);
@@ -54,7 +59,7 @@ const handleBuyModal = (value) => {
         <div class="text-primary-900 font-ibm-bold">AUCTION</div>
     </div>
 
-    <div class="grid grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold">
+    <div class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold">
         <div class="h-44 items-center p-4">
             <div class="py-4">
                 <div class="pt-3 pb-4 text-base">Current auction ends in</div>
@@ -62,7 +67,7 @@ const handleBuyModal = (value) => {
             </div>
         </div>
 
-        <div class="h-44 items-center pr-7 py-4">
+        <div class="h-44 items-center pl-7 sm:pl-0 pr-7 py-4">
             <nftmx-select-network class="font-ibm-bold w-full text-sm mb-3"></nftmx-select-network>
             <nftmx-button
                 color="primary"
@@ -74,7 +79,7 @@ const handleBuyModal = (value) => {
     </div>
 
     <div class="bg-tertiary-800 border border-black mt-4">
-        <div class="h-56 items-center p-4 text-center">
+        <div class="items-center p-4 text-center">
             <div class="pt-2 text-lg font-ibm-bold">
                 Total locked value
                 <icon class="-ml-2" :path="mdiHelpCircle" w="w-4" h="h-4" size="36" color="white" />
@@ -91,7 +96,7 @@ const handleBuyModal = (value) => {
             />
         </div>
     </div>
-    <buy-modal v-model="buyModalActive" />
+    <buy-modal v-model="buyModalActive" :orderID="orderID" :tokenPrice="tokenPrice" />
     <syndication-modal v-model="syndicationModalActive" />
 </template>
 

@@ -7,13 +7,26 @@ import NftmxTbody from '@/core/components/NftmxTbody.vue';
 import NftmxTd from '@/core/components/NftmxTd.vue';
 import NftmxTr from '@/core/components/NftmxTr.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
+import { useStore } from 'vuex';
 
 const props = defineProps({
     modalValue: {
         type: Boolean,
         default: true
-    }
+    },
+    orderID: String,
+    tokenPrice: String
 })
+
+const store = useStore();
+
+function buyOrder(params) {
+    console.log(props.orderID)
+    store.dispatch('market/buyFixedPayOrder', { orderID: parseInt(props.orderID), tokenPrice: parseInt(props.tokenPrice) }).then(res => {
+        console.log('======buyFixedPayOrder=====', res)
+    })
+}
+
 </script>
 
 <template>
@@ -68,7 +81,7 @@ const props = defineProps({
                     color="primary"
                     label="BUY NOW"
                     class="font-press w-full text-sm my-3 max-w-xs"
-                    @click="fundError = true"
+                    @click="buyOrder"
                 />
                 <div
                     v-if="fundError"

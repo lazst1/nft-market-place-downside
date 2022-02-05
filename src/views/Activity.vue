@@ -19,14 +19,14 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
 
 <template>
     <body-container :searchAble="true">
-        <div class="flex pt-4 pb-3 mt-px border-b border-b-black font-ibm-medium">
+        <div class="flex flex-wrap justify-start pt-4 pb-3 mt-px border-b border-b-black font-ibm-medium">
             <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
             <checkbox-cell><span class="text-xs relative -top-0.5">Domain Names</span></checkbox-cell>
             <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
             <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
             <checkbox-cell><span class="text-xs relative -top-0.5">Art</span></checkbox-cell>
         </div>
-        <div class="flex py-4">
+        <div class="grid lg:grid-cols-2 py-4 ">
             <div class="flex-1 items-stretch flex">
                 <nftmx-button
                     :outline="true"
@@ -34,35 +34,38 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
                     label="Listings"
                     :small="true"
                     :iconAfter="mdiCloseBox"
+                    class="hover:bg-tertiary-600"
                 />
                 <nav-bar-item>
                     <span class="text-sm text-primary-900 mx-2">Clear All</span>
                 </nav-bar-item>
             </div>
-            <div class="hidden md:block">
-                <drop-down
-                    title="Event type"
-                >
-                    <drop-down-item>
-                        DropDown Item
-                    </drop-down-item>
-                </drop-down>
-            </div>
-            <div class="ml-3 hidden md:block">
-                <drop-down
-                    title="Event type"
-                >
-                    <nav-bar-search-input small></nav-bar-search-input>
-                    <drop-down-item>
-                        <checkbox-cell><div class="text-xs pt-1">ETH Address</div></checkbox-cell>
-                    </drop-down-item>
-                    <drop-down-item>
-                        <checkbox-cell><div class="text-xs pt-1">ETH</div></checkbox-cell>
-                    </drop-down-item>
-                    <drop-down-item>
-                        <checkbox-cell><div class="text-xs pt-1">ETH</div></checkbox-cell>
-                    </drop-down-item>
-                </drop-down>
+            <div class="grid sm:grid-cols-2 mt-4 lg:mt-0 lg:justify-end lg:justify-self-end justify-self-start">
+                <div class="">
+                    <drop-down
+                        title="Event type"
+                    >
+                        <drop-down-item>
+                            DropDown Item
+                        </drop-down-item>
+                    </drop-down>
+                </div>
+                <div class="mt-2 sm:mt-0 sm:ml-3">
+                    <drop-down
+                        title="Event type"
+                    >
+                        <nav-bar-search-input small></nav-bar-search-input>
+                        <drop-down-item>
+                            <checkbox-cell><div class="text-xs pt-1">ETH Address</div></checkbox-cell>
+                        </drop-down-item>
+                        <drop-down-item>
+                            <checkbox-cell><div class="text-xs pt-1">ETH</div></checkbox-cell>
+                        </drop-down-item>
+                        <drop-down-item>
+                            <checkbox-cell><div class="text-xs pt-1">ETH</div></checkbox-cell>
+                        </drop-down-item>
+                    </drop-down>
+                </div>
             </div>
         </div>
         <accordion :accordion="false">

@@ -60,7 +60,7 @@ function toggleSidebar(params) {
         </nav-bar-item>
         <nav-bar-item @click="toggleSidebar" class="hover:text-primary-900">
           <nftmx-wallet-address
-            class="text-sm font-ibm-bold pt-1"
+            class="text-sm font-ibm-bold pt-1 hidden sm:block"
             :address="walletAddress"
           />
           <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5 ml-6"></div>

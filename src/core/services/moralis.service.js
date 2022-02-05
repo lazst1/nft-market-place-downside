@@ -1,5 +1,5 @@
 import Moralis from "moralis";
-import { moralisChain, contractAddress, marketAddress } from "../config";
+import { moralisChain, tokenAddress, marketAddress } from "../config";
 
 class MoralisService {
     async getAllNFTs(limit, offset) {

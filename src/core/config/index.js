@@ -37,10 +37,11 @@ export const walletList = [
     },
 ];
 
-export const moralisChain = 'bsc testnet';
+export const moralisChain = import.meta.env.VITE_MORALIS_CHAIN;
+export const netExplorerURL = import.meta.env.VITE_NET_EXPLORER_URL;
 
-export const contractAddress = '0x89f09DC648099fE5f12e49a91C0Ff6bA4606AdF3';
-export const marketAddress = '0x5D95950695055865E17e5EaA5B28532B93DAbC01';
+export const tokenAddress = import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS;
+export const marketAddress = import.meta.env.VITE_MARKET_CONTRACT_ADDRESS;
 
 export const saleType = {
     FIX_SALE: 'FIX-SALE',
