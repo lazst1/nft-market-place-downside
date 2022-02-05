@@ -22,7 +22,7 @@ const store = useStore();
 
 function buyOrder(params) {
     console.log(props.orderID)
-    store.dispatch('market/buyFixedPayOrder', {orderID: parseInt(props.orderID), tokenPrice: parseInt(props.tokenPrice)}).then(res => {
+    store.dispatch('market/buyFixedPayOrder', { orderID: parseInt(props.orderID), tokenPrice: parseInt(props.tokenPrice) }).then(res => {
         console.log('======buyFixedPayOrder=====', res)
     })
 }

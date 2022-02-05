@@ -107,7 +107,7 @@ function onClickOutside() {
 }
 
 function approve() {
-    store.dispatch('market/approve', {contractAddress: props.item.token_address, tokenId: props.item.token_id})
+    store.dispatch('market/approve', { contractAddress: props.item.token_address, tokenId: props.item.token_id })
 }
 
 </script>
