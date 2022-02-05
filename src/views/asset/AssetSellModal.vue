@@ -23,7 +23,7 @@ function createOrder() {
     const price = parseInt(nftPrice.value);
     const period = parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000);
     const rate = downsideRate.value * 100;
-    this.store.dispatch(
+    store.dispatch(
         'market/createOrder',
         {
             assetContractAddress,
