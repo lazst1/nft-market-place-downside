@@ -1,26 +1,31 @@
 <template>
     <Carousel :items-to-show="itemsToShow" :wrap-around="true">
         <Slide v-for="(item, index) in items" :key="index">
-            <div class="carousel__item" :style="{marginLeft: marginLeft+'em'}">
-                <div class="grid grid-cols-2 m-4 cursor-pointer hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700">
-                    <div :style="{background:'url('+item.img+')', backgroundRepeat:'no-repeat', backgroundSize:'cover'}" class="relative w-82.5 h-82.5 overflow-hidden col-span-2 sm:col-span-1">
+            <div class="carousel__item" :style="{ marginLeft: marginLeft + 'em' }">
+                <div
+                    class="grid grid-cols-2 m-4 cursor-pointer hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
+                >
+                    <div
+                        :style="{ background: 'url(' + item.img + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }"
+                        class="relative w-82.5 h-82.5 overflow-hidden col-span-2 sm:col-span-1"
+                    >
                         <ribbon :percent="100" :period="256" />
                     </div>
-                    <div class="relative w-82.5 h-82.5 overflow-hidden bg-black text-white col-span-2 sm:col-span-1">
+                    <div
+                        class="relative w-82.5 h-82.5 overflow-hidden bg-black text-white col-span-2 sm:col-span-1"
+                    >
                         <div class="py-4 px-8 text-left font-ibm-bold">
                             <div class="text-xl py-2">Syndication</div>
                             <div class="text-xs font-ibm-semi-bold">
-                                <nftmx-help>
-                                    Syndication type
-                                </nftmx-help>
+                                <nftmx-help>Syndication type</nftmx-help>
                             </div>
                             <div class="text-primary-900 text-xs font-ibm-medium leading-5">Auction</div>
                             <div class="text-xs font-ibm-semi-bold">
-                                <nftmx-help>
-                                    Total locked value
-                                </nftmx-help>
+                                <nftmx-help>Total locked value</nftmx-help>
                             </div>
-                            <div class="text-primary-900 text-xs font-ibm-medium leading-5">$1,548,548.65</div>
+                            <div
+                                class="text-primary-900 text-xs font-ibm-medium leading-5"
+                            >$1,548,548.65</div>
                         </div>
 
                         <div class="mt-0.75 mb-1.25 px-8">
@@ -28,17 +33,14 @@
                         </div>
 
                         <div class="snap-center py-2">
-                            <div class="text-xs py-2 font-ibm-medium">
-                                Current auction ends in
-                            </div>
+                            <div class="text-xs py-2 font-ibm-medium">Current auction ends in</div>
                             <timer class="place-content-center" />
                         </div>
                         <nftmx-button
                             color="secondary"
                             label="JOIN SYNDICATION"
                             class="font-press w-full text-sm py-5 absolute left-0 bottom-0"
-                        >
-                        </nftmx-button>
+                        ></nftmx-button>
                     </div>
                 </div>
             </div>
@@ -125,6 +127,7 @@ export default defineComponent({
                 this.itemsToShow = 2.7
             } else if (this.window.width <= 720) {
                 this.itemsToShow = 1
+                this.marginLeft = 0
             } else {
                 this.itemsToShow = (this.window.width - 720) / 700 + 1;
                 if (this.itemsToShow > 2) {
