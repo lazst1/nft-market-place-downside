@@ -30,12 +30,14 @@ const items = [
             </div>
         </template>
         <div class="p-4 lg:p-6">
-            <nftmx-select
-                v-if="store.state.app.windowWidth < themeConfig.lg"
-                class="font-ibm font-thin w-full max-w-lg mr-16 text-sm text-white"
-                :data="items"
-                small
-            ></nftmx-select>
+            <div class="px-5">
+                <nftmx-select
+                    v-if="store.state.app.windowWidth < themeConfig.lg"
+                    class="font-ibm font-thin w-full text-sm text-white"
+                    :data="items"
+                    small
+                ></nftmx-select>
+            </div>
             <nftmx-line-chart></nftmx-line-chart>
         </div>
     </accordion>

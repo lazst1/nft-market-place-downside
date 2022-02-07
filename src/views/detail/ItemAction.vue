@@ -27,7 +27,8 @@ const people = [
 
 const props = defineProps({
     orderID: String,
-    tokenPrice: String
+    tokenPrice: String,
+    nft: Object
 })
 
 const buyModalActive = ref(false);
@@ -42,7 +43,7 @@ const handleBuyModal = (value) => {
 
 <template>
     <div class="flex py-6 text-5/2xl">
-        <div class="flex-1 font-ibm-bold">Play Quiet #10/10</div>
+        <div class="flex-1 font-ibm-bold">{{ nft.name }}</div>
         <div class>
             <font-awesome-icon
                 :icon="['fas', 'thumbs-up']"
@@ -67,31 +68,31 @@ const handleBuyModal = (value) => {
             </div>
         </div>
 
-        <div class="h-44 items-center pl-7 sm:pl-0 pr-7 py-4">
-            <nftmx-select-network class="font-ibm-bold w-full text-sm mb-3"></nftmx-select-network>
+        <div class="h-40 sm:h-46.25 items-center pl-7 sm:pl-0 pr-7 sm:pt-6.25">
+            <nftmx-select-network class="font-ibm-bold w-full text-sm mb-2" color="black" big></nftmx-select-network>
             <nftmx-button
                 color="primary"
                 label="BUY NOW"
-                class="font-press w-full text-lg"
+                class="font-press w-full text-lg mt-0.75"
                 @click="handleBuyModal(true)"
             />
         </div>
     </div>
 
-    <div class="bg-tertiary-800 border border-black mt-4">
-        <div class="items-center p-4 text-center">
+    <div class="bg-tertiary-800 border border-black mt-3.5">
+        <div class="items-center p-4 pb-6.25 text-center">
             <div class="pt-2 text-lg font-ibm-bold">
                 Total locked value
                 <icon class="-ml-2" :path="mdiHelpCircle" w="w-4" h="h-4" size="36" color="white" />
             </div>
-            <div class="pt-2 pb-6 text-3xl">
+            <div class="pt-2 pb-7 lg:text-3xl">
                 <span class="text-primary-900 font-ibm-bold">$1.548,548.65</span>
                 <span class="text-tertiary-400">( 458,6645)</span>
             </div>
             <nftmx-button
                 color="secondary"
                 label="JOIN SYNDICATION"
-                class="font-press w-full text-lg py-5"
+                class="font-press w-full lg:text-lg pt-5.5 pb-5.25"
                 @click="syndicationModalActive = true"
             />
         </div>
