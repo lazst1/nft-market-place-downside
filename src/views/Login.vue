@@ -21,16 +21,14 @@ const selectedWallet = ref(walletList[0]);
         <div class="mt-8">
             <connect-wallet :wallet="selectedWallet" />
         </div>
-        <div>
-            <div class="flex flex-wrap gap-4">
-                <nftmx-wallet-card
-                    v-for="wallet in walletList"
-                    :key="wallet.id"
-                    :wallet="wallet"
-                    @click="selectedWallet = wallet"
-                    :active="selectedWallet.id === wallet.id"
-                />
-            </div>
+        <div class="flex flex-wrap justify-center gap-4 mt-7.5">
+            <nftmx-wallet-card
+                v-for="wallet in walletList"
+                :key="wallet.id"
+                :wallet="wallet"
+                @click="selectedWallet = wallet"
+                :active="selectedWallet.id === wallet.id"
+            />
         </div>
     </body-container>
     <nftmx-footer />
