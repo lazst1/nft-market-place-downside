@@ -32,7 +32,7 @@ function clickFilterBy(value) {
                     placeholder="Search items, collections, and accounts"
                 ></nftmx-search-input>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 justify-center gap-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 justify-center gap-2 mt-4 lg:mt-0">
                 <nftmx-button
                     color="secondary"
                     label="LAUNCH YOUR DVC"

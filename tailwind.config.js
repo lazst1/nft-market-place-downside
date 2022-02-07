@@ -83,6 +83,7 @@ module.exports = {
         '37': '148px',
         '42': '168px',
         '42.5': '170px',
+        '45.75': '183px',
         '47': '188px',
         '50': '200px',
         '58': '232px',
@@ -95,7 +96,7 @@ module.exports = {
         'modal-big': '1444px',
         'summary-xs': '251px',
         'summary-sm': '300px',
-        'asset-img': '520px',
+        'asset-img': '500px',
         'xl-text': '800px',
         'full': '100%'
       },
