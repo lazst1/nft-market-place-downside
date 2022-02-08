@@ -13,6 +13,7 @@ import { useStore } from 'vuex';
 import BrowseSearch from './BrowseSearch.vue';
 
 const store = useStore();
+console.log(store)
 
 </script>
 
@@ -41,7 +42,7 @@ const store = useStore();
             class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5 min-h-item"
         >
             <nftmx-sale-card
-                v-for="(order, index) in store.state.orders"
+                v-for="(order, index) in store.state.orders.items"
                 :data="order"
                 :key="index"
             ></nftmx-sale-card>
