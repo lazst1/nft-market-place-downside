@@ -1,8 +1,12 @@
 <script setup>
+import { ref } from 'vue';
 import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import Accordion from '@/core/container/Accordion.vue';
 import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
+import AccordionContainer from './container/AccordionContainer.vue';
+import Assets1 from './components/Assets1.vue';
+import Assets2 from './components/Assets2.vue';
 
 const items = [
     {
@@ -68,28 +72,11 @@ const items = [
                 </div>
             </div>
         </div>
-        <div class="flex-1 pl-5">
+        <div class="flex-1 sm:pl-5">
             <div class="font-press text-white">
-                <nftmx-cards-accordion more></nftmx-cards-accordion>
+                <assets1 />
                 <nftmx-divider class="mt-8 mb-6"></nftmx-divider>
-                <accordion :border="false" :sidebar="true" :bIcon="true">
-                    <template v-slot:caption>
-                        <div class="flex items-center w-full">
-                            <div class="flex-1 text-sm font-press py-4 mr-24">Digital Art</div>
-                        </div>
-                    </template>
-                    <div class="pt-2">
-                        <div
-                            class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
-                        >
-                            <nftmx-sale-card :connect="true"></nftmx-sale-card>
-                            <nftmx-sale-card></nftmx-sale-card>
-                            <nftmx-sale-card :bought="true"></nftmx-sale-card>
-                            <nftmx-sale-card :sold="true"></nftmx-sale-card>
-                            <nftmx-sale-card :closed="true"></nftmx-sale-card>
-                        </div>
-                    </div>
-                </accordion>
+                <assets2 />
             </div>
         </div>
     </div>

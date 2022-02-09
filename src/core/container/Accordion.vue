@@ -36,12 +36,13 @@ const handleClick = () => {
 <template>
     <div :class="[border ? 'border border-black bg-tertiary-800' : '', 'font-ibm']">
         <div
-            :class="[border ? 'border-b border-black' : '', sidebar ? '' : 'px-5', 'flex text-2xl text-white font-bold']"
+            @click="handleClick"
+            :class="[border ? 'border-b border-black' : '', sidebar ? '' : 'px-5', 'flex text-2xl text-white font-bold cursor-pointer']"
         >
             <div class="flex-1">
                 <slot name="caption"></slot>
             </div>
-            <div v-if="accordion" class="self-center cursor-pointer" @click="handleClick">
+            <div v-if="accordion" class="self-center cursor-pointer">
                 <font-awesome-icon
                     v-if="!modelValue"
                     :icon="['fas', 'sort-down']"

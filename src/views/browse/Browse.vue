@@ -13,7 +13,6 @@ import { useStore } from 'vuex';
 import BrowseSearch from './BrowseSearch.vue';
 
 const store = useStore();
-console.log(store)
 
 </script>
 

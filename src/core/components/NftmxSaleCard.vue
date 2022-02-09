@@ -10,7 +10,9 @@ import Timer from './Timer.vue'
 const props = defineProps({
     data: {
         type: Object,
-        default: {}
+        default: {
+            syndication: true
+        }
     },
 })
 
@@ -24,12 +26,12 @@ const order = {
     roi: props.data.roi || "+4,780.73%",
     value: props.data.value || "$0.4781",
     vote: props.data.vote || "55",
-    syndication: props.data.syndication || true,
-    auction: props.data.auction || false,
-    bought: props.data.bought || false,
-    connect: props.data.connect || false,
-    sold: props.data.sold || false,
-    closed: props.data.closed || false,
+    syndication: props.data.syndication,
+    auction: props.data.auction,
+    bought: props.data.bought,
+    connect: props.data.connect,
+    sold: props.data.sold,
+    closed: props.data.closed,
 }
 
 const syndicationCSS = computed(() => {
