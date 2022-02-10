@@ -1,5 +1,5 @@
 import Moralis from "moralis";
-import { moralisChain, tokenAddress, marketAddress } from "../config";
+import { moralisChain, marketAddress } from "../config";
 import http from "../utils/http-moralis";
 
 class MoralisService {
