@@ -42,6 +42,8 @@ export const netExplorerURL = import.meta.env.VITE_NET_EXPLORER_URL;
 
 export const marketAddress = import.meta.env.VITE_MARKET_CONTRACT_ADDRESS;
 
+export const exchangeRate = 1000000000000000000;
+
 export const saleType = {
     FIX_SALE: 'FIX-SALE',
     AUCTION: 'AUCTION'

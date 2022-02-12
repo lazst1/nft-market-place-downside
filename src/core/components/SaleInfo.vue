@@ -28,20 +28,16 @@ defineProps({
 </script>
 
 <template>
-    <div class="grid grid-cols-2 gap-x-4 text-xxs items-baseline font-ibm-semi-bold leading-4.5 text-white">
-        <div>
-            Unique
-        </div>
+    <div
+        class="grid grid-cols-2 gap-x-4 text-xxs items-baseline font-ibm-semi-bold leading-4.5 text-white"
+    >
+        <div>Unique</div>
         <div class="w-max">
             Transferred
             <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st" />
         </div>
-        <div class="text-primary-900 font-ibm-light">
-            {{unique}}
-        </div>
-        <div class="text-primary-900 font-ibm-light">
-            {{transferred}}
-        </div>
+        <div class="text-primary-900 font-ibm-light">{{ unique }}</div>
+        <div class="text-primary-900 font-ibm-light">{{ transferred }}</div>
         <div class="mt-3">
             ROI
             <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st" />
@@ -51,14 +47,10 @@ defineProps({
             <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st" />
         </div>
         <div class="text-primary-900 font-ibm-light">
-            {{roi}}
-            <div class="text-tertiary-400 font-ibm-light leading-3.5">
-                {{roii}}
-            </div>
+            {{ roi }}
+            <div class="text-tertiary-400 font-ibm-light leading-3.5">{{ roii }}</div>
         </div>
-        <div class="text-primary-900 font-ibm-light">
-            {{value}}
-        </div>
+        <div class="text-primary-900 font-ibm-light">${{ value }}</div>
     </div>
 </template>
 

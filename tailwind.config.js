@@ -99,7 +99,12 @@ module.exports = {
         'summary-sm': '300px',
         'asset-img': '500px',
         'xl-text': '800px',
-        'full': '100%'
+        'full': '100%',
+        '2/3': '60%',
+        '65per': '65%',
+        '65per': '65%',
+        '70per': '70%',
+        '73per': '73%',
       },
       lineHeight: {
         '5.25': '21px',

@@ -14,10 +14,15 @@ import NftmxAnalyzer from '@/core/components/NftmxAnalyzer.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import TrendingAssets from './TrendingAssets.vue';
 import TrendingSearch from './TrendingSearch.vue';
+import { useStore } from 'vuex';
 
 const user = computed(() => {
     return this.$store.state.auth.user;
 })
+const store = useStore();
+if (store.getters['auth/getWalletAddress']) {
+    store.dispatch("market/getSaleOrders");
+}
 
 </script>
 

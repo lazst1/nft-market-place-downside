@@ -17,6 +17,9 @@ class MoralisService {
     getNft(token_address, token_id) {
         return http.get(`nft/${token_address}/${token_id}?chain=${moralisChain}&format=decimal`).then(res => res.data);
     }
+    getBalance(address) {
+        return http.get(`${address}/balance?chain=${moralisChain}`).then(res => res.data);
+    }
 }
 
 export default new MoralisService

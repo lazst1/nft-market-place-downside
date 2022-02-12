@@ -10,12 +10,10 @@ const props = defineProps({
     disable: Boolean
 });
 
-const walletAddress = computed(() => props.disable?props.address:props.address.slice(0, 6)+'...'+props.address.slice(-4));
+const walletAddress = computed(() => props.disable ? props.address : props.address ? props.address.slice(0, 6) + '...' + props.address.slice(-4) : '');
 
 </script>
 
 <template>
-    <a :href="netExplorerURL + address" target="_blank">
-        {{walletAddress}}
-    </a>
+    <a :href="netExplorerURL + address" target="_blank">{{ walletAddress }}</a>
 </template>

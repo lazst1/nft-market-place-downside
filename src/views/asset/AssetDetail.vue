@@ -20,10 +20,10 @@ defineProps({
 
 <template>
     <div
-        class="relative overflow-hidden p-6 w-full"
-        :style="{ background: 'url(' + img_url + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center', backgroundColor: '#222222', paddingTop: '100%' }"
+        class="relative overflow-hidden w-full pt-73per"
+        :style="{ background: 'url(' + img_url + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center', backgroundColor: '#222222' }"
     >
-        <ribbon :percent="percent" :period="period" />
+        <!-- <ribbon :percent="percent" :period="period" /> -->
     </div>
     <div class="overflow-hidden overflow-x-auto mt-4 mb-8 items-center">
         <div class="flex w-full items-center text-sm font-ibm-bold">

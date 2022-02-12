@@ -16,7 +16,7 @@ const props = defineProps({
 
 <template>
     <div
-        class="relative max-h-asset-img 2xl:h-asset-img overflow-hidden p-6 pt-full 2xl:pt-0"
+        class="relative overflow-hidden p-6 w-full pt-70per"
         :style="{ background: 'url(' + '/images/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center', backgroundColor: '#222222' }"
     >
         <ribbon :percent="percent" :period="period" />

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { saleType } from '@/core/config'
 import NftmxModal from '@/core/components/NftmxModal.vue';
 import { useRoute } from 'vue-router';
@@ -7,6 +7,15 @@ import DetailButton from '@/core/components/DetailButton.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import { useStore } from 'vuex';
+import Ribbon from '@/core/components/Ribbon.vue';
+import { keyCodeNumberRange } from '../../core/utils';
+
+const props = defineProps({
+    asset: {
+        type: Object,
+        default: {}
+    }
+})
 
 const store = useStore();
 const route = useRoute();
@@ -14,14 +23,15 @@ const assetContractAddress = route.params.assetContractAddress;
 const tokenId = route.params.tokenId;
 const nftPrice = ref();
 const downsidePeriod = ref();
-const downsideRate = ref();
+const downsideRate = ref(0);
 const sale = ref(saleType.FIX_SALE);
 const openCalendar = ref(false);
 
+const period = computed(() => downsidePeriod.value ? parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000) : 0);
+
 function createOrder() {
     const token_id = parseInt(tokenId);
-    const price = parseInt(nftPrice.value);
-    const period = parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000);
+    const price = nftPrice.value;
     const rate = downsideRate.value * 100;
     store.dispatch(
         'market/createOrder',
@@ -39,6 +49,25 @@ function handleCalendar() {
     openCalendar.value = !openCalendar.value;
 }
 
+function preventKey(event) {
+    if (keyCodeNumberRange(event.keyCode)) {
+
+    } else {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+    }
+}
+
+function downsideRateRange() {
+    if (downsideRate.value > 100) {
+        downsideRate.value = 100;
+    }
+    if (downsideRate.value < 0) {
+        downsideRate.value = 0;
+    }
+}
+
 </script>
 
 <template>
@@ -49,14 +78,14 @@ function handleCalendar() {
         <div class="grid grid-cols-8 text-white my-9 px-4 lg:pl-17.5 lg:pr-17">
             <div class="col-span-full lg:col-span-3 pr-2.25">
                 <div
-                    class="relative h-90.75 overflow-hidden p-6 bg-[url('/images/img10.png')] bg-cover border border-black"
+                    class="relative overflow-hidden p-6 bg-[url('/images/img10.png')] bg-cover border border-black w-full pt-70per"
                 >
-                    <ribbon :percent="percent" :period="period" />
+                    <ribbon :percent="downsideRate" :period="period / 86400" />
                 </div>
                 <div class="flex w-full text-sm font-ibm-bold mt-7">
                     <div class="pt-0.75">
                         <detail-button class="text-primary-900">Kyle White</detail-button>
-                        <detail-button class="text-2xl mt-1.5">Play Quiet #10/10</detail-button>
+                        <detail-button class="text-2xl mt-1.5">{{ asset.name }}</detail-button>
                     </div>
                     <div class="grow"></div>
                     <div class="py-0.5">
@@ -110,10 +139,10 @@ function handleCalendar() {
                 <div class="flex flex-wrap sm:flex-nowrap mt-3.5 mb-6 font-ibm text-sm">
                     <nftmx-select-network color="black" :data="currencies" class="xl:w-1/3" />
                     <input
-                        type="number"
                         v-model="nftPrice"
                         class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-4.75 font-ibm text-sm"
-                        placeholder="Type of amount (wei)"
+                        placeholder="Type of amount"
+                        @keydown="preventKey($event)"
                     />
                 </div>
                 <div class="flex pt-0.75">
@@ -152,9 +181,10 @@ function handleCalendar() {
                 <div class="flex mt-3.5 mb-4 font-ibm text-sm">
                     <input
                         v-model="downsideRate"
-                        type="number"
                         class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full px-6 font-ibm text-sm"
                         placeholder
+                        @keydown="preventKey($event)"
+                        @input="downsideRateRange()"
                     />
                     <div class="w-14 h-13.5 px-4 bg-black flex items-center justify-center">%</div>
                 </div>

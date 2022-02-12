@@ -29,7 +29,7 @@ const handleClick = (value) => {
         </template>
         <div class="pt-2">
             <div
-                class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 justify-center"
+                class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
             >
                 <slot name="content" />
             </div>

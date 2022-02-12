@@ -10,6 +10,7 @@ import { useRoute, useRouter } from 'vue-router';
 import DetailHistory from './DetailHistory.vue';
 import marketService from '@/core/services/market.service';
 import moralisService from '@/core/services/moralis.service';
+import coinmarketcapService from '@/core/services/coinmarketcap.service';
 
 const people = [
     {
@@ -44,17 +45,16 @@ const order = ref({});
 const nft = ref({});
 
 marketService.getOrder(orderId).then(data => {
-    console.log(data);
     order.value = data;
     if (!data.id) {
         router.push('/browse');
         return;
     }
     moralisService.getNft(data.tokenAddress, data.nftTokenId).then(res => {
-        console.log(res)
         nft.value = res;
     })
 });
+// coinmarketcapService.exchangeToUSD();
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
 const fundError = ref(false);
@@ -65,10 +65,10 @@ const fundError = ref(false);
     <body-container>
         <div class="grid grid-cols-7 text-white gap-8 mt-10">
             <div class="col-span-7 lg:col-span-3">
-                <more-info />
+                <more-info :percent="order.protectionRate / 100" :period="order.protectionTime / 86400" />
             </div>
             <div class="col-span-7 mb-4 lg:col-span-4 relative">
-                <item-action :orderID="order.orderID" :tokenPrice="order.tokenPrice" :nft="nft" />
+                <item-action :order="order" :orderID="order.orderID" :tokenPrice="order.tokenPrice" :nft="nft" />
             </div>
         </div>
         <div class="mb-10">
