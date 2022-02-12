@@ -20,7 +20,7 @@ const decimal = ref();
 
 function setPrice(price) {
     integer.value = parseInt(price);
-    integerString.value = integer.value ? integer.value.toString() : '';
+    integerString.value = integer.value.toString();
     _dLength.value = price.toString().length - integer.value.toString().length - 1;
     decimal.value = _dLength.value > 0 ? (price - integer.value).toFixed(_dLength.value) : null;
 }

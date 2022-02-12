@@ -95,6 +95,7 @@ module.exports = {
         '90.75': '363px',
         '104': '416px',
         'modal-big': '1444px',
+        'modal-md': '1171px',
         'summary-xs': '251px',
         'summary-sm': '300px',
         'asset-img': '500px',

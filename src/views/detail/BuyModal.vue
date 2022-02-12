@@ -9,7 +9,10 @@ import NftmxTr from '@/core/components/NftmxTr.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import { useStore } from 'vuex';
 import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
-import { exchangeRate } from '@/core/config';
+import { exchangeRate, TokenType } from '@/core/config';
+import { roundTo } from '@/core/utils';
+import marketService from '@/core/services/market.service';
+import { ref } from 'vue';
 
 const props = defineProps({
     order: Object,
@@ -29,15 +32,20 @@ function buyOrder(params) {
     store.dispatch('market/buyFixedPayOrder', { orderID: parseInt(props.orderID), tokenPrice: props.tokenPrice });
 }
 
+const bnbPrice = ref(0);
+marketService.getUSDFromToken(TokenType.BNB).then(res => {
+    bnbPrice.value = res.price;
+})
+
 </script>
 
 <template>
-    <nftmx-modal width="md:w-3/5 lg:w-5/12">
+    <nftmx-modal big>
         <div class="text-center relative -top-2">
             <div class="font-press text-2xl">Buy</div>
             <div class="font-ibm-semi-bold text-sm items-center py-4 flex justify-center">
                 Balance:&nbsp;
-                <nftmx-price-common :price="balance" />
+                <nftmx-price-common :price="roundTo(balance * bnbPrice)" />
 
                 <span class="text-xxs font-ibm text-tertiary-400">(322.4445)</span>
             </div>
@@ -61,7 +69,7 @@ function buyOrder(params) {
                         <td class="text-right">
                             <div class="font-ibm text-xs leading-6 flex justify-end">
                                 <nftmx-price-common
-                                    :price="parseInt(order.tokenPrice) / exchangeRate"
+                                    :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)"
                                 />
                             </div>
                             <div class="font-ibm text-xxs text-tertiary-400 leading-6">( 322.4445)</div>
