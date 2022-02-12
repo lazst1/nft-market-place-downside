@@ -4,34 +4,43 @@ import Icon from './Icon.vue'
 import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 import SaleInfo from './SaleInfo.vue'
 import NftmxButton from './NftmxButton.vue'
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import Timer from './Timer.vue'
+import moralisService from '@/core/services/moralis.service';
+import { exchangeRate } from '@/core/config';
+import marketService from '../services/market.service';
+import { TokenType } from '../config';
 
 const props = defineProps({
     data: {
         type: Object,
-        default: {}
+        default: {
+            syndication: true
+        }
     },
 })
 
 const order = {
     ...props.data,
     id: props.data.id || 10,
-    percent: props.data.percent || 10,
-    period: props.data.period || 10,
+    protectionRate: props.data.protectionRate / 100,
+    protectionTime: props.data.protectionTime / 86400,
     unique: props.data.unique || "1:20",
     transferred: props.data.transferred || "12/20",
     roi: props.data.roi || "+4,780.73%",
-    value: props.data.value || "$0.4781",
+    tokenPrice: props.data.tokenPrice || "$0.4781",
     vote: props.data.vote || "55",
-    syndication: props.data.syndication || true,
-    auction: props.data.auction || false,
-    bought: props.data.bought || false,
-    connect: props.data.connect || false,
-    sold: props.data.sold || false,
-    closed: props.data.closed || false,
+    syndication: props.data.syndication,
+    auction: props.data.auction,
+    bought: props.data.bought,
+    connect: props.data.connect,
+    sold: props.data.sold,
+    closed: props.data.closed,
 }
-
+const nft = ref({});
+moralisService.getNft(order.tokenAddress, order.nftTokenId).then(res => {
+    nft.value = res;
+})
 const syndicationCSS = computed(() => {
     const base = [
         'py-3.5', 'text-xxs', 'leading-4', order.syndication ? 'bg-gradient-to-r from-secondary-900 to-secondary-700 text-white' : 'bg-tertiary-600 text-tertiary-500'
@@ -47,70 +56,77 @@ const boughtCSS = computed(() => {
     return base
 })
 
+const nftPriceInUSD = ref(0);
+marketService.getUSDFromToken(TokenType.BNB, order.tokenPrice / exchangeRate).then(res => {
+    nftPriceInUSD.value = order.tokenPrice / exchangeRate * res.price;
+})
+
 </script>
 
 <template>
-    <router-link :to="{name: 'detail', params: {orderId: order.id}}" class="w-full max-w-max mx-auto">
-        <div class="hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700">
-            <div class="relative h-50 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover">
-                <ribbon :percent="order.percent" :period="order.period" />
+    <router-link
+        :to="{ name: 'detail', params: { orderId: order.id } }"
+        class="w-full"
+    >
+        <div
+            class="hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
+        >
+            <div class="relative w-full pt-2/3 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover">
+                <ribbon :percent="order.protectionRate" :period="order.protectionTime" />
             </div>
             <div :class="boughtCSS">
                 <div class="flex text-white">
-                    <div class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16">
-                        Love in the city new nork
-                    </div>
+                    <div
+                        class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16"
+                    >{{nft.name}}</div>
                     <div class="text-xs flex">
-                        <span class="pr-1 text-tertiary-400">{{order.vote}}</span>
-                        <icon
-                            :path="mdiThumbUp"
-                            w="w-3.5"
-                            h="h-3.5"
-                            color="primary-900"
-                        />
+                        <span class="pr-1 text-tertiary-400">{{ order.vote }}</span>
+                        <icon :path="mdiThumbUp" w="w-3.5" h="h-3.5" color="primary-900" />
                     </div>
                 </div>
                 <sale-info
                     :unique="order.unique"
                     :transferred="order.transferred"
                     :roi="order.roi"
-                    :value="order.value"
+                    :value="nftPriceInUSD"
                 />
-                <div class="text-tertiary-400 text-xxs text-center relative mt-6.5">
-                    Current auction ends in
-                </div>
+                <div
+                    class="text-tertiary-400 text-xxs text-center relative mt-6.5"
+                >Current auction ends in</div>
                 <div v-if="order.bought" class="py-3">
                     <timer />
                 </div>
             </div>
-            <div v-if="!order.bought&&!order.connect&&!order.sold&&!order.closed" class="grid grid-cols-2 relative font-press">
+            <div
+                v-if="!order.bought && !order.connect && !order.sold && !order.closed"
+                class="grid grid-cols-2 relative font-press"
+            >
                 <button :class="syndicationCSS">
-                    START<br />SYNDICATION
+                    START
+                    <br />SYNDICATION
                 </button>
-                <button class="bg-gradient-to-r from-primary-900 to-primary-700 text-white text-sm">
-                    BUY NOW
-                </button>
+                <button
+                    class="bg-gradient-to-r from-primary-900 to-primary-700 text-white text-sm"
+                >BUY NOW</button>
             </div>
             <div v-if="connect" class="grid grid-cols-1 relative font-press">
-                <button class="bg-black py-6 text-xs">
-                    CONNECT WALLET
-                </button>
+                <button class="bg-black py-6 text-xs">CONNECT WALLET</button>
             </div>
             <div v-if="order.sold" class="grid grid-cols-1 relative font-press">
-                <button class="bg-black py-6 text-xs text-red-700">
-                    SOLD OUT
-                </button>
+                <button class="bg-black py-6 text-xs text-red-700">SOLD OUT</button>
             </div>
             <div v-if="order.closed" class="grid grid-cols-1 relative font-press">
-                <button class="bg-black py-6 text-xs text-red-700">
-                    AUCTION CLOSED
-                </button>
+                <button class="bg-black py-6 text-xs text-red-700">AUCTION CLOSED</button>
             </div>
         </div>
         <div v-if="order.auction" class="px-2 shadow-xl">
-            <div class="w-full h-1 bg-gradient-to-b from-primary-900 via-primary-800 to-primary-700" />
+            <div
+                class="w-full h-1 bg-gradient-to-b from-primary-900 via-primary-800 to-primary-700"
+            />
             <div class="px-2">
-                <div class="w-full h-1 bg-gradient-to-b from-primary-900 via-primary-800 to-primary-700" />
+                <div
+                    class="w-full h-1 bg-gradient-to-b from-primary-900 via-primary-800 to-primary-700"
+                />
             </div>
         </div>
     </router-link>

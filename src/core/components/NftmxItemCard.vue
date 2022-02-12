@@ -27,14 +27,6 @@ const props = defineProps({
             token_uri: ""
         }
     },
-    percent: {
-        type: Number,
-        default: 100
-    },
-    period: {
-        type: Number,
-        default: 365
-    },
     unique: {
         type: String,
         default: "1:20"
@@ -119,7 +111,7 @@ function approve() {
         :assetContractAddress="item.token_address"
         :tokenId="item.token_id"
     >
-        <div class="h-">
+        <div>
             <div :class="[forMore ? 'h-17' : 'h-24', 'mb-0.5']">
                 <div class="text-tertiary-400 text-xxs">{{ item.name ? item.name : '' }}</div>
                 <div

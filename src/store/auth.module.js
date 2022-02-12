@@ -38,7 +38,7 @@ export const auth = {
                 // MoralisService.getAllNFTs(20, 0).then(nftData => {
                 //     rootState.allNfts = JSON.parse(JSON.stringify(nftData));
                 // })
-                marketService.getOrders().then(orders => {
+                marketService.getSaleOrders().then(orders => {
                     rootState.orders = orders;
                 })
                 return AuthService.connectWallet(walletAddress).then(

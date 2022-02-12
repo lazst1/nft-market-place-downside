@@ -40,8 +40,9 @@ export const walletList = [
 export const moralisChain = import.meta.env.VITE_MORALIS_CHAIN;
 export const netExplorerURL = import.meta.env.VITE_NET_EXPLORER_URL;
 
-export const tokenAddress = import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS;
 export const marketAddress = import.meta.env.VITE_MARKET_CONTRACT_ADDRESS;
+
+export const exchangeRate = 1000000000000000000;
 
 export const saleType = {
     FIX_SALE: 'FIX-SALE',
@@ -67,4 +68,11 @@ export const themeConfig = {
     lg: 1024,
     md: 768,
     sm: 640
+}
+
+export const TokenType = {
+    BNB: 'BNB',
+    ETH: 'ETH',
+    BTC: 'BTC',
+    SOL: 'SOL'
 }

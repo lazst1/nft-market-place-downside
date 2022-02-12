@@ -16,6 +16,10 @@ import ChooseNftGroup from './ChooseNftGroup.vue';
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 const user = computed(() => store.getters['auth/getUser']);
+if (walletAddress.value) {
+    store.dispatch("moralis/getMyNFTs");
+}
+
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import Ribbon from '@/core/components/Ribbon.vue';
 import DetailButton from '@/core/components/DetailButton.vue';
@@ -14,7 +14,14 @@ import { mdiClose } from '@mdi/js'
 import MoreInfo from './MoreInfo.vue';
 import BuyModal from './BuyModal.vue';
 import SyndicationModal from './SyndicationModal.vue';
-import NftmxSelectNetwork from '../../core/components/NftmxSelectNetwork.vue';
+import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
+import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
+import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
+import moralisService from '@/core/services/moralis.service';
+import { useStore } from 'vuex';
+import { exchangeRate, TokenType } from '@/core/config';
+import marketService from '@/core/services/market.service';
+import { roundTo } from '@/core/utils';
 
 const people = [
     {
@@ -26,6 +33,7 @@ const people = [
 ]
 
 const props = defineProps({
+    order: Object,
     orderID: String,
     tokenPrice: String,
     nft: Object
@@ -34,10 +42,20 @@ const props = defineProps({
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
 const fundError = ref(false);
+const store = useStore();
+const balance = ref();
 
 const handleBuyModal = (value) => {
     buyModalActive.value = value;
+    moralisService.getBalance(store.state.user.address).then(res => {
+        balance.value = res.balance / exchangeRate;
+    })
 }
+
+const bnbPrice = ref(0);
+marketService.getUSDFromToken(TokenType.BNB).then(res => {
+    bnbPrice.value = res.price;
+})
 
 </script>
 
@@ -52,10 +70,17 @@ const handleBuyModal = (value) => {
         </div>
     </div>
     <div class="flex text-xs pb-12">
-        <div class="flex-1">
-            Created by
-            <span class="text-primary-900">234...293</span> | Owned by
-            <span class="text-primary-900">234...293</span>
+        <div class="flex flex-wrap flex-1">
+            <div>
+                Created by
+                <span class="text-primary-900">234...293</span> |&nbsp;
+            </div>
+            <div>
+                Owned by
+                <span class="text-primary-900">
+                    <nftmx-wallet-address-pop class="text-primary-900" :address="nft.owner_of"></nftmx-wallet-address-pop>
+                </span>
+            </div>
         </div>
         <div class="text-primary-900 font-ibm-bold">AUCTION</div>
     </div>
@@ -86,8 +111,10 @@ const handleBuyModal = (value) => {
                 <icon class="-ml-2" :path="mdiHelpCircle" w="w-4" h="h-4" size="36" color="white" />
             </div>
             <div class="pt-2 pb-7 lg:text-3xl">
-                <span class="text-primary-900 font-ibm-bold">$1.548,548.65</span>
-                <span class="text-tertiary-400">( 458,6645)</span>
+                <span class="text-primary-900 font-ibm-bold">
+                    <nftmx-price-common :price="roundTo(parseInt(tokenPrice) / exchangeRate)" />
+                </span>
+                <span class="text-tertiary-400">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</span>
             </div>
             <nftmx-button
                 color="secondary"
@@ -97,7 +124,7 @@ const handleBuyModal = (value) => {
             />
         </div>
     </div>
-    <buy-modal v-model="buyModalActive" :orderID="orderID" :tokenPrice="tokenPrice" />
+    <buy-modal v-model="buyModalActive" :order="order" :nft="nft" :orderID="orderID" :tokenPrice="tokenPrice" :balance="balance" />
     <syndication-modal v-model="syndicationModalActive" />
 </template>
 

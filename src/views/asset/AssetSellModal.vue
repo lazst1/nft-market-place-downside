@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { saleType } from '@/core/config'
 import NftmxModal from '@/core/components/NftmxModal.vue';
 import { useRoute } from 'vue-router';
@@ -7,6 +7,15 @@ import DetailButton from '@/core/components/DetailButton.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import { useStore } from 'vuex';
+import Ribbon from '@/core/components/Ribbon.vue';
+import { keyCodeNumberRange } from '../../core/utils';
+
+const props = defineProps({
+    asset: {
+        type: Object,
+        default: {}
+    }
+})
 
 const store = useStore();
 const route = useRoute();
@@ -18,10 +27,11 @@ const downsideRate = ref();
 const sale = ref(saleType.FIX_SALE);
 const openCalendar = ref(false);
 
+const period = computed(() => downsidePeriod.value ? parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000) : 0);
+
 function createOrder() {
     const token_id = parseInt(tokenId);
-    const price = parseInt(nftPrice.value);
-    const period = parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000);
+    const price = nftPrice.value;
     const rate = downsideRate.value * 100;
     store.dispatch(
         'market/createOrder',
@@ -29,7 +39,7 @@ function createOrder() {
             assetContractAddress,
             tokenId: token_id,
             nftPrice: price,
-            downsidePeriod: period,
+            downsidePeriod: period.value,
             downsideRate: rate
         }
     )
@@ -37,6 +47,25 @@ function createOrder() {
 
 function handleCalendar() {
     openCalendar.value = !openCalendar.value;
+}
+
+function preventKey(event) {
+    if (keyCodeNumberRange(event.keyCode)) {
+
+    } else {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+    }
+}
+
+function downsideRateRange() {
+    if (downsideRate.value > 100) {
+        downsideRate.value = 100;
+    }
+    if (downsideRate.value < 0) {
+        downsideRate.value = 0;
+    }
 }
 
 </script>
@@ -47,16 +76,16 @@ function handleCalendar() {
             <div class="font-press text-2xl">List Item for Sale</div>
         </div>
         <div class="grid grid-cols-8 text-white my-9 px-4 lg:pl-17.5 lg:pr-17">
-            <div class="col-span-full lg:col-span-3 pr-2.25">
+            <div class="col-span-full lg:col-span-3 lg:-mr-3.5 3xl:pr-2.25">
                 <div
-                    class="relative h-90.75 overflow-hidden p-6 bg-[url('/images/img10.png')] bg-cover border border-black"
+                    class="relative overflow-hidden p-6 bg-[url('/images/img10.png')] bg-cover border border-black w-full pt-70per"
                 >
-                    <ribbon :percent="percent" :period="period" />
+                    <ribbon :percent="downsideRate" :period="period / 86400" />
                 </div>
                 <div class="flex w-full text-sm font-ibm-bold mt-7">
                     <div class="pt-0.75">
                         <detail-button class="text-primary-900">Kyle White</detail-button>
-                        <detail-button class="text-2xl mt-1.5">Play Quiet #10/10</detail-button>
+                        <detail-button class="text-2xl mt-1.5">{{ asset.name }}</detail-button>
                     </div>
                     <div class="grow"></div>
                     <div class="py-0.5">
@@ -69,23 +98,23 @@ function handleCalendar() {
                 </div>
             </div>
             <div
-                class="col-span-full lg:col-span-5 relative text-lg font-ibm-medium mr-0.5 lg:pl-9 ml-px"
+                class="col-span-full lg:col-span-5 relative text-lg font-ibm-medium mr-0.5 lg:pl-10.25 3xl:pl-9 ml-px"
             >
                 <div class="flex">
                     Choose a collection
-                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
-                <div class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-4.5">
+                <div class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-8.5 3xl:gap-4.5">
                     <nftmx-select-network />
                     <nftmx-button
                         color="primary-900"
                         label="CREATE NEW COLLECTION"
-                        :class="['font-press text-smallest sm:text-xs lg:text-sm bg-primary-900 hover:bg-primary-700 focus:bg-primary-800']"
+                        :class="['font-press text-smallest sm:text-xs 3xl:text-sm bg-primary-900 hover:bg-primary-700 focus:bg-primary-800']"
                     />
                 </div>
                 <div class="flex mt-6">
                     Type of sale
-                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
                 <div class="flex my-3">
                     <nftmx-button
@@ -105,20 +134,20 @@ function handleCalendar() {
                 </div>
                 <div class="flex mt-8">
                     Price
-                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap mt-3.5 mb-6 font-ibm text-sm">
                     <nftmx-select-network color="black" :data="currencies" class="xl:w-1/3" />
                     <input
-                        type="number"
                         v-model="nftPrice"
                         class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-4.75 font-ibm text-sm"
-                        placeholder="Type of amount (wei)"
+                        placeholder="Type of amount"
+                        @keydown="preventKey($event)"
                     />
                 </div>
                 <div class="flex pt-0.75">
                     Days of protection to offer
-                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
                 <div class="mb-7">
                     <div
@@ -147,14 +176,15 @@ function handleCalendar() {
                 </div>
                 <div class="flex pt-0.5">
                     Downside Protection to Offer
-                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
                 <div class="flex mt-3.5 mb-4 font-ibm text-sm">
                     <input
                         v-model="downsideRate"
-                        type="number"
                         class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full px-6 font-ibm text-sm"
-                        placeholder
+                        placeholder="0"
+                        @keydown="preventKey($event)"
+                        @input="downsideRateRange()"
                     />
                     <div class="w-14 h-13.5 px-4 bg-black flex items-center justify-center">%</div>
                 </div>
@@ -170,7 +200,7 @@ function handleCalendar() {
                 <nftmx-divider class="mt-9 mb-6" />
                 <div class="flex pt-0.75">
                     Fees
-                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-small ml-1" />
+                    <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
                 <div class="mt-4">
                     <div class="flex py-1 text-xs font-ibm-medium text-tertiary-500">

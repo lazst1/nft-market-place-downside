@@ -15,9 +15,22 @@ import { themeConfig } from '@/core/config';
 import NavBarSearch from '@/core/container/NavBarSearch.vue';
 import Ledger from './Ledger.vue';
 import AssetSellModal from './AssetSellModal.vue';
+import { useRoute, useRouter } from 'vue-router';
+import moralisService from '@/core/services/moralis.service';
 
-const asset = ref({ image_url: '/images/img10.png' })
 const store = useStore();
+const router = useRouter();
+const route = useRoute();
+const assetContractAddress = route.params.assetContractAddress;
+const tokenId = route.params.tokenId;
+const asset = ref({});
+moralisService.getNft(assetContractAddress, tokenId).then(res => {
+    if (!res.owner_of) {
+        router.push('/browse');
+        return;
+    }
+    asset.value = res;
+})
 
 const sale = ref(saleType.FIX_SALE);
 const sellModalActive = ref(false);
@@ -31,11 +44,11 @@ const handleModal = (value) => {
     <body-container>
         <div class="grid grid-cols-7 text-white gap-8 mt-4 lg:mt-9">
             <div class="col-span-7 md:col-span-3">
-                <asset-user v-if="store.state.app.windowWidth < themeConfig.md" />
+                <asset-user v-if="store.state.app.windowWidth < themeConfig.md" :asset="asset" />
                 <asset-detail :img_url="asset.image_url" />
             </div>
             <div class="col-span-7 md:col-span-4 relative">
-                <asset-user v-if="store.state.app.windowWidth >= themeConfig.md" />
+                <asset-user v-if="store.state.app.windowWidth >= themeConfig.md" :asset="asset" />
                 <div class="mt-px">
                     <asset-statistics v-model="sellModalActive" @handle-modal="handleModal" />
                 </div>
@@ -46,7 +59,9 @@ const handleModal = (value) => {
             <accordion :accordion="false" :border="false" :sidebar="true">
                 <template v-slot:caption>
                     <div class="flex items-center">
-                        <div class="text-lg lg:text-2xl font-ibm-bold py-4 mr-24">More From This Collections</div>
+                        <div
+                            class="text-lg lg:text-2xl font-ibm-bold py-4 mr-24"
+                        >More From This Collections</div>
                     </div>
                 </template>
 
@@ -69,7 +84,7 @@ const handleModal = (value) => {
         </div>
     </body-container>
     <nftmx-footer />
-    <asset-sell-modal v-model="sellModalActive" @handle-modal="handleModal" />
+    <asset-sell-modal :asset="asset" v-model="sellModalActive" @handle-modal="handleModal" />
 </template>
 
 <style scoped>

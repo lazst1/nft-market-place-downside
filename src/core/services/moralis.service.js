@@ -1,5 +1,5 @@
 import Moralis from "moralis";
-import { moralisChain, tokenAddress, marketAddress } from "../config";
+import { moralisChain, marketAddress } from "../config";
 import http from "../utils/http-moralis";
 
 class MoralisService {
@@ -16,6 +16,9 @@ class MoralisService {
     }
     getNft(token_address, token_id) {
         return http.get(`nft/${token_address}/${token_id}?chain=${moralisChain}&format=decimal`).then(res => res.data);
+    }
+    getBalance(address) {
+        return http.get(`${address}/balance?chain=${moralisChain}`).then(res => res.data);
     }
 }
 

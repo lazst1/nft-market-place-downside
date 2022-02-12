@@ -11,8 +11,12 @@ import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex';
 import BrowseSearch from './BrowseSearch.vue';
+import marketService from '../../core/services/market.service';
 
 const store = useStore();
+if (store.getters['auth/getWalletAddress']) {
+    store.dispatch("market/getSaleOrders");
+}
 console.log(store)
 
 </script>
