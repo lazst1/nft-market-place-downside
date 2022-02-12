@@ -14,7 +14,6 @@ export const market = {
     actions: {
         getSaleOrders({ commit, rootState }) {
             marketService.getSaleOrders().then(orders => {
-                console.log(orders)
                 rootState.orders = orders;
             })
         },
