@@ -27,14 +27,6 @@ const props = defineProps({
             token_uri: ""
         }
     },
-    percent: {
-        type: Number,
-        default: 100
-    },
-    period: {
-        type: Number,
-        default: 365
-    },
     unique: {
         type: String,
         default: "1:20"
@@ -81,6 +73,7 @@ const props = defineProps({
     },
     forMore: Boolean
 })
+console.log(props.item)
 
 const store = useStore();
 
@@ -118,7 +111,6 @@ function approve() {
         :image="metadata ? metadata.image : ''"
         :assetContractAddress="item.token_address"
         :tokenId="item.token_id"
-        :percent="percent"
     >
         <div>
             <div :class="[forMore ? 'h-17' : 'h-24', 'mb-0.5']">

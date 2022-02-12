@@ -23,7 +23,7 @@ const assetContractAddress = route.params.assetContractAddress;
 const tokenId = route.params.tokenId;
 const nftPrice = ref();
 const downsidePeriod = ref();
-const downsideRate = ref(0);
+const downsideRate = ref();
 const sale = ref(saleType.FIX_SALE);
 const openCalendar = ref(false);
 
@@ -182,7 +182,7 @@ function downsideRateRange() {
                     <input
                         v-model="downsideRate"
                         class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full px-6 font-ibm text-sm"
-                        placeholder
+                        placeholder="0"
                         @keydown="preventKey($event)"
                         @input="downsideRateRange()"
                     />

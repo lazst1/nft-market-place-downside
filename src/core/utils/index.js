@@ -5,3 +5,7 @@ export function keyCodeNumberRange(keyCode) {
         return false;
     }
 }
+
+export function roundTo(num, e = 2) {
+    return +(Math.round(num + `e+${e}`) + `e-${e}`);
+}

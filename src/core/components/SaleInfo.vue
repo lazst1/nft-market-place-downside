@@ -1,6 +1,5 @@
 <script setup>
-import Icon from './Icon.vue'
-import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
+import { roundTo } from '../utils'
 
 defineProps({
     unique: {
@@ -19,10 +18,7 @@ defineProps({
         type: String,
         default: "(47.81x)"
     },
-    value: {
-        type: String,
-        default: "$0.4781"
-    },
+    value: Number
 })
 
 </script>
@@ -50,7 +46,7 @@ defineProps({
             {{ roi }}
             <div class="text-tertiary-400 font-ibm-light leading-3.5">{{ roii }}</div>
         </div>
-        <div class="text-primary-900 font-ibm-light">${{ value }}</div>
+        <div class="text-primary-900 font-ibm-light">${{ roundTo(value) }}</div>
     </div>
 </template>
 
