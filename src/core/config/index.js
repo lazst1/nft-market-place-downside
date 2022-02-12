@@ -69,3 +69,10 @@ export const themeConfig = {
     md: 768,
     sm: 640
 }
+
+export const TokenType = {
+    BNB: 'BNB',
+    ETH: 'ETH',
+    BTC: 'BTC',
+    SOL: 'SOL'
+}

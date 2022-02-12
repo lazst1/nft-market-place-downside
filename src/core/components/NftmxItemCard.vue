@@ -118,8 +118,9 @@ function approve() {
         :image="metadata ? metadata.image : ''"
         :assetContractAddress="item.token_address"
         :tokenId="item.token_id"
+        :percent="percent"
     >
-        <div class="h-">
+        <div>
             <div :class="[forMore ? 'h-17' : 'h-24', 'mb-0.5']">
                 <div class="text-tertiary-400 text-xxs">{{ item.name ? item.name : '' }}</div>
                 <div

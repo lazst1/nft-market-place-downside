@@ -29,6 +29,8 @@ export const market = {
             });
         },
         async createOrder({ commit, rootState }, data) {
+            let tokenAmount = rootState.web3.utils.toWei(amount.toString(), 'ether');
+
             rootState.marketContract.methods.createOrder(
                 data.assetContractAddress,
                 data.tokenId,

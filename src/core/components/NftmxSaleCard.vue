@@ -8,6 +8,8 @@ import { computed, ref } from 'vue';
 import Timer from './Timer.vue'
 import moralisService from '@/core/services/moralis.service';
 import { exchangeRate } from '@/core/config';
+import marketService from '../services/market.service';
+import { TokenType } from '../config';
 
 const props = defineProps({
     data: {
@@ -54,6 +56,11 @@ const boughtCSS = computed(() => {
     return base
 })
 
+const nftPriceInUSD = ref(0);
+marketService.getUSDFromToken(TokenType.BNB, order.tokenPrice / exchangeRate).then(res => {
+    nftPriceInUSD.value = order.tokenPrice / exchangeRate * res.price;
+})
+
 </script>
 
 <template>
@@ -81,7 +88,7 @@ const boughtCSS = computed(() => {
                     :unique="order.unique"
                     :transferred="order.transferred"
                     :roi="order.roi"
-                    :value="order.tokenPrice / exchangeRate"
+                    :value="nftPriceInUSD"
                 />
                 <div
                     class="text-tertiary-400 text-xxs text-center relative mt-6.5"
