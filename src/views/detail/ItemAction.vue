@@ -19,7 +19,9 @@ import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
 import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
 import moralisService from '@/core/services/moralis.service';
 import { useStore } from 'vuex';
-import { exchangeRate } from '@/core/config';
+import { exchangeRate, TokenType } from '@/core/config';
+import marketService from '@/core/services/market.service';
+import { roundTo } from '@/core/utils';
 
 const people = [
     {
@@ -49,6 +51,11 @@ const handleBuyModal = (value) => {
         balance.value = res.balance / exchangeRate;
     })
 }
+
+const bnbPrice = ref(0);
+marketService.getUSDFromToken(TokenType.BNB).then(res => {
+    bnbPrice.value = res.price;
+})
 
 </script>
 
@@ -105,9 +112,9 @@ const handleBuyModal = (value) => {
             </div>
             <div class="pt-2 pb-7 lg:text-3xl">
                 <span class="text-primary-900 font-ibm-bold">
-                    <nftmx-price-common :price="parseInt(tokenPrice) / exchangeRate" />
+                    <nftmx-price-common :price="roundTo(parseInt(tokenPrice) / exchangeRate)" />
                 </span>
-                <span class="text-tertiary-400">( 458,6645)</span>
+                <span class="text-tertiary-400">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</span>
             </div>
             <nftmx-button
                 color="secondary"

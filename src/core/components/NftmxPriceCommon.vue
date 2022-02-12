@@ -23,6 +23,7 @@ function setPrice(price) {
     integerString.value = integer.value.toString();
     _dLength.value = price.toString().length - integer.value.toString().length - 1;
     decimal.value = _dLength.value > 0 ? (price - integer.value).toFixed(_dLength.value) : null;
+    console.log(decimal.value)
 }
 watchEffect(() => {
     if (props.price) {
@@ -39,6 +40,6 @@ watchEffect(() => {
             {{ l }}
         </div>
         <span v-if="decimal">.</span>
-        <div v-for="(l, index) in decimal" :key="index" class="flex">{{ index > 2 && index < 7 ? l : '' }}</div>
+        <div v-for="(l, index) in decimal" :key="index" class="flex">{{ index > 1 && index < 7 ? l : '' }}</div>
     </div>
 </template>

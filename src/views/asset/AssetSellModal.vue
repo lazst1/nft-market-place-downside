@@ -39,7 +39,7 @@ function createOrder() {
             assetContractAddress,
             tokenId: token_id,
             nftPrice: price,
-            downsidePeriod: period,
+            downsidePeriod: period.value,
             downsideRate: rate
         }
     )

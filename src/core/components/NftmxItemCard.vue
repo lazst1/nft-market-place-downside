@@ -73,7 +73,6 @@ const props = defineProps({
     },
     forMore: Boolean
 })
-console.log(props.item)
 
 const store = useStore();
 

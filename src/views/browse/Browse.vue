@@ -17,6 +17,7 @@ const store = useStore();
 if (store.getters['auth/getWalletAddress']) {
     store.dispatch("market/getSaleOrders");
 }
+console.log(store)
 
 </script>
 

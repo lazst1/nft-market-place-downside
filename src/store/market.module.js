@@ -29,8 +29,6 @@ export const market = {
             });
         },
         async createOrder({ commit, rootState }, data) {
-            let tokenAmount = rootState.web3.utils.toWei(amount.toString(), 'ether');
-
             rootState.marketContract.methods.createOrder(
                 data.assetContractAddress,
                 data.tokenId,
@@ -44,7 +42,7 @@ export const market = {
         async buyFixedPayOrder({ commit, rootState }, data) {
             rootState.marketContract.methods.buyFixedPayOrder(
                 data.orderID
-            ).send({ from: rootState.user.address, gas: 623478, value: parseInt(data.tokenPrice), gasPrice:0 });
+            ).send({ from: rootState.user.address, gas: 623478, value: parseInt(data.tokenPrice), gasPrice: 0 });
         },
     },
     getters: {

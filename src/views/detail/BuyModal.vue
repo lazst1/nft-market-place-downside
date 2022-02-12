@@ -41,13 +41,13 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
 
 <template>
     <nftmx-modal big>
-        <div class="text-center relative -top-2">
+        <div class="text-center relative -top-2 md:w-asset-img">
             <div class="font-press text-2xl">Buy</div>
             <div class="font-ibm-semi-bold text-sm items-center py-4 flex justify-center">
                 Balance:&nbsp;
                 <nftmx-price-common :price="roundTo(balance * bnbPrice)" />
 
-                <span class="text-xxs font-ibm text-tertiary-400">(322.4445)</span>
+                <span class="text-xxs font-ibm text-tertiary-400">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</span>
             </div>
         </div>
         <div class="px-4 md:px-16 pb-10">
@@ -72,7 +72,7 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                                     :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)"
                                 />
                             </div>
-                            <div class="font-ibm text-xxs text-tertiary-400 leading-6">( 322.4445)</div>
+                            <div class="font-ibm text-xxs text-tertiary-400 leading-6">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</div>
                         </td>
                         <td class="text-center items-start">
                             <icon
@@ -87,9 +87,9 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                     <th class="py-6 px-5 text-left">Total</th>
                     <th class="text-right">
                         <div class="font-ibm text-sm text-primary-900 leading-10 flex justify-end">
-                            <nftmx-price-common :price="parseInt(order.tokenPrice) / exchangeRate" />
+                            <nftmx-price-common :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)" />
                         </div>
-                        <div class="font-ibm text-xxs text-tertiary-400">( 644.889)</div>
+                        <div class="font-ibm text-xxs text-tertiary-400">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</div>
                     </th>
                     <th></th>
                 </tfoot>
