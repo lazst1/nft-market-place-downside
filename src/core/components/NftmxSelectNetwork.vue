@@ -1,25 +1,32 @@
 <template>
-    <div class="custom-select relative w-full text-left leading-12.5" :tabindex="tabindex" @blur="open = false">
-        <div :class="[bgColor?bgColor+' pl-3':'bg-tertiary-800 pl-3.5', 'selected border-2 border-black flex items-center cursor-pointer']" @click="open = !open">
-            <img :src="selected.icon" class="mr-3" />
-            <span :class="[bgColor?'ml-0.75':'ml-px']">{{ selected.name }}</span>
-        </div>
-        <div class="items" :class="{ selectHide: !open }">
-            <div
-                class="flex items-center"
-                v-for="(option, i) of options"
-                :key="i"
-                @click="
-                selected = option;
-                open = false;
-                $emit('input', option);
-                "
-            >
-                <img :src="option.icon" class="mr-3" />
-                {{ option.name }}
-            </div>
-        </div>
+  <div
+    class="custom-select relative w-full text-left leading-12.5"
+    :tabindex="tabindex"
+    @blur="open = false"
+  >
+    <div
+      :class="[big ? 'h-15' : '', bgColor ? bgColor + ' pl-3' : 'bg-tertiary-800 pl-3.5', 'selected border-2 border-black flex items-center cursor-pointer']"
+      @click="open = !open"
+    >
+      <img :src="selected.icon" class="mr-3" />
+      <span :class="[bgColor ? 'ml-0.75' : 'ml-px']">{{ selected.name }}</span>
     </div>
+    <div class="items" :class="{ selectHide: !open }">
+      <div
+        :class="[big ? 'h-15' : '', bgColor, 'flex items-center']"
+        v-for="(option, i) of options"
+        :key="i"
+        @click="
+          selected = option;
+          open = false;
+          $emit('input', option);
+        "
+      >
+        <img :src="option.icon" class="mr-3" />
+        {{ option.name }}
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,14 +45,15 @@ export default {
       default: 0,
     },
     data: Array,
-    color: String
+    color: String,
+    big: Boolean,
   },
   data() {
     return {
       open: false,
       options: this.data || networks,
       selected: this.data ? this.data[0] : networks[0],
-      bgColor: this.color ? 'bg-'+this.color : null
+      bgColor: this.color ? 'bg-' + this.color : null
     };
   },
   mounted() {

@@ -17,12 +17,24 @@ const initialUser = {
     allNfts: {}
 }
 
+const initialOrders = {
+    orders: [],
+    meta: {
+        currentPage: 1,
+        itemCount: 0,
+        itemsPerPage: 10,
+        totalItems: 0,
+        totalPages: 0
+    }
+}
+
 export default createStore({
     state: {
         web3: new Web3(Web3.givenProvider),
         marketContract: null,
         allNfts: {},
         user: initialUser,
+        orders: initialOrders
     },
     mutations: {},
     actions: {},

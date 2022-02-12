@@ -137,6 +137,7 @@ function handleCalendar() {
                     <v-date-picker
                         v-if="openCalendar"
                         v-model="downsidePeriod"
+                        :min-date="new Date()"
                         color="red"
                         is-dark
                         is-range

@@ -10,69 +10,39 @@ import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex';
+import BrowseSearch from './BrowseSearch.vue';
 
 const store = useStore();
+console.log(store)
 
 </script>
 
 <template>
-    <body-container :searchAble="true">
-        <div class="flex flex-wrap py-4 border-b border-b-black">
-            <checkbox-cell>
-                <span class="text-xs">Art</span>
-            </checkbox-cell>
-            <checkbox-cell>
-                <span class="text-xs">Domain Names</span>
-            </checkbox-cell>
-            <checkbox-cell>
-                <span class="text-xs">Virtual Worlds</span>
-            </checkbox-cell>
-            <checkbox-cell>
-                <span class="text-xs">Trading Cards</span>
-            </checkbox-cell>
-            <checkbox-cell>
-                <span class="text-xs">Collections</span>
-            </checkbox-cell>
-            <checkbox-cell>
-                <span class="text-xs">Sports</span>
-            </checkbox-cell>
-        </div>
-        <div class="flex py-4">
-            <div class="flex-1 flex items-center">
-                <span class="text-white font-ibm-bold mr-4 text-xl">1,291,029 results</span>
+    <browse-search />
+    <body-container>
+        <div class="flex flex-col sm:flex-row justify-start items-center pb-15">
+            <div class="mt-3.5 w-full sm:w-auto">
+                <span class="text-white font-ibm-semi-bold mr-4 text-lg">1,291,029 results</span>
+            </div>
+            <div class="flex mt-3.5 w-full sm:w-auto">
                 <nftmx-button
                     :outline="true"
                     color="primary"
-                    label="Buy Now"
+                    label="List Price Available"
                     :small="true"
                     :iconAfter="mdiCloseBox"
-                    class="hover:bg-tertiary-600 hover:text-primary-900"
+                    class="hover:bg-transparent hover:text-primary-900 h-9"
                 />
                 <nav-bar-item>
-                    <span class="text-primary-900 text-sm">Clear All</span>
+                    <span class="text-primary-900 text-xs">Clear All</span>
                 </nav-bar-item>
-            </div>
-            <div class="hidden md:block">
-                <drop-down title="Event type">
-                    <drop-down-item>DropDown Item</drop-down-item>
-                </drop-down>
-            </div>
-            <div class="ml-3 hidden md:block">
-                <drop-down title="Event type">
-                    <nav-bar-search-input small></nav-bar-search-input>
-                    <drop-down-item>
-                        <checkbox-cell>
-                            <div class="text-xs pt-1">ETH Address</div>
-                        </checkbox-cell>
-                    </drop-down-item>
-                </drop-down>
             </div>
         </div>
         <div
             class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5 min-h-item"
         >
             <nftmx-sale-card
-                v-for="(order, index) in store.state.orders"
+                v-for="(order, index) in store.state.orders.items"
                 :data="order"
                 :key="index"
             ></nftmx-sale-card>

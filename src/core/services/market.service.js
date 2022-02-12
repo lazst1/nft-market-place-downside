@@ -1,16 +1,12 @@
 import http from "../utils/http-common";
 
 class MatketService {
-    getOrders() {
-        return http.get("orders").then(res => {
-            return res.data;
-        })
+    getOrders(page = 1, limit = 10) {
+        return http.get(`orders?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
     getOrder(id) {
-        return http.get(`orders/${id}`).then(res => {
-            return Promise.resolve(res.data);
-        })
+        return http.get(`orders/${id}`).then(res => res.data)
     }
 }
 

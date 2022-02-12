@@ -50,15 +50,15 @@ export const saleType = {
 
 export const networks = [
     {
-        name: "Ethereum",
-        icon: "/images/i-eth.png"
+        name: "Binance",
+        icon: "/images/curr-3.png"
     }
 ]
 
 export const currencies = [
     {
-        name: "ETH",
-        icon: "/images/i-eth.png"
+        name: "BNB",
+        icon: "/images/curr-3.png"
     }
 ]
 
