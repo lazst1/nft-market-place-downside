@@ -1,14 +1,14 @@
 <script setup>
 import NftmxTypography from '@/core/components/NftmxTypography.vue';
-
+import LandingSection from './containers/LandingSection.vue';
 </script>
 
 <template>
-    <div class="py-24 bg-black mt-1">
+    <landing-section black>
         <div class="font-press text-center pt-1 pb-10 text-white">
             <nftmx-typography h1>Create and Sell Your NFTs</nftmx-typography>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-4 px-4 lg:px-22 gap-10 text-center">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 text-center">
             <div class="flex flex-col items-center px-1">
                 <img src="/images/free-whitelabel.png" class="py-5" />
                 <div class="text-white font-ibm-medium text-lg py-3">Set up your wallet</div>
@@ -43,5 +43,5 @@ import NftmxTypography from '@/core/components/NftmxTypography.vue';
                 >Choose between auctions, fixed-price listings, and declining-price listings. You choose how you want to sell your NFTs, and we help you sell them!</div>
             </div>
         </div>
-    </div>
+    </landing-section>
 </template>

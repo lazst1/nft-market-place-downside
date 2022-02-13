@@ -2,13 +2,13 @@
 <script setup>
 import { computed, ref } from 'vue';
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import NftmxCarousel from '@/core/components/NftmxCarousel.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import NftmxAnalyzer from '@/core/components/NftmxAnalyzer.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import TrendingAssets from './TrendingAssets.vue';
 import TrendingSearch from './TrendingSearch.vue';
+import SyndicationCarousel from '../landing/components/SyndicationCarousel.vue';
 import { useStore } from 'vuex';
 
 const user = computed(() => {
@@ -31,7 +31,7 @@ if (store.getters['auth/getWalletAddress']) {
     </div>
     <body-container :padding="false">
         <div class="pt-4">
-            <nftmx-carousel></nftmx-carousel>
+            <syndication-carousel></syndication-carousel>
         </div>
 
         <nftmx-divider class="mt-9"></nftmx-divider>

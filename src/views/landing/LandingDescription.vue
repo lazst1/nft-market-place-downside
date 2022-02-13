@@ -9,7 +9,7 @@ import LandingSection from './containers/LandingSection.vue';
         <div class="font-press text-center mt-0.75">
             <nftmx-typography h1>Downside Protection</nftmx-typography>
         </div>
-        <div class="grid sm:grid-cols-2 px-4 lg:px-22 sm:gap-10 text-center mt-6 lg:mt-12">
+        <div class="grid sm:grid-cols-2 sm:gap-10 text-center mt-6 lg:mt-12">
             <div class="flex flex-col gap-7">
                 <div class="text-xl lg:text-2xl font-ibm-bold">For Buyer</div>
                 <div

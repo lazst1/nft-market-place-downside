@@ -1,12 +1,14 @@
 <script setup>
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import NftmxCarousel from '@/core/components/NftmxCarousel.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import NftmxTypography from '@/core/components/NftmxTypography.vue';
 import LandingHead from './LandingHead.vue';
 import LandingDescription from './LandingDescription.vue';
 import LandingGuide from './LandingGuide.vue';
-
+import LandingSection from './containers/LandingSection.vue';
+import LandingTopVcs from './LandingTopVcs.vue';
+import LandingPopularSyndications from './LandingPopularSyndications.vue';
+import LandingCategories from './LandingCategories.vue';
+import SyndicationCarousel from './components/SyndicationCarousel.vue';
 </script>
 
 <template>
@@ -15,16 +17,14 @@ import LandingGuide from './LandingGuide.vue';
         <landing-description />
         <div class="pt-24 pb-22">
             <div class="font-press text-3xl text-center pt-1.5 pb-10 text-white">Syndication</div>
-            <nftmx-carousel></nftmx-carousel>
+            <syndication-carousel></syndication-carousel>
         </div>
 
         <landing-guide />
+        <landing-top-vcs />
+        <landing-popular-syndications />
+        <landing-categories />
 
-        <div class="pt-24 pb-22">
-            <div class="font-press text-center pt-1 pb-10 text-white">
-                <nftmx-typography h1>Top Decentralized VCs</nftmx-typography>
-            </div>
-        </div>
     </body-container>
     <nftmx-footer :devs="true" />
 </template>
