@@ -4,12 +4,7 @@ import { computed, ref } from 'vue';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxCarousel from '@/core/components/NftmxCarousel.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
-import NftmxHelp from '@/core/components/NftmxHelp.vue';
-import NftmxPrice from '@/core/components/NftmxPrice.vue';
-import Icon from '@/core/components/Icon.vue'
-import Accordion from '@/core/container/Accordion.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
 import NftmxAnalyzer from '@/core/components/NftmxAnalyzer.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import TrendingAssets from './TrendingAssets.vue';
