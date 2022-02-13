@@ -6,7 +6,7 @@ defineProps({
 </script>
 
 <template>
-    <div :class="[black ? 'bg-black' : '', 'text-white pt-14 lg:pt-24']">
+    <div :class="[black ? 'bg-black' : '', 'text-white py-14 lg:py-24']">
         <slot />
     </div>
 </template>
