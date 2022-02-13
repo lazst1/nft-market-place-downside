@@ -112,7 +112,7 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
             </div>
             <div class="pt-2 pb-7 lg:text-3xl">
                 <span class="text-primary-900 font-ibm-bold">
-                    <nftmx-price-common :price="roundTo(parseInt(tokenPrice) / exchangeRate)" />
+                    <nftmx-price-common :price="roundTo(parseInt(tokenPrice) / exchangeRate * bnbPrice)" />
                 </span>
                 <span class="text-tertiary-400">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</span>
             </div>
