@@ -14,7 +14,7 @@ defineProps({
         <div class="bg-black text-white pt-5.25 pb-8 border-b border-tertiary-800 px-8">
             <p
                 class="text-center text-sm sm:text-xg text-primary-900 font-press leading-6 sm:leading-9"
-            >NFT.mx is a fully centralized protocol</p>
+            >NFT.mx is a fully decentralized protocol</p>
             <p
                 class="text-center text-sm"
             >All generated fees and gas costs are 100% reimbursed with the NFTmx token</p>
