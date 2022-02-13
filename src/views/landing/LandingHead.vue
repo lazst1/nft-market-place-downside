@@ -1,28 +1,26 @@
 <script setup>
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxTypography from '@/core/components/NftmxTypography.vue';
+import HeadButton from './components/HeadButton.vue';
 
 </script>
 
 <template>
     <div
-        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press text-2xl lg:text-4xl lg:leading-relaxed text-white py-32 2xl:py-32 px-5.5 sm:px-10 md:px-16 lg:px-24"
+        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press sm:leading-relaxed xl:leading-relaxed text-white px-5.5 sm:px-10 md:px-16 lg:px-22 h-summary-xs lg:h-96 xl:h-asset-img"
     >
-        <div class="mt-1.25 mb-5">
-            Buy NFTs with 100%
-            <br />Downside Protection
-        </div>
-        <div class="pt-0.75 mb-6 pb-0.5">
-            <nftmx-button
-                to="home"
-                color="secondary"
-                label="EXPLORE"
-                class="font-press w-full max-w-md text-sm h-15 mr-px"
-            />
-            <nftmx-button
-                color="primary"
-                label="CREATE"
-                class="font-press w-full max-w-md text-sm h-15 sm:ml-11"
-            />
+        <div class="relative top-9 lg:top-24 xl:top-33.25 w-home-sm lg:w-home-md xl:w-home-lg">
+            <nftmx-typography home>Buy NFTs with 100% Downside Protection</nftmx-typography>
+            <div class="flex flex-wrap mt-3 xl:mt-8.25 gap-5.25 xl:gap-11">
+                <head-button
+                    to="home"
+                    color="secondary"
+                    label="EXPLORE"
+                />
+                <head-button
+                    color="primary"
+                    label="LIST"
+                />
+            </div>
         </div>
     </div>
 </template>

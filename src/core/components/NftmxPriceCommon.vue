@@ -32,13 +32,18 @@ watchEffect(() => {
 </script>
 
 <template>
-    <div class="flex baseline w-fit gap-x-0.5">
+    <div class="flex baseline w-fit">
         $
-        <div v-for="(l, index) in integerString" :key="index" class="flex">
-            {{ index > 0 && (integerString.length - index) % 3 === 0 ? ',' : null }}
-            {{ l }}
-        </div>
+        <div
+            v-for="(l, index) in integerString"
+            :key="index"
+            class="flex"
+        >{{ index > 0 && (integerString.length - index) % 3 === 0 ? ',' : null }}{{ l }}</div>
         <span v-if="decimal">.</span>
-        <div v-for="(l, index) in decimal" :key="index" class="flex">{{ index > 1 && index < 7 ? l : '' }}</div>
+        <div
+            v-for="(l, index) in decimal"
+            :key="index"
+            class="flex"
+        >{{ index > 1 && index < 7 ? l : '' }}</div>
     </div>
 </template>

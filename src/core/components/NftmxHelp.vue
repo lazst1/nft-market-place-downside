@@ -9,7 +9,6 @@ const props = defineProps({
 <template>
         <slot />
         <icon
-            class="-ml-2"
             :path="mdiHelpCircle"
             w="w-3"
             h="h-3"
