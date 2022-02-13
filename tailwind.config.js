@@ -107,7 +107,7 @@ module.exports = {
         'asset-img': '500px',
         'home-lg': '865px',
         'home-md': '700px',
-        'home-sm': '360px',
+        'home-sm': '320px',
         'xl-text': '800px',
         'full': '100%',
         '2/3': '60%',
