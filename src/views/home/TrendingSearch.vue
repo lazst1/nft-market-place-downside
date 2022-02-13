@@ -36,10 +36,10 @@ function clickFilterBy(value) {
                 <nftmx-button
                     color="secondary"
                     label="LAUNCH YOUR DVC"
-                    class="font-press w-full max-w-search text-xs leading-5 mx-2.5"
+                    class="font-press w-full max-w-search text-xs leading-5 sm:mx-2.5"
                 />
                 <button
-                    class="font-press w-full max-w-search text-xs leading-5 ml-2.5 bg-gradient-to-r from-primary-900 to-primary-700 text-white h-13"
+                    class="font-press w-full max-w-search text-xs leading-5 sm:ml-2.5 bg-gradient-to-r from-primary-900 to-primary-700 text-white h-13"
                 >DOWNSIDE PROTECTION BENEFITS</button>
             </div>
         </div>
