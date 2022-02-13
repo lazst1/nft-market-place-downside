@@ -9,11 +9,11 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 <template>
     <landing-section black>
         <div class="font-press text-center pt-1 text-white">
-            <nftmx-typography h1>PopularSyndications</nftmx-typography>
+            <nftmx-typography h1>Popular Syndications</nftmx-typography>
         </div>
-        <div class="grid lg:grid-cols-4 gap-x-7 xl:gap-x-9 mt-4">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-7 xl:gap-x-9 mt-4">
             <div v-for="i in 8" :key="i" class="border-b border-black">
-                <div class="flex py-8 lg:gap-6 2xl:gap-9">
+                <div class="flex py-8 gap-6 2xl:gap-9">
                     <div class="font-bold text-2xl">1</div>
                     <div class="flex items-center">
                         <div
@@ -36,7 +36,7 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
                 color="primary"
                 label="GO TO COLLECTIONS"
                 :outline="true"
-                class="font-ibm-medium text-lg text-primary-700 hover:text-white h-13.5"
+                class="font-ibm-medium text-lg text-primary-700 hover:text-white h-13.5 w-full sm:w-auto"
             />
         </div>
     </landing-section>
