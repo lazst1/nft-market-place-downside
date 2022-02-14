@@ -15,7 +15,7 @@ import LandingSection from './containers/LandingSection.vue';
                 <div class="text-tertiary-400 font-ibm text-description">
                     Once you've set up your wallet of choice, connect it to Opensea by clicking the wallet icon in the top right corner. Learn about the
                     <span
-                        class="text-primary-900"
+                        class="text-primary-400"
                     >wallets we support</span>.
                 </div>
             </div>
@@ -24,7 +24,7 @@ import LandingSection from './containers/LandingSection.vue';
                 <div class="text-white font-ibm-medium text-lg py-3">Create your collection</div>
                 <div class="text-tertiary-400 font-ibm text-description">
                     Click
-                    <span class="text-primary-900">My Collections</span> and set up your collection.
+                    <span class="text-primary-400">My Collections</span> and set up your collection.
                     Add social links, a description, profile & banner images, and set a secondary sales fee.
                 </div>
             </div>

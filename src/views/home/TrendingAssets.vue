@@ -33,10 +33,10 @@ const items = [
     <div class="flex flex-wrap justify-center px-10 py-6 lg:px-22">
         <div class="w-full sm:w-68 pt-2">
             <div class="flex font-press text-white">
-                <span class="flex-1">Ledger</span>
+                <span>Ledger</span>
                 <font-awesome-icon
                     :icon="['fas', 'external-link-alt']"
-                    class="text-primary-900 cursor-pointer"
+                    class="text-primary-900 cursor-pointer ml-4 mt-1"
                 />
             </div>
             <div class="border border-black my-7 bg-tertiary-800">

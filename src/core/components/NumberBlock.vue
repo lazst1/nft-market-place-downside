@@ -18,6 +18,7 @@ const blockCss = computed(() => `text-white border text-center font-bold border-
 <template>
     <div
         :class="[blockCss, color === 'primary-900' ? 'bg-primary-900' : color === 'secondary-800' ? 'bg-secondary-800' : '', size === 'small' ? 'h-7 sm:h-8.5 w-5 sm:w-6.5 sm:pt-0.5' : 'h-10 w-8 pt-0.5']"
+        :style="{ background: color === 'primary-900' ? 'url(images/green-count-bg.png)' : color === 'secondary-800' ? 'url(images/blue-count-bg.png)' : '', backgroundPosition: 'center', backgroundRepeat: 'repeat-x', backgroundColor: color === 'primary-900' ? '#19cb58' : color === 'secondary-800' ? '#2d7cde' : '' }"
     >
         <slot />
     </div>
