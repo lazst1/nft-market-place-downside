@@ -7,7 +7,7 @@ import NftmxButtonSlot from '@/core/components/NftmxButtonSlot.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import CheckboxCell from '@/core/components/CheckboxCell.vue';
 import NftmxSearchInput from "../../core/components/NftmxSearchInput.vue";
-
+import SearchAccordionContainer from "./container/SearchAccordionContainer.vue";
 
 const filterBy = ref('collection')
 const filterActive = ref(false);
@@ -54,90 +54,94 @@ function clickFilterBy(value) {
                     :class="[filterBy === 'all' ? 'text-primary-900 border-primary-900' : 'text-white border-black', 'hover:text-primary-900 border-b-2 hover:border-primary-900 py-4']"
                 >All NFTs</div>
             </div>
-            <div v-if="filterBy === 'all'" class="flex my-2">
-                <div class="border border-black w-fit px-5 h-42.5">
-                    <accordion :border="false" :sidebar="true" class="w-58">
-                        <template v-slot:caption>
-                            <div class="flex items-center w-full">
-                                <div class="flex-1 text-xs font-ibm py-4">Status</div>
-                            </div>
-                        </template>
-                        <div class="flex flex-wrap pt-2 gap-y-2 justify-between text-xs">
-                            <nftmx-button-slot width="w-28" align="text-left pl-4" outline>Buy Now</nftmx-button-slot>
+            <div v-if="filterBy === 'all'" class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 my-4.75">
+                <div class="border border-black w-full px-5 h-42.5">
+                    <search-accordion-container title="Status">
+                        <template v-slot:content>
                             <nftmx-button-slot
-                                width="w-28"
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >Buy Now</nftmx-button-slot>
+                            <nftmx-button-slot
+                                width="w-full"
                                 align="text-left pl-4"
                                 outline
                             >On Auction</nftmx-button-slot>
-                            <nftmx-button-slot width="w-28" align="text-left pl-4" outline>New</nftmx-button-slot>
+                            <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
                             <nftmx-button-slot
-                                width="w-28"
+                                width="w-full"
                                 align="text-left pl-4"
                                 outline
                             >Has Offers</nftmx-button-slot>
-                        </div>
-                    </accordion>
-                </div>
-                <nftmx-divider vertical class="mx-2.5" />
-                <div class="border border-black w-fit px-5 h-42.5">
-                    <accordion :border="false" :sidebar="true" class="w-58">
-                        <template v-slot:caption>
-                            <div class="flex items-center w-full">
-                                <div class="flex-1 text-xs font-ibm py-4">Status</div>
-                            </div>
                         </template>
-                        <div class="flex flex-wrap pt-2 gap-y-2 justify-between">
-                            <!-- <nftmx-select class="font-ibm-bold w-full text-sm mb-3" :data="people" /> -->
-                        </div>
-                    </accordion>
+                    </search-accordion-container>
                 </div>
-                <nftmx-divider vertical class="mx-2.5" />
-                <div class="border border-black w-fit px-5 h-42.5">
-                    <accordion :border="false" :sidebar="true" class="w-58">
-                        <template v-slot:caption>
-                            <div class="flex items-center w-full">
-                                <div class="flex-1 text-xs font-ibm py-4">Status</div>
-                            </div>
+                <div class="border border-black w-full px-5 h-42.5">
+                    <search-accordion-container title="Status">
+                        <template v-slot:content>
+                            <nftmx-button-slot
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >Buy Now</nftmx-button-slot>
+                            <nftmx-button-slot
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >On Auction</nftmx-button-slot>
+                            <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
+                            <nftmx-button-slot
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >Has Offers</nftmx-button-slot>
                         </template>
-                        <div class="flex flex-wrap pt-2 gap-y-2 justify-between">
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                        </div>
-                    </accordion>
+                    </search-accordion-container>
                 </div>
-                <nftmx-divider vertical class="mx-2.5" />
-                <div class="border border-black w-fit px-5 h-42.5">
-                    <accordion :border="false" :sidebar="true" class="w-58">
-                        <template v-slot:caption>
-                            <div class="flex items-center w-full">
-                                <div class="flex-1 text-xs font-ibm py-4">Status</div>
-                            </div>
+                <div class="border border-black w-full px-5 h-42.5">
+                    <search-accordion-container title="Status">
+                        <template v-slot:content>
+                            <nftmx-button-slot
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >Buy Now</nftmx-button-slot>
+                            <nftmx-button-slot
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >On Auction</nftmx-button-slot>
+                            <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
+                            <nftmx-button-slot
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >Has Offers</nftmx-button-slot>
                         </template>
-                        <div class="flex flex-wrap pt-2 gap-y-2 justify-between">
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                        </div>
-                    </accordion>
+                    </search-accordion-container>
+                </div>
+                <div class="border border-black w-full px-5 h-42.5">
+                    <search-accordion-container title="Status">
+                        <template v-slot:content>
+                            <nftmx-button-slot
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >Buy Now</nftmx-button-slot>
+                            <nftmx-button-slot
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >On Auction</nftmx-button-slot>
+                            <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
+                            <nftmx-button-slot
+                                width="w-full"
+                                align="text-left pl-4"
+                                outline
+                            >Has Offers</nftmx-button-slot>
+                        </template>
+                    </search-accordion-container>
                 </div>
             </div>
             <div

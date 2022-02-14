@@ -64,24 +64,21 @@ marketService.getUSDFromToken(TokenType.BNB, order.tokenPrice / exchangeRate).th
 </script>
 
 <template>
-    <router-link
-        :to="{ name: 'detail', params: { orderId: order.id } }"
-        class="w-full"
-    >
+    <div class="w-full">
         <div
             class="hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
         >
-            <div class="relative w-full pt-2/3 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover">
+            <div
+                class="relative w-full pt-2/3 overflow-hidden p-6 bg-[url('@/assets/test.jpg')] bg-cover"
+            >
                 <ribbon :percent="order.protectionRate" :period="order.protectionTime" />
             </div>
             <div :class="boughtCSS">
                 <div class="flex text-white">
-                    <div
-                        class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16"
-                    >{{nft.name}}</div>
+                    <div class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16">{{ nft.name }}</div>
                     <div class="text-xs flex">
                         <span class="pr-1 text-tertiary-400">{{ order.vote }}</span>
-                        <icon :path="mdiThumbUp" w="w-3.5" h="h-3.5" color="primary-900" />
+                        <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-primary cursor-pointer" />
                     </div>
                 </div>
                 <sale-info
@@ -105,9 +102,10 @@ marketService.getUSDFromToken(TokenType.BNB, order.tokenPrice / exchangeRate).th
                     START
                     <br />SYNDICATION
                 </button>
-                <button
-                    class="bg-gradient-to-r from-primary-900 to-primary-700 text-white text-sm"
-                >BUY NOW</button>
+                <router-link
+                    :to="{ name: 'detail', params: { orderId: order.id } }"
+                    class="bg-primary-900 text-white text-sm flex justify-center items-center hover:bg-primary-700"
+                >BUY NOW</router-link>
             </div>
             <div v-if="connect" class="grid grid-cols-1 relative font-press">
                 <button class="bg-black py-6 text-xs">CONNECT WALLET</button>
@@ -129,7 +127,7 @@ marketService.getUSDFromToken(TokenType.BNB, order.tokenPrice / exchangeRate).th
                 />
             </div>
         </div>
-    </router-link>
+    </div>
 </template>
 
 <style scoped>
