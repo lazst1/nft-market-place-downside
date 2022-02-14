@@ -30,17 +30,17 @@ defineProps({
         <div>Unique</div>
         <div class="w-max">
             Transferred
-            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st" />
+            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st absolute ml-1" />
         </div>
         <div class="text-primary-900 font-ibm-light">{{ unique }}</div>
         <div class="text-primary-900 font-ibm-light">{{ transferred }}</div>
         <div class="mt-3">
             ROI
-            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st" />
+            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st absolute ml-1" />
         </div>
         <div>
             Value
-            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st" />
+            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st absolute ml-1" />
         </div>
         <div class="text-primary-900 font-ibm-light">
             {{ roi }}
