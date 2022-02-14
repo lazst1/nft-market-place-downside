@@ -9,6 +9,7 @@ import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
 // import Sidebar from '@/core/components/Sidebar.vue';
 import Sidebar from '@/views/sidebar/Sidebar.vue'
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
+import NftmxButton from '../components/NftmxButton.vue';
 
 const sidebar = ref(false);
 const store = useStore();
@@ -38,28 +39,12 @@ function toggleSidebar(params) {
       <div class="max-h-screen-menu overflow-visible flex items-stretch justify-end ml-auto">
         <nav-bar-item>
           <div class="hidden lg:block">
-            <span class="text-sm font-ibm-bold hover:text-primary-900">Seller</span>
-            <nftmx-tooltip
-              class="-top-2"
-              text="If you are a seller, NFT.mx allows you to increase your success rate by offering buyers downside protection all while gaining profits from the APY in leveraging other people's money."
-            >
-              <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs" />
-            </nftmx-tooltip>
-          </div>
-        </nav-bar-item>
-        <nav-bar-item>
-          <div class="hidden lg:block">
-            <span class="text-sm font-ibm-bold hover:text-primary-900">Buyer</span>
-            <nftmx-tooltip
-              class="-top-2"
-              text="If you are a buyer, think of NFT.mx as a new strategic staking program with upside from selling the NFT, while also providing the option to cancel your investment and get a 100% refund with your original tokens."
-            >
-              <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs" />
-            </nftmx-tooltip>
+            <nftmx-button color="primary" label="NFT List" outline class="h-6 w-37 font-ibm-bold transition" />
           </div>
         </nav-bar-item>
         <nav-bar-item @click="toggleSidebar" class="hover:text-primary-900">
           <nftmx-wallet-address
+            v-if="walletAddress"
             class="text-sm font-ibm-bold pt-1 hidden sm:block"
             :address="walletAddress"
           />

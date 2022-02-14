@@ -21,7 +21,7 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
                             class="w-16 h-15"
                         ></div>
                         <div class="pl-6">
-                            <div>Mutant Ape Yacht Club</div>
+                            <div class="font-ibm-bold">Mutant Ape Yacht Club</div>
                             <div class="text-sm text-tertiary-500">
                                 <nftmx-price-common price="50000" />
                             </div>

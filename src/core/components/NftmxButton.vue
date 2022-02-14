@@ -78,12 +78,11 @@ const componentClass = computed(() => {
     'cursor-pointer',
     'justify-center',
     'items-center',
-    'whitespace-nowrap',
     'focus:outline-none',
-    'transition-colors',
     'duration-150',
+    'transition',
     'text-xs',
-    props.small ? 'p-2' : 'p-4 px-14',
+    props.small ? 'p-2' : 'p-4',
     getButtonColor(props.color, props.outline, !props.disabled)
   ]
 
