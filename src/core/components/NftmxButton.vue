@@ -79,7 +79,6 @@ const componentClass = computed(() => {
     'justify-center',
     'items-center',
     'focus:outline-none',
-    'transition-colors',
     'duration-150',
     'transition',
     'text-xs',
