@@ -24,7 +24,7 @@ const handleClick = (value) => {
     >
         <template v-slot:caption>
             <div class="flex items-center w-full">
-                <div class="flex-1 text-sm font-press pt-3 pb-5 mr-24">{{ title }}</div>
+                <div class="flex-1 text-sm font-press pt-3 pb-5 mr-4">{{ title }}</div>
             </div>
         </template>
         <div class="pt-2">
