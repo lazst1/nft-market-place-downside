@@ -10,7 +10,7 @@ import LandingSection from './containers/LandingSection.vue';
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 text-center">
             <div class="flex flex-col items-center px-1">
-                <img src="/images/free-whitelabel.png" class="py-5" />
+                <img src="/images/setup-wallet.png" class="py-5" />
                 <div class="text-white font-ibm-medium text-lg py-3">Set up your wallet</div>
                 <div class="text-tertiary-400 font-ibm text-description">
                     Once you've set up your wallet of choice, connect it to Opensea by clicking the wallet icon in the top right corner. Learn about the
@@ -20,7 +20,7 @@ import LandingSection from './containers/LandingSection.vue';
                 </div>
             </div>
             <div class="flex flex-col items-center px-1">
-                <img src="/images/display-us.png" class="py-5" />
+                <img src="/images/create-collections.png" class="py-5" />
                 <div class="text-white font-ibm-medium text-lg py-3">Create your collection</div>
                 <div class="text-tertiary-400 font-ibm text-description">
                     Click
@@ -29,14 +29,14 @@ import LandingSection from './containers/LandingSection.vue';
                 </div>
             </div>
             <div class="flex flex-col items-center px-1">
-                <img src="/images/become-an-affiliate.png" class="py-5" />
+                <img src="/images/add-nfts.png" class="py-5" />
                 <div class="text-white font-ibm-medium text-lg py-3">Add your NFTs</div>
                 <div
                     class="text-tertiary-400 font-ibm text-description"
                 >Upload your work (image, video, audio, or 3D art), add a title and description, and customize your NFTs with properties, stats, and unlockable content.</div>
             </div>
             <div class="flex flex-col items-center px-1 text-center">
-                <img src="/images/become-an-affiliate.png" class="py-5" />
+                <img src="/images/list-sale.png" class="py-5" />
                 <div class="text-white font-ibm-medium text-lg py-3">List them for sale</div>
                 <div
                     class="text-tertiary-400 font-ibm text-description"

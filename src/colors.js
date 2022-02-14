@@ -16,8 +16,8 @@ export const colorsBg = {
     danger: 'hover:bg-red-600',
     warning: 'hover:bg-yellow-600',
     info: 'hover:bg-blue-600',
-    primary: 'hover:bg-primary-800 hover:outline outline-primary-800 focus:outline-none',
-    secondary: 'hover:bg-secondary-800 hover:outline outline-secondary-800 focus:outline-none'
+    primary: 'hover:bg-gradient-to-r',
+    secondary: 'hover:bg-secondary-800'
   }
   
   export const colorsBorders = {
