@@ -7,47 +7,45 @@
                 >
                     <div
                         :style="{ background: 'url(' + item.img + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }"
-                        class="relative w-82.5 h-82.5 overflow-hidden col-span-2 sm:col-span-1"
+                        class="relative w-70.75 h-70.75 2xl:w-82.5 2xl:h-82.5 overflow-hidden col-span-2 sm:col-span-1"
                     >
                         <ribbon :percent="100" :period="256" />
                     </div>
                     <div
-                        class="relative w-82.5 h-82.5 overflow-hidden bg-black text-white col-span-2 sm:col-span-1"
+                        class="relative w-70.75 h-70.75 2xl:w-82.5 2xl:h-82.5 overflow-hidden bg-black text-white col-span-2 sm:col-span-1"
                     >
-                        <div class="py-4 px-8 text-left font-ibm-bold">
-                            <div class="text-xl py-2">Syndication</div>
-                            <div class="text-xs font-ibm-semi-bold">
-                                <nftmx-help>Syndication type</nftmx-help>
-                            </div>
-                            <div class="text-primary-900 text-xs font-ibm-medium leading-5 flex">
-                                {{ item.type === 'AUCTION' ? 'Auction' : 'Fix Sale&nbsp;' }}
-                                <nftmx-price-common
-                                    v-if="item.type === 'FIX_SALE'"
-                                    :price="item.fixPrice"
-                                />
-                                <span
-                                    v-if="item.type === 'FIX_SALE'"
-                                    class="text-xs font-ibm text-tertiary-400 flex"
-                                >
-                                    &nbsp;(
-                                    <span class="font-sans">Ξ&nbsp;</span>
-                                    {{ item.fixPrice }})
-                                </span>
-                            </div>
-                            <div class="text-xs font-ibm-semi-bold">
-                                <nftmx-help>Total locked value</nftmx-help>
-                            </div>
-                            <div class="text-primary-900 text-xs font-ibm-medium leading-5 flex">
-                                <nftmx-price-common
-                                    :price="item.lockedValue"
-                                />
-                                <span
-                                    class="text-xs font-ibm text-tertiary-400 flex"
-                                >
-                                    &nbsp;(
-                                    <span class="font-sans">Ξ&nbsp;</span>
-                                    {{ '443.25' }})
-                                </span>
+                        <div class="pt-4 pb-2.25 xl:pb-4 px-8 text-left font-ibm-bold">
+                            <div class="text-lg xl:text-xl pt-1.5 xl:pt-2.25">Syndication</div>
+                            <div class="text-xxs xl:text-xs xl:mt-2">
+                                <div class="font-ibm-semi-bold">
+                                    <nftmx-help>Syndication type</nftmx-help>
+                                </div>
+                                <div class="text-primary-900 font-ibm-medium leading-5 flex">
+                                    {{ item.type === 'AUCTION' ? 'Auction' : 'Fix Sale&nbsp;' }}
+                                    <nftmx-price-common
+                                        v-if="item.type === 'FIX_SALE'"
+                                        :price="item.fixPrice"
+                                    />
+                                    <span
+                                        v-if="item.type === 'FIX_SALE'"
+                                        class="font-ibm text-tertiary-400 flex"
+                                    >
+                                        &nbsp;(
+                                        <span class="font-sans">Ξ&nbsp;</span>
+                                        {{ item.fixPrice }})
+                                    </span>
+                                </div>
+                                <div class="font-ibm-semi-bold">
+                                    <nftmx-help>Total locked value</nftmx-help>
+                                </div>
+                                <div class="text-primary-900 font-ibm-medium leading-5 flex">
+                                    <nftmx-price-common :price="item.lockedValue" />
+                                    <span class="font-ibm text-tertiary-400 flex">
+                                        &nbsp;(
+                                        <span class="font-sans">Ξ&nbsp;</span>
+                                        {{ '443.25' }})
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
@@ -55,14 +53,16 @@
                             <nftmx-progress-bar />
                         </div>
 
-                        <div class="snap-center py-2">
-                            <div class="text-xs py-2 font-ibm-medium">Current auction ends in</div>
+                        <div class="snap-center pt-1.5 xl:pt-2 pb-2">
+                            <div
+                                class="xl:pt-2 pb-2 font-ibm-medium text-xxs xl:text-xs"
+                            >Current auction ends in</div>
                             <timer class="place-content-center" />
                         </div>
                         <nftmx-button
                             color="secondary"
                             label="JOIN SYNDICATION"
-                            class="font-press w-full text-sm py-5 absolute left-0 bottom-0"
+                            class="font-press w-full text-xs xl:text-sm py-4.25 xl:py-5 absolute left-0 bottom-0"
                         ></nftmx-button>
                     </div>
                 </div>
@@ -86,6 +86,7 @@ import { themeConfig, syndications } from '@/core/config';
 import NftmxTrimString from '@/core/components/NftmxTrimString.vue';
 import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
 import Timer from '@/core/components/Timer.vue';
+import NftmxHelp from '@/core/components/NftmxHelp.vue';
 
 const windowSize = ref({
     width: 0,
@@ -103,9 +104,13 @@ function handleResize() {
         itemsToShow.value = 1
         marginLeft.value = 0
     } else {
-        itemsToShow.value = (windowSize.value.width - 720) / 700 + 1;
+        const base = windowSize.value.width >= 1190 ? 2 : 1;
+        const adjust = windowSize.value.width >= 1536 ? 1410 : windowSize.value.width >= 1190 ? 1192 : 600;
+        const adjustLeft = windowSize.value.width >= 1536 ? -42 : windowSize.value.width >= 1190 ? -38 : -37;
+        const adjustDivide = windowSize.value.width >= 1190 ? 660 : 566;
+        itemsToShow.value = (windowSize.value.width - adjust) / adjustDivide + base;
         if (itemsToShow.value > 2) {
-            marginLeft.value = -42
+            marginLeft.value = adjustLeft
         } else {
             marginLeft.value = 0
         }
