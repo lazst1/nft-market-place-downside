@@ -64,6 +64,7 @@ export const currencies = [
 ]
 
 export const themeConfig = {
+    xl3: 1920,
     xl: 1280,
     lg: 1024,
     md: 768,
@@ -76,3 +77,50 @@ export const TokenType = {
     BTC: 'BTC',
     SOL: 'SOL'
 }
+
+export const syndications = [
+    {
+        img: '/images/img1.png',
+        type: 'AUCTION',
+        lockedValue: 1548325.56
+    },
+    {
+        img: '/images/img2.png',
+        type: 'FIX_SALE',
+        fixPrice: 50000,
+        lockedValue: 1548325.56
+    },
+    {
+        img: '/images/img3.png',
+        type: 'FIX_SALE',
+        fixPrice: 50000,
+        lockedValue: 1548325.56
+    },
+    {
+        img: '/images/img4.png',
+        type: 'AUCTION',
+        lockedValue: 1548325.56
+    },
+    {
+        img: '/images/img5.png',
+        type: 'FIX_SALE',
+        fixPrice: 50000,
+        lockedValue: 1548325.56
+    },
+    {
+        img: '/images/img6.png',
+        type: 'AUCTION',
+        lockedValue: 1548325.56
+    },
+    {
+        img: '/images/img7.png',
+        type: 'AUCTION',
+        lockedValue: 1548325.56
+    },
+    {
+        img: '/images/img8.png',
+        type: 'FIX_SALE',
+        fixPrice: 50000,
+        lockedValue: 1548325.56
+    }
+];

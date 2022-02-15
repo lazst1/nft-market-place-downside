@@ -52,93 +52,63 @@
     </Carousel>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { defineComponent, ref, watchEffect } from 'vue';
 import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
-import Ribbon from './Ribbon.vue';
-import NftmxButton from './NftmxButton.vue';
-import NftmxHelp from './NftmxHelp.vue';
-import Timer from './Timer.vue';
-import NftmxProgressBar from './NftmxProgressBar.vue';
-
+import Ribbon from '@/core/components/Ribbon.vue';
+import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxProgressBar from '@/core/components/NftmxProgressBar.vue';
 import 'vue3-carousel/dist/carousel.css';
+import { themeConfig } from '@/core/config';
+import NftmxTrimString from '@/core/components/NftmxTrimString.vue';
 
-export default defineComponent({
-    name: 'WrapAround',
-    components: {
-        Carousel,
-        Slide,
-        Navigation,
-        Pagination,
-        Ribbon,
-        NftmxButton,
-        NftmxHelp,
-        Timer,
-        NftmxProgressBar
-    },
-    data() {
-        return {
-            window: {
-                width: 0,
-                height: 0
-            },
-            itemsToShow: 2.6,
-            marginLeft: -42,
-            items: [
-                {
-                    img: '/images/img1.png'
-                },
-                {
-                    img: '/images/img2.png'
-                },
-                {
-                    img: '/images/img3.png'
-                },
-                {
-                    img: '/images/img4.png'
-                },
-                {
-                    img: '/images/img5.png'
-                },
-                {
-                    img: '/images/img6.png'
-                },
-                {
-                    img: '/images/img7.png'
-                },
-                {
-                    img: '/images/img8.png'
-                }
-            ]
-        }
-    },
-    created() {
-        window.addEventListener('resize', this.handleResize);
-        this.handleResize();
-    },
-    destroyed() {
-        window.removeEventListener('resize', this.handleResize);
-    },
-    methods: {
-        handleResize() {
-            this.window.width = window.innerWidth;
-            this.window.height = window.innerHeight;
-            if (this.window.width >= 1920) {
-                this.itemsToShow = 2.7
-            } else if (this.window.width <= 720) {
-                this.itemsToShow = 1
-                this.marginLeft = 0
-            } else {
-                this.itemsToShow = (this.window.width - 720) / 700 + 1;
-                if (this.itemsToShow > 2) {
-                    this.marginLeft = -42
-                } else {
-                    this.marginLeft = 0
-                }
-            }
-        }
-    }
+const windowSize = ref({
+    width: 0,
+    height: 0
 });
+const itemsToShow = ref(3);
+const items = ref([
+    {
+        img: '/images/img1.png'
+    },
+    {
+        img: '/images/img2.png'
+    },
+    {
+        img: '/images/img3.png'
+    },
+    {
+        img: '/images/img4.png'
+    },
+    {
+        img: '/images/img5.png'
+    },
+    {
+        img: '/images/img6.png'
+    },
+    {
+        img: '/images/img7.png'
+    },
+    {
+        img: '/images/img8.png'
+    }
+]);
+
+
+function handleResize() {
+    windowSize.value.width = window.innerWidth;
+    windowSize.value.height = window.innerHeight;
+    if (windowSize.value.width >= themeConfig.xl) {
+        itemsToShow.value = 3
+    } else if (windowSize.value.width >= themeConfig.sm) {
+        itemsToShow.value = 2
+    } else {
+        itemsToShow.value = 1
+    }
+}
+handleResize();
+window.addEventListener('resize', handleResize);
+
 </script>
 
 <style scoped>
