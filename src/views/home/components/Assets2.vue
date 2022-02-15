@@ -12,7 +12,7 @@ const store = useStore();
     <accordion-container title="Digital Art">
         <template v-slot:content>
             <nftmx-sale-card
-                v-for="(order, index) in store.state.orders.items"
+                v-for="(order, index) in []"
                 :data="order"
                 :key="index"
             ></nftmx-sale-card>

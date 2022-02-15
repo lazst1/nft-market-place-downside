@@ -4,7 +4,7 @@ import Icon from './Icon.vue'
 import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 import SaleInfo from './SaleInfo.vue'
 import NftmxButton from './NftmxButton.vue'
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import Timer from './Timer.vue'
 import moralisService from '@/core/services/moralis.service';
 import { exchangeRate } from '@/core/config';
@@ -38,9 +38,16 @@ const order = {
     closed: props.data.closed,
 }
 const store = useStore();
-const vote = ref(order.votes.find(item => item.address === store.getters['auth/getWalletAddress']));
-const voteCount = ref(order.votes.length);
+const vote = ref(false);
+const voteCount = ref(0);
 const nft = ref({});
+console.log(order);
+marketService.voteCount(order.tokenAddress, order.nftTokenId).then(res => {
+    voteCount.value = res;
+})
+watchEffect(() => marketService.voted(order.tokenAddress, order.nftTokenId, store.getters['auth/getWalletAddress']).then(res => {
+    vote.value = res;
+}))
 moralisService.getNft(order.tokenAddress, order.nftTokenId).then(res => {
     nft.value = res;
 })
