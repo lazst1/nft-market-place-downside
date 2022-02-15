@@ -10,7 +10,6 @@ import { useRoute, useRouter } from 'vue-router';
 import DetailHistory from './DetailHistory.vue';
 import marketService from '@/core/services/market.service';
 import moralisService from '@/core/services/moralis.service';
-import coinmarketcapService from '@/core/services/coinmarketcap.service';
 
 const people = [
     {
@@ -54,7 +53,6 @@ marketService.getOrder(orderId).then(data => {
         nft.value = res;
     })
 });
-// coinmarketcapService.exchangeToUSD();
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
 const fundError = ref(false);
