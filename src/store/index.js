@@ -34,6 +34,7 @@ export default createStore({
         web3: new Web3(Web3.givenProvider),
         marketContract: null,
         allNfts: {},
+        user: initialUser,
         orders: initialOrders
     },
     mutations: {},
