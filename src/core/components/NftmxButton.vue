@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { getButtonColor } from '@/colors.js'
+import { getButtonColor, getButtonHoverColor } from '@/colors.js'
 import Icon from '@/core/components/Icon.vue'
 
 const props = defineProps({
@@ -74,6 +74,7 @@ const labelClass = computed(() => props.small ? 'px-1' : 'px-2')
 
 const componentClass = computed(() => {
   const base = [
+    'relative',
     'inline-flex',
     'cursor-pointer',
     'justify-center',
@@ -92,6 +93,8 @@ const componentClass = computed(() => {
 
   return base
 })
+const componentHoverCss = computed(() => getButtonHoverColor(props.color, props.outline, !props.disabled))
+
 </script>
 
 <template>
@@ -104,18 +107,13 @@ const componentClass = computed(() => {
     :target="target"
     :disabled="disabled"
   >
-    <icon
-      v-if="iconBefore"
-      :path="iconBefore"
-    />
-    <span
-      v-if="label"
-      :class="labelClass"
-    >{{ label }}</span>
-    <icon
-      v-if="iconAfter"
-      :path="iconAfter"
-      color="primary-900"
-    />
+    <div :class="[componentHoverCss, 'absolute w-full h-full inline-flex cursor-pointer justify-center items-center transition hover:opacity-0']">
+      <icon v-if="iconBefore" :path="iconBefore" />
+      <span v-if="label" :class="labelClass">{{ label }}</span>
+      <icon v-if="iconAfter" :path="iconAfter" color="primary-900" />
+    </div>
+    <icon v-if="iconBefore" :path="iconBefore" />
+    <span v-if="label" :class="labelClass">{{ label }}</span>
+    <icon v-if="iconAfter" :path="iconAfter" color="primary-900" />
   </component>
 </template>
