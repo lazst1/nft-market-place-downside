@@ -14,8 +14,16 @@ defineProps({
     </div>
     <input
         v-model="modelValue"
-        :class="[icon ? 'pl-17.5' : 'pl-4.75', 'h-13.5 focus:outline-none border-2 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full font-ibm text-sm']"
+        :class="[icon ? 'pl-17.5' : 'pl-4.75', 'pr-14 h-13.5 focus:outline-none border-2 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full font-ibm text-sm']"
         :placeholder="placeholder"
         :readonly="readonly"
     />
 </template>
+
+<style scoped>
+input {
+    white-space: nowrap; /*keep text on one line */
+    overflow: hidden; /*prevent text from being shown outside the border */
+    text-overflow: ellipsis;
+}
+</style>

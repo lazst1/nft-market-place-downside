@@ -14,6 +14,13 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 
 const store = useStore();
 const username = ref('');
+const profileImg = ref();
+const profileBanner = ref();
+const bio = ref('');
+const email = ref('');
+const website = ref('');
+const twitter = ref('');
+const instagram = ref('');
 
 function save() {
     console.log(username.value)
@@ -110,7 +117,7 @@ function save() {
                                 v-model="twitter"
                                 iconGroup="fas"
                                 icon="globe"
-                                placeholder="Your twitter profile"
+                                placeholder="Your website"
                             />
                         </div>
                         <div class="pt-4.75">
@@ -144,7 +151,7 @@ function save() {
                         />
                         <font-awesome-icon
                             :icon="['fas', 'copy']"
-                            class="text-white text-base absolute right-4 top-5 cursor-pointer"
+                            class="text-white text-base absolute right-6 top-5 cursor-pointer"
                         />
                     </div>
                 </template>
