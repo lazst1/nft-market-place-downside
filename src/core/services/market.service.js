@@ -12,12 +12,20 @@ class MatketService {
     }
 
     getOrder(id) {
-        return http.get(`orders/${id}`).then(res => res.data)
+        return http.get(`orders/${id}`).then(res => res.data);
+    }
+
+    vote(tokenAddress, tokenId, userId) {
+        return http.post(`votes`, {tokenAddress, tokenId, userId}).then(res => res.data);
+    }
+
+    cancelVote(tokenAddress, tokenId, userId) {
+        return http.delete(`votes?tokenAddress=${tokenAddress}&tokenId=${tokenId}&userId=${userId}`).then(res => res.data)
     }
 
     getUSDFromToken(token, amount) {
         if (token === TokenType.BNB) {
-            return axios.get('https://api.binance.com/api/v3/avgPrice?symbol=BNBUSDT').then(res => res.data)
+            return axios.get('https://api.binance.com/api/v3/avgPrice?symbol=BNBUSDT').then(res => res.data);
         } else {
             console.log('MarketService getUSDFromToken: Not implemented yet.')
             return amount;

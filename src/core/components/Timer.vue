@@ -15,13 +15,13 @@ defineProps({
 </script>
 
 <template>
-    <div class="flex w-full gap-x-0.5 justify-center" :class="{'text-2xl':size==='big'}">
+    <div class="flex gap-x-0.5 max-w-fit items-center" :class="{'text-lg 2xl:text-2xl':size==='big'}" style="width: -webkit-fill-available">
         <number-block :color="color" :size="size">0</number-block>
-        <number-block :color="color" :size="size">0</number-block>:
+        <number-block :color="color" :size="size">0</number-block><font class="-mx-px font-ibm-bold text-base">:</font>
         <number-block :color="color" :size="size">0</number-block>
-        <number-block :color="color" :size="size">0</number-block>:
+        <number-block :color="color" :size="size">0</number-block><font class="-mx-px font-ibm-bold text-base">:</font>
         <number-block :color="color" :size="size">0</number-block>
-        <number-block :color="color" :size="size">0</number-block>:
+        <number-block :color="color" :size="size">0</number-block><font class="-mx-px font-ibm-bold text-base">:</font>
         <number-block :color="color" :size="size">0</number-block>
         <number-block :color="color" :size="size">0</number-block>
     </div>

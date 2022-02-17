@@ -4,12 +4,13 @@ import Icon from './Icon.vue'
 import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 import SaleInfo from './SaleInfo.vue'
 import NftmxButton from './NftmxButton.vue'
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import Timer from './Timer.vue'
 import moralisService from '@/core/services/moralis.service';
 import { exchangeRate } from '@/core/config';
 import marketService from '../services/market.service';
 import { TokenType } from '../config';
+import { useStore } from 'vuex';
 
 const props = defineProps({
     data: {
@@ -22,14 +23,12 @@ const props = defineProps({
 
 const order = {
     ...props.data,
-    id: props.data.id || 10,
     protectionRate: props.data.protectionRate / 100,
     protectionTime: props.data.protectionTime / 86400,
     unique: props.data.unique || "1:20",
     transferred: props.data.transferred || "12/20",
     roi: props.data.roi || "+4,780.73%",
     tokenPrice: props.data.tokenPrice || "$0.4781",
-    vote: props.data.vote || "55",
     syndication: props.data.syndication,
     auction: props.data.auction,
     bought: props.data.bought,
@@ -37,8 +36,11 @@ const order = {
     sold: props.data.sold,
     closed: props.data.closed,
 }
+const store = useStore();
+const vote = ref(order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));
+const voteCount = ref(order.votes.length);
 const nft = ref({});
-moralisService.getNft(order.tokenAddress, order.nftTokenId).then(res => {
+moralisService.getNft(order.tokenAddress, order.tokenId).then(res => {
     nft.value = res;
 })
 const syndicationCSS = computed(() => {
@@ -59,7 +61,20 @@ const boughtCSS = computed(() => {
 const nftPriceInUSD = ref(0);
 marketService.getUSDFromToken(TokenType.BNB, order.tokenPrice / exchangeRate).then(res => {
     nftPriceInUSD.value = order.tokenPrice / exchangeRate * res.price;
-})
+});
+
+function handleVote() {
+    vote.value = !vote.value;
+    if (vote.value) {
+        marketService.vote(order.tokenAddress, order.tokenId, store.state.user.id).then(res => {
+            voteCount.value ++;
+        });
+    } else {
+        marketService.cancelVote(order.tokenAddress, order.tokenId, store.state.user.id).then(res => {
+            voteCount.value --;
+        });
+    }
+}
 
 </script>
 
@@ -77,8 +92,12 @@ marketService.getUSDFromToken(TokenType.BNB, order.tokenPrice / exchangeRate).th
                 <div class="flex text-white">
                     <div class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16">{{ nft.name }}</div>
                     <div class="text-xs flex">
-                        <span class="pr-1 text-tertiary-400">{{ order.vote }}</span>
-                        <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-primary cursor-pointer" />
+                        <span class="pr-1 text-tertiary-400">{{ voteCount }}</span>
+                        <font-awesome-icon
+                            :icon="['fas', 'thumbs-up']"
+                            :class="[vote ? 'text-primary-900' : 'text-white', 'cursor-pointer hover:text-primary-900']"
+                            @click="handleVote()"
+                        />
                     </div>
                 </div>
                 <sale-info

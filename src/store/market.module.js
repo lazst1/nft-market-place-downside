@@ -24,7 +24,7 @@ export const market = {
             );
 
             tokenContract.methods.approve(marketAddress, data.tokenId).send({
-                from: rootState.user.address, gas: 210000
+                from: rootState.user.walletAddress, gas: 210000
             });
         },
         async createOrder({ commit, rootState }, data) {
@@ -36,12 +36,12 @@ export const market = {
                 data.downsidePeriod,
                 false,
                 data.downsidePeriod
-            ).send({ from: rootState.user.address, gas: 250000 });
+            ).send({ from: rootState.user.walletAddress, gas: 250000 });
         },
         async buyFixedPayOrder({ commit, rootState }, data) {
             rootState.marketContract.methods.buyFixedPayOrder(
-                data.orderID
-            ).send({ from: rootState.user.address, gas: 623478, value: parseInt(data.tokenPrice), gasPrice: 0 });
+                data.orderId
+            ).send({ from: rootState.user.walletAddress, gas: 623478, value: parseInt(data.tokenPrice), gasPrice: 0 });
         },
     },
     getters: {

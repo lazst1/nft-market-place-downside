@@ -34,7 +34,7 @@ const people = [
 
 const props = defineProps({
     order: Object,
-    orderID: String,
+    orderId: String,
     tokenPrice: String,
     nft: Object
 })
@@ -44,10 +44,11 @@ const syndicationModalActive = ref(false);
 const fundError = ref(false);
 const store = useStore();
 const balance = ref();
+const vote = ref(false);
 
 const handleBuyModal = (value) => {
     buyModalActive.value = value;
-    moralisService.getBalance(store.state.user.address).then(res => {
+    moralisService.getBalance(store.state.user.walletAddress).then(res => {
         balance.value = res.balance / exchangeRate;
     })
 }
@@ -57,6 +58,23 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
     bnbPrice.value = res.price;
 })
 
+watchEffect(() => {
+    if (props.order.votes) {
+        vote.value = props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false);
+    }
+})
+
+function handleVote() {
+    vote.value = !vote.value;
+    if (vote.value) {
+        marketService.vote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
+        });
+    } else {
+        marketService.cancelVote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
+        });
+    }
+}
+
 </script>
 
 <template>
@@ -65,7 +83,8 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
         <div class>
             <font-awesome-icon
                 :icon="['fas', 'thumbs-up']"
-                class="cursor-pointer hover:text-primary-900"
+                :class="[vote ? 'text-primary-900' : 'text-white', 'cursor-pointer hover:text-primary-900']"
+                @click="handleVote()"
             />
         </div>
     </div>
@@ -86,19 +105,19 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold">
-        <div class="h-44 items-center p-4">
-            <div class="py-4">
-                <div class="pt-3 pb-4 text-base">Current auction ends in</div>
-                <timer size="big" color="tertiary-800" />
+        <div class="sm:h-44 items-center p-4">
+            <div class="flex flex-col py-4 items-center sm:items-start">
+                <div class="mt-2.25 text-lg">Current auction ends in</div>
+                <timer size="big" color="tertiary-800" class="mt-3.25" />
             </div>
         </div>
 
-        <div class="h-40 sm:h-46.25 items-center pl-7 sm:pl-0 pr-7 sm:pt-6.25">
+        <div class="h-40 sm:h-46.25 items-center pl-4 sm:pl-0 pr-4 sm:pr-7 sm:pt-6.25">
             <nftmx-select-network class="font-ibm-bold w-full text-sm mb-2" color="black" big></nftmx-select-network>
             <nftmx-button
                 color="primary"
                 label="BUY NOW"
-                class="font-press w-full text-lg mt-0.75"
+                class="font-press w-full text-base lg:text-lg mt-0.75"
                 @click="handleBuyModal(true)"
             />
         </div>
@@ -110,21 +129,34 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                 Total locked value
                 <icon class="-ml-2" :path="mdiHelpCircle" w="w-4" h="h-4" size="36" color="white" />
             </div>
-            <div class="pt-2 pb-7 lg:text-3xl">
+            <div class="pt-2 pb-6 lg:text-3xl flex justify-center">
                 <span class="text-primary-900 font-ibm-bold">
-                    <nftmx-price-common :price="roundTo(parseInt(tokenPrice) / exchangeRate * bnbPrice)" />
+                    <nftmx-price-common
+                        :price="roundTo(parseInt(tokenPrice) / exchangeRate * bnbPrice)"
+                    />
                 </span>
-                <span class="text-tertiary-400">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</span>
+                <span class="text-tertiary-400">
+                    (
+                    <span class="font-sans">Ξ</span>
+                    {{ roundTo(parseInt(tokenPrice) / exchangeRate) }})
+                </span>
             </div>
             <nftmx-button
                 color="secondary"
                 label="JOIN SYNDICATION"
-                class="font-press w-full lg:text-lg pt-5.5 pb-5.25"
+                class="font-press w-full text-base lg:text-lg pt-5.5 pb-5.25 mt-0.75 h-15 sm:h-auto"
                 @click="syndicationModalActive = true"
             />
         </div>
     </div>
-    <buy-modal v-model="buyModalActive" :order="order" :nft="nft" :orderID="orderID" :tokenPrice="tokenPrice" :balance="balance" />
+    <buy-modal
+        v-model="buyModalActive"
+        :order="order"
+        :nft="nft"
+        :orderId="orderId"
+        :tokenPrice="tokenPrice"
+        :balance="balance"
+    />
     <syndication-modal v-model="syndicationModalActive" />
 </template>
 

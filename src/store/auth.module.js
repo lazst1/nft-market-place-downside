@@ -7,6 +7,7 @@ import { marketAddress } from "@/core/config";
 import marketService from "@/core/services/market.service";
 
 const initialUser = {
+    id: '',
     address: '',
     nftData: {
         page: 0,
@@ -59,7 +60,10 @@ export const auth = {
     },
     getters: {
         getWalletAddress: state => {
-            return state.user && state.user.address ? state.user.address : ''
+            return state.user && state.user.walletAddress ? state.user.walletAddress : ''
+        },
+        getUserId: state => {
+            return state.user && state.user.id ? state.user.id : ''
         },
         getUser: state => {
             return state.user
@@ -68,7 +72,7 @@ export const auth = {
     mutations: {
         async loginSuccess(state, user) {
             state.user = user;
-            MoralisService.getMyNFTs(user.address, 40, 0).then(nftData => {
+            MoralisService.getMyNFTs(user.walletAddress, 40, 0).then(nftData => {
                 state.user.nftData = JSON.parse(JSON.stringify(nftData));
             })
             localStorage.setItem('isLoggedIn', true);

@@ -97,7 +97,6 @@ const items = ref([
 
 
 function handleResize() {
-    console.log('======')
     windowSize.value.width = window.innerWidth;
     windowSize.value.height = window.innerHeight;
     if (windowSize.value.width >= themeConfig.xl) {
