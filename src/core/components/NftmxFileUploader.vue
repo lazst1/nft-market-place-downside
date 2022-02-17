@@ -1,5 +1,5 @@
 <template>
-  <label :for="id" class="block h-79 relative overflow-hidden">
+  <label :for="id" class="block relative overflow-hidden">
     <input
       :id="id"
       type="file"
@@ -7,18 +7,18 @@
       @change="handleUpload"
     />
     <div
-      :class="`overlayed border-dash bg-tertiary-700`"
+      :class="`overlayed border-dash bg-tertiary-700 cursor-pointer`"
     >
-      <div class="text-center">
+      <div class="text-center h-full flex flex-col items-center justify-center pt-2">
         <slot>
-          <div class="font-ibm-bold text-2xl pt-24">
+          <div class="font-ibm-bold text-2xl">
             <div>
-              <font-awesome-icon :icon="['fas', 'cloud-upload-alt']" class="text-5xl" />
+              <img src="/images/drag-drop-logo.png" />
             </div>
-            <div class="mt-7 leading-9">
+            <div class="mt-5.5 leading-9">
               Drag & drop file
             </div>
-            <div class="text-sm">
+            <div class="font-ibm-medium text-sm">
               or browse media on your device
             </div>
           </div>

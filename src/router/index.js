@@ -7,7 +7,9 @@ import Detail from '@/views/detail/Detail.vue'
 import Login from '@/views/Login.vue'
 import Create from '@/views/Create.vue'
 import Profile from '@/views/profile/Profile.vue'
+import ProfileSetting from '@/views/profile/ProfileSetting.vue'
 import Asset from '@/views/asset/Asset.vue'
+import NotFound from '@/views/404/NotFound.vue'
 
 const routes = [
     {
@@ -80,7 +82,21 @@ const routes = [
         },
         path: '/profile',
         name: 'profile',
-        component: Profile
+        component: Profile,
+        children: [
+        ]
+    },
+    {
+        meta: {
+            title: 'ProfileSetting'
+        },
+        path: '/profile-setting',
+        name: 'profile_setting',
+        component: ProfileSetting
+    },
+    {
+        path: "/:catchAll(.*)",
+        component: NotFound,
     },
 ]
 
