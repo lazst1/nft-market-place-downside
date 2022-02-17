@@ -38,17 +38,10 @@ const order = {
     closed: props.data.closed,
 }
 const store = useStore();
-const vote = ref(false);
-const voteCount = ref(0);
+const vote = ref(order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));
+const voteCount = ref(order.votes.length);
 const nft = ref({});
-console.log(order);
-marketService.voteCount(order.tokenAddress, order.nftTokenId).then(res => {
-    voteCount.value = res;
-})
-watchEffect(() => marketService.voted(order.tokenAddress, order.nftTokenId, store.getters['auth/getWalletAddress']).then(res => {
-    vote.value = res;
-}))
-moralisService.getNft(order.tokenAddress, order.nftTokenId).then(res => {
+moralisService.getNft(order.tokenAddress, order.tokenId).then(res => {
     nft.value = res;
 })
 const syndicationCSS = computed(() => {
@@ -74,11 +67,14 @@ marketService.getUSDFromToken(TokenType.BNB, order.tokenPrice / exchangeRate).th
 function handleVote() {
     vote.value = !vote.value;
     if (vote.value) {
-        marketService.vote(order.tokenAddress, order.nftTokenId, store.getters['auth/getWalletAddress']).then(res => {
+        marketService.vote(order.tokenAddress, order.tokenId, store.state.user.id).then(res => {
+            // order.votes.push(store.state.user.id)
             voteCount.value ++;
         });
     } else {
-        marketService.cancelVote(order.tokenAddress, order.nftTokenId, store.getters['auth/getWalletAddress']).then(res => {
+        marketService.cancelVote(order.tokenAddress, order.tokenId, store.state.user.id).then(res => {
+            // order.votes.filter(item => item !== store.state.user.id);
+            // console.log(order.votes)
             voteCount.value --;
         });
     }

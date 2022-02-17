@@ -31,7 +31,7 @@ const store = useStore();
                         <span class="text-primary-900">
                             <nftmx-wallet-address-pop
                                 class="text-primary-900"
-                                :address="store.state.user.address"
+                                :address="store.state.user.walletAddress"
                             ></nftmx-wallet-address-pop>
                         </span>
                     </div>

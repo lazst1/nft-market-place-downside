@@ -15,21 +15,12 @@ class MatketService {
         return http.get(`orders/${id}`).then(res => res.data);
     }
 
-    voteCount(tokenAddress, nftTokenId) {
-        return http.get(`votes/count?tokenAddress=${tokenAddress}&nftTokenId=${nftTokenId}`).then(res => res.data);
+    vote(tokenAddress, tokenId, userId) {
+        return http.post(`votes`, {tokenAddress, tokenId, userId}).then(res => res.data);
     }
 
-    voted(tokenAddress, nftTokenId, address) {
-        console.log(tokenAddress, nftTokenId, address)
-        return http.get(`votes/voted?tokenAddress=${tokenAddress}&nftTokenId=${nftTokenId}&address=${address}`).then(res => res.data);
-    }
-
-    vote(tokenAddress, nftTokenId, address) {
-        return http.post(`votes`, {tokenAddress, nftTokenId, address}).then(res => res.data);
-    }
-
-    cancelVote(tokenAddress, nftTokenId, address) {
-        return http.delete(`votes?tokenAddress=${tokenAddress}&nftTokenId=${nftTokenId}&address=${address}`).then(res => res.data)
+    cancelVote(tokenAddress, tokenId, userId) {
+        return http.delete(`votes?tokenAddress=${tokenAddress}&tokenId=${tokenId}&userId=${userId}`).then(res => res.data)
     }
 
     getUSDFromToken(token, amount) {

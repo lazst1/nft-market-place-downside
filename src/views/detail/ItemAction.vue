@@ -55,7 +55,7 @@ watchEffect(() => {
 
 const handleBuyModal = (value) => {
     buyModalActive.value = value;
-    moralisService.getBalance(store.state.user.address).then(res => {
+    moralisService.getBalance(store.state.user.walletAddress).then(res => {
         balance.value = res.balance / exchangeRate;
     })
 }
