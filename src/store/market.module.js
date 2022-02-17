@@ -40,7 +40,7 @@ export const market = {
         },
         async buyFixedPayOrder({ commit, rootState }, data) {
             rootState.marketContract.methods.buyFixedPayOrder(
-                data.orderID
+                data.orderId
             ).send({ from: rootState.user.walletAddress, gas: 623478, value: parseInt(data.tokenPrice), gasPrice: 0 });
         },
     },

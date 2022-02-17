@@ -23,7 +23,6 @@ const props = defineProps({
 
 const order = {
     ...props.data,
-    id: props.data.id || 10,
     protectionRate: props.data.protectionRate / 100,
     protectionTime: props.data.protectionTime / 86400,
     unique: props.data.unique || "1:20",
@@ -68,13 +67,10 @@ function handleVote() {
     vote.value = !vote.value;
     if (vote.value) {
         marketService.vote(order.tokenAddress, order.tokenId, store.state.user.id).then(res => {
-            // order.votes.push(store.state.user.id)
             voteCount.value ++;
         });
     } else {
         marketService.cancelVote(order.tokenAddress, order.tokenId, store.state.user.id).then(res => {
-            // order.votes.filter(item => item !== store.state.user.id);
-            // console.log(order.votes)
             voteCount.value --;
         });
     }

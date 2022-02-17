@@ -34,7 +34,7 @@ const people = [
 
 const props = defineProps({
     order: Object,
-    orderID: String,
+    orderId: String,
     tokenPrice: String,
     nft: Object
 })
@@ -45,13 +45,6 @@ const fundError = ref(false);
 const store = useStore();
 const balance = ref();
 const vote = ref(false);
-watchEffect(() => {
-    if (props.order.tokenAddress && props.order.nftTokenId && store.getters['auth/getWalletAddress']) {
-        marketService.voted(props.order.tokenAddress, props.order.nftTokenId, store.getters['auth/getWalletAddress']).then(res => {
-            vote.value = res;
-        })
-    }
-})
 
 const handleBuyModal = (value) => {
     buyModalActive.value = value;
@@ -65,15 +58,19 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
     bnbPrice.value = res.price;
 })
 
+watchEffect(() => {
+    if (props.order.votes) {
+        vote.value = props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false);
+    }
+})
+
 function handleVote() {
     vote.value = !vote.value;
     if (vote.value) {
-        marketService.vote(props.order.tokenAddress, props.order.nftTokenId, store.getters['auth/getWalletAddress']).then(res => {
-            // voteCount.value ++;
+        marketService.vote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
         });
     } else {
-        marketService.cancelVote(props.order.tokenAddress, props.order.nftTokenId, store.getters['auth/getWalletAddress']).then(res => {
-            // voteCount.value --;
+        marketService.cancelVote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
         });
     }
 }
@@ -140,7 +137,7 @@ function handleVote() {
                 </span>
                 <span class="text-tertiary-400">
                     (
-                    <span class="font-mono">Ξ</span>
+                    <span class="font-sans">Ξ</span>
                     {{ roundTo(parseInt(tokenPrice) / exchangeRate) }})
                 </span>
             </div>
@@ -156,7 +153,7 @@ function handleVote() {
         v-model="buyModalActive"
         :order="order"
         :nft="nft"
-        :orderID="orderID"
+        :orderId="orderId"
         :tokenPrice="tokenPrice"
         :balance="balance"
     />

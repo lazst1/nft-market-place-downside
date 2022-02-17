@@ -22,14 +22,14 @@ const props = defineProps({
         type: Boolean,
         default: true
     },
-    orderID: String,
+    orderId: String,
     tokenPrice: String
 })
 
 const store = useStore();
 
 function buyOrder(params) {
-    store.dispatch('market/buyFixedPayOrder', { orderID: parseInt(props.orderID), tokenPrice: props.tokenPrice });
+    store.dispatch('market/buyFixedPayOrder', { orderId: parseInt(props.orderId), tokenPrice: props.tokenPrice });
 }
 
 const bnbPrice = ref(0);
@@ -47,7 +47,11 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                 Balance:&nbsp;
                 <nftmx-price-common :price="roundTo(balance * bnbPrice)" />
 
-                <span class="text-xxs font-ibm text-tertiary-400">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</span>
+                <span class="text-xxs font-ibm text-tertiary-400">
+                    (
+                    <span class="font-sans">Ξ</span>
+                    {{ roundTo(balance) }})
+                </span>
             </div>
         </div>
         <div class="px-4 md:px-16 pb-10">
@@ -72,7 +76,11 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                                     :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)"
                                 />
                             </div>
-                            <div class="font-ibm text-xxs text-tertiary-400 leading-6">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</div>
+                            <div class="font-ibm text-xxs text-tertiary-400 leading-6">
+                                (
+                                <span class="font-sans">Ξ</span>
+                                {{ roundTo(parseInt(order.tokenPrice) / exchangeRate) }})
+                            </div>
                         </td>
                         <td class="text-center items-start">
                             <icon
@@ -87,9 +95,15 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                     <th class="py-6 px-5 text-left">Total</th>
                     <th class="text-right">
                         <div class="font-ibm text-sm text-primary-900 leading-10 flex justify-end">
-                            <nftmx-price-common :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)" />
+                            <nftmx-price-common
+                                :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)"
+                            />
                         </div>
-                        <div class="font-ibm text-xxs text-tertiary-400">(<span class="font-mono">Ξ</span>{{roundTo(bnbPrice)}})</div>
+                        <div class="font-ibm text-xxs text-tertiary-400">
+                            (
+                            <span class="font-sans">Ξ</span>
+                            {{ roundTo(parseInt(order.tokenPrice) / exchangeRate) }})
+                        </div>
                     </th>
                     <th></th>
                 </tfoot>

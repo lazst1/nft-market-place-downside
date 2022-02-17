@@ -49,7 +49,7 @@ marketService.getOrder(orderId).then(data => {
         router.push('/browse');
         return;
     }
-    moralisService.getNft(data.tokenAddress, data.nftTokenId).then(res => {
+    moralisService.getNft(data.tokenAddress, data.tokenId).then(res => {
         nft.value = res;
     })
 });
@@ -66,7 +66,7 @@ const fundError = ref(false);
                 <more-info :percent="order.protectionRate / 100" :period="order.protectionTime / 86400" />
             </div>
             <div class="col-span-7 mb-4 lg:col-span-4 relative">
-                <item-action :order="order" :orderID="order.orderID" :tokenPrice="order.tokenPrice" :nft="nft" />
+                <item-action :order="order" :orderId="order.orderId" :tokenPrice="order.tokenPrice" :nft="nft" />
             </div>
         </div>
         <div class="mb-10">
