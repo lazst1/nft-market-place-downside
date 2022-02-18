@@ -44,7 +44,6 @@ export const auth = {
         },
         saveProfile({ commit, rootState }, data) {
             authService.saveProfile(rootState.user.id, data).then(res => {
-                console.log('res===============', res);
                 rootState.user = res;
             });
         },

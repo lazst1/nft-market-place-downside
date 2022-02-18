@@ -12,11 +12,11 @@
                         <ribbon :percent="100" :period="256" />
                     </div>
                     <div
-                        class="relative w-70.75 h-70.75 2xl:w-82.5 2xl:h-82.5 overflow-hidden bg-black text-white col-span-2 sm:col-span-1"
+                        class="flex flex-col justify-between relative w-70.75 h-70.75 2xl:w-82.5 2xl:h-82.5 overflow-hidden bg-black text-white col-span-2 sm:col-span-1"
                     >
-                        <div class="pt-4 pb-2.25 xl:pb-4 px-8 text-left font-ibm-bold">
-                            <div class="text-lg xl:text-xl pt-1.5 xl:pt-2.25">Syndication</div>
-                            <div class="text-xxs xl:text-xs xl:mt-2">
+                        <div class="pt-4 pb-2.25 2xl:pb-4 px-8 text-left font-ibm-bold">
+                            <div class="text-lg 2xl:text-xl pt-1.5 2xl:pt-2.25">Syndication</div>
+                            <div class="text-xxs 2xl:text-xs 2xl:mt-2">
                                 <div class="font-ibm-semi-bold">
                                     <nftmx-help>Syndication type</nftmx-help>
                                 </div>
@@ -53,16 +53,18 @@
                             <nftmx-progress-bar />
                         </div>
 
-                        <div class="snap-center pt-1.5 xl:pt-2 pb-2">
+                        <div class="snap-center pt-1.5 2xl:pt-2 pb-2">
                             <div
-                                class="xl:pt-2 pb-2 font-ibm-medium text-xxs xl:text-xs"
+                                class="2xl:pt-2 pb-2 font-ibm-medium text-xxs 2xl:text-xs"
                             >Current auction ends in</div>
-                            <timer class="place-content-center" />
+                            <div class="flex justify-center">
+                                <timer class="" />
+                            </div>
                         </div>
                         <nftmx-button
                             color="secondary"
                             label="JOIN SYNDICATION"
-                            class="font-press w-full text-xs xl:text-sm py-4.25 xl:py-5 absolute left-0 bottom-0"
+                            class="font-press w-full text-xs 2xl:text-sm py-4.25 2xl:py-5 absolute left-0 bottom-0"
                         ></nftmx-button>
                     </div>
                 </div>
