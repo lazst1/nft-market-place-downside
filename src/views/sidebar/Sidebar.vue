@@ -5,13 +5,12 @@ import SidebarRouter from './SidebarRouter.vue';
 import SidebarAccordion from './SidebarAccordion.vue';
 import SubRouter from './SubRouter.vue';
 import SidebarFooter from './SidebarFooter.vue';
+import SidebarContainer from '@/core/container/SidebarContainer.vue';
 </script>
 
 <template>
-    <div
-        class="fixed max-h-full overflow-auto z-20 w-full sm:w-72 top-0 right-0 bg-black text-white pt-20 pl-8 pr-2 font-ibm text-xs leading-7.5"
-    >
-        <sidebar-router to="/profile-setting">Profile</sidebar-router>
+    <sidebar-container>
+        <sidebar-router to="/profile">Profile</sidebar-router>
         <sidebar-router to="/">Create an NFT</sidebar-router>
         <sidebar-router to="/">Launch your DVC</sidebar-router>
         <sidebar-router to="/">My collection</sidebar-router>
@@ -108,5 +107,5 @@ import SidebarFooter from './SidebarFooter.vue';
         </div>
         <nftmx-divider class="border-tertiary-900 my-3"></nftmx-divider>
         <sidebar-footer />
-    </div>
+    </sidebar-container>
 </template>
