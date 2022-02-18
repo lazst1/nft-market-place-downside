@@ -29,7 +29,7 @@ export const auth = {
                         rootState.user = user;
                         commit('loginSuccess', user);
                         MoralisService.getMyNFTs(user.walletAddress, 40, 0).then(nftData => {
-                            rootState.user.nftData = JSON.parse(JSON.stringify(nftData));
+                            rootState.myNfts = JSON.parse(JSON.stringify(nftData));
                         })
                         return Promise.resolve(user);
                     },
@@ -45,6 +45,7 @@ export const auth = {
         saveProfile({ commit, rootState }, data) {
             authService.saveProfile(rootState.user.id, data).then(res => {
                 console.log('res===============', res);
+                rootState.user = res;
             });
         },
     },

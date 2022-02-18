@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watchEffect } from 'vue';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
@@ -11,25 +11,29 @@ import NavBarSearch from '@/core/container/NavBarSearch.vue';
 import NftmxInput from '@/core/components/NftmxInput.vue';
 import NftmxTextarea from '@/core/components/NftmxTextarea.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
-import { baseURL } from '@/core/config'
+import { baseURL, defaultUser } from '@/core/config'
 
 const store = useStore();
-const name = computed(() => store.state.user.name);
+const name = ref();
 const profileImg = ref();
 const profileBanner = ref();
-const bio = computed(() => store.state.user.bio);
-const email = computed(() => store.state.user.email);
-const website = computed(() => store.state.user.website);
-const twitter = computed(() => store.state.user.twitter);
-const instagram = computed(() => store.state.user.instagram);
-const profileImgPreview = computed(() => baseURL + store.state.user.profile_img);
-const profileBannerPreview = computed(() => baseURL + store.state.user.profile_banner);
+const bio = ref();
+const email = ref();
+const website = ref();
+const twitter = ref();
+const instagram = ref();
+const profileImgPreview = ref();
+const profileBannerPreview = ref();
 
 function save() {
     const user = new FormData();
     user.append('name', name.value);
-    user.append('profileImg', profileImg.value[0]);
-    user.append('profileBanner', profileBanner.value[0]);
+    if (profileImg.value) {
+        user.append('profileImg', profileImg.value[0]);
+    }
+    if (profileBanner.value) {
+        user.append('profileBanner', profileBanner.value[0]);
+    }
     user.append('bio', bio.value);
     user.append('email', email.value);
     user.append('website', website.value);
@@ -39,13 +43,16 @@ function save() {
 }
 
 watchEffect(() => {
-    if (profileImg.value) {
-        console.log('profileImg.value', profileImg.value)
-        profileImgPreview.value = URL.createObjectURL(profileImg.value[0])
-    }
-    if (profileBanner.value) {
-        console.log('profileBanner.value', profileBanner.value)
-        profileBannerPreview.value = URL.createObjectURL(profileBanner.value[0])
+    const user = store.getters['auth/getUser'];
+    if (user) {
+        name.value = user.name;
+        bio.value = user.bio;
+        email.value = user.email;
+        website.value = user.website;
+        twitter.value = user.twitter;
+        instagram.value = user.instagram;
+        profileImgPreview.value = profileImg.value ? URL.createObjectURL(profileImg.value[0]) : user.profile_img ? baseURL + user.profile_img : '';
+        profileBannerPreview.value = profileBanner.value ? URL.createObjectURL(profileBanner.value[0]) : user.profile_banner ? baseURL + user.profile_banner : '';
     }
 })
 
@@ -75,7 +82,11 @@ watchEffect(() => {
                 <template v-slot:value>
                     <div class="md:grid md:grid-cols-8 text-tertiary-500 mt-4 xl:mt-0">
                         <div class="col-span-5 md:pr-5">
-                            <nftmx-file-uploader id="profileImage" class="h-50 md:h-79" v-model="profileImg"></nftmx-file-uploader>
+                            <nftmx-file-uploader
+                                id="profileImage"
+                                class="h-50 md:h-79"
+                                v-model="profileImg"
+                            ></nftmx-file-uploader>
                         </div>
                         <div class="col-span-3 md:pl-6 mt-5 md:mt-0 w-full">
                             <div
@@ -100,7 +111,11 @@ watchEffect(() => {
                 <template v-slot:value>
                     <div class="md:grid md:grid-cols-8 text-tertiary-500 mt-4 xl:mt-0">
                         <div class="col-span-5 md:pr-5">
-                            <nftmx-file-uploader id="profileBanner" class="h-45" v-model="profileBanner"></nftmx-file-uploader>
+                            <nftmx-file-uploader
+                                id="profileBanner"
+                                class="h-45"
+                                v-model="profileBanner"
+                            ></nftmx-file-uploader>
                         </div>
                         <div class="col-span-3 md:pl-6 mt-5 md:mt-0 w-full">
                             <div

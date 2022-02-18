@@ -7,13 +7,13 @@ import GroupItem from './components/GroupItem.vue';
 import SubItem from './components/SubItem.vue';
 
 const store = useStore();
-const user = computed(() => store.getters['auth/getUser']);
+const myNfts = computed(() => store.state.myNfts);
 const open = ref(false);
 const handleClick = (value) => {
     open.value = value
 }
 
-const selectedGroup = ref({ name: 'Collected', count: user.nftData ? user.nftData.total : 0 });
+const selectedGroup = ref({ name: 'Collected', count: myNfts.value ? myNfts.value.total : 0 });
 
 </script>
 
@@ -22,10 +22,10 @@ const selectedGroup = ref({ name: 'Collected', count: user.nftData ? user.nftDat
         <div class="flex gap-2.5 py-4 w-max">
             <group-item
                 :active="selectedGroup.name === 'Collected'"
-                @click="selectedGroup = { name: 'Collected', count: user.nftData ? user.nftData.total : 0 }"
+                @click="selectedGroup = { name: 'Collected', count: myNfts ? myNfts.total : 0 }"
             >
                 Collected
-                <span class="font-ibm-light">{{ user.nftData ? user.nftData.total : 0 }}</span>
+                <span class="font-ibm-light">{{ myNfts ? myNfts.total : 0 }}</span>
             </group-item>
             <group-item
                 :active="selectedGroup.name === 'On Sale'"
@@ -84,16 +84,16 @@ const selectedGroup = ref({ name: 'Collected', count: user.nftData ? user.nftDat
                 {{ selectedGroup.name }}
                 <span
                     class="font-ibm-light"
-                >{{ selectedGroup.name === 'Collected' ? selectedGroup.count || user.nftData ? user.nftData.total : 0 : 0 }}</span>
+                >{{ selectedGroup.name === 'Collected' ? selectedGroup.count || myNfts ? myNfts.total : 0 : 0 }}</span>
             </div>
         </template>
         <div class="font-ibm-light text-tertiary-400 text-description">
             <sub-item
                 :active="selectedGroup.name === 'Collected'"
-                @click="selectedGroup = { name: 'Collected', count: user.nftData ? user.nftData.total : 0 }"
+                @click="selectedGroup = { name: 'Collected', count: myNfts ? myNfts.total : 0 }"
             >
                 Collected
-                <span class="font-ibm-light">{{ user.nftData ? user.nftData.total : 0 }}</span>
+                <span class="font-ibm-light">{{ myNfts ? myNfts.total : 0 }}</span>
             </sub-item>
             <sub-item
                 :active="selectedGroup.name === 'On Sale'"

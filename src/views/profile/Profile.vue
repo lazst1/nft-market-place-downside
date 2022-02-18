@@ -15,7 +15,7 @@ import ChooseNftGroup from './ChooseNftGroup.vue';
 
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
-const user = computed(() => store.getters['auth/getUser']);
+const myNfts = computed(() => store.state.myNfts);
 if (walletAddress.value) {
     store.dispatch("moralis/getMyNFTs");
 }
@@ -35,7 +35,7 @@ if (walletAddress.value) {
         </div>
         <cards-container class="mt-12 2xl:mt-11 mb-22 place-items-center">
             <nftmx-item-card
-                v-for="(nft, index) in user.nftData ? user.nftData.result : []"
+                v-for="(nft, index) in myNfts ? myNfts.result : []"
                 :key="index"
                 :item="nft"
                 class="bg-tertiary-800"

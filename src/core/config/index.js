@@ -45,6 +45,18 @@ export const marketAddress = import.meta.env.VITE_MARKET_CONTRACT_ADDRESS;
 
 export const exchangeRate = 1000000000000000000;
 
+export const defaultUser = {
+    bio: "",
+    email: "",
+    instagram: "",
+    name: "Kyle White",
+    profile_banner: "/images/profile-banner-1920.png",
+    profile_img: "/images/profile-big.png",
+    twitter: "",
+    walletAddress: "0xb29265736dcc20867f6b3c0f5aa8e5a64942b816",
+    website: ""
+}
+
 export const saleType = {
     FIX_SALE: 'FIX-SALE',
     AUCTION: 'AUCTION'
