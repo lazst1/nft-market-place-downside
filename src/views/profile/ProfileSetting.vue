@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
@@ -11,18 +11,19 @@ import NavBarSearch from '@/core/container/NavBarSearch.vue';
 import NftmxInput from '@/core/components/NftmxInput.vue';
 import NftmxTextarea from '@/core/components/NftmxTextarea.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
+import { baseURL } from '@/core/config'
 
 const store = useStore();
-const name = ref('');
+const name = computed(() => store.state.user.name);
 const profileImg = ref();
 const profileBanner = ref();
-const bio = ref('');
-const email = ref('');
-const website = ref('');
-const twitter = ref('');
-const instagram = ref('');
-const profileImgPreview = ref('');
-const profileBannerPreview = ref('');
+const bio = computed(() => store.state.user.bio);
+const email = computed(() => store.state.user.email);
+const website = computed(() => store.state.user.website);
+const twitter = computed(() => store.state.user.twitter);
+const instagram = computed(() => store.state.user.instagram);
+const profileImgPreview = computed(() => baseURL + store.state.user.profile_img);
+const profileBannerPreview = computed(() => baseURL + store.state.user.profile_banner);
 
 function save() {
     const user = new FormData();
@@ -34,7 +35,7 @@ function save() {
     user.append('website', website.value);
     user.append('twitter', twitter.value);
     user.append('instagram', instagram.value);
-    
+    store.dispatch('auth/saveProfile', user);
 }
 
 watchEffect(() => {

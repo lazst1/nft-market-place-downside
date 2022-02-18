@@ -1,14 +1,26 @@
 <script setup>
-defineProps({
+import { computed } from "vue"
+
+const props = defineProps({
     modelValue: String,
     placeholder: String
 })
+
+const emit = defineEmits(['update:modelValue'])
+
+const computedValue = computed({
+  get: () => props.modelValue,
+  set: value => {
+    emit('update:modelValue', value)
+  }
+})
+
 </script>
 
 <template>
     <div class="border-2 border-black h-full">
         <textarea
-            v-model="modelValue"
+            v-model="computedValue"
             class="outline-none border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full h-full font-ibm text-sm -mb-1.25 pt-4"
             :placeholder="placeholder"
         />

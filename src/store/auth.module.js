@@ -1,10 +1,10 @@
-import AuthService from "@/core/services/auth.service";
 import Moralis from 'moralis'
 import MoralisService from "../core/services/moralis.service";
 import Web3 from "web3/dist/web3.min.js"
 import abiJSON from '@/core/config/abi';
 import { marketAddress } from "@/core/config";
 import marketService from "@/core/services/market.service";
+import authService from "../core/services/auth.service";
 
 export const auth = {
     namespaced: true,
@@ -24,7 +24,7 @@ export const auth = {
                 marketService.getSaleOrders().then(orders => {
                     rootState.orders = orders;
                 })
-                return AuthService.connectWallet(walletAddress).then(
+                return authService.connectWallet(walletAddress).then(
                     user => {
                         rootState.user = user;
                         commit('loginSuccess', user);
@@ -42,6 +42,11 @@ export const auth = {
                 commit('loginFailure');
             }
         },
+        saveProfile({ commit, rootState }, data) {
+            authService.saveProfile(rootState.user.id, data).then(res => {
+                console.log('res===============', res);
+            });
+        },
     },
     getters: {
         getWalletAddress: (state, getters, rootState) => {
@@ -55,10 +60,10 @@ export const auth = {
         }
     },
     mutations: {
-        async loginSuccess(state, user) {
+        async loginSuccess() {
             localStorage.setItem('isLoggedIn', true);
         },
-        loginFailure(state) {
+        loginFailure() {
             localStorage.removeItem('isLoggedIn');
         },
     }

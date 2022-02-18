@@ -37,6 +37,7 @@ export const walletList = [
     },
 ];
 
+export const baseURL = import.meta.env.VITE_APP_SERVER_URL;
 export const moralisChain = import.meta.env.VITE_MORALIS_CHAIN;
 export const netExplorerURL = import.meta.env.VITE_NET_EXPLORER_URL;
 
