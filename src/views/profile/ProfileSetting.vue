@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
@@ -13,7 +13,7 @@ import NftmxTextarea from '@/core/components/NftmxTextarea.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 
 const store = useStore();
-const username = ref('');
+const name = ref('');
 const profileImg = ref();
 const profileBanner = ref();
 const bio = ref('');
@@ -21,10 +21,32 @@ const email = ref('');
 const website = ref('');
 const twitter = ref('');
 const instagram = ref('');
+const profileImgPreview = ref('');
+const profileBannerPreview = ref('');
 
 function save() {
-    console.log(username.value)
+    const user = new FormData();
+    user.append('name', name.value);
+    user.append('profileImg', profileImg.value[0]);
+    user.append('profileBanner', profileBanner.value[0]);
+    user.append('bio', bio.value);
+    user.append('email', email.value);
+    user.append('website', website.value);
+    user.append('twitter', twitter.value);
+    user.append('instagram', instagram.value);
+    
 }
+
+watchEffect(() => {
+    if (profileImg.value) {
+        console.log('profileImg.value', profileImg.value)
+        profileImgPreview.value = URL.createObjectURL(profileImg.value[0])
+    }
+    if (profileBanner.value) {
+        console.log('profileBanner.value', profileBanner.value)
+        profileBannerPreview.value = URL.createObjectURL(profileBanner.value[0])
+    }
+})
 
 </script>
 
@@ -35,13 +57,13 @@ function save() {
             <div class="col-span-2 font-press text-xl md:text-2.5xl 2xl:text-3xl">Profile Settings</div>
         </div>
         <div>
-            <nftmx-sell-grid class="">
+            <nftmx-sell-grid class>
                 <template v-slot:item>
                     <div class="font-ibm-bold text-lg pt-3.5">Username</div>
                 </template>
                 <template v-slot:value>
                     <div class="font-ibm text-sm text-tertiary-400 mt-3 md:mt-0">
-                        <nftmx-input v-model="username" />
+                        <nftmx-input v-model="name" />
                     </div>
                 </template>
             </nftmx-sell-grid>
@@ -52,12 +74,19 @@ function save() {
                 <template v-slot:value>
                     <div class="md:grid md:grid-cols-8 text-tertiary-500 mt-4 xl:mt-0">
                         <div class="col-span-5 md:pr-5">
-                            <nftmx-file-uploader class="h-50 md:h-79"></nftmx-file-uploader>
+                            <nftmx-file-uploader id="profileImage" class="h-50 md:h-79" v-model="profileImg"></nftmx-file-uploader>
                         </div>
                         <div class="col-span-3 md:pl-6 mt-5 md:mt-0 w-full">
-                            <div class="border-2 border-black text-center flex flex-col justify-center w-full md:w-auto h-50 md:h-full">
-                                <div class="font-ibm-bold text-lg md:text-2xl leading-9">Preview Image</div>
-                                <div class="text-sm">Upload file to preview your profile image</div>
+                            <div
+                                class="border-2 border-black text-center flex flex-col justify-center w-full md:w-auto h-50 md:h-full"
+                                :style="{ background: 'url(' + profileImgPreview + ')', backgroundSize: 'cover', backgroundPosition: 'center' }"
+                            >
+                                <div v-if="!profileImgPreview">
+                                    <div
+                                        class="font-ibm-bold text-lg md:text-2xl leading-9"
+                                    >Preview Image</div>
+                                    <div class="text-sm">Upload file to preview your profile image</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -70,14 +99,19 @@ function save() {
                 <template v-slot:value>
                     <div class="md:grid md:grid-cols-8 text-tertiary-500 mt-4 xl:mt-0">
                         <div class="col-span-5 md:pr-5">
-                            <nftmx-file-uploader class="h-45"></nftmx-file-uploader>
+                            <nftmx-file-uploader id="profileBanner" class="h-45" v-model="profileBanner"></nftmx-file-uploader>
                         </div>
                         <div class="col-span-3 md:pl-6 mt-5 md:mt-0 w-full">
                             <div
                                 class="border-2 border-black text-center h-45 md:h-full flex flex-col justify-center pb-4"
+                                :style="{ background: 'url(' + profileBannerPreview + ')', backgroundSize: 'cover', backgroundPosition: 'center' }"
                             >
-                                <div class="font-ibm-bold text-lg md:text-2xl leading-9">Preview Banner</div>
-                                <div class="text-sm">Upload file to preview your profile banner</div>
+                                <div v-if="!profileBannerPreview">
+                                    <div
+                                        class="font-ibm-bold text-lg md:text-2xl leading-9"
+                                    >Preview Banner</div>
+                                    <div class="text-sm">Upload file to preview your profile banner</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,7 +126,7 @@ function save() {
                 </template>
                 <template v-slot:value>
                     <div class="font-ibm text-sm text-tertiary-400 h-37.5 mt-4.75 md:mt-0">
-                        <nftmx-textarea v-model="username" />
+                        <nftmx-textarea v-model="bio" />
                     </div>
                 </template>
             </nftmx-sell-grid>
@@ -102,7 +136,7 @@ function save() {
                 </template>
                 <template v-slot:value>
                     <div class="font-ibm text-sm text-tertiary-400 pt-3 md:pt-0">
-                        <nftmx-input v-model="username" />
+                        <nftmx-input v-model="email" />
                     </div>
                 </template>
             </nftmx-sell-grid>
@@ -114,7 +148,7 @@ function save() {
                     <div class="font-ibm text-sm text-tertiary-400 pt-4 md:pt-0">
                         <div>
                             <nftmx-input
-                                v-model="twitter"
+                                v-model="website"
                                 iconGroup="fas"
                                 icon="globe"
                                 placeholder="Your website"
@@ -130,7 +164,7 @@ function save() {
                         </div>
                         <div class="pt-4.75">
                             <nftmx-input
-                                v-model="twitter"
+                                v-model="instagram"
                                 iconGroup="fab"
                                 icon="instagram"
                                 placeholder="Your instagram profile"
@@ -161,7 +195,8 @@ function save() {
             <nftmx-button
                 color="primary"
                 label="SAVE"
-                class="font-press w-btn-xl text-sm md:text-lg  absolute left-0 bottom-0 h-15 md:h-17.75"
+                class="font-press w-btn-xl text-sm md:text-lg absolute left-0 bottom-0 h-15 md:h-17.75"
+                @click="save()"
             ></nftmx-button>
         </div>
     </body-container>

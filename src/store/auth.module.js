@@ -6,24 +6,9 @@ import abiJSON from '@/core/config/abi';
 import { marketAddress } from "@/core/config";
 import marketService from "@/core/services/market.service";
 
-const initialUser = {
-    id: '',
-    address: '',
-    nftData: {
-        page: 0,
-        page_size: 0,
-        result: []
-    },
-    token: '',
-    userId: '',
-    userType: 'USER',
-    allNfts: {}
-}
-
 export const auth = {
     namespaced: true,
     state: {
-        user: initialUser,
         isLoggedIn: false
     },
     actions: {
@@ -36,9 +21,6 @@ export const auth = {
                         from: walletAddress,
                     }
                 );
-                // MoralisService.getAllNFTs(20, 0).then(nftData => {
-                //     rootState.allNfts = JSON.parse(JSON.stringify(nftData));
-                // })
                 marketService.getSaleOrders().then(orders => {
                     rootState.orders = orders;
                 })
@@ -46,6 +28,9 @@ export const auth = {
                     user => {
                         rootState.user = user;
                         commit('loginSuccess', user);
+                        MoralisService.getMyNFTs(user.walletAddress, 40, 0).then(nftData => {
+                            rootState.user.nftData = JSON.parse(JSON.stringify(nftData));
+                        })
                         return Promise.resolve(user);
                     },
                     error => {
@@ -59,26 +44,21 @@ export const auth = {
         },
     },
     getters: {
-        getWalletAddress: state => {
-            return state.user && state.user.walletAddress ? state.user.walletAddress : ''
+        getWalletAddress: (state, getters, rootState) => {
+            return rootState.user && rootState.user.walletAddress ? rootState.user.walletAddress : ''
         },
-        getUserId: state => {
-            return state.user && state.user.id ? state.user.id : ''
+        getUserId: (state, getters, rootState) => {
+            return rootState.user && rootState.user.id ? rootState.user.id : ''
         },
-        getUser: state => {
-            return state.user
+        getUser: (state, getters, rootState) => {
+            return rootState.user
         }
     },
     mutations: {
         async loginSuccess(state, user) {
-            state.user = user;
-            MoralisService.getMyNFTs(user.walletAddress, 40, 0).then(nftData => {
-                state.user.nftData = JSON.parse(JSON.stringify(nftData));
-            })
             localStorage.setItem('isLoggedIn', true);
         },
         loginFailure(state) {
-            state.user = null;
             localStorage.removeItem('isLoggedIn');
         },
     }

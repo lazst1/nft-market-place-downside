@@ -12,7 +12,7 @@ import SyndicationCarousel from '../landing/components/SyndicationCarousel.vue';
 import { useStore } from 'vuex';
 
 const user = computed(() => {
-    return this.$store.state.auth.user;
+    return this.$store.state.user;
 })
 const store = useStore();
 if (store.getters['auth/getWalletAddress']) {
