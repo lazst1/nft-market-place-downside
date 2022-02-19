@@ -29,6 +29,7 @@
     "sass": "^1.45.1",
     "sass-loader": "^12.4.0",
     "stream-browserify": "^3.0.0",
+    "tw-elements": "^1.0.0-alpha11",
     "util": "^0.12.4",
     "v-calendar": "^3.0.0-alpha.6",
     "vue": "^3.2.25",

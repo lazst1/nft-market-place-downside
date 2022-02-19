@@ -9,6 +9,7 @@ import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import { useStore } from 'vuex';
 import Ribbon from '@/core/components/Ribbon.vue';
 import { keyCodeNumberRange } from '../../core/utils';
+import NftmxToggle from '../../core/components/NftmxToggle.vue';
 
 const props = defineProps({
     asset: {
@@ -26,6 +27,8 @@ const downsidePeriod = ref();
 const downsideRate = ref();
 const sale = ref(saleType.FIX_SALE);
 const openCalendar = ref(false);
+const moreOption = ref(false);
+const bundleValue = ref(true);
 
 const period = computed(() => downsidePeriod.value ? parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000) : 0);
 
@@ -107,9 +110,9 @@ function downsideRateRange() {
                 <div class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-8.5 3xl:gap-4.5">
                     <nftmx-select-network />
                     <nftmx-button
-                        color="primary-900"
+                        color="primary"
                         label="CREATE NEW COLLECTION"
-                        :class="['font-press text-smallest sm:text-xs 3xl:text-sm bg-primary-900 hover:bg-primary-700 focus:bg-primary-800']"
+                        :class="['font-press text-smallest sm:text-xs 3xl:text-sm']"
                     />
                 </div>
                 <div class="flex mt-6">
@@ -188,13 +191,28 @@ function downsideRateRange() {
                     />
                     <div class="w-14 h-13.5 px-4 bg-black flex items-center justify-center">%</div>
                 </div>
+                <div class="flex justify-between pt-0.5">
+                    <div>Set as a bundle</div>
+                    <nftmx-toggle v-model="bundleValue" />
+                </div>
+                <div class="flex mt-3.5 mb-4 font-ibm text-sm">
+                    <input
+                        v-model="downsideRate"
+                        class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full px-6 font-ibm text-sm"
+                        placeholder="0"
+                        @keydown="preventKey($event)"
+                        @input="downsideRateRange()"
+                    />
+                    <div class="w-14 h-13.5 px-4 bg-black flex items-center justify-center">%</div>
+                </div>
                 <div
                     class="flex text-xs font-ibm-semi-bold text-primary-900 pt-0.75 pb-0.5 cursor-pointer w-fit"
+                    @click="moreOption = !moreOption"
                 >
-                    More options
+                    {{ !moreOption ? 'More options' : 'Fewer options' }}
                     <div class="self-center cursor-pointer ml-5.25">
-                        <font-awesome-icon v-if="!open" :icon="['fas', 'sort-down']" class />
-                        <font-awesome-icon v-if="open" :icon="['fas', 'sort-up']" class />
+                        <font-awesome-icon v-if="!moreOption" :icon="['fas', 'sort-down']" class />
+                        <font-awesome-icon v-if="moreOption" :icon="['fas', 'sort-up']" class />
                     </div>
                 </div>
                 <nftmx-divider class="mt-9 mb-6" />

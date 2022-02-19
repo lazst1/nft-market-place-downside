@@ -19,7 +19,7 @@ const myNfts = computed(() => store.state.myNfts);
 if (walletAddress.value) {
     store.dispatch("moralis/getMyNFTs");
 }
-
+console.log(myNfts.value)
 </script>
 
 <template>

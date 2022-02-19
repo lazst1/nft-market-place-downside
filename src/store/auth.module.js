@@ -21,15 +21,15 @@ export const auth = {
                         from: walletAddress,
                     }
                 );
-                marketService.getSaleOrders().then(orders => {
-                    rootState.orders = orders;
-                })
                 return authService.connectWallet(walletAddress).then(
                     user => {
                         rootState.user = user;
                         commit('loginSuccess', user);
                         MoralisService.getMyNFTs(user.walletAddress, 40, 0).then(nftData => {
                             rootState.myNfts = JSON.parse(JSON.stringify(nftData));
+                        })
+                        marketService.getSaleOrders(user.id).then(orders => {
+                            rootState.orders = orders;
                         })
                         return Promise.resolve(user);
                     },
