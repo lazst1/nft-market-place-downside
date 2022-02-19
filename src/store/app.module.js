@@ -4,7 +4,8 @@ export const app = {
     namespaced: true,
     state: {
         windowWidth: 0,
-        sidebarOpened: false
+        sidebarOpened: false,
+        notificationOpened: false
     },
     getters: {
         currentBreackPoint: state => {
@@ -22,6 +23,9 @@ export const app = {
         },
         TOGGLE_SIDEBAR(state, val) {
             state.sidebarOpened = val
+        },
+        TOGGLE_NOTIFICATION_BAR(state, val) {
+            state.notificationOpened = val
         }
     }
 }

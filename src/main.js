@@ -11,7 +11,7 @@ import VCalendar from 'v-calendar'
 import Moralis from './plugins/moralis'
 import {
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faMoon, faSun, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo,
-    faShareAlt, faBars, faCalendarAlt, faCopy, faGlobe, faCog, faEdit
+    faShareAlt, faBars, faCalendarAlt, faCopy, faGlobe, faCog, faEdit, faBell
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF, faTelegramPlane, faDiscord, faTwitter, faMediumM, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons'
@@ -19,7 +19,7 @@ import { faCopyright } from '@fortawesome/free-regular-svg-icons'
 library.add(
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faFacebookF, faTelegramPlane, faDiscord, faTwitter, faCopy, faGlobe, faCog,
     faMediumM, faMoon, faSun, faCopyright, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo, faShareAlt, faBars, faCalendarAlt, faInstagram,
-    faEdit
+    faEdit, faBell
 );
 
 createApp(App)
