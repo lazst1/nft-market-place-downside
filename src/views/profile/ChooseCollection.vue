@@ -5,6 +5,7 @@ import { themeConfig } from '@/core/config';
 import Accordion from '@/core/container/Accordion.vue';
 import GroupItem from './components/GroupItem.vue';
 import SubItem from './components/SubItem.vue';
+import NftmxButton from '@/core/components/NftmxButton.vue';
 
 const store = useStore();
 
@@ -20,13 +21,20 @@ const selected = ref('My Collection');
 <template>
     <div
         v-if="store.state.app.windowWidth > themeConfig.sm"
-        class="flex text-white font-ibm-semi-bold text-sm pb-4.5 md:mt-4 gap-x-7"
+        class="flex justify-between text-white font-ibm-semi-bold text-sm pb-4.5 md:mt-4 gap-x-7"
     >
-        <group-item
-            :active="selected === 'My Collection'"
-            @click="selected = 'My Collection'"
-        >My Collection</group-item>
-        <group-item :active="selected === 'Ledger'" @click="selected = 'Ledger'">Ledger</group-item>
+        <div class="flex">
+            <group-item
+                :active="selected === 'My Collection'"
+                @click="selected = 'My Collection'"
+            >My Collection</group-item>
+            <group-item :active="selected === 'Ledger'" @click="selected = 'Ledger'">Ledger</group-item>
+        </div>
+        <nftmx-button
+            color="primary"
+            label="Import NFT"
+            class="font-press h-12.5 text-sm w-68.5"
+        />
     </div>
     <accordion
         v-if="store.state.app.windowWidth <= themeConfig.sm"
@@ -37,17 +45,14 @@ const selected = ref('My Collection');
         @handle-click="handleClick"
     >
         <template v-slot:caption>
-            <div class="text-primary-900 font-ibm-light text-description pt-3 mb-1.5">{{selected}}</div>
+            <div class="text-primary-900 font-ibm-light text-description pt-3 mb-1.5">{{ selected }}</div>
         </template>
         <div class="font-ibm-light text-tertiary-400 text-description">
             <sub-item
                 :active="selected === 'My Collection'"
                 @click="selected = 'My Collection'"
             >My Collection</sub-item>
-            <sub-item
-                :active="selected === 'Ledger'"
-                @click="selected = 'Ledger'"
-            >Ledger</sub-item>
+            <sub-item :active="selected === 'Ledger'" @click="selected = 'Ledger'">Ledger</sub-item>
         </div>
     </accordion>
 </template>

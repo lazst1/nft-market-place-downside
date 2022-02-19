@@ -107,7 +107,7 @@ const componentHoverCss = computed(() => getButtonHoverColor(props.color, props.
     :target="target"
     :disabled="disabled"
   >
-    <div :class="[componentHoverCss, 'absolute w-full h-full inline-flex cursor-pointer justify-center items-center transition hover:opacity-0']">
+    <div :class="[componentHoverCss, 'absolute w-full h-full inline-flex cursor-pointer justify-center items-center transition hover:opacity-0 pb-0.5']">
       <icon v-if="iconBefore" :path="iconBefore" />
       <span v-if="label" :class="labelClass">{{ label }}</span>
       <icon v-if="iconAfter" :path="iconAfter" color="primary-900" />
