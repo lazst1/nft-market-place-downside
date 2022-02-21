@@ -34,13 +34,18 @@ const moreOption = ref(false);
 const bundleValue = ref(true);
 const reverseValue = ref(false);
 const hashtagValue = ref();
-const hashtagOptions = ref([
-    { value: '#live', label: '#live' },
-    { value: 'robin', label: 'Robin' },
-    { value: 'joker', label: 'Joker' },
-]);
+const hashtagOptions = ref([]);
 
 const period = computed(() => downsidePeriod.value ? parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000) : 0);
+
+marketService.getHashtagNames().then(res => {
+    hashtagOptions.value = res.map(item => {
+        return {
+            value: item.name,
+            label: item.name
+        }
+    });
+})
 
 watchEffect(() => {
     console.log(hashtagValue.value)
@@ -50,6 +55,7 @@ function createOrder() {
     const token_id = parseInt(tokenId);
     const price = nftPrice.value;
     const rate = downsideRate.value * 100;
+    if (!price || !rate || !period.value) return;
     createHashTags();
     store.dispatch(
         'market/createOrder',
@@ -64,9 +70,11 @@ function createOrder() {
 }
 
 function createHashTags() {
-    marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId).then(res => {
-        console.log(res);
-    })
+    if (hashtagValue.value) {
+        marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId).then(res => {
+            console.log(res);
+        })
+    }
 }
 
 function handleCalendar() {

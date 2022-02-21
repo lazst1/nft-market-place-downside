@@ -57,6 +57,8 @@ export const defaultUser = {
     website: ""
 }
 
+export const DEFAULT_USER_ID = '00000000-0000-0000-0000-000000000000';
+
 export const saleType = {
     FIX_SALE: 'FIX-SALE',
     AUCTION: 'AUCTION'
