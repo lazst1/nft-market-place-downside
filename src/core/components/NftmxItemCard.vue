@@ -49,7 +49,7 @@ function approve() {
     <nftmx-card-container
         :forMore="forMore"
         :image="metadata ? metadata.image : ''"
-        :assetContractAddress="item.token_address"
+        :tokenAddress="item.token_address"
         :tokenId="item.token_id"
     >
         <div>

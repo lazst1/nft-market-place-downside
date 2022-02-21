@@ -60,9 +60,15 @@
 			},
 			{
 				"indexed": false,
-				"internalType": "enum ProtectedMarketplace.OrderType",
-				"name": "typeOrder",
-				"type": "uint8"
+				"internalType": "uint256",
+				"name": "statusOrder",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "soldTime",
+				"type": "uint256"
 			},
 			{
 				"indexed": true,

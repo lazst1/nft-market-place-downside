@@ -28,15 +28,16 @@ export const market = {
             });
         },
         async createOrder({ commit, rootState }, data) {
-            rootState.marketContract.methods.createOrder(
-                data.assetContractAddress,
-                data.tokenId,
-                rootState.web3.utils.toWei(data.nftPrice, 'ether'),
-                data.downsideRate,
-                data.downsidePeriod,
-                false,
-                data.downsidePeriod
-            ).send({ from: rootState.user.walletAddress, gas: 250000 });
+            console.log(data)
+            // rootState.marketContract.methods.createOrder(
+            //     data.tokenAddress,
+            //     data.tokenId,
+            //     rootState.web3.utils.toWei(data.nftPrice, 'ether'),
+            //     data.downsideRate,
+            //     data.downsidePeriod,
+            //     false,
+            //     data.downsidePeriod
+            // ).send({ from: rootState.user.walletAddress, gas: 250000 });
         },
         async buyFixedPayOrder({ commit, rootState }, data) {
             rootState.marketContract.methods.buyFixedPayOrder(

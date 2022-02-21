@@ -56,7 +56,7 @@ const routes = [
         meta: {
             title: 'Asset'
         },
-        path: '/asset/:assetContractAddress/:tokenId',
+        path: '/asset/:tokenAddress/:tokenId',
         name: 'asset',
         component: Asset
     },

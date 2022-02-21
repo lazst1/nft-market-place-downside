@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watchEffect } from 'vue'
 import { saleType } from '@/core/config'
 import NftmxModal from '@/core/components/NftmxModal.vue';
 import { useRoute } from 'vue-router';
@@ -8,8 +8,11 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import { useStore } from 'vuex';
 import Ribbon from '@/core/components/Ribbon.vue';
-import { keyCodeNumberRange } from '../../core/utils';
-import NftmxToggle from '../../core/components/NftmxToggle.vue';
+import { keyCodeNumberRange } from '@/core/utils';
+import NftmxToggle from '@/core/components/NftmxToggle.vue';
+import NftmxHashtag from '@/core/components/NftmxHashtag.vue';
+import NftmxDivider from '@/core/components/NftmxDivider.vue';
+import marketService from '../../core/services/market.service';
 
 const props = defineProps({
     asset: {
@@ -20,7 +23,7 @@ const props = defineProps({
 
 const store = useStore();
 const route = useRoute();
-const assetContractAddress = route.params.assetContractAddress;
+const tokenAddress = route.params.tokenAddress;
 const tokenId = route.params.tokenId;
 const nftPrice = ref();
 const downsidePeriod = ref();
@@ -29,23 +32,41 @@ const sale = ref(saleType.FIX_SALE);
 const openCalendar = ref(false);
 const moreOption = ref(false);
 const bundleValue = ref(true);
+const reverseValue = ref(false);
+const hashtagValue = ref();
+const hashtagOptions = ref([
+    { value: '#live', label: '#live' },
+    { value: 'robin', label: 'Robin' },
+    { value: 'joker', label: 'Joker' },
+]);
 
 const period = computed(() => downsidePeriod.value ? parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000) : 0);
+
+watchEffect(() => {
+    console.log(hashtagValue.value)
+})
 
 function createOrder() {
     const token_id = parseInt(tokenId);
     const price = nftPrice.value;
     const rate = downsideRate.value * 100;
+    createHashTags();
     store.dispatch(
         'market/createOrder',
         {
-            assetContractAddress,
+            tokenAddress,
             tokenId: token_id,
             nftPrice: price,
             downsidePeriod: period.value,
             downsideRate: rate
         }
     )
+}
+
+function createHashTags() {
+    marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId).then(res => {
+        console.log(res);
+    })
 }
 
 function handleCalendar() {
@@ -112,7 +133,7 @@ function downsideRateRange() {
                     <nftmx-button
                         color="primary"
                         label="CREATE NEW COLLECTION"
-                        :class="['font-press text-smallest sm:text-xs 3xl:text-sm']"
+                        :class="['font-press text-smallest sm:text-xs 3xl:text-sm h-13.5']"
                     />
                 </div>
                 <div class="flex mt-6">
@@ -191,28 +212,49 @@ function downsideRateRange() {
                     />
                     <div class="w-14 h-13.5 px-4 bg-black flex items-center justify-center">%</div>
                 </div>
-                <div class="flex justify-between pt-0.5">
+                <div class="flex justify-between pt-4.5">
                     <div>Set as a bundle</div>
                     <nftmx-toggle v-model="bundleValue" />
                 </div>
-                <div class="flex mt-3.5 mb-4 font-ibm text-sm">
-                    <input
-                        v-model="downsideRate"
-                        class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full px-6 font-ibm text-sm"
-                        placeholder="0"
-                        @keydown="preventKey($event)"
-                        @input="downsideRateRange()"
-                    />
-                    <div class="w-14 h-13.5 px-4 bg-black flex items-center justify-center">%</div>
+                <div class="mt-6.25">
+                    <div class="flex justify-between">
+                        <div class="mb-1">Reverse for specific buyer</div>
+                        <nftmx-toggle v-model="reverseValue" />
+                    </div>
+                    <div
+                        class="font-ibm text-xs text-tertiary-500"
+                    >This item can be purchased as a soon it's listed</div>
                 </div>
                 <div
-                    class="flex text-xs font-ibm-semi-bold text-primary-900 pt-0.75 pb-0.5 cursor-pointer w-fit"
+                    class="flex text-xs font-ibm-semi-bold text-primary-900 mt-8 mb-4.5 pb-0.5 cursor-pointer w-fit"
                     @click="moreOption = !moreOption"
                 >
                     {{ !moreOption ? 'More options' : 'Fewer options' }}
                     <div class="self-center cursor-pointer ml-5.25">
                         <font-awesome-icon v-if="!moreOption" :icon="['fas', 'sort-down']" class />
                         <font-awesome-icon v-if="moreOption" :icon="['fas', 'sort-up']" class />
+                    </div>
+                </div>
+                <div v-if="moreOption">
+                    <div class="flex pt-0.5">Add hashtags</div>
+                    <div class="flex mt-3.5 mb-4 font-ibm text-sm">
+                        <Multiselect
+                            v-model="hashtagValue"
+                            mode="tags"
+                            :searchable="true"
+                            :createTag="true"
+                            :options="hashtagOptions"
+                            class="font-ibm text-xxs"
+                        >
+                            <!-- <template v-slot:tag="{ option, handleTagRemove, disabled }">
+                                <nftmx-hashtag value="live" active />
+                            </template>-->
+                        </Multiselect>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <nftmx-hashtag value="live" active />
+                        <nftmx-hashtag value="vod" />
+                        <nftmx-hashtag value="commisions" />
                     </div>
                 </div>
                 <nftmx-divider class="mt-9 mb-6" />
@@ -236,7 +278,7 @@ function downsideRateRange() {
                     <nftmx-button
                         color="primary"
                         label="COMPLETE LISTING"
-                        class="w-full font-press text-sm pt-4.5 pb-5 lg:text-lg"
+                        class="w-full font-press text-sm lg:text-lg"
                         @click="createOrder()"
                     />
                 </div>
@@ -244,3 +286,50 @@ function downsideRateRange() {
         </div>
     </nftmx-modal>
 </template>
+
+<style scoped>
+/deep/ .multiselect-tags-search {
+    background: #343434;
+}
+/deep/ input.multiselect-tags-search {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+/deep/ .multiselect {
+    border: 2px solid black;
+    border-radius: 0;
+    background: #343434;
+    min-height: 54px;
+    font-size: 14px;
+}
+/deep/ .multiselect.is-active {
+    box-shadow: none;
+    border-bottom: none;
+}
+/deep/ .multiselect-tags-search:focus {
+    outline: none;
+}
+/deep/ .multiselect-dropdown {
+    background: #343434;
+    border: 2px solid black;
+    border-top: none;
+    margin-left: -1px;
+    margin-right: -1px;
+}
+/deep/ .multiselect-option {
+    font-size: 14px;
+}
+/deep/ .multiselect-option.is-pointed {
+    background: #343434;
+    color: #19cb58;
+}
+/deep/ .multiselect-tag {
+    border-radius: 0;
+    padding-top: 5px;
+    padding-bottom: 6px;
+    background-color: #19cb58;
+    font-family: "ibm-light";
+    font-size: 13px;
+}
+</style>

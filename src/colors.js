@@ -14,8 +14,8 @@ export const colorsBorders = {
 }
 
 export const colorsText = {
-  primary: 'text-primary-900',
-  secondary: 'text-secondary-900'
+  primary: 'text-white',
+  secondary: 'text-white'
 }
 
 export const colorsOutline = {

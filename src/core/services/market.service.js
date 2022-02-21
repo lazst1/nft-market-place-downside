@@ -31,6 +31,10 @@ class MatketService {
             return amount;
         }
     }
+
+    createHashTags(hashtagNames, tokenAddress, tokenId) {
+        return http.post('tokens-hashtags', {hashtagNames, tokenAddress, tokenId}).then(res => res.data);
+    }
 }
 
 export default new MatketService();
