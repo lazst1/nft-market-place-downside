@@ -4,6 +4,8 @@ module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
+    './node_modules/tw-elements/dist/js/**/*.js',
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
@@ -76,6 +78,7 @@ module.exports = {
         '7.5': '30px',
         '8.25': '33px',
         '8.5': '34px',
+        '9.75': '39px',
         '10.25': '41px',
         '10.75': '43px',
         '12.5': '50px',
@@ -87,16 +90,22 @@ module.exports = {
         '17': '68px',
         '17.25': '69px',
         '17.5': '70px',
+        '17.75': '71px',
+        '20.75': '83px',
+        '21': '84px',
         '22': '88px',
         '22.5': '90px',
         '23.5': '94px',
+        '25': '100px',
         '30': '120px',
         '32.5': '130px',
         '33.25': '133px',
         '36.75': '147px',
         '37': '148px',
+        '37.5': '150px',
         '42': '168px',
         '42.5': '170px',
+        '45': '180px',
         '45.75': '183px',
         '46.25': '185px',
         '47': '188px',
@@ -118,6 +127,7 @@ module.exports = {
         'home-md': '700px',
         'home-sm': '320px',
         'xl-text': '800px',
+        'btn-xl': '850px',
         'full': '100%',
         '2/3': '60%',
         '55per': '55%',
@@ -143,6 +153,7 @@ module.exports = {
     },
   },
   plugins: [
-    require('@themesberg/flowbite/plugin')
+    require('@themesberg/flowbite/plugin'),
+    require('tw-elements/dist/plugin')
   ],
 }

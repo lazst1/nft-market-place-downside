@@ -7,15 +7,10 @@ import Web3 from "web3/dist/web3.min.js"
 
 const initialUser = {
     address: '',
-    nftData: {
-        page: 0,
-        page_size: 0,
-        result: []
-    },
     token: '',
     userId: '',
     userType: 'USER',
-    allNfts: {}
+    allNfts: {},
 }
 
 const initialOrders = {
@@ -35,7 +30,12 @@ export default createStore({
         marketContract: null,
         allNfts: {},
         user: initialUser,
-        orders: initialOrders
+        orders: initialOrders,
+        myNfts: {
+            page: 0,
+            page_size: 0,
+            result: []
+        }
     },
     mutations: {},
     actions: {},

@@ -27,50 +27,6 @@ const props = defineProps({
             token_uri: ""
         }
     },
-    unique: {
-        type: String,
-        default: "1:20"
-    },
-    transferred: {
-        type: String,
-        default: "12/20"
-    },
-    roi: {
-        type: String,
-        default: "+4,780.73%"
-    },
-    value: {
-        type: String,
-        default: "$0.4781"
-    },
-    vote: {
-        type: String,
-        default: "55"
-    },
-    syndication: {
-        type: Boolean,
-        default: true
-    },
-    auction: {
-        type: Boolean,
-        default: false
-    },
-    bought: {
-        type: Boolean,
-        default: false
-    },
-    connect: {
-        type: Boolean,
-        default: false
-    },
-    sold: {
-        type: Boolean,
-        default: false
-    },
-    closed: {
-        type: Boolean,
-        default: false
-    },
     forMore: Boolean
 })
 
@@ -78,21 +34,6 @@ const store = useStore();
 
 const option = ref(false)
 const metadata = props.item.metadata ? JSON.parse(props.item.metadata) : {};
-
-const syndicationCSS = computed(() => {
-    const base = [
-        'py-3.5', 'text-xxs', 'leading-4', props.syndication ? 'bg-gradient-to-r from-secondary-900 to-secondary-700 text-white' : 'bg-tertiary-600 text-tertiary-500'
-    ]
-
-    return base
-})
-const boughtCSS = computed(() => {
-    const base = [
-        'bg-tertiary-700', 'px-5', 'py-5', props.bought ? 'h-73' : 'h-56'
-    ]
-
-    return base
-})
 
 function onClickOutside() {
     option.value = false
@@ -108,7 +49,7 @@ function approve() {
     <nftmx-card-container
         :forMore="forMore"
         :image="metadata ? metadata.image : ''"
-        :assetContractAddress="item.token_address"
+        :tokenAddress="item.token_address"
         :tokenId="item.token_id"
     >
         <div>
@@ -153,8 +94,12 @@ function approve() {
                     </checkbox-cell>
                 </div>
                 <div class="text-xs text-tertiary-500 flex items-end font-ibm-medium">
-                    <span style="line-height: 0.75" class="pr-2">124</span>
-                    <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-primary-900" />
+                    <span style="line-height: 0.75" class="pr-2">0</span>
+                    <font-awesome-icon
+                        @click.prevent
+                        :icon="['fas', 'thumbs-up']"
+                        class="text-white hover:text-primary-900"
+                    />
                 </div>
             </div>
         </div>

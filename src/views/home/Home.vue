@@ -1,6 +1,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
+import { useStore } from 'vuex';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
@@ -9,10 +10,10 @@ import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import TrendingAssets from './TrendingAssets.vue';
 import TrendingSearch from './TrendingSearch.vue';
 import SyndicationCarousel from '../landing/components/SyndicationCarousel.vue';
-import { useStore } from 'vuex';
+import Analyzer from './Analyzer.vue';
 
 const user = computed(() => {
-    return this.$store.state.auth.user;
+    return this.$store.state.user;
 })
 const store = useStore();
 if (store.getters['auth/getWalletAddress']) {
@@ -36,7 +37,7 @@ if (store.getters['auth/getWalletAddress']) {
 
         <nftmx-divider class="mt-9"></nftmx-divider>
 
-        <nftmx-analyzer />
+        <analyzer />
         <trending-search />
         <trending-assets />
     </body-container>

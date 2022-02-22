@@ -7,8 +7,8 @@ class MatketService {
         return http.get(`orders?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
-    getSaleOrders(page = 1, limit = 10) {
-        return http.get(`orders/sale?page=${page}&limit=${limit}`).then(res => res.data);
+    getSaleOrders(userId = '', page = 1, limit = 10) {
+        return http.get(`orders/sale?page=${page}&limit=${limit}&userId=${userId}`).then(res => res.data);
     }
 
     getOrder(id) {
@@ -30,6 +30,10 @@ class MatketService {
             console.log('MarketService getUSDFromToken: Not implemented yet.')
             return amount;
         }
+    }
+
+    createHashTags(hashtagNames, tokenAddress, tokenId) {
+        return http.post('tokens-hashtags', {hashtagNames, tokenAddress, tokenId}).then(res => res.data);
     }
 }
 

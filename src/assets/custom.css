@@ -28,6 +28,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+textarea {
+    -webkit-box-shadow: none;
+}
+
 @font-face {
     font-family: "fontawesome";
     src: url(./fonts/fontawesome-webfont.ttf);

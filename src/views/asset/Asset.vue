@@ -21,10 +21,10 @@ import moralisService from '@/core/services/moralis.service';
 const store = useStore();
 const router = useRouter();
 const route = useRoute();
-const assetContractAddress = route.params.assetContractAddress;
+const tokenAddress = route.params.tokenAddress;
 const tokenId = route.params.tokenId;
 const asset = ref({});
-moralisService.getNft(assetContractAddress, tokenId).then(res => {
+moralisService.getNft(tokenAddress, tokenId).then(res => {
     if (!res.owner_of) {
         router.push('/browse');
         return;

@@ -6,10 +6,11 @@ import TopBar from '@/core/components/TopBar.vue';
 import Icon from '@/core/components/Icon.vue'
 import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
-// import Sidebar from '@/core/components/Sidebar.vue';
 import Sidebar from '@/views/sidebar/Sidebar.vue'
+import NotificationsBar from '@/views/notifications/NotificationsBar.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 import NftmxButton from '../components/NftmxButton.vue';
+import NftmxBadge from '../components/NftmxBadge.vue';
 
 const sidebar = ref(false);
 const store = useStore();
@@ -17,9 +18,13 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 
 function onClickOutside(params) {
   store.commit('app/TOGGLE_SIDEBAR', false)
+  store.commit('app/TOGGLE_NOTIFICATION_BAR', false)
 }
 function toggleSidebar(params) {
   store.commit('app/TOGGLE_SIDEBAR', !store.state.app.sidebarOpened)
+}
+function toggleNotificationBar(params) {
+  store.commit('app/TOGGLE_NOTIFICATION_BAR', !store.state.app.notificationOpened)
 }
 
 </script>
@@ -38,8 +43,19 @@ function toggleSidebar(params) {
     >
       <div class="max-h-screen-menu overflow-visible flex items-stretch justify-end ml-auto">
         <nav-bar-item>
+          <div @click="toggleNotificationBar" class="hidden lg:block">
+            <font-awesome-icon :icon="['fas', 'bell']" class="text-lg" />
+            <nftmx-badge>15</nftmx-badge>
+          </div>
+        </nav-bar-item>
+        <nav-bar-item>
           <div class="hidden lg:block">
-            <nftmx-button color="primary" label="NFT List" outline class="h-6 w-37 font-ibm-bold transition" />
+            <nftmx-button
+              color="primary"
+              label="NFT List"
+              outline
+              class="h-6 w-37 font-ibm-bold transition text-white"
+            />
           </div>
         </nav-bar-item>
         <nav-bar-item @click="toggleSidebar" class="hover:text-primary-900">
@@ -54,6 +70,7 @@ function toggleSidebar(params) {
     </div>
   </top-bar>
   <sidebar v-if="store.state.app.sidebarOpened" v-click-outside="onClickOutside" />
+  <notifications-bar v-if="store.state.app.notificationOpened" v-click-outside="onClickOutside" />
 </template>
 
 <style scoped>

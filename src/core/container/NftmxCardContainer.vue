@@ -7,7 +7,7 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    assetContractAddress: {
+    tokenAddress: {
         type: String,
         required: true
     },
@@ -36,7 +36,7 @@ const tokenImage = ref(props.image || 'images/img10.png')
 
 <template>
     <router-link
-        :to="{ name: 'asset', params: { assetContractAddress: assetContractAddress, tokenId: tokenId } }"
+        :to="{ name: 'asset', params: { tokenAddress: tokenAddress, tokenId: tokenId } }"
         class="w-full"
     >
         <div

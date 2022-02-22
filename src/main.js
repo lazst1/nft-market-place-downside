@@ -9,9 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from "@fortawesome/fontawesome-svg-core";
 import VCalendar from 'v-calendar'
 import Moralis from './plugins/moralis'
+import Multiselect from '@vueform/multiselect';
+import '@vueform/multiselect/themes/default.css'
 import {
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faMoon, faSun, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo,
-    faShareAlt, faBars, faCalendarAlt, faCopy, faGlobe, faCog, faEdit
+    faShareAlt, faBars, faCalendarAlt, faCopy, faGlobe, faCog, faEdit, faBell
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF, faTelegramPlane, faDiscord, faTwitter, faMediumM, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons'
@@ -19,7 +21,7 @@ import { faCopyright } from '@fortawesome/free-regular-svg-icons'
 library.add(
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faFacebookF, faTelegramPlane, faDiscord, faTwitter, faCopy, faGlobe, faCog,
     faMediumM, faMoon, faSun, faCopyright, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo, faShareAlt, faBars, faCalendarAlt, faInstagram,
-    faEdit
+    faEdit, faBell
 );
 
 createApp(App)
@@ -29,4 +31,5 @@ createApp(App)
     .use(vClickOutside)
     .use(VCalendar, {})
     .component("font-awesome-icon", FontAwesomeIcon)
+    .component('Multiselect', Multiselect)
     .mount('#app')

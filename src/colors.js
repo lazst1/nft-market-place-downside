@@ -1,74 +1,49 @@
 export const colorsBg = {
-    white: 'bg-white text-black',
-    light: 'bg-gray-100 text-black',
-    success: 'bg-emerald-500 text-white',
-    danger: 'bg-red-500 text-white',
-    warning: 'bg-yellow-500 text-white',
-    info: 'bg-blue-500 text-white',
-    primary: 'bg-gradient-to-r from-primary-900 to-primary-700 text-white',
-    secondary: 'bg-gradient-to-r from-secondary-900 to-secondary-700 text-white'
+  primary: 'bg-gradient-to-r from-primary-600 to-primary-500 text-white',
+  secondary: 'bg-gradient-to-r from-secondary-500 to-secondary-400 text-white'
+}
+
+export const colorsBgHover = {
+  primary: 'bg-gradient-to-r from-primary-900 to-primary-700 text-white',
+  secondary: 'bg-gradient-to-r from-secondary-900 to-secondary-700'
+}
+
+export const colorsBorders = {
+  primary: 'border-primary-900',
+  secondary: 'border-secondary-900'
+}
+
+export const colorsText = {
+  primary: 'text-white',
+  secondary: 'text-white'
+}
+
+export const colorsOutline = {
+  primary: [colorsText.primary, colorsBorders.primary],
+  secondary: [colorsText.secondary, colorsBorders.secondary],
+}
+
+export const colorsOutlineHover = {
+  primary: 'hover:bg-primary-900 hover:text-white border-2 border-primary-900',
+  secondary: 'hover:bg-secondary-900 hover:text-white border-2 border-secondary-900'
+}
+
+export const getButtonColor = (color, isOutlined, hasHover) => {
+  const base = [
+    isOutlined ? colorsText[color] : colorsBg[color],
+    colorsBorders[color]
+  ]
+
+  if (hasHover) {
+    base.push(isOutlined ? colorsOutlineHover[color] : '')
   }
-  
-  export const colorsBgHover = {
-    white: 'hover:bg-gray-50',
-    light: 'hover:bg-gray-200',
-    success: 'hover:bg-emerald-600',
-    danger: 'hover:bg-red-600',
-    warning: 'hover:bg-yellow-600',
-    info: 'hover:bg-blue-600',
-    primary: 'bg-gradient-to-r hover:from-primary-600 hover:to-primary-500',
-    secondary: 'bg-gradient-to-r hover:from-secondary-500 hover:to-secondary-400'
-  }
-  
-  export const colorsBorders = {
-    white: 'border-gray-300',
-    light: 'border-gray-200 dark:border-gray-400',
-    success: 'border-emerald-600',
-    danger: 'border-red-600',
-    warning: 'border-yellow-600',
-    info: 'border-blue-600',
-    primary: 'border-primary-900'
-  }
-  
-  export const colorsText = {
-    white: 'text-black dark:text-gray-100',
-    light: 'text-gray-700 dark:text-gray-400',
-    success: 'text-emerald-500',
-    danger: 'text-red-500',
-    warning: 'text-yellow-500',
-    info: 'text-blue-500',
-    primary: 'text-white'
-  }
-  
-  export const colorsOutline = {
-    white: [colorsText.white, colorsBorders.white],
-    light: [colorsText.light, colorsBorders.light],
-    success: [colorsText.success, colorsBorders.success],
-    danger: [colorsText.danger, colorsBorders.danger],
-    warning: [colorsText.warning, colorsBorders.warning],
-    info: [colorsText.info, colorsBorders.info]
-  }
-  
-  export const colorsOutlineHover = {
-    white: 'hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900',
-    light: 'hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900',
-    success: 'hover:bg-emerald-500 hover:text-white',
-    danger: 'hover:bg-red-500 hover:text-white',
-    warning: 'hover:bg-yellow-500 hover:text-white',
-    info: 'hover:bg-blue-500 hover:text-white',
-    primary: 'hover:bg-primary-900 hover:text-white border-2 border-primary-900'
-  }
-  
-  export const getButtonColor = (color, isOutlined, hasHover) => {
-    const base = [
-      isOutlined ? colorsText[color] : colorsBg[color],
-      colorsBorders[color]
-    ]
-  
-    if (hasHover) {
-      base.push(isOutlined ? colorsOutlineHover[color] : colorsBgHover[color])
-    }
-  
-    return base
-  }
-  
+
+  return base
+}
+
+export const getButtonHoverColor = (color, isOutlined, hasHover) => {
+  const base = [
+    isOutlined ? '' : colorsBgHover[color]
+  ]
+  return base
+}
