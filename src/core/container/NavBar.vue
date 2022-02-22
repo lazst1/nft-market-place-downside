@@ -43,8 +43,8 @@ function toggleNotificationBar(params) {
     >
       <div class="max-h-screen-menu overflow-visible flex items-stretch justify-end ml-auto">
         <nav-bar-item>
-          <div @click="toggleNotificationBar" class="hidden lg:block">
-            <font-awesome-icon :icon="['fas', 'bell']" class="text-lg" />
+          <div @click="toggleNotificationBar">
+            <font-awesome-icon :icon="['fas', 'bell']" class="text-lg text-white" />
             <nftmx-badge>15</nftmx-badge>
           </div>
         </nav-bar-item>
