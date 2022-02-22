@@ -108,7 +108,7 @@ function handleVote() {
         <div class="items-center">
             <div class="flex flex-col items-center sm:items-start">
                 <div class="mt-3.25 text-lg">Current auction ends in</div>
-                <timer size="big" color="tertiary-800" class="mt-3.25" />
+                <timer size="big" color="tertiary-800" class="my-3.25" />
             </div>
         </div>
 
