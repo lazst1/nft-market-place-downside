@@ -104,15 +104,15 @@ function handleVote() {
         <div class="text-primary-900 font-ibm-bold">AUCTION</div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold">
-        <div class="sm:h-44 items-center p-4">
-            <div class="flex flex-col py-4 items-center sm:items-start">
-                <div class="mt-2.25 text-lg">Current auction ends in</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold p-4 sm:p-7">
+        <div class="items-center">
+            <div class="flex flex-col items-center sm:items-start">
+                <div class="mt-3.25 text-lg">Current auction ends in</div>
                 <timer size="big" color="tertiary-800" class="mt-3.25" />
             </div>
         </div>
 
-        <div class="h-40 sm:h-46.25 items-center pl-4 sm:pl-0 pr-4 sm:pr-7 sm:pt-6.25">
+        <div class="items-centers -mt-0.75 mb-px">
             <nftmx-select-network class="font-ibm-bold w-full text-sm mb-2" color="black" big></nftmx-select-network>
             <nftmx-button
                 color="primary"
@@ -124,12 +124,12 @@ function handleVote() {
     </div>
 
     <div class="bg-tertiary-800 border border-black mt-3.5">
-        <div class="items-center p-4 pb-6.25 text-center">
-            <div class="pt-2 text-lg font-ibm-bold">
+        <div class="items-center p-4 sm:py-6 sm:px-8 text-center">
+            <div class="text-lg font-ibm-bold">
                 Total locked value
                 <icon class="-ml-2" :path="mdiHelpCircle" w="w-4" h="h-4" size="36" color="white" />
             </div>
-            <div class="pt-2 pb-6 lg:text-3xl flex justify-center">
+            <div class="lg:text-3xl flex justify-center mt-1.75">
                 <span class="text-primary-900 font-ibm-bold">
                     <nftmx-price-common
                         :price="roundTo(parseInt(tokenPrice) / exchangeRate * bnbPrice)"
@@ -144,7 +144,7 @@ function handleVote() {
             <nftmx-button
                 color="secondary"
                 label="JOIN SYNDICATION"
-                class="font-press w-full text-base lg:text-lg pt-5.5 pb-5.25 mt-0.75 h-15 sm:h-auto"
+                class="font-press w-full text-base lg:text-lg mt-7 mb-px h-15 sm:h-17.75"
                 @click="syndicationModalActive = true"
             />
         </div>

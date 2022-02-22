@@ -39,7 +39,7 @@ function toggleNotificationBar(params) {
       </nav-bar-item>
     </div>
     <div
-      class="top-14 left-0 w-auto items-stretch flex grow static border-b-0 overflow-visible shadow-none dark:bg-gray-900"
+      class="top-14 left-0 w-auto items-stretch flex grow static border-b-0 overflow-visible shadow-none"
     >
       <div class="max-h-screen-menu overflow-visible flex items-stretch justify-end ml-auto">
         <nav-bar-item>

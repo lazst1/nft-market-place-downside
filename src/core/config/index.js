@@ -139,3 +139,7 @@ export const syndications = [
         lockedValue: 1548325.56
     }
 ];
+
+export const assetDetailTabs = [
+    'Details', 'About the creator', 'Chain info', 'Downside Protection'
+]

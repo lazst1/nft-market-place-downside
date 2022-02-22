@@ -62,10 +62,10 @@ const fundError = ref(false);
 <template>
     <body-container>
         <div class="grid grid-cols-7 text-white gap-8 mt-10">
-            <div class="col-span-7 lg:col-span-3">
+            <div class="col-span-7 lg:col-span-3 lg:mr-6.25">
                 <more-info :percent="order.protectionRate / 100" :period="order.protectionTime / 86400" />
             </div>
-            <div class="col-span-7 mb-4 lg:col-span-4 relative">
+            <div class="col-span-7 mb-4 lg:col-span-4 relative lg:-ml-4">
                 <item-action :order="order" :orderId="order.orderId" :tokenPrice="order.tokenPrice" :nft="nft" />
             </div>
         </div>
