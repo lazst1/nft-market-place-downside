@@ -7,12 +7,15 @@ const props = defineProps({
 </script>
 
 <template>
-        <slot />
-        <icon
-            :path="mdiHelpCircle"
-            w="w-3"
-            h="h-3"
-            size="26"
-            color="white"
-        />
+    <slot />
+    <icon
+        :path="mdiHelpCircle"
+        w="w-3"
+        h="h-3"
+        size="26"
+        color="white"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="Tooltip on top"
+    />
 </template>

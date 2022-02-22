@@ -15,7 +15,7 @@ import SyndicationCarousel from './components/SyndicationCarousel.vue';
         <div class="mt-4">
             <syndication-carousel></syndication-carousel>
         </div>
-        <div class="mt-10 text-center">
+        <div class="mt-10 text-center px-6">
             <nftmx-button
                 to="home"
                 color="primary"

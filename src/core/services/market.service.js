@@ -1,5 +1,5 @@
 import http from "../utils/http-common";
-import { TokenType } from '../config';
+import { DEFAULT_USER_ID, TokenType } from '../config';
 import axios from "axios";
 
 class MatketService {
@@ -7,7 +7,7 @@ class MatketService {
         return http.get(`orders?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
-    getSaleOrders(userId = '', page = 1, limit = 10) {
+    getSaleOrders(userId = DEFAULT_USER_ID, page = 1, limit = 10) {
         return http.get(`orders/sale?page=${page}&limit=${limit}&userId=${userId}`).then(res => res.data);
     }
 
@@ -34,6 +34,10 @@ class MatketService {
 
     createHashTags(hashtagNames, tokenAddress, tokenId) {
         return http.post('tokens-hashtags', {hashtagNames, tokenAddress, tokenId}).then(res => res.data);
+    }
+
+    getHashtagNames() {
+        return http.get('hashtags').then(res => res.data)
     }
 }
 
