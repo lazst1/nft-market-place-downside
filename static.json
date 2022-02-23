@@ -1,9 +1,6 @@
 {
     "root": "./dist",
-    "redirects": {
-        "*": {
-            "url": "/",
-            "status": 200
-        }
+    "routes": {
+        "*": "index.html"
     }
 }
