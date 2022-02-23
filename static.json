@@ -1,9 +1,3 @@
 {
-    "root": "./dist",
-    "redirects": {
-        "*": {
-            "url": "/",
-            "status": 200
-        }
-    }
+    "root": "./dist"
 }
