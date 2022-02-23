@@ -1,5 +1,6 @@
 const app = require('express')();
 const serveStatic = require('serve-static');
+const path = require('path');
 
 app.use(serveStatic(__dirname + '/dist'));
 app.get('*', (request, response) => {
