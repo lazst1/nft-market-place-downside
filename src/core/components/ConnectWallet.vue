@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center">
+    <div class="flex flex-col text-center justify-center items-center">
         <div class="w-fit font-press text-sm pt-4 pb-6">
             <img :src="wallet.imgUrl" alt="" class="" />
             <nftmx-button-slot

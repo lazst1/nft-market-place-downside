@@ -42,7 +42,7 @@ function toggleNotificationBar(params) {
       class="top-14 left-0 w-auto items-stretch flex grow static border-b-0 overflow-visible shadow-none"
     >
       <div class="max-h-screen-menu overflow-visible flex items-stretch justify-end ml-auto">
-        <nav-bar-item>
+        <nav-bar-item v-if="walletAddress">
           <div @click="toggleNotificationBar">
             <font-awesome-icon :icon="['fas', 'bell']" class="text-lg text-white" />
             <nftmx-badge>15</nftmx-badge>

@@ -83,7 +83,7 @@ const componentClass = computed(() => {
     'duration-150',
     'transition',
     'text-xs',
-    props.small ? 'p-2' : 'py-4',
+    props.small ? 'p-2' : 'p-4',
     getButtonColor(props.color, props.outline, !props.disabled)
   ]
 

@@ -2,8 +2,9 @@
 import LandingSection from './containers/LandingSection.vue';
 import NftmxTypography from '@/core/components/NftmxTypography.vue';
 import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-
+import SectionButton from './components/SectionButton.vue';
+import NftmxTrimString from '@/core/components/NftmxTrimString.vue';
+import { popularSyndications } from '@/core/config'
 </script>
 
 <template>
@@ -11,8 +12,12 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
         <div class="font-press text-center pt-1 text-white">
             <nftmx-typography h1>Popular Syndications</nftmx-typography>
         </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-7 xl:gap-x-9 mt-4">
-            <div v-for="i in 8" :key="i" class="border-b border-black">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-7 xl:gap-x-9 mt-4">
+            <div
+                v-for="(syndication, i) in popularSyndications"
+                :key="i"
+                class="border-b border-black"
+            >
                 <div class="flex py-8 gap-6 2xl:gap-9">
                     <div class="font-bold text-2xl">1</div>
                     <div class="flex items-center">
@@ -20,10 +25,13 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
                             :style="{ background: 'url(' + '/images/item1-45x.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }"
                             class="w-16 h-15"
                         ></div>
-                        <div class="pl-6">
-                            <div class="font-ibm-bold">Mutant Ape Yacht Club</div>
-                            <div class="text-sm text-tertiary-500">
-                                <nftmx-price-common price="50000" />
+                        <div class="pl-6 font-ibm-medium">
+                            <nftmx-trim-string :line="1">{{ syndication.name }}</nftmx-trim-string>
+                            <div
+                                :class="[syndication.rate > 0 ? 'text-primary-400' : 'text-red-700', 'text-sm']"
+                            >{{ syndication.rate > 0 ? '+' + syndication.rate : syndication.rate }}%</div>
+                            <div class="text-sm font-ibm text-tertiary-500">
+                                <nftmx-price-common :price="syndication.price" />
                             </div>
                         </div>
                     </div>
@@ -31,13 +39,7 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
             </div>
         </div>
         <div class="mt-10 text-center">
-            <nftmx-button
-                to="home"
-                color="primary"
-                label="GO TO COLLECTIONS"
-                :outline="true"
-                class="font-ibm-medium text-lg text-primary-700 hover:text-white h-13.5 w-full sm:w-auto"
-            />
+            <section-button to="home" label="GO TO COLLECTIONS" />
         </div>
     </landing-section>
 </template>

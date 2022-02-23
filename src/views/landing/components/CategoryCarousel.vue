@@ -100,7 +100,7 @@ function handleResize() {
     windowSize.value.width = window.innerWidth;
     windowSize.value.height = window.innerHeight;
     if (windowSize.value.width >= themeConfig.xl) {
-        itemsToShow.value = 3
+        itemsToShow.value = 4
     } else if (windowSize.value.width >= themeConfig.sm) {
         itemsToShow.value = 2
     } else {

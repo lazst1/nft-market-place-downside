@@ -62,6 +62,10 @@ defineProps({
             </div>
             <div class="flex justify-center sm:justify-start">
                 <div class="w-fit flex">
+                    <a href="https://polygonscan.com/" target="_blank">
+                        <img src="/images/polygon-logo-footer.png" class />
+                    </a>
+                    <div class="border-r border-tertiary-800 my-2 mx-2"></div>
                     <a href="https://ethereum.org/en/" target="_blank">
                         <img src="/images/eth-logo-footer.png" class />
                     </a>

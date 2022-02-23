@@ -15,14 +15,5 @@ import SyndicationCarousel from './components/SyndicationCarousel.vue';
         <div class="mt-4">
             <syndication-carousel></syndication-carousel>
         </div>
-        <div class="mt-10 text-center px-6">
-            <nftmx-button
-                to="home"
-                color="primary"
-                label="GO TO CATEGORIES"
-                :outline="true"
-                class="font-ibm-medium text-lg text-primary-700 hover:text-white h-13.5 w-full sm:w-auto"
-            />
-        </div>
     </landing-section>
 </template>

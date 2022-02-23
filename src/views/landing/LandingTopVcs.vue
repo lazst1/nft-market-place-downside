@@ -2,7 +2,7 @@
 import LandingSection from './containers/LandingSection.vue';
 import NftmxTypography from '@/core/components/NftmxTypography.vue';
 import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import SectionButton from './components/SectionButton.vue';
 
 </script>
 
@@ -31,13 +31,7 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
             </div>
         </div>
         <div class="mt-10 text-center">
-            <nftmx-button
-                to="home"
-                color="primary"
-                label="GO TO RANKINGS"
-                :outline="true"
-                class="font-ibm-medium text-lg text-primary-700 hover:text-white h-13.5 w-full sm:w-auto"
-            />
+            <section-button to="home" label="GO TO RANKINGS" />
         </div>
     </landing-section>
 </template>
