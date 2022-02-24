@@ -22,16 +22,17 @@ const onError = (e) => {
 
 <template>
     <sidebar-container>
-        <div class="h-17 flex items-center cursor-pointer">
-            <nftmx-wallet-address
-                v-if="walletAddress"
-                class="text-base font-ibm-bold pt-1 hidden sm:block"
-                :address="walletAddress"
-                v-clipboard:copy="walletAddress"
-                v-clipboard:success="onCopy"
-                v-clipboard:error="onError"
-            />
-
+        <div class="h-17 flex items-center cursor-pointer justify-between">
+            <div>
+                <nftmx-wallet-address
+                    v-if="walletAddress"
+                    class="text-base font-ibm-bold pt-1 hidden sm:block"
+                    :address="walletAddress"
+                    v-clipboard:copy="walletAddress"
+                    v-clipboard:success="onCopy"
+                    v-clipboard:error="onError"
+                />
+            </div>
             <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5 ml-6"></div>
         </div>
         <sidebar-router to="/profile">Profile</sidebar-router>
