@@ -1,19 +1,12 @@
 <script setup>
 import SidebarContainer from '@/core/container/SidebarContainer.vue';
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
-import marketService from '../../core/services/market.service';
 import Notification from './components/Notification.vue';
 
 const store = useStore();
 
-const orderLogs = ref([]);
-
-marketService.getOrderLogs().then(res => {
-   orderLogs.value = res.items;
-});
-
-
+const orderLogs = computed(() => store.state.orderLogs);
 
 function toggleNotificationBar() {
     store.commit('app/TOGGLE_NOTIFICATION_BAR', false);

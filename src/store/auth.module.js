@@ -25,12 +25,17 @@ export const auth = {
                     user => {
                         rootState.user = user;
                         commit('loginSuccess', user);
+
                         MoralisService.getMyNFTs(user.walletAddress, 40, 0).then(nftData => {
                             rootState.myNfts = JSON.parse(JSON.stringify(nftData));
                         })
                         marketService.getSaleOrders(user.id).then(orders => {
                             rootState.orders = orders;
                         })
+                        marketService.getOrderLogs().then(res => {
+                            rootState.orderLogs = res.items;
+                        });
+                        
                         return Promise.resolve(user);
                     },
                     error => {

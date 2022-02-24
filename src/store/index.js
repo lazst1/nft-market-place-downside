@@ -24,6 +24,12 @@ const initialOrders = {
     }
 }
 
+const initialMyNfts = {
+    page: 0,
+    page_size: 0,
+    result: []
+}
+
 export default createStore({
     state: {
         web3: new Web3(Web3.givenProvider),
@@ -31,11 +37,8 @@ export default createStore({
         allNfts: {},
         user: initialUser,
         orders: initialOrders,
-        myNfts: {
-            page: 0,
-            page_size: 0,
-            result: []
-        },
+        orderLogs: [],
+        myNfts: initialMyNfts,
         bnbPrice: 0
     },
     mutations: {},

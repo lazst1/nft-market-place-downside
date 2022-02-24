@@ -45,7 +45,7 @@ function toggleNotificationBar(params) {
         <nav-bar-item v-if="walletAddress">
           <div @click="toggleNotificationBar">
             <font-awesome-icon :icon="['fas', 'bell']" class="text-lg text-white" />
-            <nftmx-badge>15</nftmx-badge>
+            <nftmx-badge>{{ store.state.orderLogs.length }}</nftmx-badge>
           </div>
         </nav-bar-item>
         <nav-bar-item>
