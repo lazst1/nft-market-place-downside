@@ -14,7 +14,21 @@ class MatketService {
     getOrder(id) {
         return http.get(`orders/${id}`).then(res => res.data);
     }
+    
+    // ledger
+    soldItems(page = 1, limit = 20) {
+        return http.get(`orders/sold?page=${page}&limit=${limit}`).then(res => res.data);
+    }
 
+    canceledItems(page = 1, limit = 20) {
+        return http.get(`orders/canceled?page=${page}&limit=${limit}`).then(res => res.data);
+    }
+
+    listedItems(page = 1, limit = 20) {
+        return http.get(`orders/active?page=${page}&limit=${limit}`).then(res => res.data);
+    }
+
+    // vote
     vote(tokenAddress, tokenId, userId) {
         return http.post(`votes`, {tokenAddress, tokenId, userId}).then(res => res.data);
     }

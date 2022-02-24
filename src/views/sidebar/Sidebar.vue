@@ -6,10 +6,34 @@ import SidebarAccordion from './SidebarAccordion.vue';
 import SubRouter from './SubRouter.vue';
 import SidebarFooter from './SidebarFooter.vue';
 import SidebarContainer from '@/core/container/SidebarContainer.vue';
+import { useStore } from 'vuex';
+import { computed } from 'vue';
+import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
+
+const store = useStore();
+const walletAddress = computed(() => store.getters['auth/getWalletAddress']);
+const onCopy = (e) => {
+    // alert('You just copied: ' + e.text)
+}
+const onError = (e) => {
+    // alert('Failed to copy texts')
+}
 </script>
 
 <template>
     <sidebar-container>
+        <div class="h-17 flex items-center cursor-pointer">
+            <nftmx-wallet-address
+                v-if="walletAddress"
+                class="text-base font-ibm-bold pt-1 hidden sm:block"
+                :address="walletAddress"
+                v-clipboard:copy="walletAddress"
+                v-clipboard:success="onCopy"
+                v-clipboard:error="onError"
+            />
+
+            <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5 ml-6"></div>
+        </div>
         <sidebar-router to="/profile">Profile</sidebar-router>
         <sidebar-router to="/">Create an NFT</sidebar-router>
         <sidebar-router to="/">Launch your DVC</sidebar-router>
@@ -102,8 +126,14 @@ import SidebarContainer from '@/core/container/SidebarContainer.vue';
         <div class="font-ibm-semi-bold pt-3.5">Privacy of policy</div>
         <div class="font-ibm-semi-bold">Terms of service</div>
         <div class="py-4 flex gap-6">
-            <font-awesome-icon :icon="['fas', 'moon']" class="text-lg text-primary-900 cursor-pointer"></font-awesome-icon>
-            <font-awesome-icon :icon="['fas', 'sun']" class="text-lg text-tertiary-400 cursor-pointer"></font-awesome-icon>
+            <font-awesome-icon
+                :icon="['fas', 'moon']"
+                class="text-lg text-primary-900 cursor-pointer"
+            ></font-awesome-icon>
+            <font-awesome-icon
+                :icon="['fas', 'sun']"
+                class="text-lg text-tertiary-400 cursor-pointer"
+            ></font-awesome-icon>
         </div>
         <nftmx-divider class="border-tertiary-900 my-3"></nftmx-divider>
         <sidebar-footer />

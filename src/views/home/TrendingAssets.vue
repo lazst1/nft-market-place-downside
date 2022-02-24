@@ -7,6 +7,23 @@ import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import AccordionContainer from './container/AccordionContainer.vue';
 import Assets1 from './components/Assets1.vue';
 import Assets2 from './components/Assets2.vue';
+import marketService from '../../core/services/market.service';
+
+const soldItems = ref([]);
+const canceledItems = ref([]);
+const listedItems = ref([]);
+const selected = ref('SOLD');
+
+marketService.soldItems().then(res => {
+    soldItems.value = res;
+    console.log(res)
+});
+marketService.canceledItems().then(res => {
+    canceledItems.value = res;
+});
+marketService.listedItems().then(res => {
+    listedItems.value = res;
+});
 
 const items = [
     {
@@ -27,11 +44,15 @@ const items = [
     }
 ]
 
+function selectLedger(value) {
+    selected.value = value;
+}
+
 </script>
 
 <template>
     <div class="flex flex-wrap justify-center px-10 py-6 lg:px-22">
-        <div class="w-full sm:w-68 pt-2">
+        <div class="w-full sm:w-68 pt-2 cursor-default">
             <div class="flex font-press text-white">
                 <span>Ledger</span>
                 <font-awesome-icon
@@ -42,16 +63,20 @@ const items = [
             <div class="border border-black my-7 bg-tertiary-800">
                 <div class="grid grid-cols-4 border-b border-black">
                     <div
-                        class="font-ibm-semi-bold text-xxs text-primary-900 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer"
+                        @click="selectLedger('SOLD')"
+                        :class="[selected === 'SOLD' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-primary-900 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer']"
                     >SOLD</div>
                     <div
-                        class="font-ibm-semi-bold text-xxs text-red-700 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer"
+                        @click="selectLedger('CANCELED')"
+                        :class="[selected === 'CANCELED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-red-700 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer']"
                     >CANCELED</div>
                     <div
-                        class="font-ibm-semi-bold text-xxs text-white border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer"
+                        @click="selectLedger('LISTED')"
+                        :class="[selected === 'LISTED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-white border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer']"
                     >LISTED</div>
                     <div
-                        class="font-ibm-semi-bold text-xxs text-tertiary-500 py-4 text-center hover:bg-tertiary-900 cursor-pointer"
+                        @click="selectLedger('CREATED')"
+                        :class="[selected === 'CREATED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-tertiary-500 py-4 text-center hover:bg-tertiary-900 cursor-pointer']"
                     >CREATED</div>
                 </div>
                 <div class="grid grid-cols-2 border-b border-black">

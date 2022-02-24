@@ -49,11 +49,11 @@ function clickFilterBy(value) {
             <div class="grid grid-cols-2 text-center text-lg font-ibm-semi-bold mt-5">
                 <div
                     @click="clickFilterBy('collection')"
-                    :class="[filterBy === 'collection' ? 'text-primary-900 border-primary-900' : 'text-white border-black', 'hover:text-primary-900 border-b-2 hover:border-primary-900 py-4']"
+                    :class="[filterBy === 'collection' ? 'text-primary-900 border-primary-900' : 'text-white border-black', 'hover:text-primary-900 border-b-2 hover:border-primary-900 py-4 cursor-pointer']"
                 >Collections</div>
                 <div
                     @click="clickFilterBy('all')"
-                    :class="[filterBy === 'all' ? 'text-primary-900 border-primary-900' : 'text-white border-black', 'hover:text-primary-900 border-b-2 hover:border-primary-900 py-4']"
+                    :class="[filterBy === 'all' ? 'text-primary-900 border-primary-900' : 'text-white border-black', 'hover:text-primary-900 border-b-2 hover:border-primary-900 py-4 cursor-pointer']"
                 >All NFTs</div>
             </div>
             <div v-if="filterBy === 'all'" class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 my-4.75">

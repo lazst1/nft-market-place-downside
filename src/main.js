@@ -11,6 +11,7 @@ import VCalendar from 'v-calendar'
 import Moralis from './plugins/moralis'
 import Multiselect from '@vueform/multiselect';
 import '@vueform/multiselect/themes/default.css'
+import VueClipboard from 'vue3-clipboard'
 import {
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faMoon, faSun, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo,
     faShareAlt, faBars, faCalendarAlt, faCopy, faGlobe, faCog, faEdit, faBell
@@ -30,6 +31,10 @@ createApp(App)
     .use(router)
     .use(vClickOutside)
     .use(VCalendar, {})
+    .use(VueClipboard, {
+        autoSetContainer: true,
+        appendToBody: true,
+    })
     .component("font-awesome-icon", FontAwesomeIcon)
     .component('Multiselect', Multiselect)
     .mount('#app')
