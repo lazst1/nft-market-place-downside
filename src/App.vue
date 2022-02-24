@@ -18,11 +18,12 @@ if (typeof window.ethereum !== 'undefined') {
       store.dispatch("auth/login", accounts[0]);
     })
 }
-store.commit('app/UPDATE_WINDOW_WIDTH', window.innerWidth)
+store.commit('app/UPDATE_WINDOW_WIDTH', window.innerWidth);
 const { width: windowWidth } = useWindowSize()
 watch(windowWidth, val => {
   store.commit('app/UPDATE_WINDOW_WIDTH', val)
 })
+store.dispatch('market/getBnbPrice');
 
 </script>
 

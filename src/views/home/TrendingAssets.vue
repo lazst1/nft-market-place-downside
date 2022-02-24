@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import Accordion from '@/core/container/Accordion.vue';
@@ -8,14 +8,22 @@ import AccordionContainer from './container/AccordionContainer.vue';
 import Assets1 from './components/Assets1.vue';
 import Assets2 from './components/Assets2.vue';
 import marketService from '../../core/services/market.service';
+import { exchangeRate } from '@/core/config';
+import { roundTo } from '@/core/utils';
+import { useStore } from 'vuex';
 
 const soldItems = ref([]);
 const canceledItems = ref([]);
 const listedItems = ref([]);
 const selected = ref('SOLD');
+const selectedItems = ref([]);
+
+const store = useStore();
+const bnbPrice = computed(() => store.getters['market/getBnbPrice']);
 
 marketService.soldItems().then(res => {
     soldItems.value = res;
+    selectedItems.value = res;
     console.log(res)
 });
 marketService.canceledItems().then(res => {
@@ -25,27 +33,22 @@ marketService.listedItems().then(res => {
     listedItems.value = res;
 });
 
-const items = [
-    {
-        name: "Hashtasks #21",
-        price: 55
-    },
-    {
-        name: "Hashtasks #21",
-        price: 322.4445
-    },
-    {
-        name: "Hashtasks #21",
-        price: 0.291
-    },
-    {
-        name: "Hashtasks #21",
-        price: 78.220
-    }
-]
-
 function selectLedger(value) {
     selected.value = value;
+    switch (selected.value) {
+        case 'SOLD':
+            selectedItems.value = soldItems.value;
+            break;
+        case 'CANCELED':
+            selectedItems.value = canceledItems.value;
+            break;
+        case 'LISTED':
+            selectedItems.value = listedItems.value;
+            break;
+    
+        default:
+            break;
+    }
 }
 
 </script>
@@ -86,13 +89,13 @@ function selectLedger(value) {
                     <div class="font-ibm-medium text-xs text-tertiary-500 py-3 pl-3">Price (USD)</div>
                 </div>
                 <div class="grid grid-cols-2 border-black">
-                    <template v-for="(item, index) in items" :key="index">
+                    <template v-for="(item, index) in selectedItems.items" :key="index">
                         <div
                             class="font-ibm-medium text-xs text-white border-r border-black py-4 pl-3"
-                        >{{ item.name }}</div>
+                        >{{ item.tokenName }}</div>
                         <div
-                            :class="[item.price > 300 ? 'text-red-700' : item.price < 1 ? 'text-white' : 'text-primary-900', 'font-ibm-medium text-xs py-4 pl-3']"
-                        >{{ item.price }}</div>
+                            :class="[item.tokenPrice / exchangeRate * bnbPrice > 300 ? 'text-red-700' : item.tokenPrice / exchangeRate * bnbPrice < 1 ? 'text-white' : 'text-primary-900', 'font-ibm-medium text-xs py-4 pl-3']"
+                        >{{ roundTo(item.tokenPrice / exchangeRate * bnbPrice) }}</div>
                     </template>
                 </div>
             </div>

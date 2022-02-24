@@ -4,7 +4,7 @@ import MoralisService from "../core/services/moralis.service";
 import Web3 from "web3/dist/web3.min.js"
 import abiJSON from '@/core/config/abi';
 import erc721ABI from '@/core/config/erc721';
-import { marketAddress } from "../core/config";
+import { marketAddress, TokenType } from "../core/config";
 import marketService from "../core/services/market.service";
 
 export const market = {
@@ -16,6 +16,12 @@ export const market = {
             marketService.getSaleOrders().then(orders => {
                 rootState.orders = orders;
             })
+        },
+        getBnbPrice({ commit, rootState }) {
+            marketService.getUSDFromToken(TokenType.BNB).then(res => {
+                rootState.bnbPrice = res.price;
+                console.log(res.price)
+            });
         },
         async approve({ commit, rootState }, data) {
             const tokenContract = new rootState.web3.eth.Contract(
@@ -46,6 +52,9 @@ export const market = {
         },
     },
     getters: {
+        getBnbPrice: (state, getters, rootState) => {
+            return rootState.bnbPrice;
+        },
     },
     mutations: {
     }

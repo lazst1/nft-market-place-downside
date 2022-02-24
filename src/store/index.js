@@ -35,7 +35,8 @@ export default createStore({
             page: 0,
             page_size: 0,
             result: []
-        }
+        },
+        bnbPrice: 0
     },
     mutations: {},
     actions: {},
