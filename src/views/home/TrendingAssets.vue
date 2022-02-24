@@ -24,7 +24,6 @@ const bnbPrice = computed(() => store.getters['market/getBnbPrice']);
 marketService.soldItems().then(res => {
     soldItems.value = res;
     selectedItems.value = res;
-    console.log(res)
 });
 marketService.canceledItems().then(res => {
     canceledItems.value = res;

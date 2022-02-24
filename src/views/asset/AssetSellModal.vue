@@ -47,10 +47,6 @@ marketService.getHashtagNames().then(res => {
     });
 })
 
-watchEffect(() => {
-    console.log(hashtagValue.value)
-})
-
 function createOrder() {
     const token_id = parseInt(tokenId);
     const price = nftPrice.value;

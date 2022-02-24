@@ -20,7 +20,6 @@ export const market = {
         getBnbPrice({ commit, rootState }) {
             marketService.getUSDFromToken(TokenType.BNB).then(res => {
                 rootState.bnbPrice = res.price;
-                console.log(res.price)
             });
         },
         async approve({ commit, rootState }, data) {
@@ -34,7 +33,6 @@ export const market = {
             });
         },
         async createOrder({ commit, rootState }, data) {
-            console.log(data, rootState.web3.utils.toWei(data.nftPrice, 'ether'))
             rootState.marketContract.methods.createOrder(
                 data.tokenAddress,
                 data.tokenId,

@@ -9,3 +9,50 @@ export function keyCodeNumberRange(keyCode) {
 export function roundTo(num, e = 3) {
     return +(Math.round(num + `e+${e}`) + `e-${e}`);
 }
+
+export function formatDate(date) {
+    const d = new Date(date);
+    const dFormat = [
+        d.getMonth() + 1,
+        d.getDate(),
+        d.getFullYear()
+    ].join('/') + ', ' +
+        formatAMPM(d);
+    return dFormat;
+}
+
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
+
+export function formatOrderStatus(status) {
+    let orderStatus;
+    switch (status) {
+        case '0':
+            orderStatus = 'Created'
+            break;
+        case '1':
+            orderStatus = 'Bidded'
+            break;
+        case '2':
+            orderStatus = 'Sold'
+            break;
+        case '3':
+            orderStatus = 'Completed'
+            break;
+        case '4':
+            orderStatus = 'Canceled'
+            break;
+
+        default:
+            break;
+    }
+    return orderStatus;
+}

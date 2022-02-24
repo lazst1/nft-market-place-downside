@@ -28,6 +28,12 @@ class MatketService {
         return http.get(`orders/active?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
+    // recent order logs
+    getOrderLogs(page = 1, limit = 20) {
+        return http.get(`orders/log?page=${page}&limit=${limit}`).then(res => res.data);
+    }
+
+
     // vote
     vote(tokenAddress, tokenId, userId) {
         return http.post(`votes`, {tokenAddress, tokenId, userId}).then(res => res.data);
