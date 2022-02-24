@@ -13,6 +13,7 @@ import NftmxToggle from '@/core/components/NftmxToggle.vue';
 import NftmxHashtag from '@/core/components/NftmxHashtag.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import marketService from '../../core/services/market.service';
+import { useToast } from "vue-toastification";
 
 const props = defineProps({
     asset: {
@@ -35,6 +36,7 @@ const bundleValue = ref(true);
 const reverseValue = ref(false);
 const hashtagValue = ref();
 const hashtagOptions = ref([]);
+const toast = useToast();
 
 const period = computed(() => downsidePeriod.value ? parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000) : 0);
 
@@ -51,8 +53,11 @@ function createOrder() {
     const token_id = parseInt(tokenId);
     const price = nftPrice.value;
     const rate = downsideRate.value * 100;
+
     if (!price || !rate || !period.value) return;
+
     createHashTags();
+
     store.dispatch(
         'market/createOrder',
         {
@@ -67,7 +72,7 @@ function createOrder() {
 
 function createHashTags() {
     if (hashtagValue.value) {
-        marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId, asset.name).then(res => {
+        marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId, props.asset.name).then(res => {
             console.log(res);
         })
     }

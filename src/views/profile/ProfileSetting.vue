@@ -12,6 +12,7 @@ import NftmxInput from '@/core/components/NftmxInput.vue';
 import NftmxTextarea from '@/core/components/NftmxTextarea.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import { baseURL, defaultUser } from '@/core/config'
+import { useToast } from "vue-toastification";
 
 const store = useStore();
 const name = ref();
@@ -24,6 +25,7 @@ const twitter = ref();
 const instagram = ref();
 const profileImgPreview = ref();
 const profileBannerPreview = ref();
+const toast = useToast();
 
 function save() {
     const user = new FormData();
@@ -40,6 +42,7 @@ function save() {
     user.append('twitter', twitter.value);
     user.append('instagram', instagram.value);
     store.dispatch('auth/saveProfile', user);
+    toast.success('Profile saved successfully!')
 }
 
 watchEffect(() => {
