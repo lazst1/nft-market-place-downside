@@ -8,6 +8,10 @@ defineProps({
     period: {
         type: Number,
         require: true
+    },
+    big: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -15,10 +19,11 @@ defineProps({
 
 <template>
     <div
-        class="ribbon bg-primary-700 text-sm text-white whitespace-no-wrap px-4 py-2 font-ibm bg-opacity-50"
+        :class="[big ? 'w-60 h-16.5 -ml-16.5 mt-5.5' : 'w-50 h-12.5 -ml-14 mt-4',
+        'absolute top-0 left-0 -rotate-45 bg-primary-700 text-white whitespace-no-wrap px-4 font-ibm-semi-bold bg-opacity-50 flex flex-col items-center justify-center']"
     >
-        <div class="-ml-6 -mb-1 text-sm text-center">{{ percent }}% / {{ period }}</div>
-        <div class="pl-3 text-xss text-left">Downside Protection</div>
+        <div :class="[big ? 'text-lg' : 'text-sm']">{{ percent }}% / {{ period }}</div>
+        <div :class="[big?'text-xs':'text-10']">Downside Protection</div>
     </div>
 </template>
 
@@ -32,8 +37,5 @@ defineProps({
     margin-left: -50px;
     margin-top: 10px;
     transform: rotate(-45deg);
-}
-.text-xss {
-    font-size: 11px;
 }
 </style>

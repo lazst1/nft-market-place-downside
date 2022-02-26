@@ -18,7 +18,7 @@ import "vue-toastification/dist/index.css";
 
 import {
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faMoon, faSun, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo,
-    faShareAlt, faBars, faCalendarAlt, faCopy, faGlobe, faCog, faEdit, faBell
+    faShareAlt, faBars, faCalendarAlt, faCopy, faGlobe, faCog, faEdit, faBell, faUser
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF, faTelegramPlane, faDiscord, faTwitter, faMediumM, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons'
@@ -27,7 +27,7 @@ import 'v-calendar/dist/style.css';
 library.add(
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faFacebookF, faTelegramPlane, faDiscord, faTwitter, faCopy, faGlobe, faCog,
     faMediumM, faMoon, faSun, faCopyright, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo, faShareAlt, faBars, faCalendarAlt, faInstagram,
-    faEdit, faBell
+    faEdit, faBell, faUser
 );
 
 const options = {

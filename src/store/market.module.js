@@ -22,7 +22,7 @@ export const market = {
                 rootState.bnbPrice = res.price;
             });
         },
-        async approve({ commit, rootState }, data) {
+        approve({ commit, rootState }, data) {
             const tokenContract = new rootState.web3.eth.Contract(
                 erc721ABI,
                 rootState.web3.utils.toChecksumAddress(data.contractAddress),
@@ -32,7 +32,7 @@ export const market = {
                 from: rootState.user.walletAddress, gas: 210000
             });
         },
-        async createOrder({ commit, rootState }, data) {
+        createOrder({ commit, rootState }, data) {
             rootState.marketContract.methods.createOrder(
                 data.tokenAddress,
                 data.tokenId,
@@ -43,7 +43,7 @@ export const market = {
                 data.downsidePeriod
             ).send({ from: rootState.user.walletAddress, gas: 250000 });
         },
-        async buyFixedPayOrder({ commit, rootState }, data) {
+        buyFixedPayOrder({ commit, rootState }, data) {
             rootState.marketContract.methods.buyFixedPayOrder(
                 data.orderId
             ).send({ from: rootState.user.walletAddress, gas: 623478, value: parseInt(data.tokenPrice), gasPrice: 0 });
