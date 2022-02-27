@@ -4,7 +4,8 @@ import Accordion from '@/core/container/Accordion.vue';
 import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 
 defineProps({
-    title: String
+    title: String,
+    more: Boolean
 })
 
 const open = ref(true);
