@@ -23,7 +23,7 @@ import SectionButton from './components/SectionButton.vue';
                         <div class="pl-6">
                             <div class="font-ibm-bold">Mutant Ape Yacht Club</div>
                             <div class="text-sm text-tertiary-500">
-                                <nftmx-price-common price="50000" />
+                                <nftmx-price-common :price="50000" />
                             </div>
                         </div>
                     </div>
