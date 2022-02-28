@@ -32,7 +32,7 @@ if (store.getters['auth/getWalletAddress']) {
             >Buy NFTs with 100% Downside Protection</div>
         </div>
     </div>
-    <body-container :padding="false">
+    <body-container :padding="false" footerExtended>
         <div class="pt-4">
             <syndication-carousel></syndication-carousel>
         </div>

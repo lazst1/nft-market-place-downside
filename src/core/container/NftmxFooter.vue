@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="bottom-0 w-full font-ibm">
+    <div class="bottom-0 w-full font-ibm absolute">
         <div class="bg-black text-white pt-5.25 pb-8 border-b border-tertiary-800 px-8">
             <p
                 class="text-center text-sm sm:text-xg text-primary-900 font-press leading-6 sm:leading-9"
@@ -64,7 +64,7 @@ defineProps({
                     </div>
                     <div class="flex justify-center sm:justify-start">
                         <div class="w-fit flex">
-                            <a href="https://polygonscan.com/" target="_blank">
+                            <a href="https://polygon.technology/" target="_blank">
                                 <img src="/images/polygon-logo-footer.png" class />
                             </a>
                             <div class="border-r border-tertiary-800 my-2 mx-2"></div>

@@ -82,13 +82,6 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                                 {{ roundTo(parseInt(order.tokenPrice) / exchangeRate) }})
                             </div>
                         </td>
-                        <td class="text-center items-start">
-                            <icon
-                                :path="mdiClose"
-                                :size="16"
-                                class="cursor-pointer relative -top-3"
-                            />
-                        </td>
                     </tr>
                 </tbody>
                 <tfoot class="text-tertiary-400 font-ibm-light text-xs">

@@ -57,9 +57,6 @@ module.exports = {
         'ibm-thin': ['ibm-thin'],
         'press': ['press']
       },
-      screens: {
-        '3xl': '1920px'
-      },
       spacing: {
         '0.75': '3px',
         '1.25': '5px',
@@ -138,6 +135,10 @@ module.exports = {
         '65per': '65%',
         '70per': '70%',
         '73per': '73%',
+        fex: '716px',
+        fel: '768px',
+        fem: '1200px',
+        fes: '1280px',
       },
       lineHeight: {
         '5.25': '21px',
@@ -153,6 +154,15 @@ module.exports = {
         md: '252px',
         '8xl': '1920px'
       },
+    },
+    screens: {
+      'xs': '375px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+      '3xl': '1920px',
     },
   },
   plugins: [

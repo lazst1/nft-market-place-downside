@@ -12,7 +12,7 @@ import LandingSyndications from './LandingSyndications.vue';
 
 <template>
     <landing-head />
-    <body-container :padding="false">
+    <body-container :padding="false" footerExtended>
         <landing-description />
         <landing-syndications />
         <landing-guide />
