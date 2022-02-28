@@ -9,11 +9,16 @@ import SidebarContainer from '@/core/container/SidebarContainer.vue';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
+import { useToast } from 'vue-toastification';
 
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress']);
+const toast = useToast();
+
 const onCopy = (e) => {
-    // alert('You just copied: ' + e.text)
+    toast.info('Wallet Address is copied', {
+        position: 'top-right'
+    })
 }
 const onError = (e) => {
     // alert('Failed to copy texts')
