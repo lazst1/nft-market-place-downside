@@ -40,7 +40,7 @@ const tokenImage = ref(props.image || 'images/img10.png')
         class="w-full"
     >
         <div
-            class="hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
+            class="transition hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
         >
             <div class="bg-black">
                 <div

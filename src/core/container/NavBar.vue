@@ -51,8 +51,9 @@ function toggleNotificationBar(params) {
         <nav-bar-item>
           <div class="hidden lg:block">
             <nftmx-button
+              to="/profile"
               color="primary"
-              label="NFT List"
+              label="List NFT"
               outline
               class="h-6 w-37 font-ibm-bold transition text-white"
             />

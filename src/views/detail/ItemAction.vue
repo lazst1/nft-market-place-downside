@@ -83,7 +83,7 @@ function handleVote() {
         <div class>
             <font-awesome-icon
                 :icon="['fas', 'thumbs-up']"
-                :class="[vote ? 'text-primary-900' : 'text-white', 'cursor-pointer hover:text-primary-900']"
+                :class="[vote ? 'text-primary-900' : 'text-white', 'transition cursor-pointer hover:text-primary-900']"
                 @click="handleVote()"
             />
         </div>

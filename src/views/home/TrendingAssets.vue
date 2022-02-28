@@ -66,19 +66,19 @@ function selectLedger(value) {
                 <div class="grid grid-cols-4 border-b border-black">
                     <div
                         @click="selectLedger('SOLD')"
-                        :class="[selected === 'SOLD' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-primary-900 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer']"
+                        :class="[selected === 'SOLD' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-primary-900 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer transition']"
                     >SOLD</div>
                     <div
                         @click="selectLedger('CANCELED')"
-                        :class="[selected === 'CANCELED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-red-700 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer']"
+                        :class="[selected === 'CANCELED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-red-700 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer transition']"
                     >CANCELED</div>
                     <div
                         @click="selectLedger('LISTED')"
-                        :class="[selected === 'LISTED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-white border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer']"
+                        :class="[selected === 'LISTED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-white border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer transition']"
                     >LISTED</div>
                     <div
                         @click="selectLedger('CREATED')"
-                        :class="[selected === 'CREATED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-tertiary-500 py-4 text-center hover:bg-tertiary-900 cursor-pointer']"
+                        :class="[selected === 'CREATED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-tertiary-500 py-4 text-center hover:bg-tertiary-900 cursor-pointer transition']"
                     >CREATED</div>
                 </div>
                 <div class="grid grid-cols-2 border-b border-black">

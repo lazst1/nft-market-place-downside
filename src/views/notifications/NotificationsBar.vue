@@ -20,7 +20,7 @@ function toggleNotificationBar() {
             <font-awesome-icon
                 @click="toggleNotificationBar()"
                 :icon="['fas', 'times']"
-                class="text-white text-lg cursor-pointer"
+                class="text-white hover:text-tertiary-400 transition text-lg cursor-pointer"
             />
         </div>
         <notification v-for="(log, i) in orderLogs" :key="i" :log="log" />

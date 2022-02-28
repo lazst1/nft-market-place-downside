@@ -31,7 +31,7 @@ const onError = (e) => {
             <div>
                 <nftmx-wallet-address
                     v-if="walletAddress"
-                    class="text-base font-ibm-bold pt-1 hidden sm:block"
+                    class="text-base font-ibm-bold pt-1 hover:text-primary-400 transition"
                     :address="walletAddress"
                     v-clipboard:copy="walletAddress"
                     v-clipboard:success="onCopy"
