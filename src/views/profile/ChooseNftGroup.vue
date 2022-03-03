@@ -6,14 +6,28 @@ import Accordion from '@/core/container/Accordion.vue';
 import GroupItem from './components/GroupItem.vue';
 import SubItem from './components/SubItem.vue';
 
+const props = defineProps({
+    selectedGroup: {
+        type: Object,
+        default: { name: 'Collected', count: 0 }
+    }
+})
+
+const emit = defineEmits(['select-group']);
+
 const store = useStore();
-const myNfts = computed(() => store.state.myNfts);
 const open = ref(false);
 const handleClick = (value) => {
     open.value = value
 }
 
-const selectedGroup = ref({ name: 'Collected', count: myNfts.value ? myNfts.value.total : 0 });
+const computedGroup = computed({
+    get: () => props.selectedGroup
+})
+
+const selectGroup = (value) => {
+    emit('select-group', value);
+}
 
 </script>
 
@@ -21,51 +35,33 @@ const selectedGroup = ref({ name: 'Collected', count: myNfts.value ? myNfts.valu
     <div v-if="store.state.app.windowWidth > themeConfig.sm" class="overflow-auto mt-3">
         <div class="flex gap-2.5 py-4 w-max">
             <group-item
-                :active="selectedGroup.name === 'Collected'"
-                @click="selectedGroup = { name: 'Collected', count: myNfts ? myNfts.total : 0 }"
+                :active="computedGroup.key === 'COLLECTED'"
+                @click="selectGroup('COLLECTED')"
             >
                 Collected
-                <span class="font-ibm-light">{{ myNfts ? myNfts.total : 0 }}</span>
+                <span class="font-ibm-light">{{ store.state.collectedNFTs.total }}</span>
             </group-item>
-            <group-item
-                :active="selectedGroup.name === 'On Sale'"
-                @click="selectedGroup = { name: 'On Sale', count: 0 }"
-            >
+            <group-item :active="computedGroup.key === 'ON_SALE'" @click="selectGroup('ON_SALE')">
                 On Sale
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ store.state.myActiveOrders.meta.totalItems }}</span>
             </group-item>
-            <group-item
-                :active="selectedGroup.name === 'Downside Protection'"
-                @click="selectedGroup = { name: 'Downside Protection', count: 0 }"
-            >
+            <group-item :active="computedGroup.key === 'DOWNSIDE'" @click="selectGroup('DOWNSIDE')">
                 Downside Protection
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ 0 }}</span>
             </group-item>
-            <group-item
-                :active="selectedGroup.name === 'Favorited'"
-                @click="selectedGroup = { name: 'Favorited', count: 0 }"
-            >
+            <group-item :active="computedGroup.key === 'FAVORITE'" @click="selectGroup('FAVORITE')">
                 Favorited
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ 0 }}</span>
             </group-item>
-            <group-item
-                :active="selectedGroup.name === 'Hidden'"
-                @click="selectedGroup = { name: 'Hidden', count: 0 }"
-            >
+            <group-item :active="computedGroup.key === 'HIDDEN'" @click="selectGroup('HIDDEN')">
                 Hidden
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ 0 }}</span>
             </group-item>
-            <group-item
-                :active="selectedGroup.name === 'Activity'"
-                @click="selectedGroup = { name: 'Activity', count: 0 }"
-            >
+            <group-item :active="computedGroup.key === 'ACTIVITY'" @click="selectGroup('ACTIVITY')">
                 Activity
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ 0 }}</span>
             </group-item>
-            <group-item
-                :active="selectedGroup.name === 'Offers'"
-                @click="selectedGroup = { name: 'Offers', count: 0 }"
-            >
+            <group-item :active="computedGroup.key === 'Offers'" @click="selectGroup('OFFERS')">
                 <span class="mr-4">Offers</span>
                 <font-awesome-icon :icon="['fas', 'sort-down']" class="relative -top-0.75" />
             </group-item>
@@ -81,54 +77,34 @@ const selectedGroup = ref({ name: 'Collected', count: myNfts.value ? myNfts.valu
     >
         <template v-slot:caption>
             <div class="text-primary-900 font-ibm-light text-description pt-3 mb-1.5">
-                {{ selectedGroup.name }}
-                <span
-                    class="font-ibm-light"
-                >{{ selectedGroup.name === 'Collected' ? selectedGroup.count || myNfts ? myNfts.total : 0 : 0 }}</span>
+                {{ computedGroup.name }}
+                <span class="font-ibm-light">{{ computedGroup.count }}</span>
             </div>
         </template>
         <div class="font-ibm-light text-tertiary-400 text-description">
-            <sub-item
-                :active="selectedGroup.name === 'Collected'"
-                @click="selectedGroup = { name: 'Collected', count: myNfts ? myNfts.total : 0 }"
-            >
+            <sub-item :active="computedGroup.key === 'COLLECTED'" @click="selectGroup('COLLECTED')">
                 Collected
-                <span class="font-ibm-light">{{ myNfts ? myNfts.total : 0 }}</span>
+                <span class="font-ibm-light">{{ store.state.collectedNFTs.total }}</span>
             </sub-item>
-            <sub-item
-                :active="selectedGroup.name === 'On Sale'"
-                @click="selectedGroup = { name: 'On Sale', count: 0 }"
-            >
+            <sub-item :active="computedGroup.key === 'ON_SALE'" @click="selectGroup('ON_SALE')">
                 On Sale
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ store.state.myActiveOrders.meta.totalItems }}</span>
             </sub-item>
-            <sub-item
-                :active="selectedGroup.name === 'Downside Protection'"
-                @click="selectedGroup = { name: 'Downside Protection', count: 0 }"
-            >
+            <sub-item :active="computedGroup.key === 'DOWNSIDE'" @click="selectGroup('DOWNSIDE')">
                 Downside Protection
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ 0 }}</span>
             </sub-item>
-            <sub-item
-                :active="selectedGroup.name === 'Favorited'"
-                @click="selectedGroup = { name: 'Favorited', count: 0 }"
-            >
+            <sub-item :active="computedGroup.key === 'FAVORITE'" @click="selectGroup('FAVORITE')">
                 Favorited
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ 0 }}</span>
             </sub-item>
-            <sub-item
-                :active="selectedGroup.name === 'Hidden'"
-                @click="selectedGroup = { name: 'Hidden', count: 0 }"
-            >
+            <sub-item :active="computedGroup.key === 'HIDDEN'" @click="selectGroup('HIDDEN')">
                 Hidden
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ 0 }}</span>
             </sub-item>
-            <sub-item
-                :active="selectedGroup.name === 'Activity'"
-                @click="selectedGroup = { name: 'Activity', count: 0 }"
-            >
+            <sub-item :active="computedGroup.key === 'ACTIVITY'" @click="selectGroup('ACTIVITY')">
                 Activity
-                <span class="font-ibm-light">0</span>
+                <span class="font-ibm-light">{{ 0 }}</span>
             </sub-item>
         </div>
     </accordion>

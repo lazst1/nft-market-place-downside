@@ -1,21 +1,20 @@
 <script setup>
-import NftmxButton from './NftmxButton.vue'
 import { computed, ref } from 'vue';
 import NftmxCardContainer from '@/core/container/NftmxCardContainer.vue';
-import CheckboxCell from './CheckboxCell.vue';
-import TextCompression from './TextCompression.vue';
+import CheckboxCell from '@/core/components/CheckboxCell.vue';
+import TextCompression from '@/core/components/TextCompression.vue';
 import { useStore } from 'vuex';
 import NftmxCancelModal from '@/core/components/NftmxCancelModal.vue';
 
 const props = defineProps({
-    item: Object,
     order: Object
-})
+});
+
 
 const store = useStore();
-
+const item = props.order.nft;
 const option = ref(false)
-const metadata = props.item.metadata ? JSON.parse(props.item.metadata) : {};
+const metadata = item.metadata ? JSON.parse(item.metadata) : {};
 const openCancelModal = ref(false);
 
 function onClickOutside() {
@@ -23,7 +22,7 @@ function onClickOutside() {
 }
 
 function approve() {
-    store.dispatch('market/approve', { contractAddress: props.item.token_address, tokenId: props.item.token_id })
+    store.dispatch('market/approve', { contractAddress: item.token_address, tokenId: item.token_id })
 }
 
 const openCancel = () => {
@@ -38,7 +37,7 @@ function cancelOrder() {
 
 <template>
     <nftmx-card-container
-        :approved="order ? true : item.approved"
+        :approved="true"
         :image="metadata ? metadata.image : ''"
         @approve="approve"
     >
@@ -68,11 +67,6 @@ function cancelOrder() {
                                 class="text-white hover:text-primary-700 cursor-pointer"
                                 @click="openCancel"
                             >Cancel selling</div>
-                            <router-link
-                                v-if="!order"
-                                :to="{ name: 'asset', params: { tokenAddress: item.token_address, tokenId: item.token_id } }"
-                                class="text-white hover:text-primary-700 cursor-pointer"
-                            >List for Sale</router-link>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Copy link</div>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Transfer</div>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Make profile picture</div>

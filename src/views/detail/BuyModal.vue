@@ -25,7 +25,6 @@ const props = defineProps({
     orderId: String,
     tokenPrice: String
 })
-
 const store = useStore();
 
 function buyOrder(params) {
@@ -41,7 +40,7 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
 
 <template>
     <nftmx-modal big>
-        <div class="text-center relative -top-2 md:w-asset-img">
+        <div class="text-center relative -top-2">
             <div class="font-press text-2xl">Buy</div>
             <div class="font-ibm-semi-bold text-sm items-center py-4 flex justify-center">
                 Balance:&nbsp;
@@ -54,58 +53,44 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                 </span>
             </div>
         </div>
-        <div class="px-4 md:px-16 pb-10">
-            <table class="w-full">
-                <thead class="text-tertiary-400 font-ibm-light text-xs border-b border-black">
-                    <th class="py-6 px-5 text-left">Items</th>
-                    <th class="text-right">Subtotal</th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    <tr :key="index" class="border-b border-black">
-                        <td class="p-4 text-left flex">
-                            <div class="bg-[url('@/assets/test.jpg')] w-13 h-13"></div>
-                            <div class="pt-0.5 px-4">
-                                <div class="text-primary-900 font-ibm text-xs leading-6">Kyle White</div>
-                                <div class="font-ibm-medium text-sm">{{ nft.name }}</div>
-                            </div>
-                        </td>
-                        <td class="text-right">
-                            <div class="font-ibm text-xs leading-6 flex justify-end">
-                                <nftmx-price-common
-                                    :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)"
-                                />
-                            </div>
-                            <div class="font-ibm text-xxs text-tertiary-400 leading-6">
-                                (
-                                <span class="font-sans">Ξ</span>
-                                {{ roundTo(parseInt(order.tokenPrice) / exchangeRate) }})
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot class="text-tertiary-400 font-ibm-light text-xs">
-                    <th class="py-6 px-5 text-left">Total</th>
-                    <th class="text-right">
-                        <div class="font-ibm text-sm text-primary-900 leading-10 flex justify-end">
-                            <nftmx-price-common
-                                :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)"
-                            />
-                        </div>
-                        <div class="font-ibm text-xxs text-tertiary-400">
-                            (
-                            <span class="font-sans">Ξ</span>
-                            {{ roundTo(parseInt(order.tokenPrice) / exchangeRate) }})
-                        </div>
-                    </th>
-                    <th></th>
-                </tfoot>
-            </table>
+        <div class="px-4 md:px-16 pb-10 font-ibm-medium">
+            <div class="w-full grid grid-cols-4 border-b border-black">
+                <div class="text-tertiary-400 text-xxs">
+                    <div class="py-6 text-left">Items</div>
+                </div>
+                <div class="text-tertiary-400 text-xxs">
+                    <div class="py-6 text-left">Downside Protection</div>
+                </div>
+                <div class="text-tertiary-400 text-xxs">
+                    <div class="py-6 text-left">Days of Protection</div>
+                </div>
+                <div class="text-tertiary-400 text-xxs text-right">
+                    <div class="py-6">Total</div>
+                </div>
+            </div>
+            <div class="w-full grid grid-cols-4 border-b border-black items-center pt-2.25 pb-2.5">
+                <div class="text-left flex">
+                    <div class="bg-[url('@/assets/test.jpg')] w-13 h-13"></div>
+                    <div class="pt-0.5 px-4">
+                        <div class="text-primary-900 font-ibm text-xs leading-6">Kyle White</div>
+                        <div class="text-sm">{{ nft.name }}</div>
+                    </div>
+                </div>
+                <div class="text-white text-sm">
+                    <div class="py-6 text-left">{{ parseInt(order.protectionRate) / 100 }} %</div>
+                </div>
+                <div class="text-white text-sm">
+                    <div class="py-6 text-left">{{ parseInt(order.protectionTime) / 3600 / 24 }}</div>
+                </div>
+                <div class="text-white text-sm text-right">
+                    <div class="py-6">Items</div>
+                </div>
+            </div>
             <div class="w-full text-center pt-6 pb-5">
                 <nftmx-button
                     color="primary"
                     label="BUY NOW"
-                    class="font-press w-full text-sm my-3 max-w-xs"
+                    class="font-press w-full text-lg my-3 max-w-xs h-13.5"
                     @click="buyOrder"
                 />
                 <div

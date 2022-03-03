@@ -24,6 +24,7 @@
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "click-outside-vue3": "^4.0.1",
+    "infinite-loading-vue3": "^1.0.1",
     "moralis": "^1.1.0",
     "postcss-import": "^14.0.2",
     "process": "^0.11.10",

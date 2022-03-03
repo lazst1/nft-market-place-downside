@@ -7,52 +7,39 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    tokenAddress: {
-        type: String,
-        required: true
-    },
-    tokenId: {
-        type: String,
-        required: true
-    },
-    card_display_style: {
-        type: String,
-        default: 'contain'
-    },
-    percent: {
-        type: Number,
-        default: 0
-    },
-    period: {
-        type: Number,
-        default: 0
-    },
-    forMore: Boolean
+    approved: {
+        type: Boolean,
+        default: false
+    }
 })
+
+const emit = defineEmits(['approve'])
 
 const tokenImage = ref(props.image || 'images/img10.png')
 
 </script>
 
 <template>
-    <router-link
-        :to="{ name: 'asset', params: { tokenAddress: tokenAddress, tokenId: tokenId } }"
-        class="w-full"
-    >
+    <div class="w-full relative">
         <div
-            class="transition hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
+            class="transition hover:shadow-[0_0px_12px_0px_rgb(0_0_0_/_0.1),_0_0px_0px_0px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
         >
             <div class="bg-black">
                 <div
                     class="relative w-full pt-65per overflow-hidden p-6"
-                    :style="{ background: 'url(' + tokenImage + ')', backgroundRepeat: 'no-repeat', backgroundSize: card_display_style, backgroundPosition: 'center' }"
-                >
-                    <ribbon v-if="!forMore" :percent="percent" :period="period" />
-                </div>
+                    :style="{ background: 'url(' + tokenImage + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center' }"
+                />
             </div>
             <div class="p-5">
                 <slot />
             </div>
         </div>
-    </router-link>
+        <div
+            v-if="!approved"
+            class="absolute top-0 w-full h-full bg-black bg-opacity-80 hover:bg-primary-900 hover:opacity-80 text-primary-400 hover:text-white hover:cursor-pointer flex justify-center items-center"
+            @click="emit('approve')"
+        >
+            <div class="w-fit font-press text-xs">Approve To List</div>
+        </div>
+    </div>
 </template>

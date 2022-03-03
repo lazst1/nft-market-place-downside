@@ -41,15 +41,15 @@ function toggleNotificationBar(params) {
     <div
       class="top-14 left-0 w-auto items-stretch flex grow static border-b-0 overflow-visible shadow-none"
     >
-      <div class="max-h-screen-menu overflow-visible flex items-stretch justify-end ml-auto">
+      <div class="max-h-screen-menu overflow-visible flex items-center justify-end ml-auto">
         <nav-bar-item v-if="walletAddress">
           <div @click="toggleNotificationBar">
             <font-awesome-icon :icon="['fas', 'bell']" class="text-lg text-white" />
             <nftmx-badge>{{ store.state.orderLogs.length }}</nftmx-badge>
           </div>
         </nav-bar-item>
-        <nav-bar-item>
-          <div class="hidden lg:block">
+        <nav-bar-item class="hidden lg:block">
+          <div>
             <nftmx-button
               to="/profile"
               color="primary"

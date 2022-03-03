@@ -59,6 +59,15 @@ class MatketService {
     getHashtagNames() {
         return http.get('hashtags').then(res => res.data)
     }
+
+    // fetch active orders created by the connected user.
+    getMyActiveOrders(walletAddress, page = 1, limit = 10) {
+        return http.get(`orders/mine/onsale?walletAddress=${walletAddress}&page=${page}&limit=${limit}`).then(res => res.data);
+    }
+
+    getMyOrdersUnderDownsideProtection(walletAddress, page = 1, limit = 10) {
+        return http.get(`orders/mine/downside?walletAddress=${walletAddress}&page=${page}&limit=${limit}`).then(res => res.data);
+    }
 }
 
 export default new MatketService();

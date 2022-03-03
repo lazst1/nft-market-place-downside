@@ -73,7 +73,7 @@ function createOrder() {
 function createHashTags() {
     if (hashtagValue.value) {
         marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId, props.asset.name).then(res => {
-            console.log(res);
+            console.log('createHashTags: ', res);
         })
     }
 }

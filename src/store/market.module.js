@@ -32,6 +32,11 @@ export const market = {
                 from: rootState.user.walletAddress, gas: 210000
             });
         },
+        cancelOrderBySeller({ commit, rootState }, orderId) {
+            rootState.marketContract.methods.cancelOrder(
+                orderId
+            ).send({ from: rootState.user.walletAddress, gas: 250000 });
+        },
         createOrder({ commit, rootState }, data) {
             rootState.marketContract.methods.createOrder(
                 data.tokenAddress,
