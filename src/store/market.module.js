@@ -88,7 +88,6 @@ export const market = {
         // fetch active orders that are created by the user.
         myActiveOrders({ commit, rootState }, { walletAddress, page = defaultPagination.page, limit = defaultPagination.limit }) {
             marketService.getMyActiveOrders(walletAddress, page, limit).then(async orders => {
-                rootState.myActiveOrders = orders;
                 const ordersWithNfts = orders.items.map(async order => {
                     const nft = await moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res);
                     order.nft = nft;
@@ -96,7 +95,8 @@ export const market = {
                 });
 
                 await Promise.all(ordersWithNfts).then(res => res);
-                rootState.myActiveNFTs = orders;
+
+                rootState.myActiveOrders = orders;
             })
         },
         // fetch orders that been sold but under downside protection. ( both sold and bought )

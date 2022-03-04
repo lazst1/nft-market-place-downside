@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
 import Accordion from '@/core/container/Accordion.vue';
@@ -29,6 +29,9 @@ const selectGroup = (value) => {
     emit('select-group', value);
 }
 
+watchEffect(() => {
+    console.log(store.state.myActiveOrders.meta.totalItems)
+})
 </script>
 
 <template>
