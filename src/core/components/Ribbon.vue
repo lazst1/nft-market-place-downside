@@ -2,12 +2,12 @@
 
 defineProps({
     percent: {
-        type: Number,
-        require: true
+        type: [Number, String],
+        default: 0
     },
     period: {
-        type: Number,
-        require: true
+        type: [Number, String],
+        default: 0
     },
     big: {
         type: Boolean,
