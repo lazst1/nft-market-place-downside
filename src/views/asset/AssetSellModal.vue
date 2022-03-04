@@ -78,6 +78,10 @@ function createHashTags() {
     }
 }
 
+function deselectHashtag(value) {
+    hashtagValue.value = hashtagValue.value.filter(name => name !== value);
+}
+
 function handleCalendar() {
     openCalendar.value = !openCalendar.value;
 }
@@ -255,15 +259,16 @@ function downsideRateRange() {
                             :options="hashtagOptions"
                             class="font-ibm text-xxs"
                         >
-                            <!-- <template v-slot:tag="{ option, handleTagRemove, disabled }">
-                                <nftmx-hashtag value="live" active />
-                            </template>-->
+                            <template v-slot:tag="{ option, handleTagRemove, disabled }">{{ }}</template>
                         </Multiselect>
                     </div>
                     <div class="flex flex-wrap gap-3">
-                        <nftmx-hashtag value="live" active />
-                        <nftmx-hashtag value="vod" />
-                        <nftmx-hashtag value="commisions" />
+                        <nftmx-hashtag
+                            v-for="(name, index) in hashtagValue"
+                            :key="index"
+                            :value="name"
+                            @click="deselectHashtag(name)"
+                        />
                     </div>
                 </div>
                 <nftmx-divider class="mt-9 mb-6" />
@@ -340,5 +345,8 @@ function downsideRateRange() {
     background-color: #19cb58;
     font-family: "ibm-light";
     font-size: 13px;
+}
+/deep/ .multiselect-clear {
+    display: none;
 }
 </style>
