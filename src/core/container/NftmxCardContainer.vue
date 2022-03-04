@@ -36,7 +36,7 @@ const tokenImage = ref(props.image || 'images/img10.png')
         </div>
         <div
             v-if="!approved"
-            class="absolute top-0 w-full h-full bg-black bg-opacity-80 hover:bg-primary-900 hover:opacity-80 text-primary-400 hover:text-white hover:cursor-pointer flex justify-center items-center"
+            class="absolute top-0 transition w-full h-full bg-black bg-opacity-80 hover:bg-primary-900 hover:opacity-80 text-primary-400 hover:text-white hover:cursor-pointer flex justify-center items-center"
             @click="emit('approve')"
         >
             <div class="w-fit font-press text-xs">Approve To List</div>

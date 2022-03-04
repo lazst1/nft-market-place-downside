@@ -186,3 +186,8 @@ export const popularSyndications = [
         price: 50000
     }
 ]
+
+export const defaultPagination = {
+    page: 1,
+    limit: 10
+}

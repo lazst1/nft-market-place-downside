@@ -15,6 +15,7 @@ import VueClipboard from 'vue3-clipboard'
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
+import InfiniteScroll from "infinite-loading-vue3";
 
 import {
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faMoon, faSun, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo,
@@ -56,6 +57,7 @@ createApp(App)
         appendToBody: true,
     })
     .use(Toast, options)
+    .use(InfiniteScroll)
     .component("font-awesome-icon", FontAwesomeIcon)
     .component('Multiselect', Multiselect)
     .mount('#app')

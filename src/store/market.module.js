@@ -1,10 +1,10 @@
 import AuthService from "@/core/services/auth.service";
 import Moralis from 'moralis'
-import MoralisService from "../core/services/moralis.service";
+import moralisService from "../core/services/moralis.service";
 import Web3 from "web3/dist/web3.min.js"
 import abiJSON from '@/core/config/abi';
 import erc721ABI from '@/core/config/erc721';
-import { marketAddress, TokenType } from "../core/config";
+import { defaultPagination, marketAddress, TokenType } from "../core/config";
 import marketService from "../core/services/market.service";
 
 export const market = {
@@ -12,16 +12,41 @@ export const market = {
     state: {
     },
     actions: {
-        getSaleOrders({ commit, rootState }) {
-            marketService.getSaleOrders().then(orders => {
+        // collect nfts from user wallet
+        collectNftsFromWallet({ commit, rootState }, { walletAddress, page = 0 }) {
+            moralisService.getMyNFTs(walletAddress, 6, 6 * page).then(async nftData => {
+                const collectedNFTs = await JSON.parse(JSON.stringify(nftData));
+                const nfts = collectedNFTs.result.map(async nft => {
+                    const tokenContract = new rootState.web3.eth.Contract(
+                        erc721ABI,
+                        rootState.web3.utils.toChecksumAddress(nft.token_address),
+                    );
+
+                    const approvedAddress = await tokenContract.methods.getApproved(nft.token_id).call({
+                        from: walletAddress, gas: 210000
+                    }).then(res => res);
+
+                    nft.approved = approvedAddress === marketAddress ? true : false;
+
+                    return nft;
+                });
+                collectedNFTs.result = await Promise.all(nfts).then(res => res);
+
+                rootState.collectedNFTs = collectedNFTs;
+            });
+        },
+        // fetch active orders on sale in the martketplace.
+        getSaleOrders({ commit, rootState }, userId) {
+            marketService.getSaleOrders(userId).then(orders => {
                 rootState.orders = orders;
-            })
+            });
         },
         getBnbPrice({ commit, rootState }) {
             marketService.getUSDFromToken(TokenType.BNB).then(res => {
                 rootState.bnbPrice = res.price;
             });
         },
+        // approve the NFT to our marketplace
         approve({ commit, rootState }, data) {
             const tokenContract = new rootState.web3.eth.Contract(
                 erc721ABI,
@@ -32,6 +57,7 @@ export const market = {
                 from: rootState.user.walletAddress, gas: 210000
             });
         },
+        // seller do cancel unsold order
         cancelOrderBySeller({ commit, rootState }, orderId) {
             rootState.marketContract.methods.cancelOrder(
                 orderId
@@ -53,6 +79,37 @@ export const market = {
                 data.orderId
             ).send({ from: rootState.user.walletAddress, gas: 623478, value: parseInt(data.tokenPrice), gasPrice: 0 });
         },
+        // fetch order logs ( notification icon on top bar )
+        orderLogs({ commit, rootState }) {
+            marketService.getOrderLogs().then(res => {
+                rootState.orderLogs = res.items;
+            });
+        },
+        // fetch active orders that are created by the user.
+        myActiveOrders({ commit, rootState }, { walletAddress, page = defaultPagination.page, limit = defaultPagination.limit }) {
+            marketService.getMyActiveOrders(walletAddress, page, limit).then(async orders => {
+                rootState.myActiveOrders = orders;
+                const ordersWithNfts = orders.items.map(async order => {
+                    const nft = await moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res);
+                    order.nft = nft;
+                    return order;
+                });
+
+                await Promise.all(ordersWithNfts).then(res => res);
+                rootState.myActiveNFTs = orders;
+            })
+        },
+        // fetch orders that been sold but under downside protection. ( both sold and bought )
+        myOrdersUnderDownsideProtection({ commit, rootState }, walletAddress) {
+            marketService.getMyOrdersUnderDownsideProtection(walletAddress, 1, 10).then(async orders => {
+                rootState.myActiveOrders = orders;
+                const nfts = orders.items.map(order => {
+                    return moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res);
+                });
+
+                rootState.myActiveNFTs = await Promise.all(nfts).then(res => res);
+            })
+        }
     },
     getters: {
         getBnbPrice: (state, getters, rootState) => {

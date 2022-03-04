@@ -1,13 +1,13 @@
 import http from "../utils/http-common";
-import { DEFAULT_USER_ID, TokenType } from '../config';
+import { defaultPagination, DEFAULT_USER_ID, TokenType } from '../config';
 import axios from "axios";
 
 class MatketService {
-    getOrders(page = 1, limit = 10) {
+    getOrders(page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
-    getSaleOrders(userId = DEFAULT_USER_ID, page = 1, limit = 10) {
+    getSaleOrders(userId = DEFAULT_USER_ID, page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders/sale?page=${page}&limit=${limit}&userId=${userId}`).then(res => res.data);
     }
 
@@ -16,20 +16,20 @@ class MatketService {
     }
     
     // ledger
-    soldItems(page = 1, limit = 20) {
+    soldItems(page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders/sold?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
-    canceledItems(page = 1, limit = 20) {
+    canceledItems(page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders/canceled?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
-    listedItems(page = 1, limit = 20) {
+    listedItems(page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders/active?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
     // recent order logs
-    getOrderLogs(page = 1, limit = 20) {
+    getOrderLogs(page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders/log?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
@@ -61,11 +61,11 @@ class MatketService {
     }
 
     // fetch active orders created by the connected user.
-    getMyActiveOrders(walletAddress, page = 1, limit = 10) {
+    getMyActiveOrders(walletAddress, page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders/mine/onsale?walletAddress=${walletAddress}&page=${page}&limit=${limit}`).then(res => res.data);
     }
 
-    getMyOrdersUnderDownsideProtection(walletAddress, page = 1, limit = 10) {
+    getMyOrdersUnderDownsideProtection(walletAddress, page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders/mine/downside?walletAddress=${walletAddress}&page=${page}&limit=${limit}`).then(res => res.data);
     }
 }
