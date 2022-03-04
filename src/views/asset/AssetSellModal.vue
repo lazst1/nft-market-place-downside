@@ -170,7 +170,7 @@ function downsideRateRange() {
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap mt-3.5 mb-6 font-ibm text-sm">
-                    <nftmx-select-network color="black" :data="currencies" class="xl:w-1/3" />
+                    <nftmx-select-network color="black" class="xl:w-1/3" />
                     <input
                         v-model="nftPrice"
                         class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-4.75 font-ibm text-sm"
