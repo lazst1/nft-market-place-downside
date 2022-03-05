@@ -36,8 +36,8 @@ export const market = {
             });
         },
         // fetch active orders on sale in the martketplace.
-        getSaleOrders({ commit, rootState }, userId) {
-            marketService.getSaleOrders(userId).then(orders => {
+        getSaleOrders({ commit, rootState }, walletAddress) {
+            marketService.getSaleOrders(walletAddress).then(orders => {
                 rootState.orders = orders;
             });
         },

@@ -33,7 +33,7 @@ watchEffect(() => {
 
 <template>
     <overlay v-show="value" @overlay-click="cancel">
-        <div class="p-6 bg-tertiary-900 font-press text-white text-2xl z-50">
+        <div class="p-6 bg-tertiary-900 font-press text-white text-xl xl:text-2xl z-50 mx-4">
             <div>
                 <font-awesome-icon
                     :icon="['fas', 'times']"
@@ -41,19 +41,19 @@ watchEffect(() => {
                     @click="cancel"
                 />
             </div>
-            <div class="p-12">
-                <div class="mt-8.5 mx-8 mb-12">Are you sure you cancel your investment?</div>
-                <div class="grid grid-cols-2 gap-11">
+            <div class="pb-6 lg:p-12">
+                <div class="mt-8.5 lg:mx-8 mb-12 text-center">Are you sure you cancel your investment?</div>
+                <div class="grid md:grid-cols-2 gap-6 xl:gap-11">
                     <nftmx-button
                         color="gray"
                         label="NO"
-                        class="font-press w-full text-lg h-16.5"
+                        class="font-press w-full text-sm xl:text-lg h-16.5"
                         @click="cancel"
                     />
                     <nftmx-button
                         color="red"
                         label="YES"
-                        class="font-press w-full text-lg h-16.5"
+                        class="font-press w-full text-sm xl:text-lg h-16.5"
                         @click="confirm"
                     />
                 </div>
@@ -61,3 +61,4 @@ watchEffect(() => {
         </div>
     </overlay>
 </template>
+&
