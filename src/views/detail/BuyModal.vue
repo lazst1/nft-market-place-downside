@@ -22,13 +22,13 @@ const props = defineProps({
         type: Boolean,
         default: true
     },
-    orderId: String,
     tokenPrice: String
 })
 const store = useStore();
+const fundError = ref(false);
 
 function buyOrder(params) {
-    store.dispatch('market/buyFixedPayOrder', { orderId: parseInt(props.orderId), tokenPrice: props.tokenPrice });
+    store.dispatch('market/buyFixedPayOrder', { orderId: parseInt(props.order.orderId), tokenPrice: props.tokenPrice });
 }
 
 const bnbPrice = ref(0);

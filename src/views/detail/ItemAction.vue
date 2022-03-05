@@ -34,14 +34,12 @@ const people = [
 
 const props = defineProps({
     order: Object,
-    orderId: String,
     tokenPrice: String,
     nft: Object
 })
 
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
-const fundError = ref(false);
 const store = useStore();
 const balance = ref();
 const vote = ref(false);
@@ -153,7 +151,6 @@ function handleVote() {
         v-model="buyModalActive"
         :order="order"
         :nft="nft"
-        :orderId="orderId"
         :tokenPrice="tokenPrice"
         :balance="balance"
     />

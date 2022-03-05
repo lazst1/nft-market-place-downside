@@ -55,7 +55,6 @@ marketService.getOrder(orderId).then(data => {
 });
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
-const fundError = ref(false);
 
 </script>
 
@@ -66,7 +65,7 @@ const fundError = ref(false);
                 <more-info :nft="nft" :percent="order.protectionRate / 100" :period="order.protectionTime / 86400" />
             </div>
             <div class="col-span-7 mt-6 mb-4 lg:col-span-4 relative lg:-ml-4">
-                <item-action :order="order" :orderId="order.orderId" :tokenPrice="order.tokenPrice" :nft="nft" />
+                <item-action :order="order" :tokenPrice="order.tokenPrice" :nft="nft" />
             </div>
         </div>
         <div class="mb-10">

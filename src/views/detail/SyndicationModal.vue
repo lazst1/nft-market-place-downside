@@ -6,7 +6,7 @@ import NftmxTh from '@/core/components/NftmxTh.vue';
 import NftmxTbody from '@/core/components/NftmxTbody.vue';
 import NftmxTd from '@/core/components/NftmxTd.vue';
 import NftmxTr from '@/core/components/NftmxTr.vue';
-
+import NftmxButton from '@/core/components/NftmxButton.vue';
 
 </script>
 
