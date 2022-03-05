@@ -43,7 +43,7 @@ watchEffect(() => {
             </div>
             <div class="pb-6 lg:p-12">
                 <div class="mt-8.5 lg:mx-8 mb-12 text-center">Are you sure you cancel your investment?</div>
-                <div class="grid md:grid-cols-2 gap-6 xl:gap-11">
+                <div class="flex flex-col-reverse md:grid md:grid-cols-2 gap-6 xl:gap-11">
                     <nftmx-button
                         color="gray"
                         label="NO"
