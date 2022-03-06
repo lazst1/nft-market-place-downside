@@ -10,7 +10,6 @@ const props = defineProps({
     order: Object
 });
 
-
 const store = useStore();
 const item = props.order.nft;
 const option = ref(false)
@@ -63,7 +62,7 @@ function cancelOrder() {
                             class="absolute w-52 bottom-5 -ml-5 px-5.5 py-3.25 bg-black text-white hover:text-primary-900 leading-9.5 font-ibm-light text-xs"
                         >
                             <div
-                                v-if="order"
+                                v-if="order.orderStatus === '0'"
                                 class="text-white hover:text-primary-700 cursor-pointer"
                                 @click="openCancel"
                             >Cancel selling</div>

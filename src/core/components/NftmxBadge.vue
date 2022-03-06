@@ -1,9 +1,11 @@
 <script setup>
+import { computed } from 'vue';
+
 const props = defineProps({
     value: Number
 });
 
-const badgeW = (10 + props.value.toFixed().length * 5) + 'px';
+const badgeW = computed(() => (10 + props.value.toFixed().length * 5) + 'px');
 
 </script>
 

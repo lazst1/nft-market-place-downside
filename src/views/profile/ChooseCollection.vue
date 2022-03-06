@@ -21,9 +21,9 @@ const selected = ref('My Collection');
 <template>
     <div
         v-if="store.state.app.windowWidth > themeConfig.sm"
-        class="flex justify-between text-white font-ibm-semi-bold text-sm pb-4.5 md:mt-4 gap-x-7"
+        class="flex justify-between text-white font-ibm-semi-bold text-sm pb-0.5 md:mt-0.5 gap-x-7"
     >
-        <div class="flex">
+        <div class="flex items-center">
             <group-item
                 :active="selected === 'My Collection'"
                 @click="selected = 'My Collection'"

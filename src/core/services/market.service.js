@@ -7,7 +7,7 @@ class MatketService {
         return http.get(`orders?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
-    getSaleOrders(walletAddress, page = defaultPagination.page, limit = defaultPagination.limit) {
+    getSaleOrders(walletAddress, page = defaultPagination.page, limit = 40) {
         return http.get(`orders/sale?page=${page}&limit=${limit}&walletAddress=${walletAddress}`).then(res => res.data);
     }
 

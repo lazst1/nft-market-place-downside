@@ -75,9 +75,10 @@ export const market = {
             ).send({ from: rootState.user.walletAddress, gas: 250000 });
         },
         buyFixedPayOrder({ commit, rootState }, data) {
+            console.log(data)
             rootState.marketContract.methods.buyFixedPayOrder(
                 data.orderId
-            ).send({ from: rootState.user.walletAddress, gas: 623478, value: parseInt(data.tokenPrice), gasPrice: 0 });
+            ).send({ from: rootState.user.walletAddress, gas: 623478, value: data.tokenPrice, gasPrice: 0 });
         },
         // fetch order logs ( notification icon on top bar )
         orderLogs({ commit, rootState }) {
@@ -96,18 +97,27 @@ export const market = {
 
                 await Promise.all(ordersWithNfts).then(res => res);
 
-                rootState.myActiveOrders = orders;
+                rootState.myOrders.onSale = orders;
             })
         },
         // fetch orders that been sold but under downside protection. ( both sold and bought )
         myOrdersUnderDownsideProtection({ commit, rootState }, walletAddress) {
             marketService.getMyOrdersUnderDownsideProtection(walletAddress, 1, 10).then(async orders => {
-                rootState.myActiveOrders = orders;
-                const nfts = orders.items.map(order => {
-                    return moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res);
+                const ordersWithNfts = orders.items.map(async order => {
+                    const nft = await moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res);
+                    order.nft = nft;
+                    return order;
                 });
 
-                rootState.myActiveNFTs = await Promise.all(nfts).then(res => res);
+                await Promise.all(ordersWithNfts).then(res => res);
+
+                rootState.myOrders.downside.all = orders;
+                console.log(orders);
+
+                rootState.myOrders.downside.bought.items = await orders.items.filter(item => item.buyerAddress == rootState.user.walletAddress);
+                rootState.myOrders.downside.bought.meta.totalItems = rootState.myOrders.downside.bought.items.length;
+                rootState.myOrders.downside.sold.items = await orders.items.filter(item => item.sellerAddress == rootState.user.walletAddress);
+                rootState.myOrders.downside.sold.meta.totalItems = rootState.myOrders.downside.sold.items.length;
             })
         }
     },

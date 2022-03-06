@@ -13,10 +13,12 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['select-group']);
+const emit = defineEmits(['select-group', 'select-tab']);
 
 const store = useStore();
 const open = ref(false);
+const selectedTab = ref('ALL');
+
 const handleClick = (value) => {
     open.value = value
 }
@@ -29,8 +31,13 @@ const selectGroup = (value) => {
     emit('select-group', value);
 }
 
+const selectTab = (value) => {
+    selectedTab.value = value;
+    emit('select-tab', value);
+}
+
 watchEffect(() => {
-    console.log(store.state.myActiveOrders.meta.totalItems)
+    console.log(store.state.myOrders.onSale.meta.totalItems)
 })
 </script>
 
@@ -46,11 +53,11 @@ watchEffect(() => {
             </group-item>
             <group-item :active="computedGroup.key === 'ON_SALE'" @click="selectGroup('ON_SALE')">
                 On Sale
-                <span class="font-ibm-light">{{ store.state.myActiveOrders.meta.totalItems }}</span>
+                <span class="font-ibm-light">{{ store.state.myOrders.onSale.meta.totalItems }}</span>
             </group-item>
             <group-item :active="computedGroup.key === 'DOWNSIDE'" @click="selectGroup('DOWNSIDE')">
                 Downside Protection
-                <span class="font-ibm-light">{{ 0 }}</span>
+                <span class="font-ibm-light">{{ store.state.myOrders.downside.all.meta.totalItems }}</span>
             </group-item>
             <group-item :active="computedGroup.key === 'FAVORITE'" @click="selectGroup('FAVORITE')">
                 Favorited
@@ -67,6 +74,29 @@ watchEffect(() => {
             <group-item :active="computedGroup.key === 'Offers'" @click="selectGroup('OFFERS')">
                 <span class="mr-4">Offers</span>
                 <font-awesome-icon :icon="['fas', 'sort-down']" class="relative -top-0.75" />
+            </group-item>
+        </div>
+        <div class="flex gap-2.5 py-4 w-max" v-if="computedGroup.key === 'DOWNSIDE'">
+            <group-item
+                :active="selectedTab === 'ALL'"
+                @click="selectTab('ALL')"
+            >
+                All
+                <span class="font-ibm-light">{{ store.state.myOrders.downside.all.meta.totalItems }}</span>
+            </group-item>
+            <group-item
+                :active="selectedTab === 'BOUGHT'"
+                @click="selectTab('BOUGHT')"
+            >
+                Bought
+                <span class="font-ibm-light">{{ store.state.myOrders.downside.bought.meta.totalItems }}</span>
+            </group-item>
+            <group-item
+                :active="selectedTab === 'SOLD'"
+                @click="selectTab('SOLD')"
+            >
+                Sold
+                <span class="font-ibm-light">{{ store.state.myOrders.downside.sold.meta.totalItems }}</span>
             </group-item>
         </div>
     </div>
@@ -91,11 +121,11 @@ watchEffect(() => {
             </sub-item>
             <sub-item :active="computedGroup.key === 'ON_SALE'" @click="selectGroup('ON_SALE')">
                 On Sale
-                <span class="font-ibm-light">{{ store.state.myActiveOrders.meta.totalItems }}</span>
+                <span class="font-ibm-light">{{ store.state.myOrders.onSale.meta.totalItems }}</span>
             </sub-item>
             <sub-item :active="computedGroup.key === 'DOWNSIDE'" @click="selectGroup('DOWNSIDE')">
                 Downside Protection
-                <span class="font-ibm-light">{{ 0 }}</span>
+                <span class="font-ibm-light">{{ store.state.myOrders.downside.all.meta.totalItems }}</span>
             </sub-item>
             <sub-item :active="computedGroup.key === 'FAVORITE'" @click="selectGroup('FAVORITE')">
                 Favorited

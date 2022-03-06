@@ -13,17 +13,6 @@ const initialUser = {
     allNfts: {},
 }
 
-const initialOrders = {
-    orders: [],
-    meta: {
-        currentPage: 1,
-        itemCount: 0,
-        itemsPerPage: 10,
-        totalItems: 0,
-        totalPages: 0
-    }
-}
-
 const initialCollectedNFTs = {
     page: 0,
     page_size: 0,
@@ -32,7 +21,7 @@ const initialCollectedNFTs = {
     result: []
 };
 
-const initialMyActiveOrders = {
+const initialOrders = {
     items: [],
     meta: {
         currentPage: 1,
@@ -40,6 +29,15 @@ const initialMyActiveOrders = {
         itemsPerPage: 20,
         totalItems: 0,
         totalPages: 0
+    }
+}
+
+const initialMyOrders = {
+    onSale: initialOrders,
+    downside: {
+        all: initialOrders,
+        bought: initialOrders,
+        sold: initialOrders
     }
 }
 
@@ -52,7 +50,7 @@ export default createStore({
         orders: initialOrders,
         orderLogs: [],
         collectedNFTs: initialCollectedNFTs,
-        myActiveOrders: initialMyActiveOrders,
+        myOrders: initialMyOrders,
         bnbPrice: 0
     },
     mutations: {},

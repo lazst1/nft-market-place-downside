@@ -12,9 +12,6 @@ import TrendingSearch from './TrendingSearch.vue';
 import SyndicationCarousel from '../landing/components/SyndicationCarousel.vue';
 import Analyzer from './Analyzer.vue';
 
-const user = computed(() => {
-    return this.$store.state.user;
-})
 const store = useStore();
 if (store.getters['auth/getWalletAddress']) {
     store.dispatch("market/getSaleOrders");

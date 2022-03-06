@@ -17,20 +17,25 @@ import OrderCard from './components/OrderCard.vue';
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 const collectedNFTs = computed(() => store.state.collectedNFTs);
-const myActiveOrders = computed(() => store.state.myActiveOrders);
+const myActiveOrders = computed(() => store.state.myOrders.onSale);
+const myOrdersUnderDownsideAll = computed(() => store.state.myOrders.downside.all);
+const myOrdersUnderDownsideBought = computed(() => store.state.myOrders.downside.bought);
+const myOrdersUnderDownsideSold = computed(() => store.state.myOrders.downside.sold);
 const selectedGroup = ref({ key: 'COLLECTED', name: 'Collected', count: store.state.collectedNFTs.total });
+const selectedOrders = ref();
 
 const selectGroup = (value) => {
     switch (value) {
         case 'COLLECTED':
             selectedGroup.value = { key: 'COLLECTED', name: 'Collected', count: store.state.collectedNFTs.total };
-
             break;
         case 'ON_SALE':
-            selectedGroup.value = { key: 'ON_SALE', name: 'On Sale', count: store.state.myActiveOrders.meta.totalItems };
+            selectedGroup.value = { key: 'ON_SALE', name: 'On Sale', count: store.state.myOrders.onSale.meta.totalItems };
+            selectedOrders.value = myActiveOrders.value;
             break;
         case 'DOWNSIDE':
-            selectedGroup.value = { key: 'DOWNSIDE', name: 'Downside Protection', count: 0 };
+            selectedGroup.value = { key: 'DOWNSIDE', name: 'Downside Protection', count: store.state.myOrders.downside.all.meta.totalItems };
+            selectedOrders.value = myOrdersUnderDownsideAll.value;
             break;
         case 'FAVORITE':
             selectedGroup.value = { key: 'FAVORITE', name: 'Favorited', count: 0 };
@@ -43,6 +48,22 @@ const selectGroup = (value) => {
             break;
         case 'OFFERS':
             selectedGroup.value = { key: 'OFFERS', name: 'Offers', count: 0 };
+            break;
+        default:
+            break;
+    }
+}
+
+const selectTab = (value) => {
+    switch (value) {
+        case 'ALL':
+            selectedOrders.value = myOrdersUnderDownsideAll.value;
+            break;
+        case 'BOUGHT':
+            selectedOrders.value = myOrdersUnderDownsideBought.value;
+            break;
+        case 'SOLD':
+            selectedOrders.value = myOrdersUnderDownsideSold.value;
             break;
         default:
             break;
@@ -64,8 +85,7 @@ watchEffect(() => {
         <choose-collection />
         <nftmx-divider class="mt-4.75 mb-3"></nftmx-divider>
         <div class="2xl:flex justify-between text-white font-ibm-semi-bold text-sm pt-0.5">
-            <choose-nft-group :selectedGroup="selectedGroup" @select-group="selectGroup" />
-            <nftmx-divider class="mt-4.75 mb-5"></nftmx-divider>
+            <choose-nft-group :selectedGroup="selectedGroup" @select-group="selectGroup" @select-tab="selectTab" />
             <nftmx-search-input class="bg-tertiary-800 mt-3.25 2xl:my-0.75 sm:ml-4" />
         </div>
         <cards-container
@@ -80,11 +100,11 @@ watchEffect(() => {
             ></nft-card>
         </cards-container>
         <cards-container
-            v-if="selectedGroup.key === 'ON_SALE'"
+            v-if="selectedGroup.key === 'ON_SALE' || selectedGroup.key === 'DOWNSIDE'"
             class="mt-12 2xl:mt-11 mb-22 place-items-center"
         >
             <order-card
-                v-for="(order, index) in myActiveOrders ? myActiveOrders.items : []"
+                v-for="(order, index) in selectedOrders ? selectedOrders.items : []"
                 :key="index"
                 :order="order"
                 class="bg-tertiary-800"
