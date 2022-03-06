@@ -15,7 +15,7 @@ if (typeof window.ethereum !== 'undefined') {
   ethereum
     .request({ method: 'eth_accounts' })
     .then(accounts => {
-      store.dispatch("auth/login", accounts[0]);
+      store.dispatch("auth/login", accounts[0].toLowerCase());
     })
 }
 store.commit('app/UPDATE_WINDOW_WIDTH', window.innerWidth);

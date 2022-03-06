@@ -25,7 +25,6 @@ const confirm = () => confirmCancel('confirm')
 const cancel = () => confirmCancel('cancel')
 
 watchEffect(() => {
-    console.log('watch: ', props.modelValue)
     emit('update:modelValue', props.modelValue)
 })
 

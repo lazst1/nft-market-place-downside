@@ -14,7 +14,6 @@ export const market = {
     actions: {
         // collect nfts from user wallet
         collectNftsFromWallet({ commit, rootState }, { walletAddress, page = 0 }) {
-            console.log(walletAddress)
             moralisService.getMyNFTs(walletAddress, 6, 6 * page).then(async nftData => {
                 const collectedNFTs = await JSON.parse(JSON.stringify(nftData));
                 const nfts = collectedNFTs.result.map(async nft => {
@@ -64,6 +63,13 @@ export const market = {
                 orderId
             ).send({ from: rootState.user.walletAddress, gas: 250000 });
         },
+        // buyer do cancel an downside protection order
+        cancelOrderByBuyer({ commit, rootState }, orderId) {
+            console.log(orderId)
+            rootState.marketContract.methods.claimDownsideProtectionAmount(
+                orderId
+            ).send({ from: rootState.user.walletAddress, gas: 250000 });
+        },
         createOrder({ commit, rootState }, data) {
             rootState.marketContract.methods.createOrder(
                 data.tokenAddress,
@@ -76,7 +82,6 @@ export const market = {
             ).send({ from: rootState.user.walletAddress, gas: 250000 });
         },
         buyFixedPayOrder({ commit, rootState }, data) {
-            console.log(data)
             rootState.marketContract.methods.buyFixedPayOrder(
                 data.orderId
             ).send({ from: rootState.user.walletAddress, gas: 623478, value: data.tokenPrice, gasPrice: 0 });
@@ -113,12 +118,23 @@ export const market = {
                 await Promise.all(ordersWithNfts).then(res => res);
 
                 rootState.myOrders.downside.all = orders;
-                console.log(orders);
 
-                rootState.myOrders.downside.bought.items = await orders.items.filter(item => item.buyerAddress == rootState.user.walletAddress);
-                rootState.myOrders.downside.bought.meta.totalItems = rootState.myOrders.downside.bought.items.length;
-                rootState.myOrders.downside.sold.items = await orders.items.filter(item => item.sellerAddress == rootState.user.walletAddress);
-                rootState.myOrders.downside.sold.meta.totalItems = rootState.myOrders.downside.sold.items.length;
+                const boughtItems = await orders.items.filter(item => item.buyerAddress.toString() === rootState.user.walletAddress.toString());
+                const boughtTotalItems = await boughtItems.length;
+                rootState.myOrders.downside.bought = {
+                    items: boughtItems,
+                    meta: {
+                        totalItems: boughtTotalItems
+                    }
+                }
+                const soldItems = await orders.items.filter(item => item.sellerAddress.toString() === rootState.user.walletAddress.toString());
+                const soleTotalItems = soldItems.length;
+                rootState.myOrders.downside.sold = {
+                    items: soldItems,
+                    meta: {
+                        totalItems: soleTotalItems
+                    }
+                }
             })
         }
     },

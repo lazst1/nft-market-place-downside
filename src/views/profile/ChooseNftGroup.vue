@@ -35,10 +35,6 @@ const selectTab = (value) => {
     selectedTab.value = value;
     emit('select-tab', value);
 }
-
-watchEffect(() => {
-    console.log(store.state.myOrders.onSale.meta.totalItems)
-})
 </script>
 
 <template>

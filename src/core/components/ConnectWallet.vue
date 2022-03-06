@@ -50,7 +50,7 @@ const handleLogin = (accounts) => {
         // MetaMask is locked or the user has not connected any accounts
         toast.error('Please connect to MetaMask')
     } else if (accounts[0] !== store.getters['auth/getWalletAddress']) {
-        store.dispatch("auth/login", accounts[0]).then(
+        store.dispatch("auth/login", accounts[0].toLowerCase()).then(
             () => {
                 router.push('/profile');
             },

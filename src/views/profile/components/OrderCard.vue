@@ -29,7 +29,11 @@ const openCancel = () => {
 }
 
 function cancelOrder() {
-    store.dispatch('market/cancelOrderBySeller', props.order.orderId )
+    if(props.order.orderStatus === '0') {
+        store.dispatch('market/cancelOrderBySeller', props.order.orderId)
+    } else if (props.order.orderStatus === '2' && props.order.buyerAddress === store.state.user.walletAddress) {
+        store.dispatch('market/cancelOrderByBuyer', props.order.orderId)
+    }
 }
 
 </script>
@@ -62,13 +66,20 @@ function cancelOrder() {
                             class="absolute w-52 bottom-5 -ml-5 px-5.5 py-3.25 bg-black text-white hover:text-primary-900 leading-9.5 font-ibm-light text-xs"
                         >
                             <div
+                                v-if="order.orderStatus === '2' && order.buyerAddress === store.state.user.walletAddress"
+                                class="text-white hover:text-primary-700 cursor-pointer"
+                                @click="openCancel"
+                            >Cancel buying</div>
+                            <div
                                 v-if="order.orderStatus === '0'"
                                 class="text-white hover:text-primary-700 cursor-pointer"
                                 @click="openCancel"
                             >Cancel selling</div>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Copy link</div>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Transfer</div>
-                            <div class="text-white hover:text-primary-700 cursor-pointer">Make profile picture</div>
+                            <div
+                                class="text-white hover:text-primary-700 cursor-pointer"
+                            >Make profile picture</div>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Hide</div>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Unbundle</div>
                         </div>
