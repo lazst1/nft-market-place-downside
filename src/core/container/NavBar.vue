@@ -16,62 +16,70 @@ const sidebar = ref(false);
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 
-function onClickOutside(params) {
-  store.commit('app/TOGGLE_SIDEBAR', false)
-  store.commit('app/TOGGLE_NOTIFICATION_BAR', false)
+function onClickOutside() {
+  store.commit('app/TOGGLE_SIDEBAR', false);
+  store.commit('app/TOGGLE_NOTIFICATION_BAR', false);
 }
-function toggleSidebar(params) {
-  store.commit('app/TOGGLE_SIDEBAR', !store.state.app.sidebarOpened)
+function toggleSidebar() {
+  store.commit('app/TOGGLE_SIDEBAR', !store.state.app.sidebarOpened);
+  store.commit('app/TOGGLE_NOTIFICATION_BAR', false);
 }
-function toggleNotificationBar(params) {
-  store.commit('app/TOGGLE_NOTIFICATION_BAR', !store.state.app.notificationOpened)
+function toggleNotificationBar() {
+  store.commit('app/TOGGLE_NOTIFICATION_BAR', !store.state.app.notificationOpened);
+  store.commit('app/TOGGLE_SIDEBAR', false);
 }
 
 </script>
 
 <template>
-  <top-bar class="px-2">
-    <div class="flex-1 items-stretch flex h-70px font-ibm">
-      <nav-bar-item>
-        <router-link to="/">
-          <img src="/images/nftmx-logo.png" alt="NFT mx" />
-        </router-link>
-      </nav-bar-item>
-    </div>
-    <div
-      class="top-14 left-0 w-auto items-stretch flex grow static border-b-0 overflow-visible shadow-none"
-    >
-      <div class="max-h-screen-menu overflow-visible flex items-center justify-end ml-auto">
-        <nav-bar-item v-if="walletAddress">
-          <div @click="toggleNotificationBar">
-            <font-awesome-icon :icon="['fas', 'bell']" class="text-lg text-white" />
-            <nftmx-badge :value="store.state.orderLogs.length" />
-          </div>
-        </nav-bar-item>
-        <nav-bar-item class="hidden lg:block">
-          <div>
-            <nftmx-button
-              to="/profile"
-              color="primary"
-              label="List NFT"
-              outline
-              class="h-6 w-37 font-ibm-bold transition text-white"
-            />
-          </div>
-        </nav-bar-item>
-        <nav-bar-item @click="toggleSidebar" class="hover:text-primary-900">
-          <nftmx-wallet-address
-            v-if="walletAddress"
-            class="text-sm font-ibm-bold pt-1 hidden sm:block"
-            :address="walletAddress"
-          />
-          <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5 ml-6"></div>
+  <div v-click-outside="onClickOutside">
+    <top-bar class="px-2">
+      <div class="flex-1 items-stretch flex h-70px font-ibm">
+        <nav-bar-item>
+          <router-link to="/">
+            <img src="/images/nftmx-logo.png" alt="NFT mx" />
+          </router-link>
         </nav-bar-item>
       </div>
-    </div>
-  </top-bar>
-  <sidebar v-if="store.state.app.sidebarOpened" v-click-outside="onClickOutside" />
-  <notifications-bar v-if="store.state.app.notificationOpened" v-click-outside="onClickOutside" />
+      <div
+        class="top-14 left-0 w-auto items-stretch flex grow static border-b-0 overflow-visible shadow-none"
+      >
+        <div class="max-h-screen-menu overflow-visible flex items-center justify-end ml-auto">
+          <nav-bar-item v-if="walletAddress">
+            <div @click="toggleNotificationBar">
+              <font-awesome-icon :icon="['fas', 'bell']" class="text-lg text-white" />
+              <nftmx-badge :value="store.state.orderLogs.length" />
+            </div>
+          </nav-bar-item>
+          <nav-bar-item class="hidden lg:block">
+            <div>
+              <nftmx-button
+                to="/profile"
+                color="primary"
+                label="List NFT"
+                outline
+                class="h-6 w-37 font-ibm-bold transition text-white"
+              />
+            </div>
+          </nav-bar-item>
+          <nav-bar-item @click="toggleSidebar" class="hover:text-primary-900">
+            <nftmx-wallet-address
+              v-if="walletAddress"
+              class="text-sm font-ibm-bold pt-1 hidden sm:block"
+              :address="walletAddress"
+            />
+            <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5 ml-6"></div>
+          </nav-bar-item>
+        </div>
+      </div>
+    </top-bar>
+    <sidebar
+      :class="[store.state.app.sidebarOpened ? '-translate-x-0' : 'translate-x-full', 'transition']"
+    />
+    <notifications-bar
+      :class="[store.state.app.notificationOpened ? '-translate-x-0' : 'translate-x-full', 'transition']"
+    />
+  </div>
 </template>
 
 <style scoped>
