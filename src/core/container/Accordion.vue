@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const props = defineProps({
     accordion: {
@@ -25,10 +25,16 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['handle-click'])
+const accordion = ref(null);
+const aHeight = ref(0);
 
 const handleClick = () => {
     emit('handle-click', props.accordion ? !props.modelValue : true)
 }
+
+onMounted(() => {
+    aHeight.value = accordion.value.scrollHeight;
+})
 
 </script>
 
@@ -55,7 +61,11 @@ const handleClick = () => {
                 />
             </div>
         </div>
-        <div v-if="modelValue">
+        <div
+            ref="accordion"
+            class="transition-all overflow-hidden"
+            :style="{ maxHeight: modelValue ? aHeight + 'px' : '0' }"
+        >
             <slot />
         </div>
     </div>

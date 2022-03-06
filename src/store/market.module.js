@@ -14,6 +14,7 @@ export const market = {
     actions: {
         // collect nfts from user wallet
         collectNftsFromWallet({ commit, rootState }, { walletAddress, page = 0 }) {
+            console.log(walletAddress)
             moralisService.getMyNFTs(walletAddress, 6, 6 * page).then(async nftData => {
                 const collectedNFTs = await JSON.parse(JSON.stringify(nftData));
                 const nfts = collectedNFTs.result.map(async nft => {
