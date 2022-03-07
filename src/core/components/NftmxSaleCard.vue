@@ -37,8 +37,12 @@ const order = {
     closed: props.data.closed,
 }
 const store = useStore();
-const vote = ref(order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));
-const voteCount = ref(order.votes.length);
+const vote = ref(false);
+const voteCount = ref(0);
+if (order.votes) {
+    vote.value = ref(order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));
+    voteCount.value = ref(order.votes.length);
+}
 const nft = ref({});
 moralisService.getNft(order.tokenAddress, order.tokenId).then(res => {
     nft.value = res;

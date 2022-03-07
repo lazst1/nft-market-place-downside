@@ -5,17 +5,24 @@ import CheckboxCell from '@/core/components/CheckboxCell.vue';
 import TextCompression from '@/core/components/TextCompression.vue';
 import { useStore } from 'vuex';
 import NftmxCancelModal from '@/core/components/NftmxCancelModal.vue';
+import marketService from '../../../core/services/market.service';
 
 const props = defineProps({
     order: Object
 });
 
+console.log(props.order)
 const store = useStore();
 const item = props.order.nft;
 const option = ref(false)
 const metadata = item.metadata ? JSON.parse(item.metadata) : {};
 const openCancelModal = ref(false);
-
+const vote = ref(false);
+const voteCount = ref(0);
+if (props.order.votes) {
+    vote.value = ref(order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));
+    voteCount.value = ref(order.votes.length);
+}
 function onClickOutside() {
     option.value = false
 }
@@ -29,13 +36,24 @@ const openCancel = () => {
 }
 
 function cancelOrder() {
-    if(props.order.orderStatus === '0') {
+    if (props.order.orderStatus === '0') {
         store.dispatch('market/cancelOrderBySeller', props.order.orderId)
     } else if (props.order.orderStatus === '2' && props.order.buyerAddress === store.state.user.walletAddress) {
         store.dispatch('market/cancelOrderByBuyer', props.order.orderId)
     }
 }
-
+const handleVote = () => {
+    vote.value = !vote.value;
+    if (vote.value) {
+        marketService.vote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
+            voteCount.value++;
+        });
+    } else {
+        marketService.cancelVote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
+            voteCount.value--;
+        });
+    }
+}
 </script>
 
 <template>
@@ -97,11 +115,11 @@ function cancelOrder() {
                     </checkbox-cell>
                 </div>
                 <div class="text-xs text-tertiary-500 flex items-end font-ibm-medium">
-                    <span style="line-height: 0.75" class="pr-2">0</span>
+                    <span style="line-height: 0.75" class="pr-2">{{ voteCount }}</span>
                     <font-awesome-icon
-                        @click.prevent
                         :icon="['fas', 'thumbs-up']"
-                        class="text-white hover:text-primary-900"
+                        :class="[vote ? 'text-primary-900' : 'text-white', 'hover:text-primary-900 cursor-pointer']"
+                        @click="handleVote()"
                     />
                 </div>
             </div>
