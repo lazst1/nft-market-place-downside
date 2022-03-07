@@ -138,6 +138,18 @@ export const market = {
                     }
                 }
             })
+        },
+        // fetch my favorite orders
+        myFavoriteOrders({ commit, rootState }, userId) {
+            marketService.getMyFavoriteOrders(userId).then(async orders => {
+                const ordersWithNfts = orders.map(async order => {
+                    const nft = await moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res);
+                    order.nft = nft;
+                    return order;
+                });
+
+                rootState.myOrders.favorite = await Promise.all(ordersWithNfts).then(res => res);
+            })
         }
     },
     getters: {

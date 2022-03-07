@@ -68,6 +68,10 @@ class MatketService {
     getMyOrdersUnderDownsideProtection(walletAddress, page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders/mine/downside?walletAddress=${walletAddress}&page=${page}&limit=${limit}`).then(res => res.data);
     }
+
+    getMyFavoriteOrders(userId) {
+        return http.get(`orders/mine/favorite?userId=${userId}`).then(res => res.data);
+    }
 }
 
 export default new MatketService();

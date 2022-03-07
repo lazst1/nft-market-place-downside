@@ -11,7 +11,6 @@ const props = defineProps({
     order: Object
 });
 
-console.log(props.order)
 const store = useStore();
 const item = props.order.nft;
 const option = ref(false)

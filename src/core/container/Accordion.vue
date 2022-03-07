@@ -37,7 +37,6 @@ const handleClick = () => {
 }
 
 onMounted(() => {
-    console.log(anim.value.scrollHeight)
     aHeight.value = anim.value.scrollHeight;
 })
 

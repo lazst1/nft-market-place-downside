@@ -21,8 +21,9 @@ const myActiveOrders = computed(() => store.state.myOrders.onSale);
 const myOrdersUnderDownsideAll = computed(() => store.state.myOrders.downside.all);
 const myOrdersUnderDownsideBought = computed(() => store.state.myOrders.downside.bought);
 const myOrdersUnderDownsideSold = computed(() => store.state.myOrders.downside.sold);
+const myFavoriteOrders = computed(() => store.state.myOrders.favorite);
 const selectedGroup = ref({ key: 'COLLECTED', name: 'Collected', count: store.state.collectedNFTs.total });
-const selectedOrders = ref();
+const selectedOrders = ref([]);
 
 const selectGroup = (value) => {
     switch (value) {
@@ -31,14 +32,16 @@ const selectGroup = (value) => {
             break;
         case 'ON_SALE':
             selectedGroup.value = { key: 'ON_SALE', name: 'On Sale', count: store.state.myOrders.onSale.meta.totalItems };
-            selectedOrders.value = myActiveOrders.value;
+            selectedOrders.value = myActiveOrders.value.items;
             break;
         case 'DOWNSIDE':
             selectedGroup.value = { key: 'DOWNSIDE', name: 'Downside Protection', count: store.state.myOrders.downside.all.meta.totalItems };
-            selectedOrders.value = myOrdersUnderDownsideAll.value;
+            selectedOrders.value = myOrdersUnderDownsideAll.value.items;
             break;
         case 'FAVORITE':
-            selectedGroup.value = { key: 'FAVORITE', name: 'Favorite', count: 0 };
+            selectedGroup.value = { key: 'FAVORITE', name: 'Favorite', count: store.state.myOrders.favorite.length };
+            console.log(myFavoriteOrders.value)
+            selectedOrders.value = myFavoriteOrders.value;
             break;
         case 'HIDDEN':
             selectedGroup.value = { key: 'HIDDEN', name: 'Hidden', count: 0 };
@@ -57,13 +60,13 @@ const selectGroup = (value) => {
 const selectTab = (value) => {
     switch (value) {
         case 'ALL':
-            selectedOrders.value = myOrdersUnderDownsideAll.value;
+            selectedOrders.value = myOrdersUnderDownsideAll.value.items;
             break;
         case 'BOUGHT':
-            selectedOrders.value = myOrdersUnderDownsideBought.value;
+            selectedOrders.value = myOrdersUnderDownsideBought.value.items;
             break;
         case 'SOLD':
-            selectedOrders.value = myOrdersUnderDownsideSold.value;
+            selectedOrders.value = myOrdersUnderDownsideSold.value.items;
             break;
         default:
             break;
@@ -104,11 +107,11 @@ watchEffect(() => {
             ></nft-card>
         </cards-container>
         <cards-container
-            v-if="selectedGroup.key === 'ON_SALE' || selectedGroup.key === 'DOWNSIDE'"
+            v-if="selectedGroup.key === 'ON_SALE' || selectedGroup.key === 'DOWNSIDE' || selectedGroup.key === 'FAVORITE'"
             class="mt-12 2xl:mt-11 mb-22 place-items-center"
         >
             <order-card
-                v-for="(order, index) in selectedOrders ? selectedOrders.items : []"
+                v-for="(order, index) in selectedOrders"
                 :key="index"
                 :order="order"
                 class="bg-tertiary-800"

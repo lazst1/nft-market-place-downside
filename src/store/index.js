@@ -38,7 +38,8 @@ const initialMyOrders = {
         all: initialOrders,
         bought: initialOrders,
         sold: initialOrders
-    }
+    },
+    favorite: []
 }
 
 export default createStore({
