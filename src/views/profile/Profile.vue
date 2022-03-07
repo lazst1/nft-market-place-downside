@@ -22,6 +22,7 @@ const myOrdersUnderDownsideAll = computed(() => store.state.myOrders.downside.al
 const myOrdersUnderDownsideBought = computed(() => store.state.myOrders.downside.bought);
 const myOrdersUnderDownsideSold = computed(() => store.state.myOrders.downside.sold);
 const myFavoriteOrders = computed(() => store.state.myOrders.favorite);
+const myHiddenOrders = computed(() => store.state.myOrders.hidden);
 const selectedGroup = ref({ key: 'COLLECTED', name: 'Collected', count: store.state.collectedNFTs.total });
 const selectedOrders = ref([]);
 
@@ -44,7 +45,8 @@ const selectGroup = (value) => {
             selectedOrders.value = myFavoriteOrders.value;
             break;
         case 'HIDDEN':
-            selectedGroup.value = { key: 'HIDDEN', name: 'Hidden', count: 0 };
+            selectedGroup.value = { key: 'HIDDEN', name: 'Hidden', count: store.state.myOrders.hidden.length };
+            selectedOrders.value = myHiddenOrders.value;
             break;
         case 'ACTIVITY':
             selectedGroup.value = { key: 'ACTIVITY', name: 'Activity', count: 0 };
@@ -107,7 +109,7 @@ watchEffect(() => {
             ></nft-card>
         </cards-container>
         <cards-container
-            v-if="selectedGroup.key === 'ON_SALE' || selectedGroup.key === 'DOWNSIDE' || selectedGroup.key === 'FAVORITE'"
+            v-if="selectedGroup.key === 'ON_SALE' || selectedGroup.key === 'DOWNSIDE' || selectedGroup.key === 'FAVORITE' || selectedGroup.key === 'HIDDEN'"
             class="mt-12 2xl:mt-11 mb-22 place-items-center"
         >
             <order-card

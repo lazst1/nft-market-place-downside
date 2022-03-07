@@ -49,6 +49,12 @@ const handleVote = () => {
         });
     }
 }
+const hideNFT = () => {
+    marketService.hideToken(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
+        console.log('hideNFT res: ', res);
+    })
+}
+
 </script>
 
 <template>
@@ -93,7 +99,10 @@ const handleVote = () => {
                             <div
                                 class="text-white hover:text-primary-700 cursor-pointer"
                             >Make profile picture</div>
-                            <div class="text-white hover:text-primary-700 cursor-pointer">Hide</div>
+                            <div
+                                class="text-white hover:text-primary-700 cursor-pointer"
+                                @click="hideNFT()"
+                            >Hide</div>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Unbundle</div>
                         </div>
                     </div>

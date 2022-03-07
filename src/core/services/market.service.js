@@ -14,7 +14,7 @@ class MatketService {
     getOrder(id) {
         return http.get(`orders/${id}`).then(res => res.data);
     }
-    
+
     // ledger
     soldItems(page = defaultPagination.page, limit = defaultPagination.limit) {
         return http.get(`orders/sold?page=${page}&limit=${limit}`).then(res => res.data);
@@ -36,7 +36,7 @@ class MatketService {
 
     // vote
     vote(tokenAddress, tokenId, userId) {
-        return http.post(`votes`, {tokenAddress, tokenId, userId}).then(res => res.data);
+        return http.post(`votes`, { tokenAddress, tokenId, userId }).then(res => res.data);
     }
 
     cancelVote(tokenAddress, tokenId, userId) {
@@ -53,7 +53,7 @@ class MatketService {
     }
 
     createHashTags(hashtagNames, tokenAddress, tokenId, tokenName) {
-        return http.post('tokens-hashtags', {hashtagNames, tokenAddress, tokenId, tokenName}).then(res => res.data);
+        return http.post('tokens-hashtags', { hashtagNames, tokenAddress, tokenId, tokenName }).then(res => res.data);
     }
 
     getHashtagNames() {
@@ -72,6 +72,19 @@ class MatketService {
     getMyFavoriteOrders(userId) {
         return http.get(`orders/mine/favorite?userId=${userId}`).then(res => res.data);
     }
+
+    getMyHiddenOrders(userId) {
+        return http.get(`orders/mine/hidden?userId=${userId}`).then(res => res.data);
+    }
+    
+    hideToken(tokenAddress, tokenId, userId) {
+        return http.post(`hidden`, { tokenAddress, tokenId, userId }).then(res => res.data);
+    }
+
+    unhideToken(tokenAddress, tokenId, userId) {
+        return http.delete(`hidden?tokenAddress=${tokenAddress}&tokenId=${tokenId}&userId=${userId}`).then(res => res.data)
+    }
+
 }
 
 export default new MatketService();

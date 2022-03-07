@@ -33,6 +33,7 @@ export const auth = {
                         dispatch('market/myActiveOrders', { walletAddress }, { root: true });
                         dispatch('market/myOrdersUnderDownsideProtection', walletAddress, { root: true });
                         dispatch('market/myFavoriteOrders', user.id, { root: true });
+                        dispatch('market/myHiddenOrders', user.id, { root: true });
 
                         return user;
                     },

@@ -150,6 +150,17 @@ export const market = {
 
                 rootState.myOrders.favorite = await Promise.all(ordersWithNfts).then(res => res);
             })
+        },
+        myHiddenOrders({ commit, rootState }, userId) {
+            marketService.getMyHiddenOrders(userId).then(async orders => {
+                const ordersWithNfts = orders.map(async order => {
+                    const nft = await moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res);
+                    order.nft = nft;
+                    return order;
+                });
+
+                rootState.myOrders.hidden = await Promise.all(ordersWithNfts).then(res => res);
+            })
         }
     },
     getters: {
