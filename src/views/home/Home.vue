@@ -13,9 +13,6 @@ import SyndicationCarousel from '../landing/components/SyndicationCarousel.vue';
 import Analyzer from './Analyzer.vue';
 
 const store = useStore();
-if (store.getters['auth/getWalletAddress']) {
-    store.dispatch("market/getSaleOrders");
-}
 
 </script>
 

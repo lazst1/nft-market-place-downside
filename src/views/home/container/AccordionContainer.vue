@@ -29,11 +29,7 @@ const handleClick = (value) => {
             </div>
         </template>
         <div class="pt-2">
-            <div
-                class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
-            >
-                <slot name="content" />
-            </div>
+            <slot name="content" />
         </div>
         <div v-if="more" class="text-sm text-right px-6 text-primary-900 font-ibm-bold mt-3">
             <span class="cursor-pointer">See More</span>

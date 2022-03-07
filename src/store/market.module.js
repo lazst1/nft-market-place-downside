@@ -37,10 +37,11 @@ export const market = {
         },
         // fetch active orders on sale in the martketplace.
         getSaleOrders({ commit, rootState }, walletAddress) {
-            marketService.getSaleOrders(walletAddress).then(orders => {
-                rootState.orders = orders;
-                console.log(orders);
-            });
+            if (walletAddress) {
+                marketService.getSaleOrders(walletAddress).then(orders => {
+                    rootState.orders = orders;
+                });
+            }
         },
         getBnbPrice({ commit, rootState }) {
             marketService.getUSDFromToken(TokenType.BNB).then(res => {

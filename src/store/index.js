@@ -16,7 +16,7 @@ const initialUser = {
 const initialCollectedNFTs = {
     page: 0,
     page_size: 0,
-    status: "SYNCED",
+    status: "",
     total: 0,
     result: []
 };
@@ -24,7 +24,7 @@ const initialCollectedNFTs = {
 const initialOrders = {
     items: [],
     meta: {
-        currentPage: 1,
+        currentPage: 0,
         itemCount: 0,
         itemsPerPage: 20,
         totalItems: 0,

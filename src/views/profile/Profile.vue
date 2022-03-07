@@ -85,7 +85,11 @@ watchEffect(() => {
         <choose-collection />
         <nftmx-divider class="mt-4.75 mb-3"></nftmx-divider>
         <div class="2xl:flex justify-between text-white font-ibm-semi-bold text-sm pt-0.5">
-            <choose-nft-group :selectedGroup="selectedGroup" @select-group="selectGroup" @select-tab="selectTab" />
+            <choose-nft-group
+                :selectedGroup="selectedGroup"
+                @select-group="selectGroup"
+                @select-tab="selectTab"
+            />
             <nftmx-search-input class="bg-tertiary-800 mt-3.25 2xl:my-0.75 sm:ml-4" />
         </div>
         <cards-container
@@ -110,6 +114,7 @@ watchEffect(() => {
                 class="bg-tertiary-800"
             ></order-card>
         </cards-container>
+        <div v-if="!collectedNFTs.status" class="h-96 font-ibm-bold text-tertiary-500 text-lg flex items-center justify-center">Loading...</div>
     </body-container>
     <nftmx-footer />
 </template>

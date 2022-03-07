@@ -22,10 +22,14 @@ const props = defineProps({
         type: Boolean,
         default: true
     },
+    animation: {
+        type: Boolean,
+        default: true
+    }
 })
 
 const emit = defineEmits(['handle-click'])
-const accordion = ref(null);
+const anim = ref(null);
 const aHeight = ref(0);
 
 const handleClick = () => {
@@ -33,7 +37,8 @@ const handleClick = () => {
 }
 
 onMounted(() => {
-    aHeight.value = accordion.value.scrollHeight;
+    console.log(anim.value.scrollHeight)
+    aHeight.value = anim.value.scrollHeight;
 })
 
 </script>
@@ -62,11 +67,12 @@ onMounted(() => {
             </div>
         </div>
         <div
-            ref="accordion"
-            class="transition-all overflow-hidden"
-            :style="{ maxHeight: modelValue ? aHeight + 'px' : '0' }"
+            :class="[animation ? 'transition-all overflow-hidden' : '']"
+            :style="{ maxHeight: animation ? modelValue ? aHeight + 'px' : '0' : '' }"
         >
-            <slot />
+            <div ref="anim" v-if="!animation ? modelValue : true">
+                <slot />
+            </div>
         </div>
     </div>
 </template>
