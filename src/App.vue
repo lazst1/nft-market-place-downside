@@ -7,15 +7,15 @@ import { useStore } from 'vuex';
 
 const store = useStore();
 
-// window.ethereum.on('accountsChanged', function (accounts) {
-//   store.dispatch("auth/login", accounts[0]);
-// })
 
 if (typeof window.ethereum !== 'undefined') {
+  window.ethereum.on('accountsChanged', function (accounts) {
+    store.dispatch("auth/login", accounts[0]);
+  })
   ethereum
     .request({ method: 'eth_accounts' })
     .then(accounts => {
-      store.dispatch("auth/login", accounts[0].toLowerCase());
+      store.dispatch("auth/login", accounts[0]);
     })
 }
 store.commit('app/UPDATE_WINDOW_WIDTH', window.innerWidth);

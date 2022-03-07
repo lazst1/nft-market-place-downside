@@ -31,18 +31,22 @@ const router = useRouter();
 const toast = useToast();
 
 const connect = async () => {
-    ethereum
-        .request({ method: 'eth_requestAccounts' })
-        .then(handleLogin)
-        .catch((err) => {
-            if (err.code === 4001) {
-                // EIP-1193 userRejectedRequest error
-                // If this happens, the user rejected the connection request.
-                toast.error('Please connect to MetaMask')
-            } else {
-                toast.error('Something went wrong')
-            }
-        });
+    if (typeof window.ethereum !== 'undefined') {
+        ethereum
+            .request({ method: 'eth_requestAccounts' })
+            .then(handleLogin)
+            .catch((err) => {
+                if (err.code === 4001) {
+                    // EIP-1193 userRejectedRequest error
+                    // If this happens, the user rejected the connection request.
+                    toast.error('Please connect to MetaMask')
+                } else {
+                    toast.error('Something went wrong')
+                }
+            });
+    } else {
+        toast.error('Please install MetaMask')
+    }
 }
 
 const handleLogin = (accounts) => {

@@ -13,6 +13,7 @@ import NftmxTextarea from '@/core/components/NftmxTextarea.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import { baseURL, defaultUser } from '@/core/config'
 import { useToast } from "vue-toastification";
+import { emailValidate } from '../../core/utils';
 
 const store = useStore();
 const name = ref();
@@ -26,8 +27,13 @@ const instagram = ref();
 const profileImgPreview = ref();
 const profileBannerPreview = ref();
 const toast = useToast();
+const isEmail = ref(true);
 
 function save() {
+    if (!isEmail.value) {
+        toast.error('Email is not valid');
+        return;
+    }
     const user = new FormData();
     user.append('name', name.value);
     if (profileImg.value) {
@@ -56,6 +62,16 @@ watchEffect(() => {
         instagram.value = user.instagram;
         profileImgPreview.value = profileImg.value ? URL.createObjectURL(profileImg.value[0]) : user.profile_img ? baseURL + user.profile_img : '';
         profileBannerPreview.value = profileBanner.value ? URL.createObjectURL(profileBanner.value[0]) : user.profile_banner ? baseURL + user.profile_banner : '';
+    }
+})
+
+watchEffect(() => {
+    if (!email.value) return;
+
+    if (emailValidate(email.value)) {
+        isEmail.value = true;
+    } else {
+        isEmail.value = false
     }
 })
 
@@ -154,8 +170,12 @@ watchEffect(() => {
                     <div class="font-ibm-bold text-lg pt-3.5">Email Address</div>
                 </template>
                 <template v-slot:value>
-                    <div class="font-ibm text-sm text-tertiary-400 pt-3 md:pt-0">
+                    <div class="relative font-ibm text-sm text-tertiary-400 pt-3 md:pt-0">
                         <nftmx-input v-model="email" />
+                        <div
+                            v-if="!isEmail"
+                            class="absolute font-ibm text-xxs text-red-900 mt-1"
+                        >Please enter valid email</div>
                     </div>
                 </template>
             </nftmx-sell-grid>

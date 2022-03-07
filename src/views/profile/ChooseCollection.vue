@@ -21,7 +21,7 @@ const selected = ref('My Collection');
 <template>
     <div
         v-if="store.state.app.windowWidth > themeConfig.sm"
-        class="flex justify-between text-white font-ibm-semi-bold text-sm pb-0.5 md:mt-0.5 gap-x-7"
+        class="flex justify-between text-white font-ibm-semi-bold text-sm pb-px md:mt-4 md:mb-9 gap-x-7"
     >
         <div class="flex items-center">
             <group-item
@@ -30,11 +30,6 @@ const selected = ref('My Collection');
             >My Collection</group-item>
             <group-item :active="selected === 'Ledger'" @click="selected = 'Ledger'">Ledger</group-item>
         </div>
-        <nftmx-button
-            color="primary"
-            label="Import NFT"
-            class="font-press h-12.5 text-sm w-68.5"
-        />
     </div>
     <accordion
         v-if="store.state.app.windowWidth <= themeConfig.sm"

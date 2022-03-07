@@ -60,3 +60,8 @@ export function formatOrderStatus(status) {
 export function toUpercaseFirstLetterOfString(sentence) {
     return sentence.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 }
+
+export function emailValidate(email) {
+    let regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    return regex.test(email);
+}
