@@ -12,11 +12,13 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex';
 import BrowseSearch from './BrowseSearch.vue';
 import marketService from '../../core/services/market.service';
+import { computed } from 'vue';
 
 const store = useStore();
 if (store.getters['auth/getWalletAddress']) {
     store.dispatch("market/getSaleOrders");
 }
+const orders = computed(() => store.state.orders);
 
 </script>
 
@@ -45,7 +47,7 @@ if (store.getters['auth/getWalletAddress']) {
             class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5 min-h-item"
         >
             <nftmx-sale-card
-                v-for="(order, index) in store.state.orders.items"
+                v-for="(order, index) in orders.items"
                 :data="order"
                 :key="index"
             ></nftmx-sale-card>

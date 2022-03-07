@@ -17,12 +17,8 @@ const item = props.order.nft;
 const option = ref(false)
 const metadata = item.metadata ? JSON.parse(item.metadata) : {};
 const openCancelModal = ref(false);
-const vote = ref(false);
-const voteCount = ref(0);
-if (props.order.votes) {
-    vote.value = ref(order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));
-    voteCount.value = ref(order.votes.length);
-}
+const vote = ref(props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));
+const voteCount = ref(props.order.votes.length);
 function onClickOutside() {
     option.value = false
 }

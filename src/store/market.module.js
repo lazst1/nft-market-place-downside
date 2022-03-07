@@ -39,6 +39,7 @@ export const market = {
         getSaleOrders({ commit, rootState }, walletAddress) {
             marketService.getSaleOrders(walletAddress).then(orders => {
                 rootState.orders = orders;
+                console.log(orders);
             });
         },
         getBnbPrice({ commit, rootState }) {

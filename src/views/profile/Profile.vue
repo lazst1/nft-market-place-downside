@@ -38,7 +38,7 @@ const selectGroup = (value) => {
             selectedOrders.value = myOrdersUnderDownsideAll.value;
             break;
         case 'FAVORITE':
-            selectedGroup.value = { key: 'FAVORITE', name: 'Favorited', count: 0 };
+            selectedGroup.value = { key: 'FAVORITE', name: 'Favorite', count: 0 };
             break;
         case 'HIDDEN':
             selectedGroup.value = { key: 'HIDDEN', name: 'Hidden', count: 0 };

@@ -56,7 +56,7 @@ const selectTab = (value) => {
                 <span class="font-ibm-light">{{ store.state.myOrders.downside.all.meta.totalItems }}</span>
             </group-item>
             <group-item :active="computedGroup.key === 'FAVORITE'" @click="selectGroup('FAVORITE')">
-                Favorited
+                Favorite
                 <span class="font-ibm-light">{{ 0 }}</span>
             </group-item>
             <group-item :active="computedGroup.key === 'HIDDEN'" @click="selectGroup('HIDDEN')">
@@ -124,7 +124,7 @@ const selectTab = (value) => {
                 <span class="font-ibm-light">{{ store.state.myOrders.downside.all.meta.totalItems }}</span>
             </sub-item>
             <sub-item :active="computedGroup.key === 'FAVORITE'" @click="selectGroup('FAVORITE')">
-                Favorited
+                Favorite
                 <span class="font-ibm-light">{{ 0 }}</span>
             </sub-item>
             <sub-item :active="computedGroup.key === 'HIDDEN'" @click="selectGroup('HIDDEN')">

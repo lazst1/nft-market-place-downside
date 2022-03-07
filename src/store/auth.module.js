@@ -14,7 +14,6 @@ export const auth = {
     },
     actions: {
         async login({ commit, dispatch, rootState }, walletAddress) {
-            console.log('login === ', walletAddress)
             if (walletAddress) {
                 walletAddress = walletAddress.toLowerCase();
                 rootState.marketContract = new rootState.web3.eth.Contract(
