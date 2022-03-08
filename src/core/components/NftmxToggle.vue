@@ -5,8 +5,7 @@
         @click="toggle()"
     >
         <div
-            class="bg-black w-5 h-full shadow-md transform duration-300"
-            :class="{ 'translate-x-6': modelValue, 'bg-primary-900': modelValue }"
+            :class="[modelValue?'bg-primary-900 translate-x-6':'bg-black', 'w-5 h-full shadow-md transform duration-300']"
         ></div>
     </div>
 </template>

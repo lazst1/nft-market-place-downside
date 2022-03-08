@@ -8,8 +8,8 @@ import SidebarFooter from './SidebarFooter.vue';
 import SidebarContainer from '@/core/container/SidebarContainer.vue';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
-import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 import { useToast } from 'vue-toastification';
+import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
 
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress']);
@@ -23,22 +23,27 @@ const onCopy = (e) => {
 const onError = (e) => {
     // alert('Failed to copy texts')
 }
+function toggleSidebar() {
+    store.commit('app/TOGGLE_SIDEBAR', !store.state.app.sidebarOpened);
+    store.commit('app/TOGGLE_NOTIFICATION_BAR', false);
+}
 </script>
 
 <template>
     <sidebar-container>
-        <div class="h-17 flex items-center cursor-pointer justify-between">
+        <div class="h-17 flex items-center cursor-pointer justify-between" @click="toggleSidebar">
             <div>
-                <nftmx-wallet-address
+                <nftmx-wallet-address-pop
                     v-if="walletAddress"
                     class="text-base font-ibm-bold pt-1 hover:text-primary-400 transition"
                     :address="walletAddress"
-                    v-clipboard:copy="walletAddress"
-                    v-clipboard:success="onCopy"
-                    v-clipboard:error="onError"
                 />
             </div>
-            <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5 ml-6"></div>
+            <div class="ml-6 flex flex-col gap-1 items-center">
+                <div class="w-2 h-2 bg-primary-900 rounded" />
+                <div class="w-1.5 h-1.5 bg-primary-900 rounded" />
+                <div class="w-1 h-1 bg-primary-900 rounded" />
+            </div>
         </div>
         <sidebar-router to="/profile">Profile</sidebar-router>
         <sidebar-router to="/">Create an NFT</sidebar-router>

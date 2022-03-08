@@ -68,7 +68,11 @@ function toggleNotificationBar() {
               class="text-sm font-ibm-bold pt-1 hidden sm:block"
               :address="walletAddress"
             />
-            <div class="w-2.5 h-2.5 bg-primary-900 rounded-md mt-0.5 ml-6"></div>
+            <div class="ml-6 flex flex-col gap-1 items-center">
+              <div class="w-2 h-2 bg-primary-900 rounded" />
+              <div class="w-1.5 h-1.5 bg-primary-900 rounded" />
+              <div class="w-1 h-1 bg-primary-900 rounded" />
+            </div>
           </nav-bar-item>
         </div>
       </div>

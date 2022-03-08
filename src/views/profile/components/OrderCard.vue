@@ -11,6 +11,7 @@ const props = defineProps({
     order: Object
 });
 
+console.log(props.order);
 const store = useStore();
 const item = props.order.nft;
 const option = ref(false)
@@ -51,6 +52,11 @@ const handleVote = () => {
 }
 const hideNFT = () => {
     marketService.hideToken(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
+        console.log('hideNFT res: ', res);
+    })
+}
+const unhideNFT = () => {
+    marketService.unhideToken(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
         console.log('hideNFT res: ', res);
     })
 }
@@ -100,9 +106,15 @@ const hideNFT = () => {
                                 class="text-white hover:text-primary-700 cursor-pointer"
                             >Make profile picture</div>
                             <div
+                                v-if="!order.hidden"
                                 class="text-white hover:text-primary-700 cursor-pointer"
                                 @click="hideNFT()"
                             >Hide</div>
+                            <div
+                                v-if="order.hidden"
+                                class="text-white hover:text-primary-700 cursor-pointer"
+                                @click="unhideNFT()"
+                            >Unhide</div>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Unbundle</div>
                         </div>
                     </div>
