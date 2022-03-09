@@ -10,7 +10,6 @@ const initialUser = {
     token: '',
     userId: '',
     userType: 'USER',
-    allNfts: {},
 }
 
 const initialCollectedNFTs = {
@@ -52,12 +51,9 @@ export default createStore({
     state: {
         web3: new Web3(Web3.givenProvider),
         marketContract: null,
-        allNfts: {},
         user: initialUser,
         orders: initialOrders,
         orderLogs: [],
-        collectedNFTs: initialCollectedNFTs,
-        myOrders: initialMyOrders,
         bnbPrice: 0
     },
     mutations: {},
