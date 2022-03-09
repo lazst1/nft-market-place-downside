@@ -90,7 +90,7 @@ export const market = {
         },
         // fetch order logs ( notification icon on top bar )
         orderLogs({ commit, rootState }) {
-            marketService.getOrderLogs(page = 1, limit = 20).then(res => {
+            marketService.getOrderLogs(1, 20).then(res => {
                 rootState.orderLogs = res.items;
             });
         },
