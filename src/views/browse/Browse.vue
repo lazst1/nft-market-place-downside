@@ -12,11 +12,21 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex';
 import BrowseSearch from './BrowseSearch.vue';
 import marketService from '../../core/services/market.service';
-import { computed } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 
 const store = useStore();
 
-const orders = computed(() => store.state.orders);
+const orders = ref([]);
+const loading = ref(true);
+
+watchEffect(() => {
+    if (store.state.user.walletAddress) {
+        marketService.getSaleOrders(store.state.user.walletAddress).then(res => {
+            loading.value = false;
+            orders.value = res.items;
+        })
+    }
+})
 
 </script>
 
@@ -44,16 +54,20 @@ const orders = computed(() => store.state.orders);
         <div
             class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5"
         >
-            <nftmx-sale-card v-for="(order, index) in orders.items" :data="order" :key="index"></nftmx-sale-card>
+            <nftmx-sale-card v-for="(order, index) in orders" :data="order" :key="index"></nftmx-sale-card>
             <!-- <nftmx-sale-card v-for="index in 2" :key="index"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{syndication:false}"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{auction:true}"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{bought:true}"></nftmx-sale-card>-->
         </div>
         <div
-            v-if="!orders.meta.currentPage"
+            v-if="loading"
             class="h-96 flex justify-center items-center font-ibm-bold text-tertiary-500 text-lg"
         >Loading...</div>
+        <div
+            v-if="!loading && orders.length === 0"
+            class="h-96 flex justify-center items-center font-ibm-bold text-tertiary-500 text-lg"
+        >No NFTs found</div>
     </body-container>
     <nftmx-footer />
 </template>
