@@ -143,3 +143,51 @@ export const syndications = [
 export const assetDetailTabs = [
     'Details', 'About the creator', 'Chain info', 'Downside Protection'
 ]
+
+export const popularSyndications = [
+    {
+        name: 'Mutant Ape Yacht Club',
+        rate: 31.28,
+        price: 50000
+    },
+    {
+        name: 'Mutant Ape Yacht Club',
+        rate: -31.28,
+        price: 50000
+    },
+    {
+        name: 'Mutant Ape Yacht Club',
+        rate: 31.28,
+        price: 50000
+    },
+    {
+        name: 'Mutant Ape Yacht Club',
+        rate: 31.28,
+        price: 50000
+    },
+    {
+        name: 'Mutant Ape Yacht Club',
+        rate: -31.28,
+        price: 50000
+    },
+    {
+        name: 'Mutant Ape Yacht Club',
+        rate: -31.28,
+        price: 50000
+    },
+    {
+        name: 'Mutant Ape Yacht Club',
+        rate: 31.28,
+        price: 50000
+    },
+    {
+        name: 'Mutant Ape Yacht Club',
+        rate: 31.28,
+        price: 50000
+    }
+]
+
+export const defaultPagination = {
+    page: 1,
+    limit: 10
+}

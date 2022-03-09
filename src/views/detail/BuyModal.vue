@@ -12,7 +12,7 @@ import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
 import { exchangeRate, TokenType } from '@/core/config';
 import { roundTo } from '@/core/utils';
 import marketService from '@/core/services/market.service';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
     order: Object,
@@ -22,14 +22,17 @@ const props = defineProps({
         type: Boolean,
         default: true
     },
-    orderId: String,
-    tokenPrice: String
 })
-
 const store = useStore();
+const fundError = ref(false);
+const tokenPrice = computed(() => roundTo(parseInt(props.order.tokenPrice) / exchangeRate))
 
-function buyOrder(params) {
-    store.dispatch('market/buyFixedPayOrder', { orderId: parseInt(props.orderId), tokenPrice: props.tokenPrice });
+function buyOrder() {
+    if (tokenPrice.value > props.balance) {
+        fundError.value = true;
+        return;
+    }
+    store.dispatch('market/buyFixedPayOrder', { orderId: parseInt(props.order.orderId), tokenPrice: props.order.tokenPrice });
 }
 
 const bnbPrice = ref(0);
@@ -41,8 +44,8 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
 
 <template>
     <nftmx-modal big>
-        <div class="text-center relative -top-2 md:w-asset-img">
-            <div class="font-press text-2xl">Buy</div>
+        <div class="text-center relative -top-2">
+            <div class="font-press text-xl md:text-2xl">Buy</div>
             <div class="font-ibm-semi-bold text-sm items-center py-4 flex justify-center">
                 Balance:&nbsp;
                 <nftmx-price-common :price="roundTo(balance * bnbPrice)" />
@@ -54,65 +57,63 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                 </span>
             </div>
         </div>
-        <div class="px-4 md:px-16 pb-10">
-            <table class="w-full">
-                <thead class="text-tertiary-400 font-ibm-light text-xs border-b border-black">
-                    <th class="py-6 px-5 text-left">Items</th>
-                    <th class="text-right">Subtotal</th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    <tr :key="index" class="border-b border-black">
-                        <td class="p-4 text-left flex">
-                            <div class="bg-[url('@/assets/test.jpg')] w-13 h-13"></div>
-                            <div class="pt-0.5 px-4">
-                                <div class="text-primary-900 font-ibm text-xs leading-6">Kyle White</div>
-                                <div class="font-ibm-medium text-sm">{{ nft.name }}</div>
-                            </div>
-                        </td>
-                        <td class="text-right">
-                            <div class="font-ibm text-xs leading-6 flex justify-end">
-                                <nftmx-price-common
-                                    :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)"
-                                />
-                            </div>
-                            <div class="font-ibm text-xxs text-tertiary-400 leading-6">
-                                (
-                                <span class="font-sans">Ξ</span>
-                                {{ roundTo(parseInt(order.tokenPrice) / exchangeRate) }})
-                            </div>
-                        </td>
-                        <td class="text-center items-start">
-                            <icon
-                                :path="mdiClose"
-                                :size="16"
-                                class="cursor-pointer relative -top-3"
-                            />
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot class="text-tertiary-400 font-ibm-light text-xs">
-                    <th class="py-6 px-5 text-left">Total</th>
-                    <th class="text-right">
-                        <div class="font-ibm text-sm text-primary-900 leading-10 flex justify-end">
-                            <nftmx-price-common
-                                :price="roundTo(parseInt(order.tokenPrice) / exchangeRate * bnbPrice)"
-                            />
+        <div class="px-4 md:px-16 pb-10 font-ibm-medium">
+            <div
+                class="w-full md:grid md:grid-cols-8 border-b border-black text-tertiary-400 text-xxs"
+            >
+                <div class="col-span-3 flex md:block mt-6.5 mb-5.75 md:mt-0 md:mb-0">
+                    <div
+                        class="md:border-b border-black h-17 flex md:items-center w-25 md:w-auto"
+                    >Items</div>
+                    <div class="text-left flex md:h-21.75 md:items-center">
+                        <div class="bg-[url('@/assets/test.jpg')] w-13 h-13"></div>
+                        <div class="pt-0.5 px-4">
+                            <div class="text-primary-900 font-ibm text-xs leading-6">Kyle White</div>
+                            <div class="text-sm">{{ nft.name }}</div>
                         </div>
-                        <div class="font-ibm text-xxs text-tertiary-400">
-                            (
+                    </div>
+                </div>
+                <div class="h-14 md:h-auto col-span-2 flex md:block">
+                    <div
+                        class="md:h-17 flex md:items-center md:border-b border-black w-25 md:w-auto leading-4.5"
+                    >Downside Protection</div>
+                    <div class="text-white text-sm">
+                        <div
+                            class="flex md:h-21.75 items-center"
+                        >{{ parseInt(order.protectionRate) / 100 }} %</div>
+                    </div>
+                </div>
+                <div class="h-14 md:h-auto col-span-2 flex md:block">
+                    <div
+                        class="md:h-17 flex md:items-center md:border-b border-black w-25 md:w-auto leading-4.5 mt-0.5 md:mt-0 mb-1"
+                    >Days of Protection</div>
+                    <div class="text-white text-sm">
+                        <div
+                            class="flex md:h-21.75 items-center"
+                        >{{ parseInt(order.protectionTime) / 3600 / 24 }}</div>
+                    </div>
+                </div>
+                <div
+                    class="h-14 md:h-auto col-span-1 md:text-right flex md:block mt-1.25 md:mt-0 mb-4.25 md:mb-0"
+                >
+                    <div
+                        class="md:h-17 flex md:items-center md:justify-end md:border-b border-black w-25 md:w-auto"
+                    >Total</div>
+                    <div class="text-white text-xxs md:text-right font-ibm md:flex flex-col justify-center items-end md:h-21.75">
+                        <nftmx-price-common :price="roundTo(tokenPrice * bnbPrice)" />
+                        <span class="text-tertiary-400">
+                            <span>(</span>
                             <span class="font-sans">Ξ</span>
-                            {{ roundTo(parseInt(order.tokenPrice) / exchangeRate) }})
-                        </div>
-                    </th>
-                    <th></th>
-                </tfoot>
-            </table>
+                            {{ tokenPrice }})
+                        </span>
+                    </div>
+                </div>
+            </div>
             <div class="w-full text-center pt-6 pb-5">
                 <nftmx-button
                     color="primary"
                     label="BUY NOW"
-                    class="font-press w-full text-sm my-3 max-w-xs"
+                    class="font-press w-full text-sm md:text-lg my-1.5 md:my-3 h-13.5"
                     @click="buyOrder"
                 />
                 <div

@@ -126,7 +126,7 @@ function handleVote() {
                     class="bg-primary-900 text-white text-sm flex justify-center items-center hover:bg-primary-700"
                 >BUY NOW</router-link>
             </div>
-            <div v-if="connect" class="grid grid-cols-1 relative font-press">
+            <div v-if="order.connect" class="grid grid-cols-1 relative font-press">
                 <button class="bg-black py-6 text-xs">CONNECT WALLET</button>
             </div>
             <div v-if="order.sold" class="grid grid-cols-1 relative font-press">

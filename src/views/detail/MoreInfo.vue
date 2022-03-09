@@ -4,7 +4,11 @@ import Ribbon from '@/core/components/Ribbon.vue';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
 import Accordion from '../../core/container/Accordion.vue';
-import { assetDetailTabs } from '@/core/config'
+import { assetDetailTabs, defaultUser } from '@/core/config'
+import InfoModal from './components/InfoModal.vue'
+import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
+import { toUpercaseFirstLetterOfString } from '@/core/utils'
+
 const props = defineProps({
     percent: {
         type: Number,
@@ -14,6 +18,7 @@ const props = defineProps({
         type: Number,
         default: 365
     },
+    nft: Object
 })
 
 const store = useStore();
@@ -24,20 +29,111 @@ const handleClick = (value) => {
     open.value = value
 }
 const selectTab = (value) => {
-    tab.value = value;
+    tab.value = value || "Please select";
+    open.value = false;
 }
-
+const cancelNFT = () => {
+    
+}
 </script>
 
 <template>
     <div
-        class="relative overflow-hidden p-6 w-full pt-70per"
-        :style="{ background: 'url(' + '/images/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center', backgroundColor: '#222222' }"
+        class="relative overflow-hidden p-6 w-full h-asset-img-lg border border-black"
+        :style="{ background: 'url(' + '/images/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#222222' }"
     >
-        <ribbon :percent="percent" :period="period" />
+        <ribbon :percent="percent" :period="period" big />
+        <info-modal
+            :title="toUpercaseFirstLetterOfString(tab)"
+            v-if="tab === assetDetailTabs[0]"
+            @select-tab="selectTab"
+        >
+            <div class="text-xxs">
+                Created by
+                <nftmx-wallet-address-pop
+                    class="text-primary-900"
+                    :address="store.state.user.walletAddress"
+                />
+            </div>
+            <div
+                class="text-xxs text-tertiary-500 mt-4"
+            >3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1</div>
+        </info-modal>
+        <info-modal
+            :title="toUpercaseFirstLetterOfString(tab)"
+            v-if="tab === assetDetailTabs[1]"
+            @select-tab="selectTab"
+        >
+            <div class="flex gap-6 items-start">
+                <img :src="defaultUser.profile_img" class="w-21 h-21 object-cover" />
+                <div
+                    class="text-xxs text-tertiary-500 leading-5"
+                >3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1</div>
+            </div>
+            <div class="mt-6.5 flex gap-6 items-center">
+                <div class="flex gap-4">
+                    <font-awesome-icon :icon="['fas', 'user']" class="text-primary-900 text-sm" />
+                    <span class="text-xxs">Activity</span>
+                </div>
+                <div class="flex gap-4">
+                    <font-awesome-icon :icon="['fab', 'twitter']" class="text-primary-900 text-sm" />
+                    <span class="text-xxs">Twitter</span>
+                </div>
+            </div>
+        </info-modal>
+        <info-modal
+            :title="toUpercaseFirstLetterOfString(tab)"
+            v-if="tab === assetDetailTabs[2]"
+            @select-tab="selectTab"
+        >
+            <div class="text-xxs flex justify-between">
+                <span class="font-ibm-medium">Contract Address</span>
+                <nftmx-wallet-address-pop class="text-primary-900" :address="nft.token_address" />
+            </div>
+            <div class="text-xxs flex justify-between mt-4">
+                <span class="font-ibm-medium">Token ID</span>
+                <span>{{ nft.token_id }}</span>
+            </div>
+            <div class="text-xxs flex justify-between mt-4">
+                <span class="font-ibm-medium">Blockchain</span>
+                <span>Binance</span>
+            </div>
+        </info-modal>
+        <info-modal
+            :title="toUpercaseFirstLetterOfString(tab)"
+            v-if="tab === assetDetailTabs[3]"
+            @select-tab="selectTab"
+        >
+            <div class="h-full flex flex-col justify-around text-center">
+                <div
+                    class="text-lg 3xl:text-2xl font-ibm-bold 3xl:leading-9"
+                >Your Investment Automatically Includes 100% Downside Protection for 365 days</div>
+                <div
+                    class="text-tertiary-500 text-sm 3xl:leading-6"
+                >If you are a buyer, think of NFT.mx as a new strategic staking program with upside from selling the NFT, while also providing the option to cancel your investment and get a 100% refund with your original tokens.</div>
+                <div class="flex flex-col gap-6">
+                    <div class="flex justify-around">
+                        <div class="text-center">
+                            <div class="font-ibm-bold text-lg">Days left</div>
+                            <div class="text-3.5xl text-primary-800 -mt-0.75">58/365</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="font-ibm-bold text-lg">Protection</div>
+                            <div class="text-3.5xl text-primary-800 -mt-0.75">100%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <span
+                        class="text-xxs text-red-600 cursor-pointer hover:text-red-700 transition"
+                        @click="cancelNFT()"
+                    >Cancel NFT investment</span>
+                </div>
+            </div>
+        </info-modal>
     </div>
     <div class="mt-4 mb-8 items-center">
-        <div class="relative flex w-full items-center text-sm font-ibm">
+        <div :class="[open ? 'h-30' : 'h-0', 'relative flex w-full text-sm font-ibm items-baseline']">
             <div v-if="store.state.app.windowWidth >= 1920" class="flex-1 flex px-5">
                 <detail-button
                     v-for="(name, i) in assetDetailTabs"
@@ -67,22 +163,22 @@ const selectTab = (value) => {
             <div class="flex-1"></div>
             <div class="flex object-right">
                 <div
-                    class="border border-black w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                    class="border border-black transition w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
                 >
                     <font-awesome-icon :icon="['fas', 'undo']" />
                 </div>
                 <div
-                    class="border-y border-r border-black w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                    class="border-y border-r border-black transition w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
                 >
                     <font-awesome-icon :icon="['fas', 'external-link-alt']" />
                 </div>
                 <div
-                    class="border-y border-black w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                    class="border-y border-black transition w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
                 >
                     <font-awesome-icon :icon="['fas', 'share-alt']" />
                 </div>
                 <div
-                    class="border border-black w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                    class="border border-black transition w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
                 >
                     <font-awesome-icon :icon="['fas', 'bars']" />
                 </div>

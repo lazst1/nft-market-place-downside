@@ -20,10 +20,7 @@ import AssetHistory from './AssetHistory.vue';
 import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
 
 const props = defineProps({
-    // modalValue: {
-    //     type: Boolean,
-    //     default: false
-    // }
+    modelValue: Boolean
 })
 
 const items = [

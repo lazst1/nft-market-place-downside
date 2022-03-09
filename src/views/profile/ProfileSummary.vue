@@ -12,11 +12,15 @@ const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 const profileImg = ref();
 const profileBanner = ref();
 const name = ref();
+const joinedDate = ref();
 
 watchEffect(() => {
-    profileBanner.value = store.state.user.profile_banner ? baseURL + store.state.user.profile_banner : defaultUser.profile_banner
-    profileImg.value = store.state.user.profile_img ? baseURL + store.state.user.profile_img : defaultUser.profile_img
-    name.value = store.state.user.name ? store.state.user.name : defaultUser.name
+    const user = store.getters['auth/getUser'];
+    profileBanner.value = user.profile_banner ? baseURL + user.profile_banner : defaultUser.profile_banner;
+    profileImg.value = user.profile_img ? baseURL + user.profile_img : defaultUser.profile_img;
+    name.value = user.name ? user.name : defaultUser.name;
+    const joined = new Date(user.createdAt);
+    joinedDate.value = joined.toLocaleString('default', { month: 'long' }) + ' ' + joined.getFullYear();
 })
 
 </script>
@@ -34,10 +38,10 @@ watchEffect(() => {
                 <div
                     class="flex font-press text-md sm:text-lg md:text-3xl leading-loose text-white w-max"
                 >
-                    {{name}}
+                    {{ name }}
                     <font-awesome-icon
                         :icon="['fas', 'edit']"
-                        class="text-sm lg:text-lg mb-4 ml-4 cursor-pointer hover:text-primary-900"
+                        class="text-sm transition lg:text-lg mb-4 ml-4 cursor-pointer hover:text-primary-900"
                     />
                 </div>
                 <div class="flex font-ibm text-sm pb-1.5 md:pb-5 mt-5">
@@ -47,24 +51,12 @@ watchEffect(() => {
                             :address="walletAddress"
                         />
                     </div>
-                    <font-awesome-icon
-                        :icon="['fas', 'edit']"
-                        class="text-sm lg:text-lg text-white ml-5 mt-0.5 cursor-pointer hover:text-primary-900"
-                    />
                 </div>
-                <div class="font-ibm text-xxs md:text-sm mt-0.5 pb-px text-white">
-                    Joined January 2022
-                    <font-awesome-icon
-                        :icon="['fas', 'edit']"
-                        class="text-sm lg:text-lg ml-4 cursor-pointer hover:text-primary-900"
-                    />
-                </div>
+                <div
+                    class="font-ibm text-xxs md:text-sm mt-0.5 pb-px text-white"
+                >Joined {{ joinedDate }}</div>
                 <div class="mt-4.75 md:mt-4 flex">
                     <nftmx-group-icon />
-                    <font-awesome-icon
-                        :icon="['fas', 'edit']"
-                        class="text-white text-sm lg:text-lg mt-2 ml-6 cursor-pointer hover:text-primary-900"
-                    />
                 </div>
             </div>
         </div>

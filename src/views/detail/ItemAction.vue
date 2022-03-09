@@ -34,14 +34,12 @@ const people = [
 
 const props = defineProps({
     order: Object,
-    orderId: String,
     tokenPrice: String,
     nft: Object
 })
 
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
-const fundError = ref(false);
 const store = useStore();
 const balance = ref();
 const vote = ref(false);
@@ -78,12 +76,12 @@ function handleVote() {
 </script>
 
 <template>
-    <div class="flex py-6 text-5/2xl">
+    <div class="flex mb-6 text-5/2xl">
         <div class="flex-1 font-ibm-bold">{{ nft.name }}</div>
         <div class>
             <font-awesome-icon
                 :icon="['fas', 'thumbs-up']"
-                :class="[vote ? 'text-primary-900' : 'text-white', 'cursor-pointer hover:text-primary-900']"
+                :class="[vote ? 'text-primary-900' : 'text-white', 'transition cursor-pointer hover:text-primary-900']"
                 @click="handleVote()"
             />
         </div>
@@ -104,7 +102,7 @@ function handleVote() {
         <div class="text-primary-900 font-ibm-bold">AUCTION</div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold p-4 sm:p-7">
+    <div class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold p-4 sm:p-7 gap-4">
         <div class="items-center">
             <div class="flex flex-col items-center sm:items-start">
                 <div class="mt-3.25 text-lg">Current auction ends in</div>
@@ -112,12 +110,12 @@ function handleVote() {
             </div>
         </div>
 
-        <div class="items-centers -mt-0.75 mb-px">
+        <div class="items-centers -mt-px mb-px">
             <nftmx-select-network class="font-ibm-bold w-full text-sm mb-2" color="black" big></nftmx-select-network>
             <nftmx-button
                 color="primary"
                 label="BUY NOW"
-                class="font-press w-full text-base lg:text-lg mt-0.75"
+                class="font-press w-full text-base lg:text-lg mt-0.75 h-15"
                 @click="handleBuyModal(true)"
             />
         </div>
@@ -153,7 +151,6 @@ function handleVote() {
         v-model="buyModalActive"
         :order="order"
         :nft="nft"
-        :orderId="orderId"
         :tokenPrice="tokenPrice"
         :balance="balance"
     />

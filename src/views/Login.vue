@@ -18,10 +18,10 @@ const selectedWallet = ref(walletList[0]);
 
 <template>
     <body-container>
-        <div class="mt-8">
+        <div class="sm:mt-8">
             <connect-wallet :wallet="selectedWallet" />
         </div>
-        <div class="flex flex-wrap justify-center gap-4 mt-7.5">
+        <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-5 3xl:grid-cols-6 justify-items-center gap-4 mt-7.5">
             <nftmx-wallet-card
                 v-for="wallet in walletList"
                 :key="wallet.id"

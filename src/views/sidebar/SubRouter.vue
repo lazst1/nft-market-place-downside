@@ -13,7 +13,7 @@ function closeSidebar(params) {
 
 <template>
     <div>
-        <router-link :to="to" class="hover:text-white" @click="closeSidebar">
+        <router-link :to="to" class="hover:text-white transition" @click="closeSidebar">
             <slot />
         </router-link>
     </div>

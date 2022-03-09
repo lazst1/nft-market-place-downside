@@ -39,12 +39,13 @@ const is = computed(() => {
 const componentClass = computed(() => {
   const base = [
     props.type,
+    'transition',
     'items-center',
     'grow-0',
     'shrink-0',
     'relative',
     'cursor-pointer',
-    props.active ? props.activeColor : 'text-white dark:text-white dark:hover:text-gray-400'
+    props.active ? props.activeColor : 'text-white dark:text-white'
   ]
 
   if (props.type === 'block') {

@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const props = defineProps({
     accordion: {
@@ -22,13 +22,23 @@ const props = defineProps({
         type: Boolean,
         default: true
     },
+    animation: {
+        type: Boolean,
+        default: true
+    }
 })
 
 const emit = defineEmits(['handle-click'])
+const anim = ref(null);
+const aHeight = ref(0);
 
 const handleClick = () => {
     emit('handle-click', props.accordion ? !props.modelValue : true)
 }
+
+onMounted(() => {
+    aHeight.value = anim.value.scrollHeight;
+})
 
 </script>
 
@@ -55,8 +65,13 @@ const handleClick = () => {
                 />
             </div>
         </div>
-        <div v-if="modelValue">
-            <slot />
+        <div
+            :class="[animation ? 'transition-all overflow-hidden' : '']"
+            :style="{ maxHeight: animation ? modelValue ? aHeight + 'px' : '0' : '' }"
+        >
+            <div ref="anim" v-if="!animation ? modelValue : true">
+                <slot />
+            </div>
         </div>
     </div>
 </template>

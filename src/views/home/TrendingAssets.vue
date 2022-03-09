@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import Accordion from '@/core/container/Accordion.vue';
@@ -7,31 +7,54 @@ import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import AccordionContainer from './container/AccordionContainer.vue';
 import Assets1 from './components/Assets1.vue';
 import Assets2 from './components/Assets2.vue';
+import marketService from '../../core/services/market.service';
+import { exchangeRate } from '@/core/config';
+import { roundTo } from '@/core/utils';
+import { useStore } from 'vuex';
 
-const items = [
-    {
-        name: "Hashtasks #21",
-        price: 55
-    },
-    {
-        name: "Hashtasks #21",
-        price: 322.4445
-    },
-    {
-        name: "Hashtasks #21",
-        price: 0.291
-    },
-    {
-        name: "Hashtasks #21",
-        price: 78.220
+const soldItems = ref([]);
+const canceledItems = ref([]);
+const listedItems = ref([]);
+const selected = ref('SOLD');
+const selectedItems = ref([]);
+
+const store = useStore();
+const bnbPrice = computed(() => store.getters['market/getBnbPrice']);
+
+marketService.soldItems().then(res => {
+    soldItems.value = res;
+    selectedItems.value = res;
+});
+marketService.canceledItems().then(res => {
+    canceledItems.value = res;
+});
+marketService.listedItems().then(res => {
+    listedItems.value = res;
+});
+
+function selectLedger(value) {
+    selected.value = value;
+    switch (selected.value) {
+        case 'SOLD':
+            selectedItems.value = soldItems.value;
+            break;
+        case 'CANCELED':
+            selectedItems.value = canceledItems.value;
+            break;
+        case 'LISTED':
+            selectedItems.value = listedItems.value;
+            break;
+    
+        default:
+            break;
     }
-]
+}
 
 </script>
 
 <template>
     <div class="flex flex-wrap justify-center px-10 py-6 lg:px-22">
-        <div class="w-full sm:w-68 pt-2">
+        <div class="w-full sm:w-68 pt-2 cursor-default">
             <div class="flex font-press text-white">
                 <span>Ledger</span>
                 <font-awesome-icon
@@ -42,16 +65,20 @@ const items = [
             <div class="border border-black my-7 bg-tertiary-800">
                 <div class="grid grid-cols-4 border-b border-black">
                     <div
-                        class="font-ibm-semi-bold text-xxs text-primary-900 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer"
+                        @click="selectLedger('SOLD')"
+                        :class="[selected === 'SOLD' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-primary-900 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer transition']"
                     >SOLD</div>
                     <div
-                        class="font-ibm-semi-bold text-xxs text-red-700 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer"
+                        @click="selectLedger('CANCELED')"
+                        :class="[selected === 'CANCELED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-red-700 border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer transition']"
                     >CANCELED</div>
                     <div
-                        class="font-ibm-semi-bold text-xxs text-white border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer"
+                        @click="selectLedger('LISTED')"
+                        :class="[selected === 'LISTED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-white border-r border-black py-4 text-center hover:bg-tertiary-900 cursor-pointer transition']"
                     >LISTED</div>
                     <div
-                        class="font-ibm-semi-bold text-xxs text-tertiary-500 py-4 text-center hover:bg-tertiary-900 cursor-pointer"
+                        @click="selectLedger('CREATED')"
+                        :class="[selected === 'CREATED' ? 'bg-tertiary-900' : '', 'font-ibm-semi-bold text-xxs text-tertiary-500 py-4 text-center hover:bg-tertiary-900 cursor-pointer transition']"
                     >CREATED</div>
                 </div>
                 <div class="grid grid-cols-2 border-b border-black">
@@ -61,13 +88,13 @@ const items = [
                     <div class="font-ibm-medium text-xs text-tertiary-500 py-3 pl-3">Price (USD)</div>
                 </div>
                 <div class="grid grid-cols-2 border-black">
-                    <template v-for="(item, index) in items" :key="index">
+                    <template v-for="(item, index) in selectedItems.items" :key="index">
                         <div
                             class="font-ibm-medium text-xs text-white border-r border-black py-4 pl-3"
-                        >{{ item.name }}</div>
+                        >{{ item.tokenName }}</div>
                         <div
-                            :class="[item.price > 300 ? 'text-red-700' : item.price < 1 ? 'text-white' : 'text-primary-900', 'font-ibm-medium text-xs py-4 pl-3']"
-                        >{{ item.price }}</div>
+                            :class="[item.tokenPrice / exchangeRate * bnbPrice > 300 ? 'text-red-700' : item.tokenPrice / exchangeRate * bnbPrice < 1 ? 'text-white' : 'text-primary-900', 'font-ibm-medium text-xs py-4 pl-3']"
+                        >{{ roundTo(item.tokenPrice / exchangeRate * bnbPrice) }}</div>
                     </template>
                 </div>
             </div>

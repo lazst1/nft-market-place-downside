@@ -33,6 +33,16 @@ module.exports = {
           500: '#828282',
           400: '#949494',
           300: '#ffffff'
+        },
+        red: {
+          900: '#d21a08',
+          800: '#f23b2a',
+          700: '#ff5e4f'
+        },
+        gray: {
+          900: '#535353',
+          800: '#666666',
+          700: '#838383'
         }
       },
       fontSize: {
@@ -41,6 +51,7 @@ module.exports = {
         xxs: ['11px', '14px'],
         xg: ['19px', '28px'],
         '2.5xl': '26px',
+        '3.5xl': '35px',
         description: ['13px', '20px'],
         'home-lg': ['36px', 1.68],
         'home-md': ['30px', 1.6],
@@ -56,15 +67,14 @@ module.exports = {
         'ibm-thin': ['ibm-thin'],
         'press': ['press']
       },
-      screens: {
-        '3xl': '1920px'
-      },
       spacing: {
         '0.75': '3px',
         '1.25': '5px',
         '1.75': '7px',
         '2.25': '9px',
+        '2.75': '11px',
         '3.25': '13px',
+        '3.75': '15px',
         '4.25': '17px',
         '4.5': '18px',
         '4.75': '19px',
@@ -85,12 +95,14 @@ module.exports = {
         '13.5': '54px',
         '14.75': '59px',
         '15': '60px',
+        '16.5': '66px',
         '17': '68px',
         '17.25': '69px',
         '17.5': '70px',
         '17.75': '71px',
         '20.75': '83px',
         '21': '84px',
+        '21.75': '87px',
         '22': '88px',
         '22.5': '90px',
         '23.5': '94px',
@@ -117,10 +129,11 @@ module.exports = {
         '90.75': '363px',
         '104': '416px',
         'modal-big': '1444px',
-        'modal-md': '1171px',
+        'modal-md': '1145px',
         'summary-xs': '251px',
         'summary-sm': '300px',
         'asset-img': '500px',
+        'asset-img-lg': '528px',
         'home-lg': '865px',
         'home-md': '700px',
         'home-sm': '320px',
@@ -133,8 +146,13 @@ module.exports = {
         '65per': '65%',
         '70per': '70%',
         '73per': '73%',
+        fex: '716px',
+        fel: '768px',
+        fem: '1200px',
+        fes: '1280px',
       },
       lineHeight: {
+        '4.5': '1.125rem',
         '5.25': '21px',
         '5.5': '22px',
         '9.5': '2.375rem',
@@ -148,6 +166,15 @@ module.exports = {
         md: '252px',
         '8xl': '1920px'
       },
+    },
+    screens: {
+      'xs': '375px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+      '3xl': '1920px',
     },
   },
   plugins: [

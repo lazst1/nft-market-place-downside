@@ -21,7 +21,7 @@ const computedValue = computed({
     <div class="border-2 border-black h-full">
         <textarea
             v-model="computedValue"
-            class="outline-none border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full h-full font-ibm text-sm -mb-1.25 pt-4"
+            class="outline-none border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full h-full font-ibm text-sm -mb-1.25 pt-2 px-4"
             :placeholder="placeholder"
         />
     </div>

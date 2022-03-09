@@ -13,15 +13,39 @@ const initialUser = {
     allNfts: {},
 }
 
+const initialCollectedNFTs = {
+    page: 0,
+    page_size: 0,
+    status: "",
+    total: 0,
+    result: []
+};
+
 const initialOrders = {
-    orders: [],
+    items: [],
     meta: {
-        currentPage: 1,
+        currentPage: 0,
         itemCount: 0,
-        itemsPerPage: 10,
+        itemsPerPage: 20,
         totalItems: 0,
         totalPages: 0
     }
+}
+
+const defaultOrders = {
+    data: [],
+    loading: true
+}
+
+const initialMyOrders = {
+    onSale: defaultOrders,
+    downside: {
+        all: defaultOrders,
+        bought: defaultOrders,
+        sold: defaultOrders
+    },
+    favorite: defaultOrders,
+    hidden: defaultOrders,
 }
 
 export default createStore({
@@ -31,11 +55,10 @@ export default createStore({
         allNfts: {},
         user: initialUser,
         orders: initialOrders,
-        myNfts: {
-            page: 0,
-            page_size: 0,
-            result: []
-        }
+        orderLogs: [],
+        collectedNFTs: initialCollectedNFTs,
+        myOrders: initialMyOrders,
+        bnbPrice: 0
     },
     mutations: {},
     actions: {},

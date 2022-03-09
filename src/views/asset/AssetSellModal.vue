@@ -13,6 +13,7 @@ import NftmxToggle from '@/core/components/NftmxToggle.vue';
 import NftmxHashtag from '@/core/components/NftmxHashtag.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import marketService from '../../core/services/market.service';
+import { useToast } from "vue-toastification";
 
 const props = defineProps({
     asset: {
@@ -35,6 +36,7 @@ const bundleValue = ref(true);
 const reverseValue = ref(false);
 const hashtagValue = ref();
 const hashtagOptions = ref([]);
+const toast = useToast();
 
 const period = computed(() => downsidePeriod.value ? parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000) : 0);
 
@@ -47,16 +49,15 @@ marketService.getHashtagNames().then(res => {
     });
 })
 
-watchEffect(() => {
-    console.log(hashtagValue.value)
-})
-
 function createOrder() {
     const token_id = parseInt(tokenId);
     const price = nftPrice.value;
     const rate = downsideRate.value * 100;
+
     if (!price || !rate || !period.value) return;
+
     createHashTags();
+
     store.dispatch(
         'market/createOrder',
         {
@@ -71,10 +72,14 @@ function createOrder() {
 
 function createHashTags() {
     if (hashtagValue.value) {
-        marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId).then(res => {
-            console.log(res);
+        marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId, props.asset.name).then(res => {
+            console.log('createHashTags: ', res);
         })
     }
+}
+
+function deselectHashtag(value) {
+    hashtagValue.value = hashtagValue.value.filter(name => name !== value);
 }
 
 function handleCalendar() {
@@ -169,7 +174,7 @@ function downsideRateRange() {
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap mt-3.5 mb-6 font-ibm text-sm">
-                    <nftmx-select-network color="black" :data="currencies" class="xl:w-1/3" />
+                    <nftmx-select-network color="black" class="xl:w-1/3" />
                     <input
                         v-model="nftPrice"
                         class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-4.75 font-ibm text-sm"
@@ -254,15 +259,16 @@ function downsideRateRange() {
                             :options="hashtagOptions"
                             class="font-ibm text-xxs"
                         >
-                            <!-- <template v-slot:tag="{ option, handleTagRemove, disabled }">
-                                <nftmx-hashtag value="live" active />
-                            </template>-->
+                            <template v-slot:tag="{ option, handleTagRemove, disabled }">{{ }}</template>
                         </Multiselect>
                     </div>
                     <div class="flex flex-wrap gap-3">
-                        <nftmx-hashtag value="live" active />
-                        <nftmx-hashtag value="vod" />
-                        <nftmx-hashtag value="commisions" />
+                        <nftmx-hashtag
+                            v-for="(name, index) in hashtagValue"
+                            :key="index"
+                            :value="name"
+                            @click="deselectHashtag(name)"
+                        />
                     </div>
                 </div>
                 <nftmx-divider class="mt-9 mb-6" />
@@ -339,5 +345,8 @@ function downsideRateRange() {
     background-color: #19cb58;
     font-family: "ibm-light";
     font-size: 13px;
+}
+/deep/ .multiselect-clear {
+    display: none;
 }
 </style>

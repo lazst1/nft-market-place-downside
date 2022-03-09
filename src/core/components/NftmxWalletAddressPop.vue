@@ -4,8 +4,7 @@ import { netExplorerURL } from '../config';
 
 const props = defineProps({
     address: {
-        type: String,
-        required: true
+        type: String
     },
     disable: Boolean
 });

@@ -70,7 +70,7 @@ const computedType = computed(() => {
   return null
 })
 
-const labelClass = computed(() => props.small ? 'px-1' : 'px-2')
+const labelClass = computed(() => props.small ? 'px-2' : 'px-4')
 
 const componentClass = computed(() => {
   const base = [
@@ -83,7 +83,7 @@ const componentClass = computed(() => {
     'duration-150',
     'transition',
     'text-xs',
-    props.small ? 'p-2' : 'py-4',
+    props.small ? 'p-2' : 'p-4',
     getButtonColor(props.color, props.outline, !props.disabled)
   ]
 
@@ -113,7 +113,7 @@ const componentHoverCss = computed(() => getButtonHoverColor(props.color, props.
       <icon v-if="iconAfter" :path="iconAfter" color="primary-900" />
     </div>
     <icon v-if="iconBefore" :path="iconBefore" />
-    <span v-if="label" :class="labelClass">{{ label }}</span>
+    <span v-if="label">{{ label }}</span>
     <icon v-if="iconAfter" :path="iconAfter" color="primary-900" />
   </component>
 </template>

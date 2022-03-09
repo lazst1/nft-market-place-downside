@@ -5,11 +5,6 @@ export const moralis = {
     state: {
     },
     actions: {
-        getMyNFTs({ commit, rootState }) {
-            MoralisService.getMyNFTs(rootState.user.walletAddress, 40, 0).then(nftData => {
-                rootState.myNfts = JSON.parse(JSON.stringify(nftData));
-            })
-        },
     },
     getters: {
     },

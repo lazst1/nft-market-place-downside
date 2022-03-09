@@ -11,18 +11,50 @@ import VCalendar from 'v-calendar'
 import Moralis from './plugins/moralis'
 import Multiselect from '@vueform/multiselect';
 import '@vueform/multiselect/themes/default.css'
+import VueClipboard from 'vue3-clipboard'
+import Toast from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+import InfiniteScroll from "infinite-loading-vue3";
+import { createValidation } from 'vue3-form-validation'
+
 import {
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faMoon, faSun, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo,
-    faShareAlt, faBars, faCalendarAlt, faCopy, faGlobe, faCog, faEdit, faBell
+    faShareAlt, faBars, faCalendarAlt, faCopy, faGlobe, faCog, faEdit, faBell, faUser
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF, faTelegramPlane, faDiscord, faTwitter, faMediumM, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons'
+import 'v-calendar/dist/style.css';
 
 library.add(
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faFacebookF, faTelegramPlane, faDiscord, faTwitter, faCopy, faGlobe, faCog,
     faMediumM, faMoon, faSun, faCopyright, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo, faShareAlt, faBars, faCalendarAlt, faInstagram,
-    faEdit, faBell
+    faEdit, faBell, faUser
 );
+
+const options = {
+    position: "bottom-right",
+    timeout: 5000,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    hideProgressBar: true,
+    closeButton: "button",
+    icon: true,
+    rtl: false
+}
+
+const validation = createValidation({
+    defaultValidationBehavior: 'lazy',
+    validationBehavior: {
+        change: ({ force }) => !force,
+        lazy: ({ touched }) => touched,
+        submit: ({ submit, hasError }) => submit || hasError
+    }
+})
 
 createApp(App)
     .provide('$moralis', Moralis)
@@ -30,6 +62,13 @@ createApp(App)
     .use(router)
     .use(vClickOutside)
     .use(VCalendar, {})
+    .use(VueClipboard, {
+        autoSetContainer: true,
+        appendToBody: true,
+    })
+    .use(Toast, options)
+    .use(InfiniteScroll)
+    .use(validation)
     .component("font-awesome-icon", FontAwesomeIcon)
     .component('Multiselect', Multiselect)
     .mount('#app')

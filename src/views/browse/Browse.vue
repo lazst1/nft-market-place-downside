@@ -12,11 +12,11 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex';
 import BrowseSearch from './BrowseSearch.vue';
 import marketService from '../../core/services/market.service';
+import { computed } from 'vue';
 
 const store = useStore();
-if (store.getters['auth/getWalletAddress']) {
-    store.dispatch("market/getSaleOrders");
-}
+
+const orders = computed(() => store.state.orders);
 
 </script>
 
@@ -42,18 +42,18 @@ if (store.getters['auth/getWalletAddress']) {
             </div>
         </div>
         <div
-            class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5 min-h-item"
+            class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5"
         >
-            <nftmx-sale-card
-                v-for="(order, index) in store.state.orders.items"
-                :data="order"
-                :key="index"
-            ></nftmx-sale-card>
+            <nftmx-sale-card v-for="(order, index) in orders.items" :data="order" :key="index"></nftmx-sale-card>
             <!-- <nftmx-sale-card v-for="index in 2" :key="index"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{syndication:false}"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{auction:true}"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{bought:true}"></nftmx-sale-card>-->
         </div>
+        <div
+            v-if="!orders.meta.currentPage"
+            class="h-96 flex justify-center items-center font-ibm-bold text-tertiary-500 text-lg"
+        >Loading...</div>
     </body-container>
     <nftmx-footer />
 </template>

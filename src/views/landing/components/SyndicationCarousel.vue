@@ -1,6 +1,6 @@
 <template>
-    <Carousel :items-to-show="itemsToShow" :wrap-around="true">
-        <Slide v-for="(item, index) in syndications" :key="index">
+    <carousel :items-to-show="itemsToShow" :wrap-around="true">
+        <slide v-for="(item, index) in syndications" :key="index">
             <div class="carousel__item" :style="{ marginLeft: marginLeft + 'em' }">
                 <div
                     class="transition duration-300 grid grid-cols-2 m-4 cursor-default hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
@@ -58,7 +58,7 @@
                                 class="2xl:pt-2 pb-2 font-ibm-medium text-xxs 2xl:text-xs"
                             >Current auction ends in</div>
                             <div class="flex justify-center">
-                                <timer class="" />
+                                <timer />
                             </div>
                         </div>
                         <nftmx-button
@@ -69,12 +69,12 @@
                     </div>
                 </div>
             </div>
-        </Slide>
+        </slide>
 
         <template #addons>
-            <Pagination />
+            <pagination />
         </template>
-    </Carousel>
+    </carousel>
 </template>
 
 <script setup>

@@ -1,7 +1,7 @@
 <template>
     <Carousel :items-to-show="itemsToShow" :wrap-around="true">
         <Slide v-for="(item, index) in items" :key="index">
-            <div class="carousel__item w-full">
+            <div class="carousel__item w-full" :style="{ marginLeft: marginLeft + 'em' }">
                 <div
                     class="transition duration-300 m-4 cursor-pointer hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
                 >
@@ -68,6 +68,7 @@ const windowSize = ref({
     height: 0
 });
 const itemsToShow = ref(3);
+const marginLeft = ref(-27);
 const items = ref([
     {
         img: '/images/img1.png'
@@ -95,16 +96,22 @@ const items = ref([
     }
 ]);
 
-
 function handleResize() {
     windowSize.value.width = window.innerWidth;
     windowSize.value.height = window.innerHeight;
-    if (windowSize.value.width >= themeConfig.xl) {
+    if (windowSize.value.width >= themeConfig.xl3) {
+        itemsToShow.value = 4
+        marginLeft.value = -27
+    } else if (windowSize.value.width >= themeConfig.xl) {
         itemsToShow.value = 3
+        marginLeft.value = 0
     } else if (windowSize.value.width >= themeConfig.sm) {
         itemsToShow.value = 2
+        const adjustLeft = (windowSize.value.width - themeConfig.sm) * 17 / 640;
+        marginLeft.value = -17 - adjustLeft;
     } else {
         itemsToShow.value = 1
+        marginLeft.value = 0
     }
 }
 handleResize();
