@@ -34,7 +34,18 @@ const connect = async () => {
     if (typeof window.ethereum !== 'undefined') {
         ethereum
             .request({ method: 'eth_requestAccounts' })
-            .then(handleLogin)
+            .then(accounts => {
+                ethereum.request({ method: 'eth_chainId' })
+                    .then(chain => {
+                        if (chain !== '0x61') {
+                            toast.error('Please switch to BSC Testnet');
+                            store.dispatch('auth/login', null)
+                            router.push('/login');
+                        } else {
+                            handleLogin(accounts)
+                        }
+                    })
+            })
             .catch((err) => {
                 if (err.code === 4001) {
                     // EIP-1193 userRejectedRequest error

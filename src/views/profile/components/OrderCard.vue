@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import NftmxCardContainer from '@/core/container/NftmxCardContainer.vue';
 import CheckboxCell from '@/core/components/CheckboxCell.vue';
 import TextCompression from '@/core/components/TextCompression.vue';
@@ -8,76 +8,54 @@ import NftmxCancelModal from '@/core/components/NftmxCancelModal.vue';
 import marketService from '../../../core/services/market.service';
 
 const props = defineProps({
-    order: Object
+    order: Object,
 });
+const emit = defineEmits(['handle-vote', 'hide-nft', 'cancel-order']);
 
-console.log(props.order);
 const store = useStore();
-const item = props.order.nft;
+const item = computed(() => props.order);
 const option = ref(false)
-const metadata = item.metadata ? JSON.parse(item.metadata) : {};
+const metadata = computed(() => props.order.nft.metadata ? props.order.nft.metadata : {});
 const openCancelModal = ref(false);
-const vote = ref(props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));
-const voteCount = ref(props.order.votes.length);
+
 function onClickOutside() {
     option.value = false
 }
 
 function approve() {
-    store.dispatch('market/approve', { contractAddress: item.token_address, tokenId: item.token_id })
+    store.dispatch('market/approve', { contractAddress: props.order.tokenAddress, tokenId: props.order.tokenId })
 }
 
 const openCancel = () => {
     openCancelModal.value = true;
 }
-
-function cancelOrder() {
-    if (props.order.orderStatus === '0') {
-        store.dispatch('market/cancelOrderBySeller', props.order.orderId)
-    } else if (props.order.orderStatus === '2' && props.order.buyerAddress === store.state.user.walletAddress) {
-        store.dispatch('market/cancelOrderByBuyer', props.order.orderId)
-    }
-}
 const handleVote = () => {
-    vote.value = !vote.value;
-    if (vote.value) {
-        marketService.vote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
-            voteCount.value++;
-        });
-    } else {
-        marketService.cancelVote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
-            voteCount.value--;
-        });
-    }
+    emit('handle-vote', props.order);
 }
-const hideNFT = () => {
-    marketService.hideToken(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
-        console.log('hideNFT res: ', res);
-    })
+const hideNFT = (hide) => {
+    emit('hide-nft', props.order, hide);
 }
-const unhideNFT = () => {
-    marketService.unhideToken(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
-        console.log('hideNFT res: ', res);
-    })
+const cancelOrder = () => {
+    emit('cancel-order', props.order);
 }
 
 </script>
 
 <template>
     <nftmx-card-container
-        :approved="true"
+        :approved="order.orderStatus > -1 ? true : order.nft.approved"
         :image="metadata ? metadata.image : ''"
         @approve="approve"
     >
         <div>
             <div :class="['h-24', 'mb-0.5']">
-                <div class="text-tertiary-400 text-xxs">{{ item.name ? item.name : '' }}</div>
+                <div class="text-tertiary-400 text-xxs">{{ order.nft.name ? order.nft.name : '' }}</div>
                 <div
                     class="text-white font-ibm-medium text-sm leading-5.25 my-0.75"
-                >{{ metadata.name ? metadata.name : '' }}</div>
+                >{{ metadata.name ? metadata.name : 'Unnamed' }}</div>
                 <div class="text-tertiary-400 font-ibm-light text-xxs leading-5.25">
                     <text-compression
-                        :text="metadata.description ? metadata.description : ''"
+                        :text="metadata.description ? metadata.description : 'No description'"
                         :length="40"
                     />
                 </div>
@@ -90,6 +68,11 @@ const unhideNFT = () => {
                             v-show="option"
                             class="absolute w-52 bottom-5 -ml-5 px-5.5 py-3.25 bg-black text-white hover:text-primary-900 leading-9.5 font-ibm-light text-xs"
                         >
+                            <router-link
+                                v-if="order.orderStatus === -1"
+                                :to="{ name: 'asset', params: { tokenAddress: order.tokenAddress, tokenId: order.tokenId } }"
+                                class="text-white hover:text-primary-700 cursor-pointer"
+                            >List for Sale</router-link>
                             <div
                                 v-if="order.orderStatus === '2' && order.buyerAddress === store.state.user.walletAddress"
                                 class="text-white hover:text-primary-700 cursor-pointer"
@@ -106,14 +89,14 @@ const unhideNFT = () => {
                                 class="text-white hover:text-primary-700 cursor-pointer"
                             >Make profile picture</div>
                             <div
-                                v-if="!order.hidden"
+                                v-if="order.hiders.findIndex(id => id === store.state.user.id) === -1"
                                 class="text-white hover:text-primary-700 cursor-pointer"
-                                @click="hideNFT()"
+                                @click="hideNFT(true)"
                             >Hide</div>
                             <div
-                                v-if="order.hidden"
+                                v-if="order.hiders.findIndex(id => id === store.state.user.id) > -1"
                                 class="text-white hover:text-primary-700 cursor-pointer"
-                                @click="unhideNFT()"
+                                @click="hideNFT(false)"
                             >Unhide</div>
                             <div class="text-white hover:text-primary-700 cursor-pointer">Unbundle</div>
                         </div>
@@ -131,10 +114,10 @@ const unhideNFT = () => {
                     </checkbox-cell>
                 </div>
                 <div class="text-xs text-tertiary-500 flex items-end font-ibm-medium">
-                    <span style="line-height: 0.75" class="pr-2">{{ voteCount }}</span>
+                    <span style="line-height: 0.75" class="pr-2">{{ order.votes.length }}</span>
                     <font-awesome-icon
                         :icon="['fas', 'thumbs-up']"
-                        :class="[vote ? 'text-primary-900' : 'text-white', 'hover:text-primary-900 cursor-pointer']"
+                        :class="[order.votes.findIndex(id => id === store.state.user.id) > -1 ? 'text-primary-900' : 'text-white', 'hover:text-primary-900 cursor-pointer']"
                         @click="handleVote()"
                     />
                 </div>

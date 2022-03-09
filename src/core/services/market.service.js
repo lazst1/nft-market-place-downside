@@ -33,14 +33,17 @@ class MatketService {
         return http.get(`orders/log?page=${page}&limit=${limit}`).then(res => res.data);
     }
 
-
     // vote
     vote(tokenAddress, tokenId, userId) {
-        return http.post(`votes`, { tokenAddress, tokenId, userId }).then(res => res.data);
+        return http.post(`tokens/vote`, { tokenAddress, tokenId, userId }).then(res => res.data);
     }
 
     cancelVote(tokenAddress, tokenId, userId) {
-        return http.delete(`votes?tokenAddress=${tokenAddress}&tokenId=${tokenId}&userId=${userId}`).then(res => res.data)
+        return http.delete(`tokens/vote?tokenAddress=${tokenAddress}&tokenId=${tokenId}&userId=${userId}`).then(res => res.data)
+    }
+
+    getTokenInfo(tokenAddress, tokenId) {
+        return http.get(`tokens/info?tokenAddress=${tokenAddress}&tokenId=${tokenId}`).then(res => res.data)
     }
 
     getUSDFromToken(token, amount) {
@@ -60,29 +63,17 @@ class MatketService {
         return http.get('hashtags').then(res => res.data)
     }
 
-    // fetch active orders created by the connected user.
-    getMyActiveOrders(walletAddress, page = defaultPagination.page, limit = defaultPagination.limit) {
-        return http.get(`orders/mine/onsale?walletAddress=${walletAddress}&page=${page}&limit=${limit}`).then(res => res.data);
+    // fetch orders related to the connected user.
+    getMyOrders(userId) {
+        return http.get(`orders/mine?userId=${userId}`).then(res => res.data);
     }
 
-    getMyOrdersUnderDownsideProtection(walletAddress, page = defaultPagination.page, limit = defaultPagination.limit) {
-        return http.get(`orders/mine/downside?walletAddress=${walletAddress}&page=${page}&limit=${limit}`).then(res => res.data);
-    }
-
-    getMyFavoriteOrders(userId) {
-        return http.get(`orders/mine/favorite?userId=${userId}`).then(res => res.data);
-    }
-
-    getMyHiddenOrders(userId) {
-        return http.get(`orders/mine/hidden?userId=${userId}`).then(res => res.data);
-    }
-    
     hideToken(tokenAddress, tokenId, userId) {
-        return http.post(`hidden`, { tokenAddress, tokenId, userId }).then(res => res.data);
+        return http.post(`tokens/hide`, { tokenAddress, tokenId, userId }).then(res => res.data);
     }
 
     unhideToken(tokenAddress, tokenId, userId) {
-        return http.delete(`hidden?tokenAddress=${tokenAddress}&tokenId=${tokenId}&userId=${userId}`).then(res => res.data)
+        return http.delete(`tokens/unhide?tokenAddress=${tokenAddress}&tokenId=${tokenId}&userId=${userId}`).then(res => res.data)
     }
 
 }

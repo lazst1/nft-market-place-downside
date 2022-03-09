@@ -4,19 +4,50 @@ import { useWindowSize } from '@vueuse/core'
 import { watch } from 'vue';
 import NavBar from './core/container/NavBar.vue';
 import { useStore } from 'vuex';
+import { useToast } from 'vue-toastification';
+import { useRouter } from 'vue-router';
 
 const store = useStore();
-
+const toast = useToast();
+const router = useRouter();
 
 if (typeof window.ethereum !== 'undefined') {
   window.ethereum.on('accountsChanged', function (accounts) {
-    store.dispatch("auth/login", accounts[0]);
+    ethereum.request({ method: 'eth_chainId' })
+      .then(chain => {
+        if (chain !== '0x61') {
+          toast.error('Please switch to BSC Testnet');
+          store.dispatch('auth/login', null)
+          router.push('/login');
+        } else {
+          store.dispatch("auth/login", accounts[0]);
+        }
+      })
   })
   ethereum
     .request({ method: 'eth_accounts' })
     .then(accounts => {
-      store.dispatch("auth/login", accounts[0]);
+      ethereum.request({ method: 'eth_chainId' })
+        .then(chain => {
+          if (chain !== '0x61') {
+            toast.error('Please switch to BSC Testnet');
+            store.dispatch('auth/login', null)
+            router.push('/login');
+          } else {
+            store.dispatch("auth/login", accounts[0]);
+          }
+        })
     })
+  ethereum.on('chainChanged', (chainId) => {
+    if (chainId !== '0x61') {
+      toast.error('Please switch to BSC Testnet')
+      store.dispatch('auth/login', null);
+      router.push('/login');
+    }
+  });
+  ethereum.on('connect', (connectInfo) => {
+    console.log(connectInfo)
+  });
 }
 store.commit('app/UPDATE_WINDOW_WIDTH', window.innerWidth);
 const { width: windowWidth } = useWindowSize()

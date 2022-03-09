@@ -32,15 +32,20 @@ const initialOrders = {
     }
 }
 
+const defaultOrders = {
+    data: [],
+    loading: true
+}
+
 const initialMyOrders = {
-    onSale: initialOrders,
+    onSale: defaultOrders,
     downside: {
-        all: initialOrders,
-        bought: initialOrders,
-        sold: initialOrders
+        all: defaultOrders,
+        bought: defaultOrders,
+        sold: defaultOrders
     },
-    favorite: [],
-    hidden: [],
+    favorite: defaultOrders,
+    hidden: defaultOrders,
 }
 
 export default createStore({

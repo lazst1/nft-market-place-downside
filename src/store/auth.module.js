@@ -27,13 +27,6 @@ export const auth = {
                     user => {
                         rootState.user = user;
                         commit('loginSuccess', user);
-                        dispatch('market/collectNftsFromWallet', { walletAddress }, { root: true });
-                        dispatch('market/getSaleOrders', walletAddress, { root: true });
-                        dispatch('market/orderLogs', null, { root: true });
-                        dispatch('market/myActiveOrders', { walletAddress }, { root: true });
-                        dispatch('market/myOrdersUnderDownsideProtection', walletAddress, { root: true });
-                        dispatch('market/myFavoriteOrders', user.id, { root: true });
-                        dispatch('market/myHiddenOrders', user.id, { root: true });
 
                         return user;
                     },
