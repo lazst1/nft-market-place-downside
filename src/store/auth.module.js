@@ -27,6 +27,7 @@ export const auth = {
                     user => {
                         rootState.user = user;
                         commit('loginSuccess', user);
+                        dispatch('market/orderLogs', null, { root: true });
 
                         return user;
                     },
