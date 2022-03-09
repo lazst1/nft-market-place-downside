@@ -15,11 +15,6 @@ marketService.getSaleOrders().then(res => {
     loading.value = false;
     orders.value = res.items;
 })
-
-const handleClick = (value) => {
-    open.value = value
-}
-
 </script>
 
 <template>
@@ -28,8 +23,6 @@ const handleClick = (value) => {
         :sidebar="true"
         :bIcon="true"
         :animation="false"
-        v-model="open"
-        @handle-click="handleClick"
     >
         <template v-slot:caption>
             <div class="flex items-center w-full">

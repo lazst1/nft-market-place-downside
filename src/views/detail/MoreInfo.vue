@@ -25,8 +25,8 @@ const store = useStore();
 const open = ref(false);
 const tab = ref('Please select');
 
-const handleClick = (value) => {
-    open.value = value
+const handleClick = () => {
+    open.value = !open.value
 }
 const selectTab = (value) => {
     tab.value = value || "Please select";
@@ -148,6 +148,7 @@ const cancelNFT = () => {
                 :sidebar="true"
                 v-model="open"
                 @handle-click="handleClick"
+                :handleEmit="true"
                 class="absolute top-0 width"
             >
                 <template v-slot:caption>

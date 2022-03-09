@@ -12,16 +12,11 @@ const items = [
         name: 'All time'
     },
 ]
-const open = ref(true);
-
-const handleClick = (value) => {
-    open.value = value
-}
 
 </script>
 
 <template>
-    <accordion v-model="open" @handle-click="handleClick">
+    <accordion>
         <template v-slot:caption>
             <div class="flex items-center">
                 <div class="text-lg font-ibm-bold pt-4 pb-3.5 mr-24">History</div>

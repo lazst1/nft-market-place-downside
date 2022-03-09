@@ -17,13 +17,8 @@ const props = defineProps({
 const emit = defineEmits(['select-group', 'select-tab']);
 
 const store = useStore();
-const open = ref(false);
 const selectedTab = ref('ALL');
 const itemCounts = computed(() => props.counts);
-
-const handleClick = (value) => {
-    open.value = value
-}
 
 const computedGroup = computed({
     get: () => props.selectedGroup
@@ -121,8 +116,6 @@ const selectTab = (value) => {
         :border="false"
         :sidebar="true"
         class="-mt-px"
-        v-model="open"
-        @handle-click="handleClick"
     >
         <template v-slot:caption>
             <div class="text-primary-900 font-ibm-light text-description pt-3 mb-1.5">

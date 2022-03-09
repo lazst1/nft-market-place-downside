@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 
 const props = defineProps({
     accordion: {
@@ -18,26 +18,46 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    modelValue: {
+    value: {
         type: Boolean,
         default: true
     },
     animation: {
         type: Boolean,
         default: true
+    },
+    handleEmit: Boolean,
+    modelValue: Boolean
+})
+
+const emit = defineEmits(['handle-click']);
+
+const anim = ref(null);
+const aHeight = ref(0);
+const open = ref(props.handleEmit ? props.modelValue : props.value);
+
+const handleClick = () => {
+    if (props.handleEmit) {
+        emit('handle-click');
+        console.log(props.modelValue);
+    } else {
+        open.value = props.accordion ? !open.value : true;
+    }
+}
+
+watchEffect(() => {
+    if (props.handleEmit) {
+        open.value = props.modelValue;
     }
 })
 
-const emit = defineEmits(['handle-click'])
-const anim = ref(null);
-const aHeight = ref(0);
-
-const handleClick = () => {
-    emit('handle-click', props.accordion ? !props.modelValue : true)
-}
-
 onMounted(() => {
-    aHeight.value = anim.value.scrollHeight;
+    aHeight.value = 'fit-content';
+    if (anim.value) {
+        setTimeout(() => {
+            aHeight.value = anim.value.scrollHeight + 'px';
+        }, 500);
+    }
 })
 
 </script>
@@ -54,12 +74,12 @@ onMounted(() => {
             </div>
             <div v-if="accordion" class="self-center cursor-pointer">
                 <font-awesome-icon
-                    v-if="!modelValue"
+                    v-if="!open"
                     :icon="['fas', 'sort-down']"
                     :class="[bIcon ? 'text-2xl' : 'text-sm', '-translate-y-1/3']"
                 />
                 <font-awesome-icon
-                    v-if="modelValue"
+                    v-if="open"
                     :icon="['fas', 'sort-up']"
                     :class="[bIcon ? 'text-2xl' : 'text-sm']"
                 />
@@ -67,9 +87,9 @@ onMounted(() => {
         </div>
         <div
             :class="[animation ? 'transition-all overflow-hidden' : '']"
-            :style="{ maxHeight: animation ? modelValue ? aHeight + 'px' : '0' : '' }"
+            :style="{ maxHeight: animation ? open ? aHeight : '0' : '' }"
         >
-            <div ref="anim" v-if="!animation ? modelValue : true">
+            <div ref="anim" v-if="!animation ? open : true">
                 <slot />
             </div>
         </div>
