@@ -35,6 +35,7 @@ const order = {
     connect: props.data.connect,
     sold: props.data.sold,
     closed: props.data.closed,
+    votes: props.data.votes,
 }
 const store = useStore();
 const vote = ref(order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));

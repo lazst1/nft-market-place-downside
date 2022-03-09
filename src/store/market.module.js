@@ -12,29 +12,6 @@ export const market = {
     state: {
     },
     actions: {
-        // collect nfts from user wallet
-        collectNftsFromWallet({ commit, rootState }, { walletAddress, page = 0 }) {
-            moralisService.getMyNFTs(walletAddress, 6, 6 * page).then(async nftData => {
-                const collectedNFTs = await JSON.parse(JSON.stringify(nftData));
-                const nfts = collectedNFTs.result.map(async nft => {
-                    const tokenContract = new rootState.web3.eth.Contract(
-                        erc721ABI,
-                        rootState.web3.utils.toChecksumAddress(nft.token_address),
-                    );
-
-                    const approvedAddress = await tokenContract.methods.getApproved(nft.token_id).call({
-                        from: walletAddress, gas: 210000
-                    }).then(res => res);
-
-                    nft.approved = approvedAddress === marketAddress ? true : false;
-
-                    return nft;
-                });
-                collectedNFTs.result = await Promise.all(nfts).then(res => res);
-
-                rootState.collectedNFTs = collectedNFTs;
-            });
-        },
         // fetch active orders on sale in the martketplace.
         getSaleOrders({ commit, rootState }, walletAddress) {
             if (walletAddress) {
