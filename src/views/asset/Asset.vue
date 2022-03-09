@@ -17,6 +17,8 @@ import Ledger from './Ledger.vue';
 import AssetSellModal from './AssetSellModal.vue';
 import { useRoute, useRouter } from 'vue-router';
 import moralisService from '@/core/services/moralis.service';
+import MoreInfo from '../detail/MoreInfo.vue';
+import marketService from '../../core/services/market.service';
 
 const store = useStore();
 const router = useRouter();
@@ -24,11 +26,7 @@ const route = useRoute();
 const tokenAddress = route.params.tokenAddress;
 const tokenId = route.params.tokenId;
 const asset = ref({});
-moralisService.getNft(tokenAddress, tokenId).then(res => {
-    if (!res.owner_of) {
-        router.push('/browse');
-        return;
-    }
+moralisService.getNft(tokenAddress, tokenId).then(async res => {
     asset.value = res;
 })
 
@@ -45,7 +43,8 @@ const handleModal = (value) => {
         <div class="grid grid-cols-7 text-white gap-8 mt-4 lg:mt-9">
             <div class="col-span-7 md:col-span-3">
                 <asset-user v-if="store.state.app.windowWidth < themeConfig.md" :asset="asset" />
-                <asset-detail :img_url="asset.image_url" />
+                <!-- <asset-detail :img_url="asset.image_url" /> -->
+                <more-info :nft="asset" :percent="0" :period="0" />
             </div>
             <div class="col-span-7 md:col-span-4 relative">
                 <asset-user v-if="store.state.app.windowWidth >= themeConfig.md" :asset="asset" />

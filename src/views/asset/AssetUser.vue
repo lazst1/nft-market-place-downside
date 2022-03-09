@@ -2,13 +2,36 @@
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
 import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
+import marketService from '../../core/services/market.service';
+import { ref, watchEffect } from 'vue';
 
 const props = defineProps({
-    asset: Object
+    asset: Object,
 })
 
 const store = useStore();
+const votes = ref([]);
 
+watchEffect(() => {
+    if (props.asset) {
+        marketService.getTokenInfo(props.asset.token_address, props.asset.token_id).then(res => {
+            votes.value = res.votes || [];
+        });
+    }
+})
+
+const handleVote = () => {
+    const userIndex = votes.value.findIndex(id => id === store.state.user.id);
+    if (userIndex > -1) {
+        marketService.cancelVote(props.asset.token_address, props.asset.token_id, store.state.user.id).then(res => {
+            votes.value.splice(userIndex, 1);
+        })
+    } else {
+        marketService.vote(props.asset.token_address, props.asset.token_id, store.state.user.id).then(res => {
+            votes.value.push(store.state.user.id);
+        })
+    }
+}
 </script>
 
 <template>
@@ -18,7 +41,7 @@ const store = useStore();
             <div
                 class="flex-1 flex-wrap flex text-2xl md:text-3xl font-ibm-bold mt-1.5 md:mt-1.25 pb-4.75 md:pb-8"
             >
-                <div class="mr-4">{{asset.name}}</div>
+                <div class="mr-4">{{ asset.name }}</div>
             </div>
             <div class="flex text-xxs pb-3.5 md:pb-12">
                 <div class="flex-1 flex flex-wrap leading-5">
@@ -41,10 +64,11 @@ const store = useStore();
         <div
             class="text:xs md:text-base text-tertiary-400 flex items-end font-ibm-light md:font-ibm-semi-bold pt-4"
         >
-            <span class="px-2 leading-4">124</span>
+            <span class="px-2 leading-4">{{ votes.length }}</span>
             <font-awesome-icon
                 :icon="['fas', 'thumbs-up']"
-                class="text-lg md:text-2xl text-primary-900"
+                :class="[votes.findIndex(id => id === store.state.user.id) > -1 ? 'text-primary-900' : 'text-white', 'hover:text-primary-900 cursor-pointer text-lg md:text-2xl']"
+                @click="handleVote()"
             />
         </div>
     </div>
