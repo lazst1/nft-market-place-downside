@@ -11,14 +11,9 @@ const more = ref(false);
 const orders = ref([]);
 const loading = ref(true);
 
-watchEffect(() => {
-    if (store.state.user.walletAddress) {
-        console.log('===============')
-        marketService.getSaleOrders(store.state.user.walletAddress).then(res => {
-            loading.value = false;
-            orders.value = res.items;
-        })
-    }
+marketService.getSaleOrders().then(res => {
+    loading.value = false;
+    orders.value = res.items;
 })
 
 const handleClick = (value) => {
