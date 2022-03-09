@@ -15,8 +15,6 @@ import VueClipboard from 'vue3-clipboard'
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
-import InfiniteScroll from "infinite-loading-vue3";
-import { createValidation } from 'vue3-form-validation'
 
 import {
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faMoon, faSun, faSortUp, faSortDown, faCloudUploadAlt, faEllipsisV, faThumbsUp, faUndo,
@@ -47,15 +45,6 @@ const options = {
     rtl: false
 }
 
-const validation = createValidation({
-    defaultValidationBehavior: 'lazy',
-    validationBehavior: {
-        change: ({ force }) => !force,
-        lazy: ({ touched }) => touched,
-        submit: ({ submit, hasError }) => submit || hasError
-    }
-})
-
 createApp(App)
     .provide('$moralis', Moralis)
     .use(store)
@@ -67,8 +56,6 @@ createApp(App)
         appendToBody: true,
     })
     .use(Toast, options)
-    .use(InfiniteScroll)
-    .use(validation)
     .component("font-awesome-icon", FontAwesomeIcon)
     .component('Multiselect', Multiselect)
     .mount('#app')
