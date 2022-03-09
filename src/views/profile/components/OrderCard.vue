@@ -36,7 +36,7 @@ const hideNFT = (hide) => {
     emit('hide-nft', props.order, hide);
 }
 const cancelOrder = () => {
-    emit('cancel-order', props.order);
+    // emit('cancel-order', props.order);
 }
 
 </script>
