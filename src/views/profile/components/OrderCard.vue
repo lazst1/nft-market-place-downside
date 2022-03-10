@@ -10,7 +10,7 @@ import marketService from '../../../core/services/market.service';
 const props = defineProps({
     order: Object,
 });
-const emit = defineEmits(['handle-vote', 'hide-nft', 'cancel-order']);
+const emit = defineEmits(['handle-vote', 'hide-nft', 'cancel-order', 'approve']);
 
 const store = useStore();
 const item = computed(() => props.order);
@@ -23,7 +23,7 @@ function onClickOutside() {
 }
 
 function approve() {
-    store.dispatch('market/approve', { contractAddress: props.order.tokenAddress, tokenId: props.order.tokenId })
+    emit('approve', props.order);
 }
 
 const openCancel = () => {

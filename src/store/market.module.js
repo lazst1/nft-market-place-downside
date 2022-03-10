@@ -44,7 +44,6 @@ export const market = {
         },
         // buyer do cancel an downside protection order
         cancelOrderByBuyer({ commit, rootState }, orderId) {
-            console.log(orderId)
             rootState.marketContract.methods.claimDownsideProtectionAmount(
                 orderId
             ).send({ from: rootState.user.walletAddress, gas: 250000 });

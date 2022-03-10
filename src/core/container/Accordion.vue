@@ -39,7 +39,6 @@ const open = ref(props.handleEmit ? props.modelValue : props.value);
 const handleClick = () => {
     if (props.handleEmit) {
         emit('handle-click');
-        console.log(props.modelValue);
     } else {
         open.value = props.accordion ? !open.value : true;
     }

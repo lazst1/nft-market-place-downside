@@ -2,7 +2,7 @@
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import { saleType } from '@/core/config'
 import NftmxModal from '@/core/components/NftmxModal.vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import DetailButton from '@/core/components/DetailButton.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
@@ -24,6 +24,7 @@ const props = defineProps({
 
 const store = useStore();
 const route = useRoute();
+const router = useRouter();
 const tokenAddress = route.params.tokenAddress;
 const tokenId = route.params.tokenId;
 const nftPrice = ref();
@@ -58,23 +59,23 @@ function createOrder() {
 
     createHashTags();
 
-    store.dispatch(
-        'market/createOrder',
-        {
-            tokenAddress,
-            tokenId: token_id,
-            nftPrice: price,
-            downsidePeriod: period.value,
-            downsideRate: rate
-        }
-    )
+    store.state.marketContract.methods.createOrder(
+        tokenAddress,
+        token_id,
+        store.state.web3.utils.toWei(price, 'ether'),
+        rate,
+        period.value,
+        false,
+        period.value
+    ).send({ from: store.state.user.walletAddress, gas: 250000 })
+        .then(res => {
+            router.push('/profile');
+        }).catch(err => { console.log('err ', err) });
 }
 
 function createHashTags() {
     if (hashtagValue.value) {
-        marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId, props.asset.name).then(res => {
-            console.log('createHashTags: ', res);
-        })
+        marketService.createHashTags(hashtagValue.value, tokenAddress, tokenId, props.asset.name);
     }
 }
 
