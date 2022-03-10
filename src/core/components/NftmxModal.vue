@@ -51,9 +51,16 @@ const cancel = () => confirmCancel('cancel')
   <overlay v-show="value" @overlay-click="cancel">
     <div class="h-full z-50 overflow-auto modal" @click="cancel">
       <div class="h-1/6" />
-      <div @click.stop :class="[big ? 'xl:w-modal-md 3xl:w-modal-big' : secondary ? 'w-test' : 'w-full', 'bg-tertiary-900 text-white']">
+      <div
+        @click.stop
+        :class="[big ? 'xl:w-modal-md 3xl:w-modal-big' : secondary ? 'w-test' : 'w-full', 'bg-tertiary-900 text-white']"
+      >
         <div class="text-right text-xl p-5">
-          <icon :path="mdiClose" :size="24" class="cursor-pointer" @click="cancel" />
+          <font-awesome-icon
+            :icon="['fas', 'times']"
+            class="cursor-pointer hover:text-tertiary-400 transition"
+            @click="cancel"
+          />
         </div>
         <slot />
       </div>

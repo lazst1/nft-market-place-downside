@@ -31,7 +31,7 @@ const store = useStore();
 
 <template>
     <div
-        :class="[navbar ? 'w-full px-0 lg:px-6' : 'w-full sm:w-68.5 border border-black', 'flex justify-between items-center gap-4 px-6 h-12.5']"
+        :class="[navbar ? 'w-full' : 'w-full sm:w-68.5 border border-black', 'flex justify-between items-center gap-4 h-12.5']"
     >
         <div class="flex items-center w-full">
             <font-awesome-icon
