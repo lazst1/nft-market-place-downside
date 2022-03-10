@@ -49,11 +49,10 @@ export const defaultUser = {
     bio: "",
     email: "",
     instagram: "",
-    name: "Kyle White",
+    name: "Your name",
     profile_banner: "/images/profile-banner-1920.png",
     profile_img: "/images/profile-big.png",
     twitter: "",
-    walletAddress: "0xb29265736dcc20867f6b3c0f5aa8e5a64942b816",
     website: ""
 }
 
