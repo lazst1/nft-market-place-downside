@@ -55,7 +55,7 @@ onMounted(() => {
     if (anim.value) {
         setTimeout(() => {
             aHeight.value = anim.value.scrollHeight + 'px';
-        }, 500);
+        }, 1000);
     }
 })
 

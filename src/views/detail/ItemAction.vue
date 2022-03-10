@@ -23,15 +23,6 @@ import { exchangeRate, TokenType } from '@/core/config';
 import marketService from '@/core/services/market.service';
 import { roundTo } from '@/core/utils';
 
-const people = [
-    {
-        id: 1,
-        name: 'Wade Cooper',
-        image:
-            'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-]
-
 const props = defineProps({
     order: Object,
     tokenPrice: String,
@@ -43,6 +34,7 @@ const syndicationModalActive = ref(false);
 const store = useStore();
 const balance = ref();
 const vote = ref(false);
+const nftCreator = ref('');
 
 const handleBuyModal = (value) => {
     buyModalActive.value = value;
@@ -59,6 +51,13 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
 watchEffect(() => {
     if (props.order.votes) {
         vote.value = props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false);
+    }
+})
+watchEffect(() => {
+    if (props.nft && props.nft.token_address) {
+        moralisService.nftTransfers(props.nft.token_address, props.nft.token_id).then(res => {
+            nftCreator.value = res.result[res.result.length - 1].to_address;
+        })
     }
 })
 
@@ -90,7 +89,9 @@ function handleVote() {
         <div class="flex flex-wrap flex-1">
             <div>
                 Created by
-                <span class="text-primary-900">234...293</span> |&nbsp;
+                <span class="text-primary-900">
+                    <nftmx-wallet-address-pop class="text-primary-900" :address="nftCreator"></nftmx-wallet-address-pop>
+                </span> |&nbsp;
             </div>
             <div>
                 Owned by
@@ -102,7 +103,9 @@ function handleVote() {
         <div class="text-primary-900 font-ibm-bold">AUCTION</div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold p-4 sm:p-7 gap-4">
+    <div
+        class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold p-4 sm:p-7 gap-4"
+    >
         <div class="items-center">
             <div class="flex flex-col items-center sm:items-start">
                 <div class="mt-3.25 text-lg">Current auction ends in</div>

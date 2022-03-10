@@ -4,6 +4,7 @@ import { themeConfig } from '@/core/config';
 import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
 import marketService from '../../core/services/market.service';
 import { ref, watchEffect } from 'vue';
+import moralisService from '../../core/services/moralis.service';
 
 const props = defineProps({
     asset: Object,
@@ -11,12 +12,16 @@ const props = defineProps({
 
 const store = useStore();
 const votes = ref([]);
+const nftCreator = ref('');
 
 watchEffect(() => {
-    if (props.asset) {
+    if (props.asset && props.asset.token_address) {
         marketService.getTokenInfo(props.asset.token_address, props.asset.token_id).then(res => {
             votes.value = res.votes || [];
         });
+        moralisService.nftTransfers(props.asset.token_address, props.asset.token_id).then(res => {
+            nftCreator.value = res.result[res.result.length-1].to_address;
+        })
     }
 })
 
@@ -47,7 +52,12 @@ const handleVote = () => {
                 <div class="flex-1 flex flex-wrap leading-5">
                     <div>
                         Created by
-                        <span class="text-primary-900">234...293</span> |&nbsp;
+                        <span class="text-primary-900">
+                            <nftmx-wallet-address-pop
+                                class="text-primary-900"
+                                :address="nftCreator"
+                            ></nftmx-wallet-address-pop>
+                        </span> |&nbsp;
                     </div>
                     <div>
                         Owned by

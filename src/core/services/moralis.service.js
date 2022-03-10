@@ -20,6 +20,9 @@ class MoralisService {
     getBalance(address) {
         return http.get(`${address}/balance?chain=${moralisChain}`).then(res => res.data);
     }
+    nftTransfers(token_address, token_id) {
+        return http.get(`nft/${token_address}/${token_id}/transfers?chain=${moralisChain}&format=decimal`).then(res => res.data);
+    }
 }
 
 export default new MoralisService

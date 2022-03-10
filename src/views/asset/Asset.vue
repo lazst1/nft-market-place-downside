@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watchEffect } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import Accordion from '@/core/container/Accordion.vue';
@@ -26,12 +26,17 @@ const route = useRoute();
 const tokenAddress = route.params.tokenAddress;
 const tokenId = route.params.tokenId;
 const asset = ref({});
-moralisService.getNft(tokenAddress, tokenId).then(async res => {
-    asset.value = res;
-})
-
 const sale = ref(saleType.FIX_SALE);
 const sellModalActive = ref(false);
+
+watchEffect(() => {
+    if (tokenAddress && tokenId) {
+        moralisService.getNft(tokenAddress, tokenId).then(res => {
+            asset.value = res;
+        })
+    }
+})
+
 const handleModal = (value) => {
     sellModalActive.value = value
 }
