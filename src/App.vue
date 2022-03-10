@@ -22,6 +22,8 @@ if (typeof window.ethereum !== 'undefined') {
         } else {
           store.dispatch("auth/login", accounts[0]);
         }
+      }).catch(err => {
+        consolr.log('err ', err);
       })
   })
   ethereum
@@ -36,6 +38,8 @@ if (typeof window.ethereum !== 'undefined') {
           } else {
             store.dispatch("auth/login", accounts[0]);
           }
+        }).catch(err => {
+          consolr.log('err ', err);
         })
     })
   ethereum.on('chainChanged', (chainId) => {
