@@ -18,33 +18,31 @@ marketService.getSaleOrders().then(res => {
 </script>
 
 <template>
-    <accordion
-        :border="false"
-        :sidebar="true"
-        :bIcon="true"
-    >
-        <template v-slot:caption>
-            <div class="flex items-center w-full">
-                <div class="flex-1 text-sm font-press pt-3 pb-5 mr-4">Trending Collection</div>
+    <div class="-mx-4">
+        <accordion :border="false" :bIcon="true">
+            <template v-slot:caption>
+                <div class="flex items-center w-full">
+                    <div class="flex-1 text-sm font-press pt-3 pb-5 mr-4">Trending Collection</div>
+                </div>
+            </template>
+            <div class="px-4 pt-2 pb-4">
+                <div
+                    class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
+                >
+                    <nftmx-sale-card v-for="(order, index) in orders" :data="order" :key="index"></nftmx-sale-card>
+                </div>
+                <div
+                    v-if="loading"
+                    class="h-96 flex justify-center items-center font-ibm-bold text-tertiary-500 text-lg"
+                >Loading...</div>
+                <div
+                    v-if="!loading && orders.length === 0"
+                    class="h-96 flex justify-center items-center font-ibm-bold text-tertiary-500 text-lg"
+                >No NFTs found</div>
             </div>
-        </template>
-        <div class="pt-2">
-            <div
-                class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
-            >
-                <nftmx-sale-card v-for="(order, index) in orders" :data="order" :key="index"></nftmx-sale-card>
+            <div v-if="more" class="text-sm text-right px-6 text-primary-900 font-ibm-bold mt-3">
+                <span class="cursor-pointer">See More</span>
             </div>
-            <div
-                v-if="loading"
-                class="h-96 flex justify-center items-center font-ibm-bold text-tertiary-500 text-lg"
-            >Loading...</div>
-            <div
-                v-if="!loading && orders.length === 0"
-                class="h-96 flex justify-center items-center font-ibm-bold text-tertiary-500 text-lg"
-            >No NFTs found</div>
-        </div>
-        <div v-if="more" class="text-sm text-right px-6 text-primary-900 font-ibm-bold mt-3">
-            <span class="cursor-pointer">See More</span>
-        </div>
-    </accordion>
+        </accordion>
+    </div>
 </template>
