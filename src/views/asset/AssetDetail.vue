@@ -1,57 +1,168 @@
 <script setup>
-import Ribbon from '@/core/components/Ribbon.vue';
 import DetailButton from '@/core/components/DetailButton.vue';
+import Ribbon from '@/core/components/Ribbon.vue';
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+import Accordion from '../../core/container/Accordion.vue';
+import { assetDetailTabs, defaultUser } from '@/core/config'
+import InfoModal from '../detail/components/InfoModal.vue'
+import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
+import { toUpercaseFirstLetterOfString } from '@/core/utils'
+import { baseURL } from '@/core/config';
 
-
-defineProps({
-    img_url: String,
-    percent: {
-        type: Number,
-        default: 100
-    },
-    period: {
-        type: Number,
-        default: 365
-    },
+const props = defineProps({
+    nft: Object,
+    nftCreator: {
+        type: Object,
+        default: defaultUser
+    }
 })
 
+const store = useStore();
+const open = ref(false);
+const tab = ref('Please select');
 
+const handleClick = () => {
+    open.value = !open.value
+}
+const selectTab = (value) => {
+    tab.value = value || "Please select";
+    open.value = false;
+}
+const cancelNFT = () => {
+
+}
 </script>
 
 <template>
     <div
-        class="relative overflow-hidden w-full pt-73per"
-        :style="{ background: 'url(' + img_url + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center', backgroundColor: '#222222' }"
+        class="relative overflow-hidden p-6 w-full h-asset-img-lg border border-black"
+        :style="{ background: 'url(' + '/images/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#222222' }"
     >
-        <!-- <ribbon :percent="percent" :period="period" /> -->
+        <info-modal
+            :title="toUpercaseFirstLetterOfString(tab)"
+            v-if="tab === assetDetailTabs[0]"
+            @select-tab="selectTab"
+        >
+            <div class="text-xxs">
+                Created by
+                <nftmx-wallet-address-pop
+                    class="text-primary-900"
+                    :address="nftCreator.walletAddress"
+                />
+            </div>
+            <div class="text-xxs text-tertiary-500 mt-4">
+                {{
+                    nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
+                }}
+            </div>
+        </info-modal>
+        <info-modal
+            :title="toUpercaseFirstLetterOfString(tab)"
+            v-if="tab === assetDetailTabs[1]"
+            @select-tab="selectTab"
+        >
+            <div class="flex gap-6 items-start">
+                <img
+                    :src="nftCreator.profile_img ? baseURL + nftCreator.profile_img : defaultUser.profile_img"
+                    class="w-21 h-21 object-cover"
+                />
+                <div class="text-xxs text-tertiary-500 leading-5">
+                    {{
+                        nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
+                    }}
+                </div>
+            </div>
+            <div class="mt-6.5 flex gap-6 items-center">
+                <div class="flex gap-4">
+                    <font-awesome-icon :icon="['fas', 'user']" class="text-primary-900 text-sm" />
+                    <span class="text-xxs">Activity</span>
+                </div>
+                <div class="flex gap-4">
+                    <font-awesome-icon :icon="['fab', 'twitter']" class="text-primary-900 text-sm" />
+                    <span class="text-xxs">Twitter</span>
+                </div>
+            </div>
+        </info-modal>
+        <info-modal
+            :title="toUpercaseFirstLetterOfString(tab)"
+            v-if="tab === assetDetailTabs[2]"
+            @select-tab="selectTab"
+        >
+            <div class="text-xxs flex justify-between">
+                <span class="font-ibm-medium">Contract Address</span>
+                <nftmx-wallet-address-pop class="text-primary-900" :address="nft.token_address" />
+            </div>
+            <div class="text-xxs flex justify-between mt-4">
+                <span class="font-ibm-medium">Token ID</span>
+                <span>{{ nft.token_id }}</span>
+            </div>
+            <div class="text-xxs flex justify-between mt-4">
+                <span class="font-ibm-medium">Blockchain</span>
+                <span>BSC Testnet</span>
+            </div>
+        </info-modal>
     </div>
-    <div class="overflow-hidden overflow-x-auto mt-4 mb-8 items-center">
-        <div class="flex w-full items-center text-sm font-ibm-bold">
-            <detail-button>Details</detail-button>
-            <detail-button class="min-w-fit">About the creator</detail-button>
-            <detail-button class="min-w-fit">Chain info</detail-button>
-            <detail-button class="min-w-fit">Downside Protection</detail-button>
-            <div class="grow"></div>
-            <div
-                class="border border-black w-8 h-8 px-2 pt-0.75 hover:bg-primary-900 bg-tertiary-800"
-            >
-                <font-awesome-icon :icon="['fas', 'undo']" />
+    <div class="mt-4 mb-8 items-center">
+        <div
+            :class="[open ? 'h-30' : 'h-0', 'relative flex w-full text-sm font-ibm items-baseline']"
+        >
+            <div v-if="store.state.app.windowWidth >= 1920" class="flex-1 flex px-5">
+                <detail-button
+                    v-for="(name, i) in assetDetailTabs"
+                    :key="i"
+                    @click="selectTab(name === tab ? 'Please select' : name)"
+                    :active="name === tab"
+                >{{ name }}</detail-button>
             </div>
-            <div
-                class="border-y border-r border-black w-8 h-8 px-2 pt-0.75 hover:bg-primary-900 bg-tertiary-800"
+            <accordion
+                v-if="store.state.app.windowWidth < 1920"
+                :border="false"
+                :sidebar="true"
+                v-model="open"
+                @handle-click="handleClick"
+                :handleEmit="true"
+                class="absolute top-0 width"
             >
-                <font-awesome-icon :icon="['fas', 'external-link-alt']" />
-            </div>
-            <div
-                class="border-y border-black w-8 h-8 px-2 pt-0.75 hover:bg-primary-900 bg-tertiary-800"
-            >
-                <font-awesome-icon :icon="['fas', 'share-alt']" />
-            </div>
-            <div
-                class="border border-black w-8 h-8 px-2 pt-0.75 hover:bg-primary-900 bg-tertiary-800"
-            >
-                <font-awesome-icon :icon="['fas', 'bars']" />
+                <template v-slot:caption>
+                    <detail-button class="text-sm pt-1.5 font-ibm-light">{{ tab }}</detail-button>
+                </template>
+                <detail-button
+                    v-for="(name, i) in assetDetailTabs"
+                    :key="i"
+                    @click="selectTab(name === tab ? 'Please select' : name)"
+                    :active="name === tab"
+                >{{ name }}</detail-button>
+            </accordion>
+            <div class="flex-1"></div>
+            <div class="flex object-right">
+                <div
+                    class="border border-black transition w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                >
+                    <font-awesome-icon :icon="['fas', 'undo']" />
+                </div>
+                <div
+                    class="border-y border-r border-black transition w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                >
+                    <font-awesome-icon :icon="['fas', 'external-link-alt']" />
+                </div>
+                <div
+                    class="border-y border-black transition w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                >
+                    <font-awesome-icon :icon="['fas', 'share-alt']" />
+                </div>
+                <div
+                    class="border border-black transition w-8 h-8 px-2.25 pt-1.25 hover:bg-primary-900 bg-tertiary-800 cursor-pointer"
+                >
+                    <font-awesome-icon :icon="['fas', 'bars']" />
+                </div>
             </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+.width {
+    width: calc(100% - theme("spacing[40]"));
+}
+</style>

@@ -17,13 +17,8 @@ const props = defineProps({
 const emit = defineEmits(['select-group', 'select-tab']);
 
 const store = useStore();
-const open = ref(false);
 const selectedTab = ref('ALL');
 const itemCounts = computed(() => props.counts);
-
-const handleClick = (value) => {
-    open.value = value
-}
 
 const computedGroup = computed({
     get: () => props.selectedGroup
@@ -93,24 +88,15 @@ const selectTab = (value) => {
             </group-item>
         </div>
         <div class="flex gap-2.5 py-4 w-max" v-if="computedGroup.key === 'DOWNSIDE'">
-            <group-item
-                :active="selectedTab === 'ALL'"
-                @click="selectTab('ALL')"
-            >
+            <group-item :active="selectedTab === 'ALL'" @click="selectTab('ALL')">
                 All
                 <span class="font-ibm-light">{{ itemCounts.downside }}</span>
             </group-item>
-            <group-item
-                :active="selectedTab === 'BOUGHT'"
-                @click="selectTab('BOUGHT')"
-            >
+            <group-item :active="selectedTab === 'BOUGHT'" @click="selectTab('BOUGHT')">
                 Bought
                 <span class="font-ibm-light">{{ itemCounts.downsideBought }}</span>
             </group-item>
-            <group-item
-                :active="selectedTab === 'SOLD'"
-                @click="selectTab('SOLD')"
-            >
+            <group-item :active="selectedTab === 'SOLD'" @click="selectTab('SOLD')">
                 Sold
                 <span class="font-ibm-light">{{ itemCounts.downsideSold }}</span>
             </group-item>
@@ -120,9 +106,8 @@ const selectTab = (value) => {
         v-if="store.state.app.windowWidth <= themeConfig.sm"
         :border="false"
         :sidebar="true"
+        :value="false"
         class="-mt-px"
-        v-model="open"
-        @handle-click="handleClick"
     >
         <template v-slot:caption>
             <div class="text-primary-900 font-ibm-light text-description pt-3 mb-1.5">

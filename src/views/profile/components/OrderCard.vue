@@ -10,7 +10,7 @@ import marketService from '../../../core/services/market.service';
 const props = defineProps({
     order: Object,
 });
-const emit = defineEmits(['handle-vote', 'hide-nft', 'cancel-order']);
+const emit = defineEmits(['handle-vote', 'hide-nft', 'cancel-order', 'approve']);
 
 const store = useStore();
 const item = computed(() => props.order);
@@ -23,7 +23,7 @@ function onClickOutside() {
 }
 
 function approve() {
-    store.dispatch('market/approve', { contractAddress: props.order.tokenAddress, tokenId: props.order.tokenId })
+    emit('approve', props.order);
 }
 
 const openCancel = () => {
@@ -73,11 +73,11 @@ const cancelOrder = () => {
                                 :to="{ name: 'asset', params: { tokenAddress: order.tokenAddress, tokenId: order.tokenId } }"
                                 class="text-white hover:text-primary-700 cursor-pointer"
                             >List for Sale</router-link>
-                            <div
+                            <router-link
+                                :to="{ name: 'cancelOrder', params: { orderId: order.id } }"
                                 v-if="order.orderStatus === '2' && order.buyerAddress === store.state.user.walletAddress"
                                 class="text-white hover:text-primary-700 cursor-pointer"
-                                @click="openCancel"
-                            >Cancel buying</div>
+                            >Cancel buying</router-link>
                             <div
                                 v-if="order.orderStatus === '0'"
                                 class="text-white hover:text-primary-700 cursor-pointer"
@@ -105,7 +105,7 @@ const cancelOrder = () => {
                         v-click-outside="onClickOutside"
                         @click="option = !option"
                         @click.prevent
-                        class="pr-3 mr-px text-white hover:text-primary-900 text-lg cursor-pointer"
+                        class="pr-3 mr-px transition text-white hover:text-primary-900 text-lg cursor-pointer"
                     >
                         <font-awesome-icon :icon="['fas', 'ellipsis-v']" />
                     </div>
@@ -117,7 +117,7 @@ const cancelOrder = () => {
                     <span style="line-height: 0.75" class="pr-2">{{ order.votes.length }}</span>
                     <font-awesome-icon
                         :icon="['fas', 'thumbs-up']"
-                        :class="[order.votes.findIndex(id => id === store.state.user.id) > -1 ? 'text-primary-900' : 'text-white', 'hover:text-primary-900 cursor-pointer']"
+                        :class="[order.votes.findIndex(id => id === store.state.user.id) > -1 ? 'text-primary-900' : 'text-white', 'hover:text-primary-900 transition cursor-pointer']"
                         @click="handleVote()"
                     />
                 </div>

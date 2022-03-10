@@ -1,5 +1,6 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { useWindowSize } from '@vueuse/core';
+import { computed, onMounted, ref, watch, watchEffect } from 'vue';
 
 const props = defineProps({
     accordion: {
@@ -18,28 +19,53 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
-    modelValue: {
+    value: {
         type: Boolean,
         default: true
     },
     animation: {
         type: Boolean,
         default: true
+    },
+    handleEmit: Boolean,
+    modelValue: Boolean
+})
+
+const emit = defineEmits(['handle-click']);
+
+const anim = ref(null);
+const aHeight = ref(0);
+const open = ref(props.handleEmit ? props.modelValue : props.value);
+
+const handleClick = () => {
+    if (props.handleEmit) {
+        emit('handle-click');
+    } else {
+        open.value = props.accordion ? !open.value : true;
+    }
+}
+
+watchEffect(() => {
+    if (props.handleEmit) {
+        open.value = props.modelValue;
     }
 })
 
-const emit = defineEmits(['handle-click'])
-const anim = ref(null);
-const aHeight = ref(0);
-
-const handleClick = () => {
-    emit('handle-click', props.accordion ? !props.modelValue : true)
-}
-
 onMounted(() => {
-    aHeight.value = anim.value.scrollHeight;
+    aHeight.value = 'fit-content';
+    if (anim.value) {
+        setTimeout(() => {
+            if (anim.value) {
+                aHeight.value = anim.value.scrollHeight + 'px';
+            }
+        }, 1000);
+    }
 })
 
+const { width: windowWidth } = useWindowSize()
+watch(windowWidth, val => {
+    aHeight.value = anim.value.scrollHeight + 'px';
+})
 </script>
 
 
@@ -47,19 +73,19 @@ onMounted(() => {
     <div :class="[border ? 'border border-black bg-tertiary-800' : '', 'font-ibm']">
         <div
             @click="handleClick"
-            :class="[border ? 'border-b border-black' : '', sidebar ? '' : 'px-5', 'flex text-2xl text-white font-bold cursor-pointer']"
+            :class="[border && open ? 'border-b border-black' : '', sidebar ? '' : 'px-5', 'flex text-2xl text-white font-bold cursor-pointer']"
         >
             <div class="flex-1">
                 <slot name="caption"></slot>
             </div>
             <div v-if="accordion" class="self-center cursor-pointer">
                 <font-awesome-icon
-                    v-if="!modelValue"
+                    v-if="!open"
                     :icon="['fas', 'sort-down']"
                     :class="[bIcon ? 'text-2xl' : 'text-sm', '-translate-y-1/3']"
                 />
                 <font-awesome-icon
-                    v-if="modelValue"
+                    v-if="open"
                     :icon="['fas', 'sort-up']"
                     :class="[bIcon ? 'text-2xl' : 'text-sm']"
                 />
@@ -67,9 +93,9 @@ onMounted(() => {
         </div>
         <div
             :class="[animation ? 'transition-all overflow-hidden' : '']"
-            :style="{ maxHeight: animation ? modelValue ? aHeight + 'px' : '0' : '' }"
+            :style="{ maxHeight: animation ? open ? aHeight : '0' : '' }"
         >
-            <div ref="anim" v-if="!animation ? modelValue : true">
+            <div ref="anim" v-if="!animation ? open : true">
                 <slot />
             </div>
         </div>

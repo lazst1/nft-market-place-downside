@@ -5,11 +5,6 @@ import { ref } from '@vue/reactivity';
 defineProps({
     name: String,
 })
-
-const open = ref(true);
-const handleClick = (value) => {
-    open.value = value
-}
 </script>
 
 <template>
@@ -17,8 +12,6 @@ const handleClick = (value) => {
         :border="false"
         :sidebar="true"
         class="mt-4.25"
-        v-model="open"
-        @handle-click="handleClick"
     >
         <template v-slot:caption>
             <div class="text-white font-ibm text-sm mt-1.5">{{ name }}</div>

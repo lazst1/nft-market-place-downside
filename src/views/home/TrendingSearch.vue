@@ -32,17 +32,23 @@ function clickFilterBy(value) {
                     placeholder="Search items, collections, and accounts"
                 ></nftmx-search-input>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 justify-center gap-2 mt-4 lg:mt-0">
-                <nftmx-button
-                    color="secondary"
-                    label="LAUNCH YOUR DVC"
-                    class="font-press w-full max-w-search text-xs leading-5 sm:mx-2.5"
-                />
-                <nftmx-button
-                    color="primary"
-                    label="DOWNSIDE PROTECTION BENEFITS"
-                    class="font-press w-full max-w-search text-xs leading-5 sm:ml-2.5 bg-gradient-to-r from-primary-900 to-primary-700 text-white h-13"
-                ></nftmx-button>
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 justify-center gap-2 mt-4 lg:mt-0 w-full xl:w-auto"
+            >
+                <div class="xl:ml-5">
+                    <nftmx-button
+                        color="secondary"
+                        label="LAUNCH YOUR DVC"
+                        class="font-press w-full xl:max-w-search text-xs leading-5 h-13.5"
+                    />
+                </div>
+                <div class="xl:mx-2.5">
+                    <nftmx-button
+                        color="primary"
+                        label="DOWNSIDE PROTECTION BENEFITS"
+                        class="font-press w-full xl:max-w-search text-xs leading-5 bg-gradient-to-r from-primary-900 to-primary-700 text-white h-13.5"
+                    ></nftmx-button>
+                </div>
             </div>
         </div>
         <div v-if="filterActive">
@@ -60,138 +66,90 @@ function clickFilterBy(value) {
                 <div class="border border-black w-full px-5 h-42.5">
                     <search-accordion-container title="Status">
                         <template v-slot:content>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >Buy Now</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >On Auction</nftmx-button-slot>
+                            <nftmx-button-slot>Buy Now</nftmx-button-slot>
+                            <nftmx-button-slot>On Auction</nftmx-button-slot>
                             <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >Has Offers</nftmx-button-slot>
+                            <nftmx-button-slot>Has Offers</nftmx-button-slot>
                         </template>
                     </search-accordion-container>
                 </div>
                 <div class="border border-black w-full px-5 h-42.5">
                     <search-accordion-container title="Status">
                         <template v-slot:content>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >Buy Now</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >On Auction</nftmx-button-slot>
+                            <nftmx-button-slot>Buy Now</nftmx-button-slot>
+                            <nftmx-button-slot>On Auction</nftmx-button-slot>
                             <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >Has Offers</nftmx-button-slot>
+                            <nftmx-button-slot>Has Offers</nftmx-button-slot>
                         </template>
                     </search-accordion-container>
                 </div>
                 <div class="border border-black w-full px-5 h-42.5">
                     <search-accordion-container title="Status">
                         <template v-slot:content>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >Buy Now</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >On Auction</nftmx-button-slot>
+                            <nftmx-button-slot>Buy Now</nftmx-button-slot>
+                            <nftmx-button-slot>On Auction</nftmx-button-slot>
                             <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >Has Offers</nftmx-button-slot>
+                            <nftmx-button-slot>Has Offers</nftmx-button-slot>
                         </template>
                     </search-accordion-container>
                 </div>
                 <div class="border border-black w-full px-5 h-42.5">
                     <search-accordion-container title="Status">
                         <template v-slot:content>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >Buy Now</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >On Auction</nftmx-button-slot>
+                            <nftmx-button-slot>Buy Now</nftmx-button-slot>
+                            <nftmx-button-slot>On Auction</nftmx-button-slot>
                             <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-full"
-                                align="text-left pl-4"
-                                outline
-                            >Has Offers</nftmx-button-slot>
+                            <nftmx-button-slot>Has Offers</nftmx-button-slot>
                         </template>
                     </search-accordion-container>
                 </div>
             </div>
-            <div
-                v-if="filterBy === 'collection'"
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 pt-6"
-            >
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">List Price Available</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Open Offer Available</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Creator Owned</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Sold</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Domain Names</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Music</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Art</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Collectibles</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Virtual Worlds</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Utility</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Most Popular</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Trading Cards</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Reverse Price Set</span>
-                </checkbox-cell>
-                <checkbox-cell class="pb-3.5">
-                    <span class="text-xs relative -top-0.5">Sports</span>
-                </checkbox-cell>
+            <div v-if="filterBy === 'collection'" class="pt-6 grid grid-cols-1 sm:grid-cols-2">
+                <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4">
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">List Price Available</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Open Offer Available</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Creator Owned</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Sold</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Domain Names</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Music</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Art</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Collectibles</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Virtual Worlds</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Utility</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Most Popular</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Trading Cards</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Reverse Price Set</span>
+                    </checkbox-cell>
+                    <checkbox-cell class="pb-3.5">
+                        <span class="text-xs relative -top-0.5">Sports</span>
+                    </checkbox-cell>
+                </div>
+                <div></div>
             </div>
         </div>
     </div>
@@ -201,8 +159,10 @@ function clickFilterBy(value) {
 .text-center {
     text-align: -webkit-center;
 }
-.max-w-search {
-    max-width: 23em;
+@media (min-width: 1280px) {
+    .xl\:max-w-search {
+        max-width: 23em;
+    }
 }
 .w-68 {
     width: 17rem /* 260px */;

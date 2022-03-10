@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watchEffect } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import Accordion from '@/core/container/Accordion.vue';
@@ -17,6 +17,9 @@ import Ledger from './Ledger.vue';
 import AssetSellModal from './AssetSellModal.vue';
 import { useRoute, useRouter } from 'vue-router';
 import moralisService from '@/core/services/moralis.service';
+import MoreInfo from '../detail/MoreInfo.vue';
+import marketService from '../../core/services/market.service';
+import authService from '../../core/services/auth.service';
 
 const store = useStore();
 const router = useRouter();
@@ -24,16 +27,24 @@ const route = useRoute();
 const tokenAddress = route.params.tokenAddress;
 const tokenId = route.params.tokenId;
 const asset = ref({});
-moralisService.getNft(tokenAddress, tokenId).then(res => {
-    if (!res.owner_of) {
-        router.push('/browse');
-        return;
-    }
-    asset.value = res;
-})
-
 const sale = ref(saleType.FIX_SALE);
 const sellModalActive = ref(false);
+const nftCreator = ref({});
+
+watchEffect(() => {
+    if (tokenAddress && tokenId) {
+        moralisService.getNft(tokenAddress, tokenId).then(res => {
+            asset.value = res;
+        })
+        moralisService.nftTransfers(tokenAddress, tokenId).then(res => {
+            const creatorAddress = res.result[res.result.length - 1].to_address;
+            authService.connectWallet(creatorAddress).then(res => {
+                nftCreator.value = res;
+            })
+        })
+    }
+})
+
 const handleModal = (value) => {
     sellModalActive.value = value
 }
@@ -43,12 +54,13 @@ const handleModal = (value) => {
     <nav-bar-search />
     <body-container>
         <div class="grid grid-cols-7 text-white gap-8 mt-4 lg:mt-9">
-            <div class="col-span-7 md:col-span-3">
-                <asset-user v-if="store.state.app.windowWidth < themeConfig.md" :asset="asset" />
-                <asset-detail :img_url="asset.image_url" />
+            <div class="col-span-7 lg:col-span-3">
+                <asset-user v-if="store.state.app.windowWidth < themeConfig.lg" :asset="asset" />
+                <asset-detail :nft="asset" :nftCreator="nftCreator" />
+                <!-- <more-info :nft="asset" :percent="0" :period="0" :nftCreator="nftCreator" /> -->
             </div>
-            <div class="col-span-7 md:col-span-4 relative">
-                <asset-user v-if="store.state.app.windowWidth >= themeConfig.md" :asset="asset" />
+            <div class="col-span-7 lg:col-span-4 relative">
+                <asset-user v-if="store.state.app.windowWidth >= themeConfig.lg" :asset="asset" />
                 <div class="mt-px">
                     <asset-statistics v-model="sellModalActive" @handle-modal="handleModal" />
                 </div>

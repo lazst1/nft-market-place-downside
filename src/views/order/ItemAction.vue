@@ -10,10 +10,6 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import { mdiClose } from '@mdi/js'
-import MoreInfo from './MoreInfo.vue';
-import BuyModal from './BuyModal.vue';
-import SyndicationModal from './SyndicationModal.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
 import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
@@ -22,6 +18,8 @@ import { useStore } from 'vuex';
 import { exchangeRate, TokenType } from '@/core/config';
 import marketService from '@/core/services/market.service';
 import { roundTo } from '@/core/utils';
+import CancelModal from './components/CancelModal.vue';
+import { formatAMPM } from '@/core/utils'
 
 const props = defineProps({
     order: Object,
@@ -35,13 +33,9 @@ const store = useStore();
 const balance = ref();
 const vote = ref(false);
 const nftCreator = ref('');
-
-const handleBuyModal = (value) => {
-    buyModalActive.value = value;
-    moralisService.getBalance(store.state.user.walletAddress).then(res => {
-        balance.value = res.balance / exchangeRate;
-    })
-}
+const openCancelModal = ref(false);
+const date = new Date();
+const displayDate = date.toLocaleString('default', { month: 'long' }) + ' ' + date.getDay() + ', ' + date.getFullYear() + ' at ' + formatAMPM(date) + ' UTC'
 
 const bnbPrice = ref(0);
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
@@ -49,6 +43,7 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
 })
 
 watchEffect(() => {
+    console.log(props.order)
     if (props.order.votes) {
         vote.value = props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false);
     }
@@ -61,15 +56,28 @@ watchEffect(() => {
     }
 })
 
+const openCancel = () => {
+    openCancelModal.value = true;
+}
 function handleVote() {
     vote.value = !vote.value;
     if (vote.value) {
         marketService.vote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
+
         });
     } else {
         marketService.cancelVote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
         });
     }
+}
+const cancelOrder = (order) => {
+    store.state.marketContract.methods.claimDownsideProtectionAmount(
+        props.order.orderId
+    ).send({ from: store.state.user.walletAddress, gas: 250000 }).then(res => {
+        console.log('res: ', res);
+    }).catch(err => {
+        console.log('err: ', err);
+    });
 }
 
 </script>
@@ -104,60 +112,31 @@ function handleVote() {
     </div>
 
     <div
-        class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold p-4 sm:p-7 gap-4"
+        class="grid grid-cols-1 sm:grid-cols-2 bg-tertiary-800 border border-black font-ibm-bold gap-4 px-6.5 py-5"
     >
-        <div class="items-center">
-            <div class="flex flex-col items-center sm:items-start">
-                <div class="mt-3.25 text-lg">Current auction ends in</div>
-                <timer size="big" color="tertiary-800" class="my-3.25" />
+        <div>
+            <div class="text-lg">Last Sale</div>
+            <div class="flex items-baseline text-5xl text-primary-900 font-ibm py-2">
+                <nftmx-price-common
+                    :price="roundTo(parseInt(tokenPrice) / exchangeRate * bnbPrice)"
+                />
+                <span class="font-sans font-black text-lg text-tertiary-500">&nbsp;Ξ&nbsp;</span>
+                <span
+                    class="text-lg text-tertiary-500"
+                >{{ roundTo(parseInt(tokenPrice) / exchangeRate) }}</span>
             </div>
+            <div class="font-ibm-semi-bold text-sm text-tertiary-500 mt-2.75 mb-5">{{ displayDate }}</div>
         </div>
-
-        <div class="items-centers -mt-px mb-px">
-            <nftmx-select-network class="font-ibm-bold w-full text-sm mb-2" color="black" big></nftmx-select-network>
+        <div class="flex items-center">
             <nftmx-button
-                color="primary"
-                label="BUY NOW"
+                color="red"
+                label="CANCEL INVESTMENT"
                 class="font-press w-full text-base lg:text-lg mt-0.75 h-15"
-                @click="handleBuyModal(true)"
+                @click="openCancel(true)"
             />
         </div>
     </div>
-
-    <div class="bg-tertiary-800 border border-black mt-3.5">
-        <div class="items-center p-4 sm:py-6 sm:px-8 text-center">
-            <div class="text-lg font-ibm-bold">
-                Total locked value
-                <icon class="-ml-2" :path="mdiHelpCircle" w="w-4" h="h-4" size="36" color="white" />
-            </div>
-            <div class="lg:text-3xl flex justify-center mt-1.75">
-                <span class="text-primary-900 font-ibm-bold">
-                    <nftmx-price-common
-                        :price="roundTo(parseInt(tokenPrice) / exchangeRate * bnbPrice)"
-                    />
-                </span>
-                <span class="text-tertiary-400">
-                    (
-                    <span class="font-sans">Ξ</span>
-                    {{ roundTo(parseInt(tokenPrice) / exchangeRate) }})
-                </span>
-            </div>
-            <nftmx-button
-                color="secondary"
-                label="JOIN SYNDICATION"
-                class="font-press w-full text-base lg:text-lg mt-7 mb-px h-15 sm:h-17.75"
-                @click="syndicationModalActive = true"
-            />
-        </div>
-    </div>
-    <buy-modal
-        v-model="buyModalActive"
-        :order="order"
-        :nft="nft"
-        :tokenPrice="tokenPrice"
-        :balance="balance"
-    />
-    <syndication-modal v-model="syndicationModalActive" />
+    <cancel-modal v-model="openCancelModal" @confirm="cancelOrder" />
 </template>
 
 <style scoped>

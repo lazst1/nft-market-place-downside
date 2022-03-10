@@ -6,19 +6,12 @@ defineProps({
     title: String
 })
 
-const open = ref(true);
-const handleClick = (value) => {
-    open.value = value
-}
-
 </script>
 
 <template>
     <accordion
         :border="false"
         :sidebar="true"
-        v-model="open"
-        @handle-click="handleClick"
         class="w-full"
     >
         <template v-slot:caption>

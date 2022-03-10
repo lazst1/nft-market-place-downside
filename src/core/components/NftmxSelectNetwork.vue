@@ -1,102 +1,77 @@
+<script setup>
+import Accordion from '@/core/container/Accordion.vue';
+import { onMounted, ref, watchEffect } from 'vue';
+import { networks } from "@/core/config";
+
+const props = defineProps({
+  color: {
+    type: String,
+    default: 'tertiary'
+  }
+})
+
+const bgColor = {
+  tertiary: 'bg-tertiary-700',
+  black: 'bg-black'
+}
+
+const hoverColor = {
+  tertiary: 'hover:bg-tertiary-900',
+  black: 'hover:bg-tertiary-900'
+}
+
+const selected = ref(networks[0]);
+const selectNetwork = (network) => {
+  selected.value = network;
+  open.value = !open.value;
+}
+
+const open = ref(false);
+
+const handleClick = () => {
+  open.value = !open.value;
+}
+const onClickOutside = () => {
+  open.value = false;
+}
+
+</script>
+
 <template>
-  <div
-    class="custom-select relative w-full text-left leading-12.5"
-    :tabindex="tabindex"
-    @blur="open = false"
-  >
+  <div class="relative h-15" v-click-outside="onClickOutside">
     <div
-      :class="[big ? 'h-15' : '', bgColor ? bgColor + ' pl-3' : 'bg-tertiary-800 pl-3.5', 'selected border-2 border-black flex items-center cursor-pointer']"
-      @click="open = !open"
+      :class="[open ? '' : 'border-b-0', bgColor[props.color], 'border-2 border-black font-ibm absolute z-10 w-full']"
     >
-      <img :src="selected.icon" class="mr-3" />
-      <span :class="[bgColor ? 'ml-0.75' : 'ml-px']">{{ selected.name }}</span>
-    </div>
-    <div class="items" :class="{ selectHide: !open }">
       <div
-        :class="[big ? 'h-15' : '', bgColor, 'flex items-center']"
-        v-for="(option, i) of options"
-        :key="i"
-        @click="
-          selected = option;
-          open = false;
-          $emit('input', option);
-        "
+        @click="handleClick"
+        class="border-b-2 border-black px-5 flex text-2xl text-white cursor-pointer"
       >
-        <img :src="option.icon" class="mr-3" />
-        {{ option.name }}
+        <div class="flex-1">
+          <div class="selected flex items-center cursor-pointer h-14 text-sm">
+            <img :src="selected.icon" class="mr-3" />
+            <span>{{ selected.name }}</span>
+          </div>
+        </div>
+        <div class="self-center cursor-pointer">
+          <font-awesome-icon
+            v-if="!open"
+            :icon="['fas', 'sort-down']"
+            class="text-sm -translate-y-1/3"
+          />
+          <font-awesome-icon v-if="open" :icon="['fas', 'sort-up']" class="text-sm" />
+        </div>
+      </div>
+      <div class="transition-all overflow-auto" :style="{ maxHeight: open ? '200px' : '0' }">
+        <div
+          :class="[hoverColor[props.color], 'flex items-center h-12 cursor-pointer px-5']"
+          v-for="(option, i) of networks"
+          :key="i"
+          @click="selectNetwork(option)"
+        >
+          <img :src="option.icon" class="mr-3" />
+          {{ option.name }}
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-import { networks } from "../config";
-
-export default {
-  props: {
-    default: {
-      type: Object,
-      required: false,
-      default: null,
-    },
-    tabindex: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
-    data: Array,
-    color: String,
-    big: Boolean,
-  },
-  data() {
-    return {
-      open: false,
-      options: this.data || networks,
-      selected: this.data ? this.data[0] : networks[0],
-      bgColor: this.color ? 'bg-' + this.color : null
-    };
-  },
-  mounted() {
-    this.$emit("input", this.selected);
-  },
-};
-</script>
-
-<style scoped>
-.custom-select .selected:after {
-  position: absolute;
-  content: "";
-  top: 26px;
-  right: 1em;
-  width: 0;
-  height: 0;
-  border: 5px solid transparent;
-  border-color: #fff transparent transparent transparent;
-}
-
-.custom-select .items {
-  overflow: hidden;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
-  border-bottom: 1px solid black;
-  position: absolute;
-  background-color: #343434;
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
-
-.custom-select .items div {
-  padding-left: 1em;
-  cursor: pointer;
-  user-select: none;
-}
-
-.custom-select .items div:hover {
-  background-color: #151515;
-}
-
-.selectHide {
-  display: none;
-}
-</style>

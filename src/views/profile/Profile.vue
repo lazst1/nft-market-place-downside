@@ -140,8 +140,21 @@ const selectTab = (value) => {
     }
 }
 
-const approve = (token) => {
-    console.log('approve', token);
+const approve = (order) => {
+    const tokenContract = new store.state.web3.eth.Contract(
+        erc721ABI,
+        store.state.web3.utils.toChecksumAddress(order.tokenAddress),
+    );
+
+    tokenContract.methods.approve(marketAddress, order.tokenId).send({
+        from: store.state.user.walletAddress, gas: 210000
+    }).then(res => {
+        const index = orders.value.findIndex(item => item.id === order.id);
+        orders.value[index].nft.approved = true;
+
+    }).catch(err => {
+        console.log('Err ', err);
+    });
 }
 const handleVote = (order) => {
     const index = orders.value.findIndex(item => item.id === order.id);
@@ -183,6 +196,7 @@ const cancelOrder = (order) => {
     }
 }
 
+
 </script>
 
 <template>
@@ -210,6 +224,7 @@ const cancelOrder = (order) => {
                     @handle-vote="handleVote"
                     @hide-nft="hideNFT"
                     @cancel-order="cancelOrder"
+                    @approve="approve"
                 ></order-card>
             </cards-container>
             <div
@@ -338,6 +353,11 @@ const cancelOrder = (order) => {
             >Loading...</div>
             <div
                 v-if="!loadingOrders && hiddenOrders.length === 0"
+                class="h-96 font-ibm-bold text-tertiary-500 text-lg flex items-center justify-center"
+            >No orders found</div>
+        </div>
+        <div v-if="selectedGroup.key === 'ACTIVITY'" class="mt-12 2xl:mt-11 mb-22">
+            <div
                 class="h-96 font-ibm-bold text-tertiary-500 text-lg flex items-center justify-center"
             >No orders found</div>
         </div>

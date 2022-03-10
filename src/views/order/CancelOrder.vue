@@ -11,17 +11,8 @@ import marketService from '@/core/services/market.service';
 import moralisService from '@/core/services/moralis.service';
 import AssetHistory from '../asset/AssetHistory.vue';
 import authService from '../../core/services/auth.service';
+import NavBarSearch from '@/core/container/NavBarSearch.vue';
 
-const props = defineProps({
-    percent: {
-        type: Number,
-        default: 100
-    },
-    period: {
-        type: Number,
-        default: 365
-    },
-})
 const store = useStore();
 const route = useRoute();
 const router = useRouter();
@@ -46,14 +37,13 @@ marketService.getOrder(orderId).then(data => {
         })
     })
 });
-const buyModalActive = ref(false);
-const syndicationModalActive = ref(false);
 
 </script>
 
 <template>
+    <nav-bar-search></nav-bar-search>
     <body-container>
-        <div class="grid grid-cols-7 text-white gap-8 mt-10">
+        <div class="grid grid-cols-7 text-white gap-8 my-10">
             <div class="col-span-7 lg:col-span-3 lg:mr-6.25">
                 <more-info
                     :nft="nft"

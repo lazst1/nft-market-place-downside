@@ -217,14 +217,14 @@ watchEffect(() => {
                     <div class="font-ibm-bold text-lg pt-3.5">Wallet Address</div>
                 </template>
                 <template v-slot:value>
-                    <div class="font-ibm text-sm text-tertiary-400 relative mt-3 md:mt-0">
+                    <div class="font-ibm text-sm text-tertiary-400 relative mt-3 md:mt-0 cursor-default">
                         <nftmx-input
                             :placeholder="store.getters['auth/getWalletAddress']"
                             readonly
                         />
                         <font-awesome-icon
                             :icon="['fas', 'copy']"
-                            class="text-white text-base absolute right-6 top-5 cursor-pointer"
+                            class="text-white text-base absolute right-6 top-5"
                         />
                     </div>
                 </template>

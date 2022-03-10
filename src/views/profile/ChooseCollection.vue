@@ -9,11 +9,6 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 
 const store = useStore();
 
-const open = ref(false);
-const handleClick = (value) => {
-    open.value = value
-}
-
 const selected = ref('My Collection');
 
 </script>
@@ -35,9 +30,8 @@ const selected = ref('My Collection');
         v-if="store.state.app.windowWidth <= themeConfig.sm"
         :border="false"
         :sidebar="true"
+        :value="false"
         class="-mt-px"
-        v-model="open"
-        @handle-click="handleClick"
     >
         <template v-slot:caption>
             <div class="text-primary-900 font-ibm-light text-description pt-3 mb-1.5">{{ selected }}</div>

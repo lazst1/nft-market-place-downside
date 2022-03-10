@@ -8,11 +8,6 @@ defineProps({
     more: Boolean
 })
 
-const open = ref(true);
-const handleClick = (value) => {
-    open.value = value
-}
-
 </script>
 
 <template>
@@ -20,8 +15,6 @@ const handleClick = (value) => {
         :border="false"
         :sidebar="true"
         :bIcon="true"
-        v-model="open"
-        @handle-click="handleClick"
     >
         <template v-slot:caption>
             <div class="flex items-center w-full">
