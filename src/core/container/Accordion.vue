@@ -1,5 +1,6 @@
 <script setup>
-import { computed, onMounted, ref, watchEffect } from 'vue';
+import { useWindowSize } from '@vueuse/core';
+import { computed, onMounted, ref, watch, watchEffect } from 'vue';
 
 const props = defineProps({
     accordion: {
@@ -45,6 +46,13 @@ const handleClick = () => {
 }
 
 watchEffect(() => {
+    if (anim.value) {
+        setTimeout(() => {
+            aHeight.value = anim.value.scrollHeight + 'px';
+        }, 1000);
+    }
+})
+watchEffect(() => {
     if (props.handleEmit) {
         open.value = props.modelValue;
     }
@@ -59,6 +67,10 @@ onMounted(() => {
     }
 })
 
+const { width: windowWidth } = useWindowSize()
+watch(windowWidth, val => {
+    aHeight.value = anim.value.scrollHeight + 'px';
+})
 </script>
 
 

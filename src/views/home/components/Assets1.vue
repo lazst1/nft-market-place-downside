@@ -22,7 +22,6 @@ marketService.getSaleOrders().then(res => {
         :border="false"
         :sidebar="true"
         :bIcon="true"
-        :animation="false"
     >
         <template v-slot:caption>
             <div class="flex items-center w-full">
