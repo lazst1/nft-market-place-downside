@@ -35,16 +35,20 @@ function clickFilterBy(value) {
             <div
                 class="grid grid-cols-1 sm:grid-cols-2 justify-center gap-2 mt-4 lg:mt-0 w-full xl:w-auto"
             >
-                <nftmx-button
-                    color="secondary"
-                    label="LAUNCH YOUR DVC"
-                    class="font-press w-full xl:max-w-search text-xs leading-5 xl:mx-2.5"
-                />
-                <nftmx-button
-                    color="primary"
-                    label="DOWNSIDE PROTECTION BENEFITS"
-                    class="font-press w-full xl:max-w-search text-xs leading-5 bg-gradient-to-r from-primary-900 to-primary-700 text-white h-13"
-                ></nftmx-button>
+                <div class="xl:ml-5">
+                    <nftmx-button
+                        color="secondary"
+                        label="LAUNCH YOUR DVC"
+                        class="font-press w-full xl:max-w-search text-xs leading-5 h-13.5"
+                    />
+                </div>
+                <div class="xl:mx-2.5">
+                    <nftmx-button
+                        color="primary"
+                        label="DOWNSIDE PROTECTION BENEFITS"
+                        class="font-press w-full xl:max-w-search text-xs leading-5 bg-gradient-to-r from-primary-900 to-primary-700 text-white h-13.5"
+                    ></nftmx-button>
+                </div>
             </div>
         </div>
         <div v-if="filterActive">
@@ -145,9 +149,7 @@ function clickFilterBy(value) {
                         <span class="text-xs relative -top-0.5">Sports</span>
                     </checkbox-cell>
                 </div>
-                <div>
-                    
-                </div>
+                <div></div>
             </div>
         </div>
     </div>
@@ -157,8 +159,10 @@ function clickFilterBy(value) {
 .text-center {
     text-align: -webkit-center;
 }
-.max-w-search {
-    max-width: 23em;
+@media (min-width: 1280px) {
+    .xl\:max-w-search {
+        max-width: 23em;
+    }
 }
 .w-68 {
     width: 17rem /* 260px */;
