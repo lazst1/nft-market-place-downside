@@ -51,18 +51,10 @@ watchEffect(() => {
     }
 })
 
-onMounted(() => {
-    aHeight.value = 'fit-content';
-    if (anim.value) {
-        setTimeout(() => {
-            if (anim.value) {
-                aHeight.value = anim.value.scrollHeight + 'px';
-            }
-        }, 1000);
-    }
-})
-
 const { width: windowWidth } = useWindowSize()
+window.addEventListener('load', (event) => {
+    aHeight.value = anim.value.scrollHeight + 'px';
+});
 watch(windowWidth, val => {
     aHeight.value = anim.value.scrollHeight + 'px';
 })
