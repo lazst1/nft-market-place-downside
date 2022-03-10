@@ -19,6 +19,7 @@ import { useRoute, useRouter } from 'vue-router';
 import moralisService from '@/core/services/moralis.service';
 import MoreInfo from '../detail/MoreInfo.vue';
 import marketService from '../../core/services/market.service';
+import authService from '../../core/services/auth.service';
 
 const store = useStore();
 const router = useRouter();
@@ -28,11 +29,18 @@ const tokenId = route.params.tokenId;
 const asset = ref({});
 const sale = ref(saleType.FIX_SALE);
 const sellModalActive = ref(false);
+const nftCreator = ref({});
 
 watchEffect(() => {
     if (tokenAddress && tokenId) {
         moralisService.getNft(tokenAddress, tokenId).then(res => {
             asset.value = res;
+        })
+        moralisService.nftTransfers(tokenAddress, tokenId).then(res => {
+            const creatorAddress = res.result[res.result.length - 1].to_address;
+            authService.connectWallet(creatorAddress).then(res => {
+                nftCreator.value = res;
+            })
         })
     }
 })
@@ -49,7 +57,7 @@ const handleModal = (value) => {
             <div class="col-span-7 lg:col-span-3">
                 <asset-user v-if="store.state.app.windowWidth < themeConfig.lg" :asset="asset" />
                 <!-- <asset-detail :img_url="asset.image_url" /> -->
-                <more-info :nft="asset" :percent="0" :period="0" />
+                <more-info :nft="asset" :percent="0" :period="0" :nftCreator="nftCreator" />
             </div>
             <div class="col-span-7 lg:col-span-4 relative">
                 <asset-user v-if="store.state.app.windowWidth >= themeConfig.lg" :asset="asset" />

@@ -8,6 +8,7 @@ import { assetDetailTabs, defaultUser } from '@/core/config'
 import InfoModal from './components/InfoModal.vue'
 import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
 import { toUpercaseFirstLetterOfString } from '@/core/utils'
+import { baseURL } from '@/core/config';
 
 const props = defineProps({
     percent: {
@@ -18,7 +19,11 @@ const props = defineProps({
         type: Number,
         default: 365
     },
-    nft: Object
+    nft: Object,
+    nftCreator: {
+        type: Object,
+        default: defaultUser
+    }
 })
 
 const store = useStore();
@@ -33,7 +38,7 @@ const selectTab = (value) => {
     open.value = false;
 }
 const cancelNFT = () => {
-    
+
 }
 </script>
 
@@ -52,12 +57,14 @@ const cancelNFT = () => {
                 Created by
                 <nftmx-wallet-address-pop
                     class="text-primary-900"
-                    :address="store.state.user.walletAddress"
+                    :address="nftCreator.walletAddress"
                 />
             </div>
-            <div
-                class="text-xxs text-tertiary-500 mt-4"
-            >3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1</div>
+            <div class="text-xxs text-tertiary-500 mt-4">
+                {{
+                    nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
+                }}
+            </div>
         </info-modal>
         <info-modal
             :title="toUpercaseFirstLetterOfString(tab)"
@@ -65,10 +72,15 @@ const cancelNFT = () => {
             @select-tab="selectTab"
         >
             <div class="flex gap-6 items-start">
-                <img :src="defaultUser.profile_img" class="w-21 h-21 object-cover" />
-                <div
-                    class="text-xxs text-tertiary-500 leading-5"
-                >3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1</div>
+                <img
+                    :src="nftCreator.profile_img ? baseURL + nftCreator.profile_img : defaultUser.profile_img"
+                    class="w-21 h-21 object-cover"
+                />
+                <div class="text-xxs text-tertiary-500 leading-5">
+                    {{
+                        nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
+                    }}
+                </div>
             </div>
             <div class="mt-6.5 flex gap-6 items-center">
                 <div class="flex gap-4">
@@ -96,7 +108,7 @@ const cancelNFT = () => {
             </div>
             <div class="text-xxs flex justify-between mt-4">
                 <span class="font-ibm-medium">Blockchain</span>
-                <span>Binance</span>
+                <span>BSC Testnet</span>
             </div>
         </info-modal>
         <info-modal
@@ -115,11 +127,11 @@ const cancelNFT = () => {
                     <div class="flex justify-around">
                         <div class="text-center">
                             <div class="font-ibm-bold text-lg">Days left</div>
-                            <div class="text-3.5xl text-primary-800 -mt-0.75">58/365</div>
+                            <div class="text-3.5xl text-primary-800 -mt-0.75">{{period}}/{{period}}</div>
                         </div>
                         <div class="text-center">
                             <div class="font-ibm-bold text-lg">Protection</div>
-                            <div class="text-3.5xl text-primary-800 -mt-0.75">100%</div>
+                            <div class="text-3.5xl text-primary-800 -mt-0.75">{{ percent }}%</div>
                         </div>
                     </div>
                 </div>
@@ -133,7 +145,9 @@ const cancelNFT = () => {
         </info-modal>
     </div>
     <div class="mt-4 mb-8 items-center">
-        <div :class="[open ? 'h-30' : 'h-0', 'relative flex w-full text-sm font-ibm items-baseline']">
+        <div
+            :class="[open ? 'h-30' : 'h-0', 'relative flex w-full text-sm font-ibm items-baseline']"
+        >
             <div v-if="store.state.app.windowWidth >= 1920" class="flex-1 flex px-5">
                 <detail-button
                     v-for="(name, i) in assetDetailTabs"

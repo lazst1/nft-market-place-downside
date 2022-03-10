@@ -10,6 +10,7 @@ import { useRoute, useRouter } from 'vue-router';
 import marketService from '@/core/services/market.service';
 import moralisService from '@/core/services/moralis.service';
 import AssetHistory from '../asset/AssetHistory.vue';
+import authService from '../../core/services/auth.service';
 
 const props = defineProps({
     percent: {
@@ -27,6 +28,7 @@ const router = useRouter();
 const orderId = route.params.orderId;
 const order = ref({});
 const nft = ref({});
+const nftCreator = ref({});
 
 marketService.getOrder(orderId).then(data => {
     order.value = data;
@@ -36,6 +38,12 @@ marketService.getOrder(orderId).then(data => {
     }
     moralisService.getNft(data.tokenAddress, data.tokenId).then(res => {
         nft.value = res;
+    })
+    moralisService.nftTransfers(data.tokenAddress, data.tokenId).then(res => {
+        const creatorAddress = res.result[res.result.length - 1].to_address;
+        authService.connectWallet(creatorAddress).then(res => {
+            nftCreator.value = res;
+        })
     })
 });
 const buyModalActive = ref(false);
@@ -47,7 +55,12 @@ const syndicationModalActive = ref(false);
     <body-container>
         <div class="grid grid-cols-7 text-white gap-8 mt-10">
             <div class="col-span-7 lg:col-span-3 lg:mr-6.25">
-                <more-info :nft="nft" :percent="order.protectionRate / 100" :period="order.protectionTime / 86400" />
+                <more-info
+                    :nft="nft"
+                    :percent="order.protectionRate / 100"
+                    :period="order.protectionTime / 86400"
+                    :nftCreator="nftCreator"
+                />
             </div>
             <div class="col-span-7 mt-6 mb-4 lg:col-span-4 relative lg:-ml-4">
                 <item-action :order="order" :tokenPrice="order.tokenPrice" :nft="nft" />
