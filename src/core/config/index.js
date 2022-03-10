@@ -68,26 +68,6 @@ export const networks = [
     {
         name: "Binance",
         icon: "/images/curr-3.png"
-    },
-    {
-        name: "Binance",
-        icon: "/images/curr-3.png"
-    },
-    {
-        name: "Binance",
-        icon: "/images/curr-3.png"
-    },
-    {
-        name: "Binance",
-        icon: "/images/curr-3.png"
-    },
-    {
-        name: "Binance",
-        icon: "/images/curr-3.png"
-    },
-    {
-        name: "Binance",
-        icon: "/images/curr-3.png"
     }
 ]
 
