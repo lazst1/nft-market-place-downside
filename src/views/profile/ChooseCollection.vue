@@ -30,6 +30,7 @@ const selected = ref('My Collection');
         v-if="store.state.app.windowWidth <= themeConfig.sm"
         :border="false"
         :sidebar="true"
+        :value="false"
         class="-mt-px"
     >
         <template v-slot:caption>

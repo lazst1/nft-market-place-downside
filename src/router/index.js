@@ -10,6 +10,7 @@ import Profile from '@/views/profile/Profile.vue'
 import ProfileSetting from '@/views/profile/ProfileSetting.vue'
 import Asset from '@/views/asset/Asset.vue'
 import NotFound from '@/views/404/NotFound.vue'
+import CancelOrder from '@/views/order/CancelOrder.vue'
 
 const routes = [
     {
@@ -93,6 +94,14 @@ const routes = [
         path: '/profile-setting',
         name: 'profile_setting',
         component: ProfileSetting
+    },
+    {
+        meta: {
+            title: 'CancelOrder'
+        },
+        path: '/cancel/:orderId',
+        name: 'cancelOrder',
+        component: CancelOrder
     },
     {
         path: "/:catchAll(.*)",

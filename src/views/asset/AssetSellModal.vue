@@ -7,7 +7,6 @@ import DetailButton from '@/core/components/DetailButton.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
 import { useStore } from 'vuex';
-import Ribbon from '@/core/components/Ribbon.vue';
 import { keyCodeNumberRange } from '@/core/utils';
 import NftmxToggle from '@/core/components/NftmxToggle.vue';
 import NftmxHashtag from '@/core/components/NftmxHashtag.vue';
@@ -119,9 +118,7 @@ function downsideRateRange() {
             <div class="col-span-full lg:col-span-3 lg:-mr-3.5 3xl:pr-2.25">
                 <div
                     class="relative overflow-hidden p-6 bg-[url('/images/img10.png')] bg-cover border border-black w-full pt-70per"
-                >
-                    <ribbon :percent="downsideRate" :period="period / 86400" />
-                </div>
+                ></div>
                 <div class="flex w-full text-sm font-ibm-bold mt-7">
                     <div class="pt-0.75">
                         <detail-button class="text-primary-900">Kyle White</detail-button>
@@ -144,9 +141,7 @@ function downsideRateRange() {
                     Choose a collection
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
-                <div
-                    class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-4.5 relative"
-                >
+                <div class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-4.5 relative">
                     <collection />
                     <nftmx-button
                         color="primary"

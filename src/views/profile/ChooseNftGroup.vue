@@ -88,24 +88,15 @@ const selectTab = (value) => {
             </group-item>
         </div>
         <div class="flex gap-2.5 py-4 w-max" v-if="computedGroup.key === 'DOWNSIDE'">
-            <group-item
-                :active="selectedTab === 'ALL'"
-                @click="selectTab('ALL')"
-            >
+            <group-item :active="selectedTab === 'ALL'" @click="selectTab('ALL')">
                 All
                 <span class="font-ibm-light">{{ itemCounts.downside }}</span>
             </group-item>
-            <group-item
-                :active="selectedTab === 'BOUGHT'"
-                @click="selectTab('BOUGHT')"
-            >
+            <group-item :active="selectedTab === 'BOUGHT'" @click="selectTab('BOUGHT')">
                 Bought
                 <span class="font-ibm-light">{{ itemCounts.downsideBought }}</span>
             </group-item>
-            <group-item
-                :active="selectedTab === 'SOLD'"
-                @click="selectTab('SOLD')"
-            >
+            <group-item :active="selectedTab === 'SOLD'" @click="selectTab('SOLD')">
                 Sold
                 <span class="font-ibm-light">{{ itemCounts.downsideSold }}</span>
             </group-item>
@@ -115,6 +106,7 @@ const selectTab = (value) => {
         v-if="store.state.app.windowWidth <= themeConfig.sm"
         :border="false"
         :sidebar="true"
+        :value="false"
         class="-mt-px"
     >
         <template v-slot:caption>

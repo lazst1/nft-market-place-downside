@@ -46,13 +46,6 @@ const handleClick = () => {
 }
 
 watchEffect(() => {
-    if (anim.value) {
-        setTimeout(() => {
-            aHeight.value = anim.value.scrollHeight + 'px';
-        }, 1000);
-    }
-})
-watchEffect(() => {
     if (props.handleEmit) {
         open.value = props.modelValue;
     }
@@ -62,7 +55,9 @@ onMounted(() => {
     aHeight.value = 'fit-content';
     if (anim.value) {
         setTimeout(() => {
-            aHeight.value = anim.value.scrollHeight + 'px';
+            if (anim.value) {
+                aHeight.value = anim.value.scrollHeight + 'px';
+            }
         }, 1000);
     }
 })

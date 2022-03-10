@@ -56,8 +56,8 @@ const handleModal = (value) => {
         <div class="grid grid-cols-7 text-white gap-8 mt-4 lg:mt-9">
             <div class="col-span-7 lg:col-span-3">
                 <asset-user v-if="store.state.app.windowWidth < themeConfig.lg" :asset="asset" />
-                <!-- <asset-detail :img_url="asset.image_url" /> -->
-                <more-info :nft="asset" :percent="0" :period="0" :nftCreator="nftCreator" />
+                <asset-detail :nft="asset" :nftCreator="nftCreator" />
+                <!-- <more-info :nft="asset" :percent="0" :period="0" :nftCreator="nftCreator" /> -->
             </div>
             <div class="col-span-7 lg:col-span-4 relative">
                 <asset-user v-if="store.state.app.windowWidth >= themeConfig.lg" :asset="asset" />

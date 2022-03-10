@@ -21,7 +21,7 @@ export function formatDate(date) {
     return dFormat;
 }
 
-function formatAMPM(date) {
+export function formatAMPM(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var ampm = hours >= 12 ? 'pm' : 'am';

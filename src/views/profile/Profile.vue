@@ -356,6 +356,11 @@ const cancelOrder = (order) => {
                 class="h-96 font-ibm-bold text-tertiary-500 text-lg flex items-center justify-center"
             >No orders found</div>
         </div>
+        <div v-if="selectedGroup.key === 'ACTIVITY'" class="mt-12 2xl:mt-11 mb-22">
+            <div
+                class="h-96 font-ibm-bold text-tertiary-500 text-lg flex items-center justify-center"
+            >No orders found</div>
+        </div>
     </body-container>
     <nftmx-footer />
 </template>
