@@ -7,9 +7,9 @@ import MoreInfo from './MoreInfo.vue';
 import ItemAction from './ItemAction.vue';
 import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
-import DetailHistory from './DetailHistory.vue';
 import marketService from '@/core/services/market.service';
 import moralisService from '@/core/services/moralis.service';
+import AssetHistory from '../asset/AssetHistory.vue';
 
 const props = defineProps({
     percent: {
@@ -54,7 +54,7 @@ const syndicationModalActive = ref(false);
             </div>
         </div>
         <div class="mb-10">
-            <detail-history />
+            <asset-history />
         </div>
     </body-container>
     <nftmx-footer />

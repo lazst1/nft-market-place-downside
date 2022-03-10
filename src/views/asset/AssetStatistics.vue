@@ -18,7 +18,6 @@ import { themeConfig } from '@/core/config';
 import StatisticAccordion from './StatisticAccordion.vue'
 import AssetHistory from './AssetHistory.vue';
 import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
-import DetailHistory from '../detail/DetailHistory.vue';
 
 const props = defineProps({
     modelValue: Boolean
@@ -49,7 +48,7 @@ const handleModal = () => {
         />
     </div>
     <div class="mt-5">
-        <detail-history />
+        <asset-history />
     </div>
     <div class="mt-5">
         <accordion>
