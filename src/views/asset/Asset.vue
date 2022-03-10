@@ -41,13 +41,13 @@ const handleModal = (value) => {
     <nav-bar-search />
     <body-container>
         <div class="grid grid-cols-7 text-white gap-8 mt-4 lg:mt-9">
-            <div class="col-span-7 md:col-span-3">
-                <asset-user v-if="store.state.app.windowWidth < themeConfig.md" :asset="asset" />
+            <div class="col-span-7 lg:col-span-3">
+                <asset-user v-if="store.state.app.windowWidth < themeConfig.lg" :asset="asset" />
                 <!-- <asset-detail :img_url="asset.image_url" /> -->
                 <more-info :nft="asset" :percent="0" :period="0" />
             </div>
-            <div class="col-span-7 md:col-span-4 relative">
-                <asset-user v-if="store.state.app.windowWidth >= themeConfig.md" :asset="asset" />
+            <div class="col-span-7 lg:col-span-4 relative">
+                <asset-user v-if="store.state.app.windowWidth >= themeConfig.lg" :asset="asset" />
                 <div class="mt-px">
                     <asset-statistics v-model="sellModalActive" @handle-modal="handleModal" />
                 </div>

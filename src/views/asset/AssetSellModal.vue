@@ -14,6 +14,8 @@ import NftmxHashtag from '@/core/components/NftmxHashtag.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import marketService from '../../core/services/market.service';
 import { useToast } from "vue-toastification";
+import Network from './Network.vue';
+import Collection from './Collection.vue';
 
 const props = defineProps({
     asset: {
@@ -111,7 +113,7 @@ function downsideRateRange() {
 <template>
     <nftmx-modal big>
         <div class="text-center relative mt-1.75 pb-2.5">
-            <div class="font-press text-2xl">List Item for Sale</div>
+            <div class="font-press text-2xl mx-6">List Item for Sale</div>
         </div>
         <div class="grid grid-cols-8 text-white my-9 px-4 lg:pl-17.5 lg:pr-17">
             <div class="col-span-full lg:col-span-3 lg:-mr-3.5 3xl:pr-2.25">
@@ -142,12 +144,15 @@ function downsideRateRange() {
                     Choose a collection
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
-                <div class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-8.5 3xl:gap-4.5">
-                    <nftmx-select-network />
+                <div
+                    class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-4.5 relative"
+                >
+                    <collection />
                     <nftmx-button
                         color="primary"
                         label="CREATE NEW COLLECTION"
-                        :class="['font-press text-smallest sm:text-xs 3xl:text-sm h-13.5']"
+                        :small="true"
+                        :class="['font-press text-xs 3xl:text-sm h-13.5']"
                     />
                 </div>
                 <div class="flex mt-6">
@@ -175,10 +180,10 @@ function downsideRateRange() {
                     <font-awesome-icon :icon="['fas', 'question-circle']" class="text-xxs ml-1" />
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap mt-3.5 mb-6 font-ibm text-sm">
-                    <nftmx-select-network color="black" class="xl:w-1/3" />
+                    <network class="w-full xl:w-1/3" color="black" />
                     <input
                         v-model="nftPrice"
-                        class="focus:outline-none border-2 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-4.75 font-ibm text-sm"
+                        class="focus:outline-none border-2 sm:border-l-0 h-13.5 border-black text-white placeholder-tertiary-500 bg-tertiary-700 w-full pl-4.75 font-ibm text-sm"
                         placeholder="Type of amount"
                         @keydown="preventKey($event)"
                     />
@@ -258,7 +263,7 @@ function downsideRateRange() {
                             :searchable="true"
                             :createTag="true"
                             :options="hashtagOptions"
-                            class="font-ibm text-xxs"
+                            class="font-ibm text-xxs z-10"
                         >
                             <template v-slot:tag="{ option, handleTagRemove, disabled }">{{ }}</template>
                         </Multiselect>
