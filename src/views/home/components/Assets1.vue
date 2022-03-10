@@ -19,7 +19,7 @@ marketService.getSaleOrders().then(res => {
 
 <template>
     <div class="-mx-4">
-        <accordion :border="false" :bIcon="true">
+        <accordion :border="false" :bIcon="true" :animation="false">
             <template v-slot:caption>
                 <div class="flex items-center w-full">
                     <div class="flex-1 text-sm font-press pt-3 pb-5 mr-4">Trending Collection</div>
