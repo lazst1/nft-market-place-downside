@@ -28,19 +28,19 @@ defineProps({
         class="grid grid-cols-2 gap-x-4 text-xxs items-baseline font-ibm-semi-bold leading-4.5 text-white"
     >
         <div>Unique</div>
-        <div class="w-max">
+        <div class="w-max flex">
             Transferred
-            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st absolute ml-1" />
+            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st ml-1" />
         </div>
         <div class="text-primary-900 font-ibm-light">{{ unique }}</div>
         <div class="text-primary-900 font-ibm-light">{{ transferred }}</div>
-        <div class="mt-3">
+        <div class="flex mt-3">
             ROI
-            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st absolute ml-1" />
+            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st ml-1" />
         </div>
-        <div>
+        <div class="flex">
             Value
-            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st absolute ml-1" />
+            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st ml-1" />
         </div>
         <div class="text-primary-900 font-ibm-light">
             {{ roi }}
