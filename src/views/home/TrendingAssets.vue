@@ -11,6 +11,7 @@ import marketService from '../../core/services/market.service';
 import { exchangeRate } from '@/core/config';
 import { roundTo } from '@/core/utils';
 import { useStore } from 'vuex';
+import { TokenType } from '../../core/config';
 
 const soldItems = ref([]);
 const canceledItems = ref([]);
@@ -19,7 +20,10 @@ const selected = ref('SOLD');
 const selectedItems = ref([]);
 
 const store = useStore();
-const bnbPrice = computed(() => store.getters['market/getBnbPrice']);
+const bnbPrice = ref(0);
+marketService.getUSDFromToken(TokenType.BNB).then(res => {
+    bnbPrice.value = res.USD;
+})
 
 marketService.soldItems().then(res => {
     soldItems.value = res;

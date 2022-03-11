@@ -1,5 +1,5 @@
 import http from "../utils/http-common";
-import { defaultPagination, DEFAULT_USER_ID, TokenType } from '../config';
+import { cryptocompareApiKey, defaultPagination, TokenType } from '../config';
 import axios from "axios";
 
 class MatketService {
@@ -46,9 +46,9 @@ class MatketService {
         return http.get(`tokens/info?tokenAddress=${tokenAddress}&tokenId=${tokenId}`).then(res => res.data)
     }
 
-    getUSDFromToken(token, amount) {
+    getUSDFromToken(token) {
         if (token === TokenType.BNB) {
-            return axios.get('https://api.binance.com/api/v3/avgPrice?symbol=BNBUSDT').then(res => res.data);
+            return axios.get(`https://min-api.cryptocompare.com/data/price?fsym=BNB&tsyms=USD&api_key=${cryptocompareApiKey}`).then(res => res.data);
         } else {
             console.log('MarketService getUSDFromToken: Not implemented yet.')
             return amount;

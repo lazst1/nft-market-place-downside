@@ -45,7 +45,7 @@ const handleBuyModal = (value) => {
 
 const bnbPrice = ref(0);
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
-    bnbPrice.value = res.price;
+    bnbPrice.value = res.USD;
 })
 
 watchEffect(() => {

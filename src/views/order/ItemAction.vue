@@ -39,11 +39,10 @@ const displayDate = date.toLocaleString('default', { month: 'long' }) + ' ' + da
 
 const bnbPrice = ref(0);
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
-    bnbPrice.value = res.price;
+    bnbPrice.value = res.USD;
 })
 
 watchEffect(() => {
-    console.log(props.order)
     if (props.order.votes) {
         vote.value = props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false);
     }
