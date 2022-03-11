@@ -1,6 +1,6 @@
 <script setup>
 import { useWindowSize } from '@vueuse/core';
-import { onUpdated, ref, watch, watchEffect } from 'vue';
+import { onMounted, onUpdated, ref, watch, watchEffect } from 'vue';
 
 const props = defineProps({
     accordion: {
@@ -50,6 +50,9 @@ watchEffect(() => {
     if (props.handleEmit) {
         open.value = props.modelValue;
     }
+})
+onMounted(() => {
+    aHeight.value = anim.value.scrollHeight + 'px';
 })
 onUpdated(() => {
     if (anim.value) {
