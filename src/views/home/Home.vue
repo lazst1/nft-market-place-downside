@@ -11,6 +11,7 @@ import TrendingAssets from './TrendingAssets.vue';
 import TrendingSearch from './TrendingSearch.vue';
 import SyndicationCarousel from '../landing/components/SyndicationCarousel.vue';
 import Analyzer from './Analyzer.vue';
+import NftmxTypography from '@/core/components/NftmxTypography.vue';
 
 const store = useStore();
 
@@ -18,16 +19,16 @@ const store = useStore();
 
 <template>
     <div
-        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press text-xl sm:text-2.5xl xl:text-4xl sm:leading-relaxed xl:leading-relaxed text-white px-5.5 sm:px-10 md:px-16 lg:px-22 h-summary-xs sm:h-96 lg:h-asset-img"
+        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press sm:leading-relaxed xl:leading-relaxed text-white px-5.5 sm:px-10 md:px-16 lg:px-22 h-summary-xs lg:h-96 xl:h-asset-img"
     >
         <div class="max-w-screen-3xl mx-auto">
-            <div
-                class="relative top-17 sm:top-32 lg:top-45.75 w-80 sm:w-asset-img xl:w-xl-text"
-            >Buy NFTs with 100% Downside Protection</div>
+            <div class="relative top-16.75 lg:top-36 xl:top-45.5 w-home-sm lg:w-home-md xl:w-home-lg">
+                <nftmx-typography home>Buy NFTs with 100% Downside Protection</nftmx-typography>
+            </div>
         </div>
     </div>
     <body-container :padding="false" footerExtended>
-        <div class="pt-4">
+        <div class="pt-6 sm:pt-4">
             <syndication-carousel></syndication-carousel>
         </div>
 
