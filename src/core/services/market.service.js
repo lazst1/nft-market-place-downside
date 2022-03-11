@@ -46,9 +46,9 @@ class MatketService {
         return http.get(`tokens/info?tokenAddress=${tokenAddress}&tokenId=${tokenId}`).then(res => res.data)
     }
 
-    getUSDFromToken(token, amount) {
+    getUSDFromToken(token) {
         if (token === TokenType.BNB) {
-            return axios.get('https://api.binance.com/api/v3/avgPrice?symbol=BNBUSDT').then(res => res.data);
+            return axios.get('https://min-api.cryptocompare.com/data/price?fsym=BNB&tsyms=USD&api_key=9a1e6b42dbba19ab66350371cb6425baffaa018623cc9d8f2d7e92d86c1640ab').then(res => res.data);
         } else {
             console.log('MarketService getUSDFromToken: Not implemented yet.')
             return amount;

@@ -20,11 +20,6 @@ export const market = {
                 });
             }
         },
-        getBnbPrice({ commit, rootState }) {
-            marketService.getUSDFromToken(TokenType.BNB).then(res => {
-                rootState.bnbPrice = res.price;
-            });
-        },
         // approve the NFT to our marketplace
         approve({ commit, rootState }, data) {
             const tokenContract = new rootState.web3.eth.Contract(
@@ -72,9 +67,6 @@ export const market = {
         },
     },
     getters: {
-        getBnbPrice: (state, getters, rootState) => {
-            return rootState.bnbPrice;
-        },
     },
     mutations: {
     }

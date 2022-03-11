@@ -60,8 +60,8 @@ const boughtCSS = computed(() => {
 })
 
 const nftPriceInUSD = ref(0);
-marketService.getUSDFromToken(TokenType.BNB, order.tokenPrice / exchangeRate).then(res => {
-    nftPriceInUSD.value = order.tokenPrice / exchangeRate * res.price;
+marketService.getUSDFromToken(TokenType.BNB).then(res => {
+    nftPriceInUSD.value = order.tokenPrice / exchangeRate * res.USD;
 });
 
 function handleVote() {

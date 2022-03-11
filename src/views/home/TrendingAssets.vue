@@ -19,7 +19,10 @@ const selected = ref('SOLD');
 const selectedItems = ref([]);
 
 const store = useStore();
-const bnbPrice = computed(() => store.getters['market/getBnbPrice']);
+const bnbPrice = ref(0);
+marketService.getUSDFromToken(TokenType.BNB).then(res => {
+    bnbPrice.value = res.USD;
+})
 
 marketService.soldItems().then(res => {
     soldItems.value = res;

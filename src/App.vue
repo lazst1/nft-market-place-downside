@@ -58,7 +58,6 @@ const { width: windowWidth } = useWindowSize()
 watch(windowWidth, val => {
   store.commit('app/UPDATE_WINDOW_WIDTH', val)
 })
-store.dispatch('market/getBnbPrice');
 
 </script>
 
