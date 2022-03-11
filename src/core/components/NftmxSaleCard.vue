@@ -1,7 +1,6 @@
 <script setup>
 import Ribbon from './Ribbon.vue';
 import Icon from './Icon.vue'
-import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 import SaleInfo from './SaleInfo.vue'
 import NftmxButton from './NftmxButton.vue'
 import { computed, ref, watchEffect } from 'vue';

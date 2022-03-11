@@ -11,6 +11,7 @@ import marketService from '../../core/services/market.service';
 import { exchangeRate } from '@/core/config';
 import { roundTo } from '@/core/utils';
 import { useStore } from 'vuex';
+import { TokenType } from '../../core/config';
 
 const soldItems = ref([]);
 const canceledItems = ref([]);
