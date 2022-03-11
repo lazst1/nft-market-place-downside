@@ -6,7 +6,7 @@
                     class="transition duration-300 grid grid-cols-2 m-4 cursor-default hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
                 >
                     <div
-                        :style="{ background: 'url(' + item.img + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }"
+                        :style="{ background: 'url(' + item.img + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center' }"
                         class="relative w-70.75 h-70.75 2xl:w-82.5 2xl:h-82.5 overflow-hidden col-span-2 sm:col-span-1"
                     >
                         <ribbon :percent="100" :period="256" />
@@ -102,8 +102,8 @@ function handleResize() {
     windowSize.value.height = window.innerHeight;
     if (windowSize.value.width >= 1920) {
         itemsToShow.value = 2.7
-    } else if (windowSize.value.width <= 720) {
-        itemsToShow.value = 1
+    } else if (windowSize.value.width < 640) {
+        itemsToShow.value = 1.01
         marginLeft.value = 0
     } else {
         const base = windowSize.value.width >= 1190 ? 2 : 1;
