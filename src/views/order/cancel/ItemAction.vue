@@ -69,10 +69,13 @@ function handleVote() {
         });
     }
 }
-const cancelOrder = (order) => {
+const cancelOrder = async (order) => {
+    const gas = await store.state.marketContract.methods.claimDownsideProtectionAmount(
+        props.order.orderId
+    ).estimateGas('', { from: store.state.user.walletAddress });
     store.state.marketContract.methods.claimDownsideProtectionAmount(
         props.order.orderId
-    ).send({ from: store.state.user.walletAddress, gas: 250000 }).then(res => {
+    ).send({ from: store.state.user.walletAddress, gas: gas }).then(res => {
         console.log('res: ', res);
     }).catch(err => {
         console.log('err: ', err);

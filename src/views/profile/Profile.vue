@@ -11,7 +11,6 @@ import { marketAddress } from '@/core/config';
 import ProfileSummary from './ProfileSummary.vue';
 import ChooseCollection from './ChooseCollection.vue';
 import ChooseNftGroup from './ChooseNftGroup.vue';
-import NftCard from './components/NftCard.vue';
 import OrderCard from './components/OrderCard.vue';
 import moralisService from '@/core/services/moralis.service';
 import erc721ABI from '@/core/config/erc721';
@@ -140,18 +139,14 @@ const selectTab = (value) => {
     }
 }
 
-const approve = (order) => {
-    const tokenContract = new store.state.web3.eth.Contract(
-        erc721ABI,
-        store.state.web3.utils.toChecksumAddress(order.tokenAddress),
-    );
+const approve = async (order) => {
+    const gas = await store.state.marketContract.methods.approve(marketAddress, order.tokenId).estimateGas('', { from: store.state.user.walletAddress });
 
-    tokenContract.methods.approve(marketAddress, order.tokenId).send({
-        from: store.state.user.walletAddress, gas: 210000
+    store.state.marketContract.methods.approve(marketAddress, order.tokenId).send({
+        from: store.state.user.walletAddress, gas: gas
     }).then(res => {
         const index = orders.value.findIndex(item => item.id === order.id);
         orders.value[index].nft.approved = true;
-
     }).catch(err => {
         console.log('Err ', err);
     });
@@ -223,7 +218,6 @@ const cancelOrder = (order) => {
                     class="bg-tertiary-800"
                     @handle-vote="handleVote"
                     @hide-nft="hideNFT"
-                    @cancel-order="cancelOrder"
                     @approve="approve"
                 ></order-card>
             </cards-container>
@@ -267,7 +261,6 @@ const cancelOrder = (order) => {
                         class="bg-tertiary-800"
                         @handle-vote="handleVote"
                         @hide-nft="hideNFT"
-                        @cancel-order="cancelOrder"
                     ></order-card>
                 </cards-container>
                 <div
@@ -284,7 +277,6 @@ const cancelOrder = (order) => {
                         class="bg-tertiary-800"
                         @handle-vote="handleVote"
                         @hide-nft="hideNFT"
-                        @cancel-order="cancelOrder"
                     ></order-card>
                 </cards-container>
                 <div
@@ -301,7 +293,6 @@ const cancelOrder = (order) => {
                         class="bg-tertiary-800"
                         @handle-vote="handleVote"
                         @hide-nft="hideNFT"
-                        @cancel-order="cancelOrder"
                     ></order-card>
                 </cards-container>
                 <div
