@@ -38,5 +38,4 @@ const store = useStore();
         <trending-search />
         <trending-assets />
     </body-container>
-    <nftmx-footer :devs="true" />
 </template>

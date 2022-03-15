@@ -9,8 +9,8 @@ import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
 import marketService from '@/core/services/market.service';
 import moralisService from '@/core/services/moralis.service';
-import AssetHistory from '../asset/AssetHistory.vue';
-import authService from '../../core/services/auth.service';
+import AssetHistory from '@/views/asset/sell/AssetHistory.vue';
+import authService from '@/core/services/auth.service';
 import NavBarSearch from '@/core/container/NavBarSearch.vue';
 
 const store = useStore();
@@ -60,5 +60,4 @@ marketService.getOrder(orderId).then(data => {
             <asset-history />
         </div>
     </body-container>
-    <nftmx-footer />
 </template>

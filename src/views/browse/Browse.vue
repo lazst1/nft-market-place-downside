@@ -11,7 +11,7 @@ import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex';
 import BrowseSearch from './BrowseSearch.vue';
-import marketService from '../../core/services/market.service';
+import marketService from '@/core/services/market.service';
 import { computed, ref, watchEffect } from 'vue';
 
 const store = useStore();
@@ -69,7 +69,6 @@ watchEffect(() => {
             class="h-96 flex justify-center items-center font-ibm-bold text-tertiary-500 text-lg"
         >No NFTs found</div>
     </body-container>
-    <nftmx-footer />
 </template>
 
 <style scoped>

@@ -20,5 +20,4 @@ import LandingSyndications from './LandingSyndications.vue';
         <landing-popular-syndications />
         <landing-categories />
     </body-container>
-    <nftmx-footer :devs="true" />
 </template>

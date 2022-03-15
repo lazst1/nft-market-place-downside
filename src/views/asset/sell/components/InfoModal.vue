@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import { themeConfig } from '../../../core/config';
+import { themeConfig } from '@/core/config';
 
 defineProps({
     title: String

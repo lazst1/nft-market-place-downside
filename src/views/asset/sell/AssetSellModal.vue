@@ -11,7 +11,7 @@ import { keyCodeNumberRange } from '@/core/utils';
 import NftmxToggle from '@/core/components/NftmxToggle.vue';
 import NftmxHashtag from '@/core/components/NftmxHashtag.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
-import marketService from '../../core/services/market.service';
+import marketService from '@/core/services/market.service';
 import { useToast } from "vue-toastification";
 import Network from './Network.vue';
 import Collection from './Collection.vue';

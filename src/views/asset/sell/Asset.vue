@@ -17,9 +17,9 @@ import Ledger from './Ledger.vue';
 import AssetSellModal from './AssetSellModal.vue';
 import { useRoute, useRouter } from 'vue-router';
 import moralisService from '@/core/services/moralis.service';
-import MoreInfo from '../detail/MoreInfo.vue';
-import marketService from '../../core/services/market.service';
-import authService from '../../core/services/auth.service';
+import MoreInfo from './MoreInfo.vue';
+import marketService from '@/core/services/market.service';
+import authService from '@/core/services/auth.service';
 
 const store = useStore();
 const router = useRouter();
@@ -95,7 +95,6 @@ const handleModal = (value) => {
             />
         </div>
     </body-container>
-    <nftmx-footer />
     <asset-sell-modal :asset="asset" v-model="sellModalActive" @handle-modal="handleModal" />
 </template>
 

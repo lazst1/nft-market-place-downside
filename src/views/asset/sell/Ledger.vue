@@ -7,7 +7,7 @@ import NftmxTbody from '@/core/components/NftmxTbody.vue';
 import NftmxTd from '@/core/components/NftmxTd.vue';
 import NftmxTr from '@/core/components/NftmxTr.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
-import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
+import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
 
 
 </script>

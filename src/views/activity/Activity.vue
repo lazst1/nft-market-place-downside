@@ -3,7 +3,7 @@ import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import { mdiFilter, mdiCloseBox } from '@mdi/js'
 import CheckboxCell from '@/core/components/CheckboxCell.vue';
-import DropDown from '../core/components/DropDown.vue';
+import DropDown from '@/core/components/DropDown.vue';
 import NavBarItem from '@/core/components/NavBarItem.vue'
 import DropDownItem from '@/core/components/DropDownItem.vue';
 import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
@@ -102,7 +102,6 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
             </nftmx-table>
         </accordion>
     </body-container>
-    <nftmx-footer />
 </template>
 
 <style>

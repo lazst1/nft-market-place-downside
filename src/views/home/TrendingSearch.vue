@@ -6,7 +6,7 @@ import Accordion from '@/core/container/Accordion.vue';
 import NftmxButtonSlot from '@/core/components/NftmxButtonSlot.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import CheckboxCell from '@/core/components/CheckboxCell.vue';
-import NftmxSearchInput from "../../core/components/NftmxSearchInput.vue";
+import NftmxSearchInput from "@/core/components/NftmxSearchInput.vue";
 import SearchAccordionContainer from "./container/SearchAccordionContainer.vue";
 
 const filterBy = ref('collection')

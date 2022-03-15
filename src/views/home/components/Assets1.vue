@@ -3,7 +3,7 @@ import Accordion from '@/core/container/Accordion.vue';
 import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import { useStore } from 'vuex';
 import { computed, ref, watchEffect } from 'vue';
-import marketService from '../../../core/services/market.service';
+import marketService from '@/core/services/market.service';
 
 const store = useStore();
 const open = ref(true);

@@ -12,19 +12,28 @@ const toast = useToast();
 const router = useRouter();
 
 if (typeof window.ethereum !== 'undefined') {
-  window.ethereum.on('accountsChanged', function (accounts) {
-    ethereum.request({ method: 'eth_chainId' })
-      .then(chain => {
-        if (chain !== '0x61') {
-          toast.error('Please switch to BSC Testnet');
-          store.dispatch('auth/login', null)
-          router.push('/login');
-        } else {
-          store.dispatch("auth/login", accounts[0]);
-        }
-      }).catch(err => {
-        consolr.log('err ', err);
-      })
+  ethereum.on('accountsChanged', function (accounts) {
+    if (accounts.length === 0) {
+      store.dispatch('auth/login', null).then(res => {
+        router.push('/login');
+      });
+    } else {
+      ethereum.request({ method: 'eth_chainId' })
+        .then(chain => {
+          if (chain !== '0x61') {
+            toast.error('Please switch to BSC Testnet');
+            store.dispatch('auth/login', null).then(res => {
+              router.push('/login');
+            })
+          } else {
+            store.dispatch("auth/login", accounts[0]).then(res => {
+              router.push('/profile');
+            });
+          }
+        }).catch(err => {
+          consolr.log('err ', err);
+        })
+    }
   })
   ethereum
     .request({ method: 'eth_accounts' })
@@ -33,10 +42,13 @@ if (typeof window.ethereum !== 'undefined') {
         .then(chain => {
           if (chain !== '0x61') {
             toast.error('Please switch to BSC Testnet');
-            store.dispatch('auth/login', null)
-            router.push('/login');
+            store.dispatch('auth/login', null).then(res => {
+              router.push('/login');
+            })
           } else {
-            store.dispatch("auth/login", accounts[0]);
+            store.dispatch("auth/login", accounts[0]).then(res => {
+              router.push('/profile');
+            });
           }
         }).catch(err => {
           consolr.log('err ', err);
@@ -45,14 +57,13 @@ if (typeof window.ethereum !== 'undefined') {
   ethereum.on('chainChanged', (chainId) => {
     if (chainId !== '0x61') {
       toast.error('Please switch to BSC Testnet')
-      store.dispatch('auth/login', null);
-      router.push('/login');
+      store.dispatch('auth/login', null).then(res => {
+        router.push('/login')
+      })
     }
   });
-  ethereum.on('connect', (connectInfo) => {
-    console.log(connectInfo)
-  });
 }
+
 store.commit('app/UPDATE_WINDOW_WIDTH', window.innerWidth);
 const { width: windowWidth } = useWindowSize()
 watch(windowWidth, val => {

@@ -2,9 +2,9 @@
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
 import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
-import marketService from '../../core/services/market.service';
+import marketService from '@/core/services/market.service';
 import { ref, watchEffect } from 'vue';
-import moralisService from '../../core/services/moralis.service';
+import moralisService from '@/core/services/moralis.service';
 
 const props = defineProps({
     asset: Object,

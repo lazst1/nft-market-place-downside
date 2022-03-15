@@ -7,11 +7,11 @@ import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
 import AccordionContainer from './container/AccordionContainer.vue';
 import Assets1 from './components/Assets1.vue';
 import Assets2 from './components/Assets2.vue';
-import marketService from '../../core/services/market.service';
+import marketService from '@/core/services/market.service';
 import { exchangeRate } from '@/core/config';
 import { roundTo } from '@/core/utils';
 import { useStore } from 'vuex';
-import { TokenType } from '../../core/config';
+import { TokenType } from '@/core/config';
 
 const soldItems = ref([]);
 const canceledItems = ref([]);

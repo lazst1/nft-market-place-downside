@@ -55,5 +55,4 @@ import NftmxFileUploader from '@/core/components/NftmxFileUploader.vue';
             </template>
         </nftmx-sell-grid>
     </body-container>
-    <nftmx-footer />
 </template>

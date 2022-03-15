@@ -17,7 +17,7 @@ import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
 import StatisticAccordion from './StatisticAccordion.vue'
 import AssetHistory from './AssetHistory.vue';
-import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
+import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
 
 const props = defineProps({
     modelValue: Boolean

@@ -11,10 +11,16 @@ import NotificationsBar from '@/views/notifications/NotificationsBar.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 import NftmxButton from '../components/NftmxButton.vue';
 import NftmxBadge from '../components/NftmxBadge.vue';
+import marketService from '../services/market.service';
 
 const sidebar = ref(false);
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
+const orderLogs = ref([]);
+
+marketService.getOrderLogs(1, 20).then(res => {
+  orderLogs.value = res.items;
+});
 
 function onClickOutside() {
   store.commit('app/TOGGLE_SIDEBAR', false);
@@ -48,7 +54,7 @@ function toggleNotificationBar() {
           <nav-bar-item v-if="walletAddress">
             <div @click="toggleNotificationBar">
               <font-awesome-icon :icon="['fas', 'bell']" class="text-lg text-white" />
-              <nftmx-badge :value="store.state.orderLogs.length" />
+              <nftmx-badge :value="orderLogs.length" />
             </div>
           </nav-bar-item>
           <nav-bar-item class="hidden lg:block">

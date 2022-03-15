@@ -5,7 +5,7 @@ import { useStore } from 'vuex'
 import { themeConfig, baseURL, defaultUser } from '@/core/config';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
 import NftmxGroupIcon from '@/core/components/NftmxGroupIcon.vue';
-import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
+import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
 import { useToast } from 'vue-toastification';
 
 const store = useStore();

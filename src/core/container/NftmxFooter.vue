@@ -1,16 +1,31 @@
 <script setup>
 import NftmxTypography from '@/core/components/NftmxTypography.vue';
+import { useWindowSize } from '@vueuse/core';
+import { onMounted, onUpdated, ref, watch } from 'vue';
 
 defineProps({
-    devs: {
+    extend: {
         type: Boolean,
         default: false
     }
 })
+const emit = defineEmits(['handle-footer'])
+
+const footer = ref();
+onMounted(() => {
+    emit('handle-footer', footer.value.scrollHeight);
+})
+onUpdated(() => {
+    emit('handle-footer', footer.value.scrollHeight);
+})
+const { width: windowWidth } = useWindowSize();
+watch(windowWidth, val => {
+    emit('handle-footer', footer.value.scrollHeight);
+})
 </script>
 
 <template>
-    <div class="bottom-0 w-full font-ibm absolute">
+    <div ref="footer" class="bottom-0 w-full font-ibm absolute">
         <div class="bg-black text-white pt-5.25 pb-8 border-b border-tertiary-800 px-8">
             <p
                 class="text-center text-sm sm:text-xg text-primary-900 font-press leading-6 sm:leading-9"
@@ -19,7 +34,7 @@ defineProps({
                 class="text-center text-sm"
             >All generated fees and gas costs are 100% reimbursed with the NFTmx token</p>
         </div>
-        <div v-if="devs" class="bg-tertiary-900 text-center pt-12">
+        <div v-if="extend" class="bg-tertiary-900 text-center pt-12">
             <div class="max-w-screen-3xl mx-auto pb-28">
                 <div class="text-white font-press px-4 pt-10 pb-2 sm:pb-6 lg:pb-16">
                     <nftmx-typography h1>For developers and marketers</nftmx-typography>

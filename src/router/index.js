@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory, } from 'vue-router'
 import Landing from '@/views/landing/Landing.vue'
 import Home from '@/views/home/Home.vue'
+import Login from '@/views/login/Login.vue'
 import Browse from '@/views/browse/Browse.vue'
-import Activity from '@/views/Activity.vue'
-import Detail from '@/views/detail/Detail.vue'
-import Login from '@/views/Login.vue'
-import Create from '@/views/Create.vue'
+import Activity from '@/views/activity/Activity.vue'
+import BuyOrder from '@/views/order/buy/BuyOrder.vue'
+import CancelOrder from '@/views/order/cancel/CancelOrder.vue'
+import Create from '@/views/asset/create/Create.vue'
 import Profile from '@/views/profile/Profile.vue'
 import ProfileSetting from '@/views/profile/ProfileSetting.vue'
-import Asset from '@/views/asset/Asset.vue'
+import Asset from '@/views/asset/sell/Asset.vue'
 import NotFound from '@/views/404/NotFound.vue'
-import CancelOrder from '@/views/order/CancelOrder.vue'
 
 const routes = [
     {
@@ -47,11 +47,19 @@ const routes = [
     },
     {
         meta: {
-            title: 'Detail'
+            title: 'BuyOrder'
         },
-        path: '/detail/:orderId',
-        name: 'detail',
-        component: Detail
+        path: '/order/buy/:orderId',
+        name: 'buyOrder',
+        component: BuyOrder
+    },
+    {
+        meta: {
+            title: 'CancelOrder'
+        },
+        path: '/order/cancel/:orderId',
+        name: 'cancelOrder',
+        component: CancelOrder
     },
     {
         meta: {
@@ -94,14 +102,6 @@ const routes = [
         path: '/profile-setting',
         name: 'profile_setting',
         component: ProfileSetting
-    },
-    {
-        meta: {
-            title: 'CancelOrder'
-        },
-        path: '/cancel/:orderId',
-        name: 'cancelOrder',
-        component: CancelOrder
     },
     {
         path: "/:catchAll(.*)",

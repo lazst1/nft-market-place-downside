@@ -13,9 +13,9 @@ import ChooseCollection from './ChooseCollection.vue';
 import ChooseNftGroup from './ChooseNftGroup.vue';
 import NftCard from './components/NftCard.vue';
 import OrderCard from './components/OrderCard.vue';
-import moralisService from '../../core/services/moralis.service';
+import moralisService from '@/core/services/moralis.service';
 import erc721ABI from '@/core/config/erc721';
-import marketService from '../../core/services/market.service';
+import marketService from '@/core/services/market.service';
 
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
@@ -362,5 +362,4 @@ const cancelOrder = (order) => {
             >No orders found</div>
         </div>
     </body-container>
-    <nftmx-footer />
 </template>
