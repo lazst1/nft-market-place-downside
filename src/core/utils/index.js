@@ -65,3 +65,17 @@ export function emailValidate(email) {
     let regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     return regex.test(email);
 }
+
+export function queryBuilder(data) {
+    let query = '';
+    let firstArg = true;
+    for (const [key, value] of Object.entries(data)) {
+        if (firstArg) {
+            query += key + '=' + value;
+            firstArg = false;
+        } else {
+            query += '&' + key + '=' + value;
+        }
+    }
+    return query;
+}

@@ -27,19 +27,19 @@ export const auth = {
                     user => {
                         rootState.user = user;
                         commit('loginSuccess', user);
-                        dispatch('market/orderLogs', null, { root: true });
 
                         return user;
                     },
                     error => {
                         commit('loginFailure');
                         rootState.user = null;
-                        return Promise.reject(error);
+                        return error;
                     }
                 )
             } else {
-                rootState.user = null;
+                rootState.user = {};
                 commit('loginFailure');
+                return false;
             }
         },
         saveProfile({ commit, rootState }, data) {

@@ -11,7 +11,7 @@ import { keyCodeNumberRange } from '@/core/utils';
 import NftmxToggle from '@/core/components/NftmxToggle.vue';
 import NftmxHashtag from '@/core/components/NftmxHashtag.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
-import marketService from '../../core/services/market.service';
+import marketService from '@/core/services/market.service';
 import { useToast } from "vue-toastification";
 import Network from './Network.vue';
 import Collection from './Collection.vue';
@@ -51,7 +51,7 @@ marketService.getHashtagNames().then(res => {
     });
 })
 
-function createOrder() {
+async function createOrder() {
     const token_id = parseInt(tokenId);
     const price = nftPrice.value;
     const rate = downsideRate.value * 100;
@@ -60,6 +60,15 @@ function createOrder() {
 
     createHashTags();
 
+    const gas = await store.state.marketContract.methods.createOrder(
+        tokenAddress,
+        token_id,
+        store.state.web3.utils.toWei(price, 'ether'),
+        rate,
+        period.value,
+        false,
+        period.value
+    ).estimateGas('', { from: store.state.user.walletAddress });
     store.state.marketContract.methods.createOrder(
         tokenAddress,
         token_id,
@@ -68,7 +77,7 @@ function createOrder() {
         period.value,
         false,
         period.value
-    ).send({ from: store.state.user.walletAddress, gas: 250000 })
+    ).send({ from: store.state.user.walletAddress, gas: gas })
         .then(res => {
             router.push('/profile');
         }).catch(err => { console.log('err ', err) });

@@ -12,14 +12,6 @@ export const market = {
     state: {
     },
     actions: {
-        // fetch active orders on sale in the martketplace.
-        getSaleOrders({ commit, rootState }, walletAddress) {
-            if (walletAddress) {
-                marketService.getSaleOrders(walletAddress).then(orders => {
-                    rootState.orders = orders;
-                });
-            }
-        },
         // approve the NFT to our marketplace
         approve({ commit, rootState }, data) {
             const tokenContract = new rootState.web3.eth.Contract(
@@ -42,28 +34,6 @@ export const market = {
             rootState.marketContract.methods.claimDownsideProtectionAmount(
                 orderId
             ).send({ from: rootState.user.walletAddress, gas: 250000 });
-        },
-        createOrder({ commit, rootState }, data) {
-            rootState.marketContract.methods.createOrder(
-                data.tokenAddress,
-                data.tokenId,
-                rootState.web3.utils.toWei(data.nftPrice, 'ether'),
-                data.downsideRate,
-                data.downsidePeriod,
-                false,
-                data.downsidePeriod
-            ).send({ from: rootState.user.walletAddress, gas: 250000 });
-        },
-        buyFixedPayOrder({ commit, rootState }, data) {
-            rootState.marketContract.methods.buyFixedPayOrder(
-                data.orderId
-            ).send({ from: rootState.user.walletAddress, gas: 623478, value: data.tokenPrice, gasPrice: 0 });
-        },
-        // fetch order logs ( notification icon on top bar )
-        orderLogs({ commit, rootState }) {
-            marketService.getOrderLogs(1, 20).then(res => {
-                rootState.orderLogs = res.items;
-            });
         },
     },
     getters: {

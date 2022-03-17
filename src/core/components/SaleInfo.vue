@@ -18,7 +18,10 @@ defineProps({
         type: String,
         default: "(47.81x)"
     },
-    value: Number
+    value: {
+        type: Number,
+        default: 10
+    }
 })
 
 </script>

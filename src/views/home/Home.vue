@@ -31,12 +31,9 @@ const store = useStore();
         <div class="pt-6 sm:pt-4">
             <syndication-carousel></syndication-carousel>
         </div>
-
         <nftmx-divider class="mt-9"></nftmx-divider>
-
         <analyzer />
         <trending-search />
         <trending-assets />
     </body-container>
-    <nftmx-footer :devs="true" />
 </template>

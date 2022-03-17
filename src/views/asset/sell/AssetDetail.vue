@@ -3,22 +3,14 @@ import DetailButton from '@/core/components/DetailButton.vue';
 import Ribbon from '@/core/components/Ribbon.vue';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
-import Accordion from '../../core/container/Accordion.vue';
+import Accordion from '@/core/container/Accordion.vue';
 import { assetDetailTabs, defaultUser } from '@/core/config'
 import InfoModal from './components/InfoModal.vue'
-import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
+import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
 import { toUpercaseFirstLetterOfString } from '@/core/utils'
 import { baseURL } from '@/core/config';
 
 const props = defineProps({
-    percent: {
-        type: Number,
-        default: 100
-    },
-    period: {
-        type: Number,
-        default: 365
-    },
     nft: Object,
     nftCreator: {
         type: Object,
@@ -47,7 +39,6 @@ const cancelNFT = () => {
         class="relative overflow-hidden p-6 w-full h-asset-img-lg border border-black"
         :style="{ background: 'url(' + '/images/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#222222' }"
     >
-        <ribbon :percent="percent" :period="period" big />
         <info-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[0]"
@@ -109,32 +100,6 @@ const cancelNFT = () => {
             <div class="text-xxs flex justify-between mt-4">
                 <span class="font-ibm-medium">Blockchain</span>
                 <span>BSC Testnet</span>
-            </div>
-        </info-modal>
-        <info-modal
-            :title="toUpercaseFirstLetterOfString(tab)"
-            v-if="tab === assetDetailTabs[3]"
-            @select-tab="selectTab"
-        >
-            <div class="h-full flex flex-col justify-around text-center">
-                <div
-                    class="text-lg 3xl:text-2xl font-ibm-bold 3xl:leading-9"
-                >Your Investment Automatically Includes 100% Downside Protection for 365 days</div>
-                <div
-                    class="text-tertiary-500 text-sm 3xl:leading-6"
-                >If you are a buyer, think of NFT.mx as a new strategic staking program with upside from selling the NFT, while also providing the option to cancel your investment and get a 100% refund with your original tokens.</div>
-                <div class="flex flex-col gap-6">
-                    <div class="flex justify-around">
-                        <div class="text-center">
-                            <div class="font-ibm-bold text-lg">Days left</div>
-                            <div class="text-3.5xl text-primary-800 -mt-0.75">{{period}}/{{period}}</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="font-ibm-bold text-lg">Protection</div>
-                            <div class="text-3.5xl text-primary-800 -mt-0.75">{{ percent }}%</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </info-modal>
     </div>

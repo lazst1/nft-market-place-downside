@@ -37,104 +37,18 @@ function clickFilterBy(value) {
             <div class="grid grid-cols-2 text-center text-lg font-ibm-semi-bold mt-5">
                 <div
                     @click="clickFilterBy('collection')"
-                    :class="[filterBy === 'collection' ? 'text-primary-900 border-primary-900' : 'text-white border-black', 'hover:text-primary-900 border-b-2 hover:border-primary-900 py-4']"
+                    :class="[filterBy === 'collection' ? 'text-primary-900 border-primary-900' : 'text-white border-black', 'cursor-pointer transition hover:text-primary-900 border-b-2 hover:border-primary-900 py-4']"
                 >Collections</div>
                 <div
                     @click="clickFilterBy('all')"
-                    :class="[filterBy === 'all' ? 'text-primary-900 border-primary-900' : 'text-white border-black', 'hover:text-primary-900 border-b-2 hover:border-primary-900 py-4']"
+                    :class="[filterBy === 'all' ? 'text-primary-900 border-primary-900' : 'text-white border-black', 'cursor-pointer transition hover:text-primary-900 border-b-2 hover:border-primary-900 py-4']"
                 >All NFTs</div>
             </div>
             <div v-if="filterBy === 'all'" class="flex my-2">
-                <div class="border border-black w-fit px-5 h-42.5">
-                    <accordion :border="false" :sidebar="true" class="w-58">
-                        <template v-slot:caption>
-                            <div class="flex items-center w-full">
-                                <div class="flex-1 text-xs font-ibm py-4">Status</div>
-                            </div>
-                        </template>
-                        <div class="flex flex-wrap pt-2 gap-y-2 justify-between text-xs">
-                            <nftmx-button-slot width="w-28" align="text-left pl-4" outline>Buy Now</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-28"
-                                align="text-left pl-4"
-                                outline
-                            >On Auction</nftmx-button-slot>
-                            <nftmx-button-slot width="w-28" align="text-left pl-4" outline>New</nftmx-button-slot>
-                            <nftmx-button-slot
-                                width="w-28"
-                                align="text-left pl-4"
-                                outline
-                            >Has Offers</nftmx-button-slot>
-                        </div>
-                    </accordion>
-                </div>
-                <nftmx-divider vertical class="mx-2.5" />
-                <div class="border border-black w-fit px-5 h-42.5">
-                    <accordion :border="false" :sidebar="true" class="w-58">
-                        <template v-slot:caption>
-                            <div class="flex items-center w-full">
-                                <div class="flex-1 text-xs font-ibm py-4">Status</div>
-                            </div>
-                        </template>
-                        <div class="flex flex-wrap pt-2 gap-y-2 justify-between">
-                            <!-- <nftmx-select class="font-ibm-bold w-full text-sm mb-3" :data="people" /> -->
-                        </div>
-                    </accordion>
-                </div>
-                <nftmx-divider vertical class="mx-2.5" />
-                <div class="border border-black w-fit px-5 h-42.5">
-                    <accordion :border="false" :sidebar="true" class="w-58">
-                        <template v-slot:caption>
-                            <div class="flex items-center w-full">
-                                <div class="flex-1 text-xs font-ibm py-4">Status</div>
-                            </div>
-                        </template>
-                        <div class="flex flex-wrap pt-2 gap-y-2 justify-between">
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                        </div>
-                    </accordion>
-                </div>
-                <nftmx-divider vertical class="mx-2.5" />
-                <div class="border border-black w-fit px-5 h-42.5">
-                    <accordion :border="false" :sidebar="true" class="w-58">
-                        <template v-slot:caption>
-                            <div class="flex items-center w-full">
-                                <div class="flex-1 text-xs font-ibm py-4">Status</div>
-                            </div>
-                        </template>
-                        <div class="flex flex-wrap pt-2 gap-y-2 justify-between">
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                            <button
-                                class="bg-primary-900 text-white text-xs w-28 h-9 text-left pl-4 border border-black"
-                            >Buy Now</button>
-                        </div>
-                    </accordion>
-                </div>
+                
             </div>
-            <div
-                v-if="filterBy === 'collection'"
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 pt-6"
-            >
-                <checkbox-cell class="pb-3.5">
+            <div v-if="filterBy === 'collection'" class="flex my-2">
+                <!-- <checkbox-cell class="pb-3.5">
                     <span class="text-xs relative -top-0.5">List Price Available</span>
                 </checkbox-cell>
                 <checkbox-cell class="pb-3.5">
@@ -175,7 +89,7 @@ function clickFilterBy(value) {
                 </checkbox-cell>
                 <checkbox-cell class="pb-3.5">
                     <span class="text-xs relative -top-0.5">Sports</span>
-                </checkbox-cell>
+                </checkbox-cell>-->
             </div>
         </div>
     </div>

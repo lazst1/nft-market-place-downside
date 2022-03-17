@@ -13,7 +13,7 @@ import NftmxTextarea from '@/core/components/NftmxTextarea.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import { baseURL, defaultUser } from '@/core/config'
 import { useToast } from "vue-toastification";
-import { emailValidate } from '../../core/utils';
+import { emailValidate } from '@/core/utils';
 
 const store = useStore();
 const name = ref();
@@ -239,5 +239,4 @@ watchEffect(() => {
             ></nftmx-button>
         </div>
     </body-container>
-    <nftmx-footer />
 </template>

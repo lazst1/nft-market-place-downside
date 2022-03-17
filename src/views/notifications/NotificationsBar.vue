@@ -4,9 +4,14 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 import Notification from './components/Notification.vue';
 
-const store = useStore();
+defineProps({
+    orderLogs: {
+        type: Array,
+        default: []
+    }
+})
 
-const orderLogs = computed(() => store.state.orderLogs);
+const store = useStore();
 
 function toggleNotificationBar() {
     store.commit('app/TOGGLE_NOTIFICATION_BAR', false);

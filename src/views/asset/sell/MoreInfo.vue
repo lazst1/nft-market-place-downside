@@ -3,10 +3,10 @@ import DetailButton from '@/core/components/DetailButton.vue';
 import Ribbon from '@/core/components/Ribbon.vue';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
-import Accordion from '../../core/container/Accordion.vue';
+import Accordion from '@/core/container/Accordion.vue';
 import { assetDetailTabs, defaultUser } from '@/core/config'
 import InfoModal from './components/InfoModal.vue'
-import NftmxWalletAddressPop from '../../core/components/NftmxWalletAddressPop.vue';
+import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
 import { toUpercaseFirstLetterOfString } from '@/core/utils'
 import { baseURL } from '@/core/config';
 

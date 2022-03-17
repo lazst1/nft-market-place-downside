@@ -27,12 +27,25 @@ const store = useStore();
 const fundError = ref(false);
 const tokenPrice = computed(() => roundTo(parseInt(props.order.tokenPrice) / exchangeRate))
 
-function buyOrder() {
+async function buyOrder() {
     if (tokenPrice.value > props.balance) {
         fundError.value = true;
         return;
     }
-    store.dispatch('market/buyFixedPayOrder', { orderId: parseInt(props.order.orderId), tokenPrice: props.order.tokenPrice });
+
+    const gas = await store.state.marketContract.methods.buyFixedPayOrder(
+        parseInt(props.order.orderId)
+    ).estimateGas('', { from: store.state.user.walletAddress });
+
+    store.state.marketContract.methods.buyFixedPayOrder(
+        parseInt(props.order.orderId)
+    ).send({ from: store.state.user.walletAddress, gas: gas, value: props.order.tokenPrice })
+        .then(res => {
+            router.push('/profile');
+        })
+        .catch(err => {
+            console.log('err: ', err);
+        });
 }
 
 const bnbPrice = ref(0);

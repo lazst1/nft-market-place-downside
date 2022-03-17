@@ -1,5 +1,7 @@
 <script setup>
 import NavBarSearch from '@/core/container/NavBarSearch.vue';
+import { ref } from 'vue';
+import NftmxFooter from './NftmxFooter.vue';
 
 defineProps({
     searchAble: {
@@ -12,13 +14,22 @@ defineProps({
     },
     footerExtended: Boolean
 })
+
+const footerHeight = ref(0);
+const handleFooter = (value) => {
+    footerHeight.value = value;
+}
 </script>
 
 <template>
     <nav-bar-search v-if="searchAble"></nav-bar-search>
-    <div :class="[padding?'px-5.5 sm:px-10 md:px-16 lg:px-20 py-4':'', footerExtended?'pb-fes sm:pb-fem lg:pb-fel 2xl:pb-fex':'pb-50', 'bg-tertiary-900 font-ibm cursor-default']">
+    <div
+        :class="[padding ? 'px-5.5 sm:px-10 md:px-16 lg:px-20 py-4' : '', 'bg-tertiary-900 font-ibm cursor-default']"
+        :style="{ paddingBottom: footerHeight + 'px' }"
+    >
         <div class="max-w-8xl mx-auto">
             <slot />
         </div>
     </div>
+    <nftmx-footer :extend="footerExtended" @handle-footer="handleFooter" />
 </template>

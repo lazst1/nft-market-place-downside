@@ -5,7 +5,7 @@ import CheckboxCell from '@/core/components/CheckboxCell.vue';
 import TextCompression from '@/core/components/TextCompression.vue';
 import { useStore } from 'vuex';
 import NftmxCancelModal from '@/core/components/NftmxCancelModal.vue';
-import marketService from '../../../core/services/market.service';
+import marketService from '@/core/services/market.service';
 
 const props = defineProps({
     order: Object,
