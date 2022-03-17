@@ -37,7 +37,7 @@ watch(checked, newVal => {
 </template>
 
 
-<style>
+<style scoped>
 .container {
   display: block;
   position: relative;

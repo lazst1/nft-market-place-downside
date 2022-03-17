@@ -46,9 +46,7 @@ if (typeof window.ethereum !== 'undefined') {
               router.push('/login');
             })
           } else {
-            store.dispatch("auth/login", accounts[0]).then(res => {
-              router.push('/profile');
-            });
+            store.dispatch("auth/login", accounts[0]);
           }
         }).catch(err => {
           consolr.log('err ', err);

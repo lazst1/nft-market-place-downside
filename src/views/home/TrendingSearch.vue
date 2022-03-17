@@ -63,7 +63,7 @@ function clickFilterBy(value) {
                 >All NFTs</div>
             </div>
             <div v-if="filterBy === 'all'" class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 my-4.75">
-                <div class="border border-black w-full px-5 h-42.5">
+                <!-- <div class="border border-black w-full px-5 h-42.5">
                     <search-accordion-container title="Status">
                         <template v-slot:content>
                             <nftmx-button-slot>Buy Now</nftmx-button-slot>
@@ -102,10 +102,10 @@ function clickFilterBy(value) {
                             <nftmx-button-slot>Has Offers</nftmx-button-slot>
                         </template>
                     </search-accordion-container>
-                </div>
+                </div> -->
             </div>
             <div v-if="filterBy === 'collection'" class="pt-6 grid grid-cols-1 sm:grid-cols-2">
-                <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4">
+                <!-- <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4">
                     <checkbox-cell class="pb-3.5">
                         <span class="text-xs relative -top-0.5">List Price Available</span>
                     </checkbox-cell>
@@ -148,7 +148,7 @@ function clickFilterBy(value) {
                     <checkbox-cell class="pb-3.5">
                         <span class="text-xs relative -top-0.5">Sports</span>
                     </checkbox-cell>
-                </div>
+                </div> -->
                 <div></div>
             </div>
         </div>

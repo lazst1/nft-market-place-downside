@@ -122,7 +122,7 @@ function handleVote() {
                     <br />SYNDICATION
                 </button>
                 <router-link
-                    :to="{ name: 'detail', params: { orderId: order.id } }"
+                    :to="{ name: 'buyOrder', params: { orderId: order.id } }"
                     class="bg-primary-900 text-white text-sm flex justify-center items-center hover:bg-primary-700"
                 >BUY NOW</router-link>
             </div>

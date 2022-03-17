@@ -1,7 +1,7 @@
 <script setup>
 import NftmxTypography from '@/core/components/NftmxTypography.vue';
-import { useWindowSize } from '@vueuse/core';
-import { onMounted, onUpdated, ref, watch } from 'vue';
+import { computed, onMounted, onUpdated, ref, watch } from 'vue';
+import { useStore } from 'vuex';
 
 defineProps({
     extend: {
@@ -11,14 +11,16 @@ defineProps({
 })
 const emit = defineEmits(['handle-footer'])
 
+const store = useStore();
 const footer = ref();
+const windowWidth = computed(() => store.state.app.windowWidth);
+
 onMounted(() => {
     emit('handle-footer', footer.value.scrollHeight);
 })
 onUpdated(() => {
     emit('handle-footer', footer.value.scrollHeight);
 })
-const { width: windowWidth } = useWindowSize();
 watch(windowWidth, val => {
     emit('handle-footer', footer.value.scrollHeight);
 })
@@ -43,21 +45,21 @@ watch(windowWidth, val => {
                     class="grid grid-cols-1 lg:grid-cols-3 px-5.5 sm:px-10 md:px-16 lg:px-22 sm:gap-10 lg:gap-32"
                 >
                     <div class="flex flex-col items-center px-1">
-                        <img src="/images/free-whitelabel.png" class="py-5" />
+                        <img src="/images/free-whitelabel.png" class="h-25 my-5" />
                         <div class="text-white font-ibm-medium text-lg py-3">Free Whitelabel</div>
                         <div
                             class="text-tertiary-400 font-ibm text-xm"
                         >Build for FREE your own NFT.mx under a new brand and enjoy from sale fees</div>
                     </div>
                     <div class="flex flex-col items-center px-1">
-                        <img src="/images/display-us.png" class="py-5" />
+                        <img src="/images/display-us.png" class="h-25 my-5" />
                         <div class="text-white font-ibm-medium text-lg py-3">Display us</div>
                         <div
                             class="text-tertiary-400 font-ibm text-xm"
                         >Use our API to display NFT on you website and enjoy from sale fees</div>
                     </div>
                     <div class="flex flex-col items-center px-1">
-                        <img src="/images/become-an-affiliate.png" class="py-5" />
+                        <img src="/images/become-an-affiliate.png" class="h-25 my-5" />
                         <div class="text-white font-ibm-medium text-lg py-3">Become an affiliate</div>
                         <div
                             class="text-tertiary-400 font-ibm text-xm"
@@ -74,21 +76,21 @@ watch(windowWidth, val => {
                             target="_blank"
                         >
                             <div class>Powered by:</div>
-                            <img src="/images/atom-logo-footer.png" class />
+                            <img src="/images/atom-logo-footer.png" class="h-12.5" />
                         </a>
                     </div>
                     <div class="flex justify-center sm:justify-start">
                         <div class="w-fit flex">
                             <a href="https://polygon.technology/" target="_blank">
-                                <img src="/images/polygon-logo-footer.png" class />
+                                <img src="/images/polygon-logo-footer.png" class="h-12.5" />
                             </a>
                             <div class="border-r border-tertiary-800 my-2 mx-2"></div>
                             <a href="https://ethereum.org/en/" target="_blank">
-                                <img src="/images/eth-logo-footer.png" class />
+                                <img src="/images/eth-logo-footer.png" class="h-12.5" />
                             </a>
                             <div class="border-r border-tertiary-800 my-2 mx-2"></div>
                             <a href="https://www.binance.com/en" target="_blank">
-                                <img src="/images/bsc-logo-footer.png" class />
+                                <img src="/images/bsc-logo-footer.png" class="h-12.5" />
                             </a>
                         </div>
                     </div>

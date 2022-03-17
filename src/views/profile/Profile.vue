@@ -52,7 +52,6 @@ const counts = computed(() => {
 
 watchEffect(() => {
     if (walletAddress.value) {
-        console.log('get nfts and orders')
         moralisService.getMyNFTs(walletAddress.value, 100, 0).then(async nftData => {
             const collectedNFTs = await JSON.parse(JSON.stringify(nftData));
             const nfts = await Promise.all(collectedNFTs.result.map(async (nft, index) => {

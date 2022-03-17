@@ -54,7 +54,7 @@ const store = useStore();
         <font-awesome-icon
             @click="clickFilter"
             :icon="['fas', 'filter']"
-            :class="[navbar ? 'text-lg' : 'text-sm', filterActive ? 'text-primary-900' : 'text-white', 'text-white hover:text-primary-900 cursor-pointer']"
+            :class="[navbar ? 'text-lg' : 'text-sm', filterActive ? 'text-primary-900' : 'text-white', 'transition text-white hover:text-primary-900 cursor-pointer']"
         />
     </div>
 </template>
