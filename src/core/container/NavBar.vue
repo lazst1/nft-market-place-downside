@@ -43,7 +43,7 @@ function toggleNotificationBar() {
       <div class="flex-1 items-stretch flex h-70px font-ibm">
         <nav-bar-item>
           <router-link to="/">
-            <img src="/images/nftmx-logo.png" alt="NFT mx" />
+            <img src="/images/logo/nftmx-logo.png" alt="NFT mx" />
           </router-link>
         </nav-bar-item>
       </div>

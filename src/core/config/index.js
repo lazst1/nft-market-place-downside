@@ -50,8 +50,8 @@ export const defaultUser = {
     email: "",
     instagram: "",
     name: "Your name",
-    profile_banner: "/images/profile-banner-1920.png",
-    profile_img: "/images/profile-big.png",
+    profile_banner: "/images/creators/profile-banner-1920.png",
+    profile_img: "/images/creators/profile-big.png",
     twitter: "",
     website: ""
 }
@@ -66,14 +66,14 @@ export const saleType = {
 export const networks = [
     {
         name: "Binance",
-        icon: "/images/curr-3.png"
+        icon: "/images/currencies/curr-3.png"
     }
 ]
 
 export const currencies = [
     {
         name: "BNB",
-        icon: "/images/curr-3.png"
+        icon: "/images/currencies/curr-3.png"
     }
 ]
 
@@ -95,45 +95,45 @@ export const TokenType = {
 
 export const syndications = [
     {
-        img: '/images/img1.png',
+        img: '/images/nfts/img1.png',
         type: 'AUCTION',
         lockedValue: 1548325.56
     },
     {
-        img: '/images/img2.png',
+        img: '/images/nfts/img2.png',
         type: 'FIX_SALE',
         fixPrice: 50000,
         lockedValue: 1548325.56
     },
     {
-        img: '/images/img3.png',
+        img: '/images/nfts/img3.png',
         type: 'FIX_SALE',
         fixPrice: 50000,
         lockedValue: 1548325.56
     },
     {
-        img: '/images/img4.png',
+        img: '/images/nfts/img4.png',
         type: 'AUCTION',
         lockedValue: 1548325.56
     },
     {
-        img: '/images/img5.png',
+        img: '/images/nfts/img5.png',
         type: 'FIX_SALE',
         fixPrice: 50000,
         lockedValue: 1548325.56
     },
     {
-        img: '/images/img6.png',
+        img: '/images/nfts/img6.png',
         type: 'AUCTION',
         lockedValue: 1548325.56
     },
     {
-        img: '/images/img7.png',
+        img: '/images/nfts/img7.png',
         type: 'AUCTION',
         lockedValue: 1548325.56
     },
     {
-        img: '/images/img8.png',
+        img: '/images/nfts/img8.png',
         type: 'FIX_SALE',
         fixPrice: 50000,
         lockedValue: 1548325.56

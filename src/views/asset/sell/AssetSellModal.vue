@@ -126,7 +126,7 @@ function downsideRateRange() {
         <div class="grid grid-cols-8 text-white my-9 px-4 lg:pl-17.5 lg:pr-17">
             <div class="col-span-full lg:col-span-3 lg:-mr-3.5 3xl:pr-2.25">
                 <div
-                    class="relative overflow-hidden p-6 bg-[url('/images/img10.png')] bg-cover border border-black w-full pt-70per"
+                    class="relative overflow-hidden p-6 bg-[url('/images/nfts/img10.png')] bg-cover border border-black w-full pt-70per"
                 ></div>
                 <div class="flex w-full text-sm font-ibm-bold mt-7">
                     <div class="pt-0.75">
@@ -137,7 +137,7 @@ function downsideRateRange() {
                     <div class="py-0.5">
                         <div>Price</div>
                         <div class="text-sm font-ibm-light flex items-center mt-3">
-                            <img src="/images/curr-1.png" class="w-4 h-4 mr-2.5" />
+                            <img src="/images/currencies/curr-1.png" class="w-4 h-4 mr-2.5" />
                             0
                         </div>
                     </div>

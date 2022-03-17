@@ -45,7 +45,7 @@ const cancelNFT = () => {
 <template>
     <div
         class="relative overflow-hidden p-6 w-full h-asset-img-lg border border-black"
-        :style="{ background: 'url(' + '/images/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#222222' }"
+        :style="{ background: 'url(' + '/images/nfts/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#222222' }"
     >
         <ribbon :percent="percent" :period="period" big />
         <info-modal
@@ -127,7 +127,9 @@ const cancelNFT = () => {
                     <div class="flex justify-around">
                         <div class="text-center">
                             <div class="font-ibm-bold text-lg">Days left</div>
-                            <div class="text-3.5xl text-primary-800 -mt-0.75">{{period}}/{{period}}</div>
+                            <div
+                                class="text-3.5xl text-primary-800 -mt-0.75"
+                            >{{ period }}/{{ period }}</div>
                         </div>
                         <div class="text-center">
                             <div class="font-ibm-bold text-lg">Protection</div>

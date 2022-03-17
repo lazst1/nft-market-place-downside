@@ -51,7 +51,7 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
                     placeholder="Type of amount"
                 />
                 <div
-                    class="w-14 h-14 bg-black absolute bg-[url('/images/curr-1.png')] bg-no-repeat bg-center"
+                    class="w-14 h-14 bg-black absolute bg-[url('/images/currencies/curr-1.png')] bg-no-repeat bg-center"
                 />
             </div>
             <div class="w-full text-center">
