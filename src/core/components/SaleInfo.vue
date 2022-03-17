@@ -28,28 +28,33 @@ defineProps({
 
 <template>
     <div
-        class="grid grid-cols-2 gap-x-4 text-xxs items-baseline font-ibm-semi-bold leading-4.5 text-white"
+        class="flex justify-between gap-x-4 text-xxs items-baseline font-ibm-light leading-4.5 text-white"
     >
-        <div>Unique</div>
-        <div class="w-max flex">
-            Transferred
-            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st ml-1" />
+        <div class>
+            <div>Unique</div>
+            <div class="text-primary-900">{{ unique }}</div>
+            <div class="flex mt-3">
+                ROI
+                <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st ml-1" />
+            </div>
+            <div class="text-primary-900">
+                {{ roi }}
+                <div class="text-tertiary-400 leading-3.5">{{ roii }}</div>
+            </div>
         </div>
-        <div class="text-primary-900 font-ibm-light">{{ unique }}</div>
-        <div class="text-primary-900 font-ibm-light">{{ transferred }}</div>
-        <div class="flex mt-3">
-            ROI
-            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st ml-1" />
+        <div class>
+            <div class="w-max flex">
+                Transferred
+                <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st ml-1" />
+            </div>
+            <div class="text-primary-900">{{ transferred }}</div>
+
+            <div class="flex mt-3">
+                Value
+                <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st ml-1" />
+            </div>
+            <div class="text-primary-900">${{ roundTo(value) }}</div>
         </div>
-        <div class="flex">
-            Value
-            <font-awesome-icon :icon="['fas', 'question-circle']" class="text-st ml-1" />
-        </div>
-        <div class="text-primary-900 font-ibm-light">
-            {{ roi }}
-            <div class="text-tertiary-400 font-ibm-light leading-3.5">{{ roii }}</div>
-        </div>
-        <div class="text-primary-900 font-ibm-light">${{ roundTo(value) }}</div>
     </div>
 </template>
 

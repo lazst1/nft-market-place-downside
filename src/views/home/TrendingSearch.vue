@@ -21,7 +21,7 @@ function clickFilterBy(value) {
 </script>
 
 <template>
-    <div class="bg-tertiary-800 border-t border-b border-black pt-5 pb-4 px-10 lg:px-22">
+    <div class="bg-tertiary-800 border-t border-b border-black py-5 px-10 lg:px-22">
         <div class="flex flex-wrap flex-col xl:flex-row justify-between items-center">
             <div class="flex flex-1 w-full min-w-max items-center">
                 <nftmx-search-input

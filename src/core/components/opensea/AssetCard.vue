@@ -41,7 +41,7 @@ watchEffect(() => {
 <template>
     <div ref="card" class="w-full">
         <div
-            class="transition hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
+            class="transition hover:shadow-[0_0px_12px_0px_rgb(0_0_0_/_0.1),_0_0px_0px_0px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
         >
             <div
                 class="relative w-full overflow-hidden"
@@ -52,7 +52,7 @@ watchEffect(() => {
                     :period="(Math.random() * 365).toFixed()"
                 />
             </div>
-            <div class="p-5 bg-tertiary-700">
+            <div class="px-4.5 pt-5.5 pb-6 bg-tertiary-700">
                 <div class="flex text-white">
                     <div class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16">{{ asset.name }}</div>
                     <div class="text-xs flex mt-1.5">
@@ -66,7 +66,7 @@ watchEffect(() => {
                 </div>
                 <sale-info :transferred="transferred" :value="price" />
                 <div
-                    class="text-tertiary-400 text-xxs text-center relative mt-6.5"
+                    class="text-tertiary-400 text-xxs text-center relative mt-6"
                 >Current auction ends in</div>
                 <div class="pt-3 w-fit mx-auto max-w-full">
                     <timer />

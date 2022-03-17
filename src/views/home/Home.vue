@@ -5,7 +5,6 @@ import { useStore } from 'vuex';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxDivider from '@/core/components/NftmxDivider.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import NftmxAnalyzer from '@/core/components/NftmxAnalyzer.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';
 import TrendingAssets from './TrendingAssets.vue';
 import TrendingSearch from './TrendingSearch.vue';
@@ -28,7 +27,7 @@ const store = useStore();
         </div>
     </div>
     <body-container :padding="false" footerExtended>
-        <div class="pt-6 sm:pt-4">
+        <div class="pt-6 sm:pt-4.25">
             <syndication-carousel></syndication-carousel>
         </div>
         <nftmx-divider class="mt-9"></nftmx-divider>

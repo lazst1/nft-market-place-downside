@@ -5,10 +5,10 @@ import NftmxPrice from '@/core/components/NftmxPrice.vue';
 
 
 <template>
-    <div class="grid lg:grid-cols-2 3xl:grid-cols-4 justify-center pt-12 pb-9 px-22 gap-1.5 3xl:gap-6">
+    <div class="grid lg:grid-cols-2 3xl:grid-cols-4 justify-center pt-10.5 pb-2.75 px-22 gap-1.5 3xl:gap-6">
         <div class="justify-center pb-4 text-white text-center font-press text-10 flex">
             <div class="w-min">
-                <div class="h-10">
+                <div class="h-9">
                     Decentralized Venture Capital
                     <nftmx-help />
                 </div>
@@ -17,7 +17,7 @@ import NftmxPrice from '@/core/components/NftmxPrice.vue';
                 </div>
                 <div class="text-xxs font-ibm text-tertiary-400 pt-2.5 pb-3">
                     <span>Avg ROI 125.52%&nbsp;</span>
-                    <span class="font-ibm-bold text-secondary-700">Become A Baker</span>
+                    <span class="font-ibm-bold text-secondary-500">Become A Baker</span>
                     |
                     <span
                         class="font-ibm-bold text-secondary-700"
