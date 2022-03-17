@@ -88,6 +88,7 @@ function toggleNotificationBar() {
     />
     <notifications-bar
       :class="[store.state.app.notificationOpened ? '-translate-x-0' : 'translate-x-full', 'transition']"
+      :orderLogs="orderLogs"
     />
   </div>
 </template>
