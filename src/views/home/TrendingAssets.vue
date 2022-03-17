@@ -53,7 +53,7 @@ const retrieveCollections = () => {
         //     retrieveCollections();
         //     return;
         // }
-        console.log('success===', validCollections);
+        // console.log('success===', validCollections);
         allCollections.value = validCollections;
         loadMoreCollection();
     })
