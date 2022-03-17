@@ -16,6 +16,7 @@ import { useToast } from "vue-toastification";
 import { emailValidate } from '@/core/utils';
 
 const store = useStore();
+const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 const name = ref();
 const profileImg = ref();
 const profileBanner = ref();
@@ -74,7 +75,9 @@ watchEffect(() => {
         isEmail.value = false
     }
 })
-
+const onCopy = (e) => {
+    toast.success('Wallet Address is copied')
+}
 </script>
 
 <template>
@@ -212,20 +215,24 @@ watchEffect(() => {
                     </div>
                 </template>
             </nftmx-sell-grid>
-            <nftmx-sell-grid>
+            <nftmx-sell-grid class="mt-9.75">
                 <template v-slot:item>
                     <div class="font-ibm-bold text-lg pt-3.5">Wallet Address</div>
                 </template>
                 <template v-slot:value>
-                    <div class="font-ibm text-sm text-tertiary-400 relative mt-3 md:mt-0 cursor-default">
-                        <nftmx-input
-                            :placeholder="store.getters['auth/getWalletAddress']"
-                            readonly
-                        />
-                        <font-awesome-icon
-                            :icon="['fas', 'copy']"
-                            class="text-white text-base absolute right-6 top-5"
-                        />
+                    <div
+                        class="flex font-ibm text-sm text-tertiary-400 mt-3 md:mt-0 cursor-default"
+                    >
+                        <div class="w-full">
+                            <nftmx-input :placeholder="walletAddress" readonly />
+                        </div>
+                        <div
+                            class="text-white hover:text-primary-900 text-base right-6 top-4 cursor-pointer float-right w-fit -ml-9 mt-4"
+                            v-clipboard:copy="walletAddress"
+                            v-clipboard:success="onCopy"
+                        >
+                            <font-awesome-icon :icon="['fas', 'copy']" />
+                        </div>
                     </div>
                 </template>
             </nftmx-sell-grid>
