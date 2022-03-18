@@ -6,7 +6,7 @@ const props = defineProps({
     log: {
         type: Object,
         default: {
-            img: '/images/item1-45x.png',
+            img: '/images/nfts/item1-45x.png',
             tokenName: 'Miss Atrbreellllll',
             description: 'Sold for 0.0005ETH',
             soldTime: '7/12/2021, 4:21 AM'
@@ -16,7 +16,7 @@ const props = defineProps({
 
 const orderLog = {
     name: props.log.tokenName,
-    img: '/images/item1-45x.png',
+    img: '/images/nfts/item1-45x.png',
     description: formatOrderStatus(props.log.orderStatus) + ' for ' + props.log.tokenPrice / exchangeRate + ' BNB',
     soldTime: formatDate(parseInt(props.log.soldTime) * 1000)
 }

@@ -22,7 +22,7 @@ import { popularSyndications } from '@/core/config'
                     <div class="font-bold text-2xl">1</div>
                     <div class="flex items-center">
                         <div
-                            :style="{ background: 'url(' + '/images/item1-45x.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }"
+                            :style="{ background: 'url(' + '/images/nfts/item1-45x.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }"
                             class="w-16 h-15"
                         ></div>
                         <div class="pl-6 font-ibm-medium">

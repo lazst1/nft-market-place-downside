@@ -16,7 +16,7 @@ const props = defineProps({
 
 const emit = defineEmits(['approve'])
 
-const tokenImage = ref(props.image || 'images/img10.png')
+const tokenImage = ref(props.image || 'images/nfts/img10.png')
 
 </script>
 

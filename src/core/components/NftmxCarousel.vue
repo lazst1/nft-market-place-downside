@@ -1,9 +1,9 @@
 <template>
     <Carousel :items-to-show="itemsToShow" :wrap-around="true">
-        <Slide v-for="(item, index) in items" :key="index">
+        <Slide v-for="(item, index) in syndications" :key="index">
             <div class="carousel__item" :style="{ marginLeft: marginLeft + 'em' }">
                 <div
-                    class="grid grid-cols-2 m-4 cursor-pointer hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
+                    class="grid grid-cols-2 m-4 cursor-pointer hover:shadow-[0_0px_12px_0px_rgb(0_0_0_/_0.1),_0_0px_0px_0px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
                 >
                     <div
                         :style="{ background: 'url(' + item.img + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }"
@@ -59,7 +59,7 @@ import Ribbon from '@/core/components/Ribbon.vue';
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxProgressBar from '@/core/components/NftmxProgressBar.vue';
 import 'vue3-carousel/dist/carousel.css';
-import { themeConfig } from '@/core/config';
+import { themeConfig, syndications } from '@/core/config';
 import NftmxTrimString from '@/core/components/NftmxTrimString.vue';
 
 const windowSize = ref({
@@ -67,33 +67,6 @@ const windowSize = ref({
     height: 0
 });
 const itemsToShow = ref(3);
-const items = ref([
-    {
-        img: '/images/img1.png'
-    },
-    {
-        img: '/images/img2.png'
-    },
-    {
-        img: '/images/img3.png'
-    },
-    {
-        img: '/images/img4.png'
-    },
-    {
-        img: '/images/img5.png'
-    },
-    {
-        img: '/images/img6.png'
-    },
-    {
-        img: '/images/img7.png'
-    },
-    {
-        img: '/images/img8.png'
-    }
-]);
-
 
 function handleResize() {
     windowSize.value.width = window.innerWidth;

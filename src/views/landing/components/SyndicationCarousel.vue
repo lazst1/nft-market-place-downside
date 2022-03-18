@@ -3,7 +3,7 @@
         <slide v-for="(item, index) in syndications" :key="index">
             <div class="carousel__item" :style="{ marginLeft: marginLeft + 'em' }">
                 <div
-                    class="transition duration-300 grid grid-cols-2 m-4 cursor-default hover:shadow-[0_0px_15px_-3px_rgb(0_0_0_/_0.1),_0_4px_6px_-4px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
+                    class="transition duration-300 grid grid-cols-2 m-4 cursor-default hover:shadow-[0_0px_12px_0px_rgb(0_0_0_/_0.1),_0_0px_0px_0px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
                 >
                     <div
                         :style="{ background: 'url(' + item.img + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center' }"

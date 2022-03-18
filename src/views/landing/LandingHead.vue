@@ -6,7 +6,7 @@ import HeadButton from './components/HeadButton.vue';
 
 <template>
     <div
-        class="bg-[url('/images/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press sm:leading-relaxed xl:leading-relaxed text-white px-5.5 sm:px-10 md:px-16 lg:px-22 h-summary-xs lg:h-96 xl:h-asset-img"
+        class="bg-[url('/images/landing/hero-image-1920.png')] bg-no-repeat bg-cover bg-right font-press sm:leading-relaxed xl:leading-relaxed text-white px-5.5 sm:px-10 md:px-16 lg:px-22 h-summary-xs lg:h-96 xl:h-asset-img"
     >
         <div class="max-w-screen-3xl mx-auto">
             <div class="relative top-9 lg:top-24 xl:top-33.25 w-home-sm lg:w-home-md xl:w-home-lg">

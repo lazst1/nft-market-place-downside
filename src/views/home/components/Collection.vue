@@ -92,7 +92,7 @@ watchEffect(() => {
         <accordion :border="false" :bIcon="true">
             <template v-slot:caption>
                 <div class="flex items-center w-full">
-                    <div class="flex-1 text-sm font-press pt-3 pb-5 mr-4">{{ collection.name }}</div>
+                    <div class="flex-1 text-sm font-press pt-2.75 pb-5 mr-4">{{ collection.name }}</div>
                 </div>
             </template>
             <div class="px-4 pt-2 pb-4">

@@ -88,7 +88,7 @@ const loadMoreCollection = () => {
 </script>
 
 <template>
-    <div class="sm:flex justify-center px-10 py-6 lg:px-22">
+    <div class="sm:flex justify-center px-10 py-6.5 lg:px-22">
         <div class="w-full sm:w-68 pt-2 cursor-default">
             <div class="flex font-press text-white">
                 <span>Ledger</span>
@@ -97,38 +97,40 @@ const loadMoreCollection = () => {
                     class="text-primary-900 cursor-pointer ml-4 mt-1"
                 />
             </div>
-            <div class="border border-black my-7 bg-tertiary-800">
-                <div class="grid grid-cols-4 border-b border-black font-ibm-semi-bold text-xxs text-center">
+            <div class="border border-black my-6.75 bg-tertiary-800">
+                <div
+                    class="grid grid-cols-4 border-b border-black font-ibm-semi-bold text-xxs text-center"
+                >
                     <div
                         @click="selectLedger('SOLD')"
-                        :class="[selected === 'SOLD' ? 'bg-tertiary-900' : '', 'text-primary-900 border-r border-black py-4 hover:bg-tertiary-900 cursor-pointer transition']"
+                        :class="[selected === 'SOLD' ? 'bg-tertiary-900' : '', 'text-primary-900 border-r border-black pt-4.75 pb-4.5 hover:bg-tertiary-900 cursor-pointer transition']"
                     >SOLD</div>
                     <div
                         @click="selectLedger('CANCELED')"
-                        :class="[selected === 'CANCELED' ? 'bg-tertiary-900' : '', 'text-red-700 border-r border-black py-4 hover:bg-tertiary-900 cursor-pointer transition']"
+                        :class="[selected === 'CANCELED' ? 'bg-tertiary-900' : '', 'text-red-900 border-r border-black pt-4.75 pb-4.5 hover:bg-tertiary-900 cursor-pointer transition']"
                     >CANCELED</div>
                     <div
                         @click="selectLedger('LISTED')"
-                        :class="[selected === 'LISTED' ? 'bg-tertiary-900' : '', 'text-white border-r border-black py-4 hover:bg-tertiary-900 cursor-pointer transition']"
+                        :class="[selected === 'LISTED' ? 'bg-tertiary-900' : '', 'text-white border-r border-black pt-4.75 pb-4.5 hover:bg-tertiary-900 cursor-pointer transition']"
                     >LISTED</div>
                     <div
                         @click="selectLedger('CREATED')"
-                        :class="[selected === 'CREATED' ? 'bg-tertiary-900' : '', 'text-tertiary-500 py-4 hover:bg-tertiary-900 cursor-pointer transition']"
+                        :class="[selected === 'CREATED' ? 'bg-tertiary-900' : '', 'text-tertiary-500 pt-4.75 pb-4.5 hover:bg-tertiary-900 cursor-pointer transition']"
                     >CREATED</div>
                 </div>
-                <div class="grid grid-cols-2 border-b border-black font-ibm-medium text-xs text-tertiary-500">
-                    <div
-                        class="border-r border-black py-3 pl-3"
-                    >Items</div>
-                    <div class="py-3 pl-3">Price (USD)</div>
+                <div
+                    class="grid grid-cols-2 border-b border-black font-ibm-medium text-xxs text-tertiary-500"
+                >
+                    <div class="border-r border-black pt-3.5 pb-2.75 pl-3">Items</div>
+                    <div class="pt-3.5 pb-2.75 pl-3">Price (USD)</div>
                 </div>
-                <div class="grid grid-cols-2 border-black">
+                <div class="grid grid-cols-2 border-black text-xs">
                     <template v-for="(item, index) in selectedItems.items" :key="index">
                         <div
-                            class="font-ibm-medium text-xs text-white border-r border-black py-4 pl-3"
+                            :class="[index === selectedItems.items.length - 1 ? 'pb-6.25' : 'pb-1', 'text-white border-r border-black pt-5 pl-3']"
                         >{{ item.tokenName }}</div>
                         <div
-                            :class="[item.tokenPrice / exchangeRate * bnbPrice > 300 ? 'text-red-700' : item.tokenPrice / exchangeRate * bnbPrice < 1 ? 'text-white' : 'text-primary-900', 'font-ibm-medium text-xs py-4 pl-3']"
+                            :class="[item.tokenPrice / exchangeRate * bnbPrice > 300 ? 'text-red-900' : item.tokenPrice / exchangeRate * bnbPrice < 1 ? 'text-white' : 'text-primary-900', index === selectedItems.items.length - 1 ? 'pb-6.25' : 'pb-1', 'pt-5 pl-3']"
                         >{{ roundTo(item.tokenPrice / exchangeRate * bnbPrice) }}</div>
                     </template>
                 </div>
