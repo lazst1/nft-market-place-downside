@@ -45,7 +45,7 @@ watchEffect(() => {
         >
             <div
                 class="relative w-full overflow-hidden"
-                :style="{ background: `url(${asset.image_url})`, backgroundSize: asset.collection.display_data.card_display_style, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'black', height: cardHeight }"
+                :style="{ background: `url(${asset.image_url})`, backgroundSize: asset.collection.display_data.card_display_style === 'padded' ? 'contain' : asset.collection.display_data.card_display_style, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'black', height: cardHeight }"
             >
                 <ribbon
                     :percent="(Math.random() * 100).toFixed()"
