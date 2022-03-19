@@ -82,12 +82,12 @@ const handleModal = () => {
                             <nftmx-button
                                 color="primary"
                                 label="BUY NOW"
-                                class="font-press w-37 text-smallest py-1.5 mr-5"
+                                class="font-press w-37 text-8 py-1.5 mr-5"
                             />
                             <nftmx-button
                                 color="secondary"
                                 label="JOIN SYNDICATION"
-                                class="font-press text-smallest py-1.5 px-0.5"
+                                class="font-press text-8 py-1.5 px-0.5"
                             />
                         </nftmx-td>
                     </nftmx-tr>

@@ -16,7 +16,7 @@
                     >
                         <div class="pt-4 pb-2.25 2xl:pb-4 px-8 text-left font-ibm-bold">
                             <div class="text-lg 2xl:text-xl pt-1.5 2xl:pt-2.25">Syndication</div>
-                            <div class="text-xxs 2xl:text-xs 2xl:mt-2">
+                            <div class="text-11 2xl:text-xs 2xl:mt-2">
                                 <div class="font-ibm-semi-bold">
                                     <nftmx-help>Syndication type</nftmx-help>
                                 </div>
@@ -55,7 +55,7 @@
 
                         <div class="snap-center pt-1.5 2xl:pt-2 pb-2">
                             <div
-                                class="2xl:pt-2 pb-2 font-ibm-medium text-xxs 2xl:text-xs"
+                                class="2xl:pt-2 pb-2 font-ibm-medium text-11 2xl:text-xs"
                             >Current auction ends in</div>
                             <div class="flex justify-center">
                                 <timer />

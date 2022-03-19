@@ -53,14 +53,14 @@ const cancelNFT = () => {
             v-if="tab === assetDetailTabs[0]"
             @select-tab="selectTab"
         >
-            <div class="text-xxs">
+            <div class="text-11">
                 Created by
                 <nftmx-wallet-address-pop
                     class="text-primary-900"
                     :address="nftCreator.walletAddress"
                 />
             </div>
-            <div class="text-xxs text-tertiary-500 mt-4">
+            <div class="text-11 text-tertiary-500 mt-4">
                 {{
                     nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
                 }}
@@ -76,7 +76,7 @@ const cancelNFT = () => {
                     :src="nftCreator.profile_img ? baseURL + nftCreator.profile_img : defaultUser.profile_img"
                     class="w-21 h-21 object-cover"
                 />
-                <div class="text-xxs text-tertiary-500 leading-5">
+                <div class="text-11 text-tertiary-500 leading-5">
                     {{
                         nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
                     }}
@@ -85,11 +85,11 @@ const cancelNFT = () => {
             <div class="mt-6.5 flex gap-6 items-center">
                 <div class="flex gap-4">
                     <font-awesome-icon :icon="['fas', 'user']" class="text-primary-900 text-sm" />
-                    <span class="text-xxs">Activity</span>
+                    <span class="text-11">Activity</span>
                 </div>
                 <div class="flex gap-4">
                     <font-awesome-icon :icon="['fab', 'twitter']" class="text-primary-900 text-sm" />
-                    <span class="text-xxs">Twitter</span>
+                    <span class="text-11">Twitter</span>
                 </div>
             </div>
         </info-modal>
@@ -98,15 +98,15 @@ const cancelNFT = () => {
             v-if="tab === assetDetailTabs[2]"
             @select-tab="selectTab"
         >
-            <div class="text-xxs flex justify-between">
+            <div class="text-11 flex justify-between">
                 <span class="font-ibm-medium">Contract Address</span>
                 <nftmx-wallet-address-pop class="text-primary-900" :address="nft.token_address" />
             </div>
-            <div class="text-xxs flex justify-between mt-4">
+            <div class="text-11 flex justify-between mt-4">
                 <span class="font-ibm-medium">Token ID</span>
                 <span>{{ nft.token_id }}</span>
             </div>
-            <div class="text-xxs flex justify-between mt-4">
+            <div class="text-11 flex justify-between mt-4">
                 <span class="font-ibm-medium">Blockchain</span>
                 <span>BSC Testnet</span>
             </div>

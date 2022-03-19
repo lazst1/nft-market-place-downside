@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted } from 'vue';
 import { useWindowSize } from '@vueuse/core'
 import { watch } from 'vue';
 import { useStore } from 'vuex';

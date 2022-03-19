@@ -35,9 +35,9 @@ const orderLog = {
         <div class="truncate">
             <div class="truncate">{{ orderLog.name }}</div>
             <div
-                class="truncate text-xxs font-ibm-bold text-tertiary-500 mt-2"
+                class="truncate text-11 font-ibm-bold text-tertiary-500 mt-2"
             >{{ orderLog.description }}</div>
-            <div class="truncate text-xxs text-tertiary-500 mt-1">{{ orderLog.soldTime }}</div>
+            <div class="truncate text-11 text-tertiary-500 mt-1">{{ orderLog.soldTime }}</div>
         </div>
     </div>
 </template>

@@ -161,7 +161,7 @@ const cancel = () => {
                         Choose a collection
                         <font-awesome-icon
                             :icon="['fas', 'question-circle']"
-                            class="text-xxs ml-1"
+                            class="text-11 ml-1"
                         />
                     </div>
                     <div class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-4.5 relative">
@@ -177,7 +177,7 @@ const cancel = () => {
                         Type of sale
                         <font-awesome-icon
                             :icon="['fas', 'question-circle']"
-                            class="text-xxs ml-1"
+                            class="text-11 ml-1"
                         />
                     </div>
                     <div class="flex my-3">
@@ -200,7 +200,7 @@ const cancel = () => {
                         Price
                         <font-awesome-icon
                             :icon="['fas', 'question-circle']"
-                            class="text-xxs ml-1"
+                            class="text-11 ml-1"
                         />
                     </div>
                     <div class="flex flex-wrap sm:flex-nowrap mt-3.5 mb-6 font-ibm text-sm">
@@ -216,7 +216,7 @@ const cancel = () => {
                         Days of protection to offer
                         <font-awesome-icon
                             :icon="['fas', 'question-circle']"
-                            class="text-xxs ml-1"
+                            class="text-11 ml-1"
                         />
                     </div>
                     <div class="mb-7">
@@ -248,7 +248,7 @@ const cancel = () => {
                         Downside Protection to Offer
                         <font-awesome-icon
                             :icon="['fas', 'question-circle']"
-                            class="text-xxs ml-1"
+                            class="text-11 ml-1"
                         />
                     </div>
                     <div class="flex mt-3.5 mb-4 font-ibm text-sm">
@@ -297,7 +297,7 @@ const cancel = () => {
                                 :searchable="true"
                                 :createTag="true"
                                 :options="hashtagOptions"
-                                class="font-ibm text-xxs z-10"
+                                class="font-ibm text-11 z-10"
                             >
                                 <template v-slot:tag="{}">{{ }}</template>
                             </Multiselect>
@@ -316,7 +316,7 @@ const cancel = () => {
                         Fees
                         <font-awesome-icon
                             :icon="['fas', 'question-circle']"
-                            class="text-xxs ml-1"
+                            class="text-11 ml-1"
                         />
                     </div>
                     <div class="mt-4">

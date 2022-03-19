@@ -48,7 +48,7 @@ const handleVote = () => {
             >
                 <div class="mr-4">{{ asset.name }}</div>
             </div>
-            <div class="flex text-xxs pb-3.5 md:pb-12">
+            <div class="flex text-11 pb-3.5 md:pb-12">
                 <div class="flex-1 flex flex-wrap leading-5">
                     <div>
                         Created by

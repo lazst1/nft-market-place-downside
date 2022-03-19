@@ -11,7 +11,7 @@ const badgeW = computed(() => (10 + props.value.toFixed().length * 5) + 'px');
 
 <template>
     <span
-        class="relative inline-block py-1 px-1 leading-none text-center whitespace-nowrap align-top font-ibm text-xxs bg-primary-900 text-white rounded-full -mt-1.5 -ml-2"
+        class="relative inline-block py-1 px-1 leading-none text-center whitespace-nowrap align-top font-ibm text-11 bg-primary-900 text-white rounded-full -mt-1.5 -ml-2"
     >
         {{ value }}
         <span

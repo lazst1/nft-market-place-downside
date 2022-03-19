@@ -48,10 +48,9 @@ module.exports = {
         }
       },
       fontSize: {
-        smallest: ['8px'],
-        '10': ['10px'],
-        xxs: ['11px', '14px'],
-        xg: ['19px', '28px'],
+        8: ['8px'],
+        10: ['10px'],
+        11: ['11px', '14px'],
         '2.5xl': '26px',
         '3.5xl': '35px',
         description: ['13px', '20px'],

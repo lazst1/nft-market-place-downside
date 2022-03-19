@@ -63,7 +63,7 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                 Balance:&nbsp;
                 <nftmx-price-common :price="roundTo(balance * bnbPrice)" />
 
-                <span class="text-xxs font-ibm text-tertiary-400">
+                <span class="text-11 font-ibm text-tertiary-400">
                     (
                     <span class="font-sans">Ξ</span>
                     {{ roundTo(balance) }})
@@ -72,7 +72,7 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
         </div>
         <div class="px-4 md:px-16 pb-10 font-ibm-medium">
             <div
-                class="w-full md:grid md:grid-cols-8 border-b border-black text-tertiary-400 text-xxs"
+                class="w-full md:grid md:grid-cols-8 border-b border-black text-tertiary-400 text-11"
             >
                 <div class="col-span-3 flex md:block mt-6.5 mb-5.75 md:mt-0 md:mb-0">
                     <div
@@ -112,7 +112,7 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                     <div
                         class="md:h-17 flex md:items-center md:justify-end md:border-b border-black w-25 md:w-auto"
                     >Total</div>
-                    <div class="text-white text-xxs md:text-right font-ibm md:flex flex-col justify-center items-end md:h-21.75">
+                    <div class="text-white text-11 md:text-right font-ibm md:flex flex-col justify-center items-end md:h-21.75">
                         <nftmx-price-common :price="roundTo(tokenPrice * bnbPrice)" />
                         <span class="text-tertiary-400">
                             <span>(</span>
@@ -131,7 +131,7 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
                 />
                 <div
                     v-if="fundError"
-                    class="h-0 text-center font-ibm-medium text-xxs text-red-600"
+                    class="h-0 text-center font-ibm-medium text-11 text-red-600"
                 >Add fund to your wallet</div>
             </div>
         </div>

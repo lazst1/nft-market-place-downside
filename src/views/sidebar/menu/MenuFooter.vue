@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-10 text-tertiary-400 text-xxs font-ibm">
+    <div class="pb-10 text-tertiary-400 text-11 font-ibm">
         <img src="/images/logo/nftmx-logo.png" alt="NFT mx" class="h-9 mt-4" />
         <div class="leading-5">
             <font-awesome-icon :icon="['far', 'copyright']" />2021 NFT.mx All rights reserved

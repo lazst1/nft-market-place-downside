@@ -28,7 +28,7 @@ defineProps({
 
 <template>
     <div
-        class="flex justify-between gap-x-4 text-xxs items-baseline font-ibm-light leading-4.5 text-white"
+        class="flex justify-between gap-x-4 text-11 items-baseline font-ibm-light leading-4.5 text-white"
     >
         <div class>
             <div>Unique</div>

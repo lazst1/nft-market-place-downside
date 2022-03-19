@@ -27,7 +27,7 @@ watch(windowWidth, val => {
     <div ref="footer" class="bottom-0 w-full font-ibm absolute">
         <div class="bg-black text-white pt-6 pb-7 px-8">
             <p
-                class="text-center text-sm sm:text-xg text-primary-900 font-press leading-6 sm:leading-9"
+                class="text-center text-sm sm:text-19 text-primary-900 font-press leading-6 sm:leading-9"
             >NFT.mx is a fully decentralized protocol</p>
             <p
                 class="text-center text-sm pb-px"
@@ -102,7 +102,8 @@ watch(windowWidth, val => {
     font-size: 0.81rem;
     line-height: 1.5rem;
 }
-.text-xb {
+.text-19 {
     font-size: 19px;
+    line-height: 28px;
 }
 </style>

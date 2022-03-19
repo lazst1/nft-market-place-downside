@@ -177,7 +177,7 @@ const onCopy = (e) => {
                         <nftmx-input v-model="email" />
                         <div
                             v-if="!isEmail"
-                            class="absolute font-ibm text-xxs text-red-900 mt-1"
+                            class="absolute font-ibm text-11 text-red-900 mt-1"
                         >Please enter valid email</div>
                     </div>
                 </template>

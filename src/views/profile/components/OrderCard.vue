@@ -49,11 +49,11 @@ const cancelOrder = () => {
     >
         <div>
             <div :class="['h-24', 'mb-0.5']">
-                <div class="text-tertiary-400 text-xxs">{{ order.nft.name ? order.nft.name : '' }}</div>
+                <div class="text-tertiary-400 text-11">{{ order.nft.name ? order.nft.name : '' }}</div>
                 <div
                     class="text-white font-ibm-medium text-sm leading-5.25 my-0.75"
                 >{{ metadata.name ? metadata.name : 'Unnamed' }}</div>
-                <div class="text-tertiary-400 font-ibm-light text-xxs leading-5.25">
+                <div class="text-tertiary-400 font-ibm-light text-11 leading-5.25">
                     <text-compression
                         :text="metadata.description ? metadata.description : 'No description'"
                         :length="40"

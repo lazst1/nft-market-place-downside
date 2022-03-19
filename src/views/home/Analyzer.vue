@@ -17,7 +17,7 @@ import AnalyzerCardContainer from './container/AnalyzerCardContainer.vue';
             <div class="font-ibm-semi-bold text-lg sm:text-xl text-center pt-2">
                 <nftmx-price :price="1548985.53" color="secondary"></nftmx-price>
             </div>
-            <div class="text-xxs font-ibm text-tertiary-400 pt-2.5 pb-3">
+            <div class="text-11 font-ibm text-tertiary-400 pt-2.5 pb-3">
                 <span>Avg ROI 125.52%&nbsp;</span>
                 <span class="font-ibm-bold text-secondary-500">Become A Baker</span>
                 |

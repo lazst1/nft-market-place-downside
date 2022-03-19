@@ -51,7 +51,7 @@ watchEffect(() => {
                     class="hover:bg-transparent hover:text-primary-900 h-9"
                 />
             </div>
-            <span class="text-primary-900 text-xxs ml-4">Clear All</span>
+            <span class="text-primary-900 text-11 ml-4">Clear All</span>
         </div>
         <div
             class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5"

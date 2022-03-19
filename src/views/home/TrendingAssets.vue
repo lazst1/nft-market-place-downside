@@ -99,7 +99,7 @@ const loadMoreCollection = () => {
             </div>
             <div class="border border-black my-6.75 bg-tertiary-800">
                 <div
-                    class="grid grid-cols-4 border-b border-black font-ibm-semi-bold text-xxs text-center"
+                    class="grid grid-cols-4 border-b border-black font-ibm-semi-bold text-11 text-center"
                 >
                     <div
                         @click="selectLedger('SOLD')"
@@ -119,7 +119,7 @@ const loadMoreCollection = () => {
                     >CREATED</div>
                 </div>
                 <div
-                    class="grid grid-cols-2 border-b border-black font-ibm-medium text-xxs text-tertiary-500"
+                    class="grid grid-cols-2 border-b border-black font-ibm-medium text-11 text-tertiary-500"
                 >
                     <div class="border-r border-black pt-3.5 pb-2.75 pl-3">Items</div>
                     <div class="pt-3.5 pb-2.75 pl-3">Price (USD)</div>

@@ -61,7 +61,7 @@ const handleVote = () => {
                 </div>
                 <sale-info :transferred="transferred" :value="price" />
                 <div
-                    class="text-tertiary-400 text-xxs text-center relative mt-6"
+                    class="text-tertiary-400 text-11 text-center relative mt-6"
                 >Current auction ends in</div>
                 <div class="pt-3 w-fit mx-auto max-w-full">
                     <timer />

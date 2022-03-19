@@ -60,7 +60,7 @@ const onCopy = (e) => {
                     </div>
                 </div>
                 <div
-                    class="font-ibm text-xxs md:text-sm mt-0.5 pb-px text-white"
+                    class="font-ibm text-11 md:text-sm mt-0.5 pb-px text-white"
                 >Joined {{ joinedDate }}</div>
                 <div class="mt-4.75 md:mt-4 flex">
                     <div class="flex text-sm text-white cursor-pointer">

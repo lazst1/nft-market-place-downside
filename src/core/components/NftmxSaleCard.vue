@@ -45,7 +45,7 @@ moralisService.getNft(order.tokenAddress, order.tokenId).then(res => {
 })
 const syndicationCSS = computed(() => {
     const base = [
-        'py-3.5', 'text-xxs', 'leading-4', order.syndication ? 'bg-gradient-to-r from-secondary-900 to-secondary-700 text-white' : 'bg-tertiary-600 text-tertiary-500'
+        'py-3.5', 'text-11', 'leading-4', order.syndication ? 'bg-gradient-to-r from-secondary-900 to-secondary-700 text-white' : 'bg-tertiary-600 text-tertiary-500'
     ]
 
     return base
@@ -107,7 +107,7 @@ function handleVote() {
                     :value="nftPriceInUSD"
                 />
                 <div
-                    class="text-tertiary-400 text-xxs text-center relative mt-6.5"
+                    class="text-tertiary-400 text-11 text-center relative mt-6.5"
                 >Current auction ends in</div>
                 <div v-if="order.bought" class="py-3">
                     <timer />
