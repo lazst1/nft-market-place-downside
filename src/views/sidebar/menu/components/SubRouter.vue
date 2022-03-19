@@ -7,7 +7,7 @@ defineProps({
 
 const store = useStore();
 function closeSidebar(params) {
-  store.commit('app/TOGGLE_SIDEBAR', false)
+    store.commit('app/TOGGLE_MENU', false)
 }
 </script>
 

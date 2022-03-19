@@ -17,7 +17,6 @@ const props = defineProps({
 const store = useStore();
 const windowWidth = computed(() => store.state.app.windowWidth);
 const card = ref(null);
-const cardHeight = ref();
 const transferred = ref('not');
 const price = ref(0);
 
@@ -29,13 +28,9 @@ onMounted(() => {
     }
 })
 
-watchEffect(() => {
-    windowWidth.value
-    if (card.value) {
-        cardHeight.value = (card.value.scrollWidth * 0.73) + 'px';
-    }
-})
-
+const handleVote = () => {
+    
+}
 </script>
 
 <template>
@@ -44,8 +39,8 @@ watchEffect(() => {
             class="transition hover:shadow-[0_0px_12px_0px_rgb(0_0_0_/_0.1),_0_0px_0px_0px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
         >
             <div
-                class="relative w-full overflow-hidden"
-                :style="{ background: `url(${asset.image_url})`, backgroundSize: asset.collection.display_data.card_display_style === 'padded' ? 'contain' : asset.collection.display_data.card_display_style, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'black', height: cardHeight }"
+                class="relative w-full overflow-hidden pt-73per"
+                :style="{ background: `url(${asset.image_url})`, backgroundSize: !asset.collection.display_data.card_display_style || asset.collection.display_data.card_display_style === 'padded' ? 'contain' : asset.collection.display_data.card_display_style, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'black' }"
             >
                 <ribbon
                     :percent="(Math.random() * 100).toFixed()"

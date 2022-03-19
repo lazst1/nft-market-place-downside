@@ -56,7 +56,7 @@ class MatketService {
     }
 
     createHashTags(hashtagNames, tokenAddress, tokenId, tokenName) {
-        return http.post('tokens-hashtags', { hashtagNames, tokenAddress, tokenId, tokenName }).then(res => res.data);
+        return http.post('tokens/hashtags', { hashtagNames, tokenAddress, tokenId, tokenName }).then(res => res.data);
     }
 
     getHashtagNames() {

@@ -4,7 +4,6 @@ import BodyContainer from '@/core/container/BodyContainer.vue';
 import Ribbon from '@/core/components/Ribbon.vue';
 import DetailButton from '@/core/components/DetailButton.vue';
 import Icon from '@/core/components/Icon.vue'
-import { mdiThumbUp, mdiHelpCircle, mdiMenu } from '@mdi/js'
 import Timer from '@/core/components/Timer.vue'
 import NftmxButton from '@/core/components/NftmxButton.vue';
 import NftmxSelect from '@/core/components/NftmxSelect.vue';

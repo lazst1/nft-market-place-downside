@@ -26,10 +26,7 @@ const overlayClick = event => {
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div
-        class="absolute inset-0 bg-black opacity-70"
-        @click="overlayClick"
-      />
+      <div class="absolute inset-0 bg-black opacity-70" @click="overlayClick" />
     </transition>
     <transition
       enter-active-class="transition duration-100 ease-out"

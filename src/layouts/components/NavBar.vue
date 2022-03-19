@@ -1,19 +1,17 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import NavBarItem from '@/core/components/NavBarItem.vue'
+import NavBarItem from './NavBarItem.vue'
 import TopBar from '@/core/components/TopBar.vue';
 import Icon from '@/core/components/Icon.vue'
-import { mdiThumbUp, mdiHelpCircle } from '@mdi/js'
 import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
-import Sidebar from '@/views/sidebar/Sidebar.vue'
-import NotificationsBar from '@/views/notifications/NotificationsBar.vue';
+import MenuBar from '@/views/sidebar/menu/MenuBar.vue'
+import NotificationsBar from '@/views/sidebar/notification/NotificationsBar.vue';
 import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
-import NftmxButton from '../components/NftmxButton.vue';
-import NftmxBadge from '../components/NftmxBadge.vue';
-import marketService from '../services/market.service';
+import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxBadge from '@/core/components/NftmxBadge.vue';
+import marketService from '@/core/services/market.service';
 
-const sidebar = ref(false);
 const store = useStore();
 const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
 const orderLogs = ref([]);
@@ -22,17 +20,17 @@ marketService.getOrderLogs(1, 20).then(res => {
   orderLogs.value = res.items;
 });
 
-function onClickOutside() {
-  store.commit('app/TOGGLE_SIDEBAR', false);
+const onClickOutside = () => {
+  store.commit('app/TOGGLE_MENU', false);
   store.commit('app/TOGGLE_NOTIFICATION_BAR', false);
 }
-function toggleSidebar() {
-  store.commit('app/TOGGLE_SIDEBAR', !store.state.app.sidebarOpened);
+const toggleSidebar = () => {
+  store.commit('app/TOGGLE_MENU', !store.state.app.menuOpened);
   store.commit('app/TOGGLE_NOTIFICATION_BAR', false);
 }
-function toggleNotificationBar() {
+const toggleNotificationBar = () => {
   store.commit('app/TOGGLE_NOTIFICATION_BAR', !store.state.app.notificationOpened);
-  store.commit('app/TOGGLE_SIDEBAR', false);
+  store.commit('app/TOGGLE_MENU', false);
 }
 
 </script>
@@ -41,10 +39,8 @@ function toggleNotificationBar() {
   <div v-click-outside="onClickOutside">
     <top-bar class="px-2">
       <div class="flex-1 items-stretch flex h-70px font-ibm">
-        <nav-bar-item>
-          <router-link to="/">
-            <img src="/images/logo/nftmx-logo.png" alt="NFT mx" />
-          </router-link>
+        <nav-bar-item to="/">
+          <img src="/images/logo/nftmx-logo.png" alt="NFT mx" />
         </nav-bar-item>
       </div>
       <div
@@ -83,8 +79,8 @@ function toggleNotificationBar() {
         </div>
       </div>
     </top-bar>
-    <sidebar
-      :class="[store.state.app.sidebarOpened ? '-translate-x-0' : 'translate-x-full', 'transition']"
+    <menu-bar
+      :class="[store.state.app.menuOpened ? '-translate-x-0' : 'translate-x-full', 'transition']"
     />
     <notifications-bar
       :class="[store.state.app.notificationOpened ? '-translate-x-0' : 'translate-x-full', 'transition']"

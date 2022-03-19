@@ -10,7 +10,9 @@ import HeadButton from './components/HeadButton.vue';
     >
         <div class="max-w-screen-3xl mx-auto">
             <div class="relative top-9 lg:top-24 xl:top-33.25 w-home-sm lg:w-home-md xl:w-home-lg">
-                <nftmx-typography home>Buy NFTs with 100% Downside Protection</nftmx-typography>
+                <p
+                    class="text-home-sm lg:text-home-md xl:text-home-lg"
+                >Buy NFTs with 100% Downside Protection</p>
                 <div class="flex flex-wrap mt-3 xl:mt-8.25 gap-5.25 xl:gap-11">
                     <head-button to="home" color="secondary" label="EXPLORE" />
                     <head-button color="primary" label="LIST" />

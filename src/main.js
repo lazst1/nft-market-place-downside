@@ -23,6 +23,7 @@ import {
 import { faFacebookF, faTelegramPlane, faDiscord, faTwitter, faMediumM, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons'
 import 'v-calendar/dist/style.css';
+import { vfmPlugin } from 'vue-final-modal'
 
 library.add(
     faFilter, faExternalLinkAlt, faSearch, faTimes, faQuestionCircle, faFacebookF, faTelegramPlane, faDiscord, faTwitter, faCopy, faGlobe, faCog,
@@ -55,6 +56,7 @@ createApp(App)
         autoSetContainer: true,
         appendToBody: true,
     })
+    .use(vfmPlugin)
     .use(Toast, options)
     .component("font-awesome-icon", FontAwesomeIcon)
     .component('Multiselect', Multiselect)

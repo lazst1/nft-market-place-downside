@@ -4,7 +4,7 @@ export const app = {
     namespaced: true,
     state: {
         windowWidth: 0,
-        sidebarOpened: false,
+        menuOpened: false,
         notificationOpened: false
     },
     getters: {
@@ -14,8 +14,8 @@ export const app = {
         UPDATE_WINDOW_WIDTH(state, val) {
             state.windowWidth = val
         },
-        TOGGLE_SIDEBAR(state, val) {
-            state.sidebarOpened = val
+        TOGGLE_MENU(state, val) {
+            state.menuOpened = val
         },
         TOGGLE_NOTIFICATION_BAR(state, val) {
             state.notificationOpened = val

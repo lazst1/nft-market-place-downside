@@ -4,7 +4,6 @@ import NftmxButton from '@/core/components/NftmxButton.vue';
 import { mdiFilter, mdiCloseBox } from '@mdi/js'
 import CheckboxCell from '@/core/components/CheckboxCell.vue';
 import DropDown from '@/core/components/DropDown.vue';
-import NavBarItem from '@/core/components/NavBarItem.vue'
 import DropDownItem from '@/core/components/DropDownItem.vue';
 import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
 import Accordion from '@/core/container/Accordion.vue';
@@ -36,9 +35,9 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
                     :iconAfter="mdiCloseBox"
                     class="hover:bg-tertiary-600"
                 />
-                <nav-bar-item>
+                <div>
                     <span class="text-sm text-primary-900 mx-2">Clear All</span>
-                </nav-bar-item>
+                </div>
             </div>
             <div class="grid sm:grid-cols-2 mt-4 lg:mt-0 lg:justify-end lg:justify-self-end justify-self-start">
                 <div class="">
