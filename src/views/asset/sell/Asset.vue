@@ -11,7 +11,7 @@ import AssetDetail from './AssetDetail.vue';
 import AssetStatistics from './AssetStatistics.vue';
 import AssetUser from './AssetUser.vue';
 import { themeConfig } from '@/core/config';
-import NavBarSearch from '@/core/container/NavBarSearch.vue';
+import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
 import Ledger from './Ledger.vue';
 import AssetSellModal from './AssetSellModal.vue';
 import { useRoute, useRouter } from 'vue-router';

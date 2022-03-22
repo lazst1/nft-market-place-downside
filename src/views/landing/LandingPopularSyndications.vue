@@ -18,7 +18,7 @@ import { popularSyndications } from '@/core/config'
                 class="border-b border-black"
             >
                 <div class="flex py-8 gap-6 2xl:gap-9">
-                    <div class="font-bold text-2xl">1</div>
+                    <div class="text-2xl">1</div>
                     <div class="flex items-center">
                         <div
                             :style="{ background: 'url(' + '/images/nfts/item1-45x.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }"

@@ -13,7 +13,7 @@ import SectionButton from './components/SectionButton.vue';
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-7 xl:gap-x-9 mt-4">
             <div v-for="i in 8" :key="i" class="border-b border-black">
                 <div class="flex py-8 gap-6 2xl:gap-9">
-                    <div class="font-bold text-2xl">1</div>
+                    <div class="text-2xl">1</div>
                     <div class="flex items-center">
                         <div
                             :style="{ background: 'url(' + '/images/nfts/item1-45x.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }"

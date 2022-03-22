@@ -7,7 +7,7 @@ import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
 import NftmxSelectNetwork from '@/core/components/basic/NftmxSelectNetwork.vue';
 import SettingItemRow from '@/core/components/basic/SettingItemRow.vue';
 import NftmxFileUploader from '@/core/components/file-uploader/NftmxFileUploader.vue';
-import NavBarSearch from '@/core/container/NavBarSearch.vue';
+import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
 import NftmxInput from '@/core/components/basic/NftmxInput.vue';
 import NftmxTextarea from '@/core/components/basic/NftmxTextarea.vue';
 import NftmxButton from '@/core/components/basic/NftmxButton.vue';

@@ -2,7 +2,7 @@
 import SidebarContainer from '@/core/container/SidebarContainer.vue';
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import Notification from './components/Notification.vue';
+import Notification from './Notification.vue';
 
 defineProps({
     orderLogs: {
@@ -20,7 +20,7 @@ function toggleNotificationBar() {
 
 <template>
     <sidebar-container>
-        <div class="h-17 flex items-center justify-between cursor-default text-sm text-primary-900">
+        <div class="mt-5 mb-7 flex items-center justify-between cursor-default text-sm text-primary-900">
             See All
             <font-awesome-icon
                 @click="toggleNotificationBar()"

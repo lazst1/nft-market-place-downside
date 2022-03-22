@@ -37,10 +37,10 @@ const onCopy = (e) => {
             <div>
                 <img
                     :src="profileImg"
-                    class="w-30 h-30 mt-14.75 sm:mt-12.75 sm:w-50 sm:h-50 object-contain object-top"
+                    class="w-24 h-24 mt-14.5 sm:mt-10.5 xl:mt-12.75 sm:w-50 sm:h-50 object-contain object-top"
                 />
             </div>
-            <div class="ml-5.75 md:ml-13 mt-17.5">
+            <div class="ml-5.75 md:ml-13 mt-13 xl:mt-17.5">
                 <div
                     class="flex font-press text-md sm:text-lg md:text-3xl leading-loose text-white w-max"
                 >
@@ -50,7 +50,7 @@ const onCopy = (e) => {
                         class="text-sm transition lg:text-lg mb-4 ml-4 cursor-pointer hover:text-primary-900"
                     />
                 </div>
-                <div class="flex font-ibm text-sm pb-1.5 md:pb-5 mt-5">
+                <div class="flex font-ibm text-sm pb-1.5 md:pb-5 mt-1.75 sm:mt-5">
                     <div class="text-primary-900">
                         <nftmx-wallet-address-pop
                             :disable="store.state.app.windowWidth > themeConfig.sm"
@@ -59,7 +59,7 @@ const onCopy = (e) => {
                     </div>
                 </div>
                 <div
-                    class="font-ibm text-11 md:text-sm mt-0.5 pb-px text-white"
+                    class="font-ibm text-11 md:text-sm mt-0.75 pb-px text-white"
                 >Joined {{ joinedDate }}</div>
                 <div class="mt-4.75 md:mt-4 flex">
                     <div class="flex text-sm text-white cursor-pointer">

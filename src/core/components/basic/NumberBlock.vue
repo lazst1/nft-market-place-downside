@@ -11,7 +11,7 @@ const props = defineProps({
     }
 })
 
-const blockCss = computed(() => `flex justify-center items-center pb-px text-white border text-center font-bold border-black bg-${props.color}`)
+const blockCss = computed(() => `flex justify-center items-center pb-px text-white border text-center border-black bg-${props.color}`)
 
 </script>
 

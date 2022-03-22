@@ -11,7 +11,7 @@ import marketService from '@/core/services/market.service';
 import moralisService from '@/core/services/moralis.service';
 import AssetHistory from '@/views/asset/sell/AssetHistory.vue';
 import authService from '@/core/services/auth.service';
-import NavBarSearch from '@/core/container/NavBarSearch.vue';
+import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
 
 const store = useStore();
 const route = useRoute();

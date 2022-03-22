@@ -71,7 +71,7 @@ watch(windowWidth, val => {
     <div :class="[border ? 'border border-black bg-tertiary-800' : '', 'font-ibm']">
         <div
             @click="handleClick"
-            :class="[border && open ? 'border-b border-black' : '', sidebar ? '' : 'px-5', 'flex text-2xl text-white font-bold cursor-pointer']"
+            :class="[border && open ? 'border-b border-black' : '', sidebar ? '' : 'px-5', 'flex text-2xl text-white cursor-pointer']"
         >
             <div class="flex-1">
                 <slot name="caption"></slot>

@@ -5,7 +5,7 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex'
 import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
 import CardsContainer from '@/core/container/CardsContainer.vue';
-import NavBarSearch from '@/core/container/NavBarSearch.vue';
+import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
 import NftmxSearchInput from '@/core/components/basic/NftmxSearchInput.vue';
 import { marketAddress } from '@/core/config';
 import ProfileSummary from './ProfileSummary.vue';
@@ -200,15 +200,15 @@ const cancelOrder = (order) => {
     <profile-summary />
     <body-container>
         <choose-collection />
-        <nftmx-divider class="mt-4.75 mb-3"></nftmx-divider>
-        <div class="2xl:flex justify-between text-white font-ibm-semi-bold text-sm pt-0.5">
+        <nftmx-divider />
+        <div class="2xl:flex justify-between text-white font-ibm-medium text-sm">
             <choose-nft-group
                 :counts="counts"
                 :selectedGroup="selectedGroup"
                 @select-group="selectGroup"
                 @select-tab="selectTab"
             />
-            <nftmx-search-input class="bg-tertiary-800 mt-3.25 2xl:my-0.75 sm:ml-4" />
+            <nftmx-search-input class="bg-tertiary-800 mt-5 sm:mt-3.75 2xl:mt-7.25 sm:ml-4" />
         </div>
         <div v-if="selectedGroup.key === 'COLLECTED'" class="mt-12 2xl:mt-11 mb-22">
             <cards-container v-if="selectedGroup.key === 'COLLECTED'" class="place-items-center">

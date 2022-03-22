@@ -1,5 +1,5 @@
 <script setup>
-import NavBarSearch from '@/core/container/NavBarSearch.vue';
+import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
 import { ref } from 'vue';
 import NftmxFooter from './NftmxFooter.vue';
 
