@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import ConnectWallet from './ConnectWallet.vue';
-import NftmxWalletCard from '@/core/components/NftmxWalletCard.vue';
+import NftmxWalletCard from '@/core/components/cards/NftmxWalletCard.vue';
 import { walletList } from '@/core/config';
 import { useRouter } from 'vue-router'
 

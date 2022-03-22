@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import Accordion from '@/core/container/Accordion.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import MoreInfo from './MoreInfo.vue';
 import ItemAction from './ItemAction.vue';
@@ -30,17 +30,17 @@ const order = ref({});
 const nft = ref({});
 const nftCreator = ref({});
 
-marketService.getOrder(orderId).then(data => {
-    order.value = data;
-    if (!data.id) {
+marketService.getOrder(orderId).then(res => {
+    order.value = res.data;
+    if (!res.data.id) {
         router.push('/browse');
         return;
     }
-    moralisService.getNft(data.tokenAddress, data.tokenId).then(res => {
-        nft.value = res;
+    moralisService.getNft(res.data.tokenAddress, res.data.tokenId).then(res => {
+        nft.value = res.data;
     })
-    moralisService.nftTransfers(data.tokenAddress, data.tokenId).then(res => {
-        const creatorAddress = res.result[res.result.length - 1].to_address;
+    moralisService.nftTransfers(res.data.tokenAddress, res.data.tokenId).then(res => {
+        const creatorAddress = res.data.result[res.data.result.length - 1].to_address;
         authService.connectWallet(creatorAddress).then(res => {
             nftCreator.value = res;
         })

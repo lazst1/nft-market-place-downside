@@ -17,8 +17,9 @@
                         <div class="pt-4 pb-2.25 2xl:pb-4 px-8 text-left font-ibm-bold">
                             <div class="text-lg 2xl:text-xl pt-1.5 2xl:pt-2.25">Syndication</div>
                             <div class="text-11 2xl:text-xs 2xl:mt-2">
-                                <div class="font-ibm-semi-bold">
-                                    <nftmx-help>Syndication type</nftmx-help>
+                                <div class="font-ibm-semi-bold flex">
+                                    Syndication type
+                                    <nftmx-help class="text-8"></nftmx-help>
                                 </div>
                                 <div class="text-primary-900 font-ibm-medium leading-5 flex">
                                     {{ item.type === 'AUCTION' ? 'Auction' : 'Fix Sale&nbsp;' }}
@@ -35,8 +36,9 @@
                                         {{ item.fixPrice }})
                                     </span>
                                 </div>
-                                <div class="font-ibm-semi-bold">
-                                    <nftmx-help>Total locked value</nftmx-help>
+                                <div class="font-ibm-semi-bold flex">
+                                    Total locked value
+                                    <nftmx-help class="text-8"></nftmx-help>
                                 </div>
                                 <div class="text-primary-900 font-ibm-medium leading-5 flex">
                                     <nftmx-price-common :price="item.lockedValue" />
@@ -80,15 +82,15 @@
 <script setup>
 import { defineComponent, ref, watchEffect } from 'vue';
 import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
-import Ribbon from '@/core/components/Ribbon.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import NftmxProgressBar from '@/core/components/NftmxProgressBar.vue';
+import Ribbon from '@/core/components/basic/Ribbon.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import NftmxProgressBar from '@/core/components/basic/NftmxProgressBar.vue';
 import 'vue3-carousel/dist/carousel.css';
 import { themeConfig, syndications } from '@/core/config';
-import NftmxTrimString from '@/core/components/NftmxTrimString.vue';
-import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
-import Timer from '@/core/components/Timer.vue';
-import NftmxHelp from '@/core/components/NftmxHelp.vue';
+import NftmxTrimString from '@/core/components/basic/NftmxTrimString.vue';
+import NftmxPriceCommon from '@/core/components/price/NftmxPriceCommon.vue';
+import Timer from '@/core/components/timer/Timer.vue';
+import NftmxHelp from '@/core/components/basic/NftmxHelp.vue';
 
 const windowSize = ref({
     width: 0,

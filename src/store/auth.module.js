@@ -1,11 +1,7 @@
-import Moralis from 'moralis'
 import Web3 from "web3/dist/web3.min.js"
 import abiJSON from '@/core/config/abi';
 import { marketAddress } from "@/core/config";
-import marketService from "../core/services/market.service";
-import authService from "../core/services/auth.service";
-import erc721ABI from '@/core/config/erc721';
-import moralisService from '../core/services/moralis.service';
+import authService from "@/core/services/auth.service";
 
 export const auth = {
     namespaced: true,
@@ -49,13 +45,13 @@ export const auth = {
         },
     },
     getters: {
-        getWalletAddress: (state, getters, rootState) => {
+        walletAdderss: (state, getters, rootState) => {
             return rootState.user && rootState.user.walletAddress ? rootState.user.walletAddress : ''
         },
-        getUserId: (state, getters, rootState) => {
+        userId: (state, getters, rootState) => {
             return rootState.user && rootState.user.id ? rootState.user.id : ''
         },
-        getUser: (state, getters, rootState) => {
+        user: (state, getters, rootState) => {
             return rootState.user
         }
     },

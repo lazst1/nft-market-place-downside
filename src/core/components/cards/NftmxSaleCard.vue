@@ -1,14 +1,13 @@
 <script setup>
-import Ribbon from './Ribbon.vue';
-import Icon from './Icon.vue'
-import SaleInfo from './SaleInfo.vue'
-import NftmxButton from './NftmxButton.vue'
+import Ribbon from '@/core/components/basic/Ribbon.vue';
+import Icon from '@/core/components/basic/Icon.vue'
+import SaleInfo from '@/core/components/cards/SaleInfo.vue'
+import NftmxButton from '@/core/components/basic/NftmxButton.vue'
 import { computed, ref, watchEffect } from 'vue';
-import Timer from './Timer.vue'
+import Timer from '@/core/components/timer/Timer.vue'
 import moralisService from '@/core/services/moralis.service';
-import { exchangeRate } from '@/core/config';
-import marketService from '../services/market.service';
-import { TokenType } from '../config';
+import marketService from '@/core/services/market.service';
+import { TokenType } from '@/core/config';
 import { useStore } from 'vuex';
 
 const props = defineProps({
@@ -37,11 +36,11 @@ const order = {
     votes: props.data.votes,
 }
 const store = useStore();
-const vote = ref(order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false));
+const vote = ref(order.votes.find(item => item === store.getters['auth/userId'] ? true : false));
 const voteCount = ref(order.votes.length);
 const nft = ref({});
 moralisService.getNft(order.tokenAddress, order.tokenId).then(res => {
-    nft.value = res;
+    nft.value = res.data;
 })
 const syndicationCSS = computed(() => {
     const base = [
@@ -60,18 +59,18 @@ const boughtCSS = computed(() => {
 
 const nftPriceInUSD = ref(0);
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
-    nftPriceInUSD.value = order.tokenPrice / exchangeRate * res.USD;
+    nftPriceInUSD.value = store.getters['market/etherFromWei'](order.tokenPrice) * res.data.USD;
 });
 
 function handleVote() {
     vote.value = !vote.value;
     if (vote.value) {
         marketService.vote(order.tokenAddress, order.tokenId, store.state.user.id).then(res => {
-            voteCount.value ++;
+            voteCount.value++;
         });
     } else {
         marketService.cancelVote(order.tokenAddress, order.tokenId, store.state.user.id).then(res => {
-            voteCount.value --;
+            voteCount.value--;
         });
     }
 }

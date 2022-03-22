@@ -1,6 +1,6 @@
 <script setup>
-import NftmxHelp from '@/core/components/NftmxHelp.vue';
-import NftmxPrice from '@/core/components/NftmxPrice.vue';
+import NftmxHelp from '@/core/components/basic/NftmxHelp.vue';
+import NftmxPrice from '@/core/components/price/NftmxPrice.vue';
 import AnalyzerCardContainer from './container/AnalyzerCardContainer.vue';
 </script>
 
@@ -10,9 +10,9 @@ import AnalyzerCardContainer from './container/AnalyzerCardContainer.vue';
         class="grid lg:grid-cols-2 3xl:flex justify-center 3xl:justify-between pt-10.5 pb-2.75 px-22"
     >
         <analyzer-card-container>
-            <div class="h-9">
+            <div class="h-9 flex">
                 Decentralized Venture Capital
-                <nftmx-help />
+                <nftmx-help class="text-8" />
             </div>
             <div class="font-ibm-semi-bold text-lg sm:text-xl text-center pt-2">
                 <nftmx-price :price="1548985.53" color="secondary"></nftmx-price>

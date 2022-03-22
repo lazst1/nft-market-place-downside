@@ -3,14 +3,13 @@
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import NftmxDivider from '@/core/components/NftmxDivider.vue';
+import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import NftmxSelect from '@/core/components/NftmxSelect.vue';
+import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
 import TrendingAssets from './TrendingAssets.vue';
 import TrendingSearch from './TrendingSearch.vue';
 import SyndicationCarousel from '../landing/components/SyndicationCarousel.vue';
 import Analyzer from './Analyzer.vue';
-import NftmxTypography from '@/core/components/NftmxTypography.vue';
 
 const store = useStore();
 

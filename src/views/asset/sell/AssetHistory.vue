@@ -1,9 +1,9 @@
 <script setup>
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
-import NftmxSelect from '@/core/components/NftmxSelect.vue';
-import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
-import Accordion from '@/core/container/Accordion.vue';
+import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
+import NftmxLineChart from '@/core/components/chart/NftmxLineChart.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 import { ref } from 'vue';
 
 const store = useStore();

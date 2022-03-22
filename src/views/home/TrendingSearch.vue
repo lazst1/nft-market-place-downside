@@ -1,12 +1,10 @@
 <script setup>
 import { ref } from "@vue/reactivity";
-import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import Accordion from '@/core/container/Accordion.vue';
-import NftmxButtonSlot from '@/core/components/NftmxButtonSlot.vue';
-import NftmxDivider from '@/core/components/NftmxDivider.vue';
-import CheckboxCell from '@/core/components/CheckboxCell.vue';
-import NftmxSearchInput from "@/core/components/NftmxSearchInput.vue";
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
+import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
+import CheckboxCell from '@/core/components/basic/CheckboxCell.vue';
+import NftmxSearchInput from "@/core/components/basic/NftmxSearchInput.vue";
 import SearchAccordionContainer from "./container/SearchAccordionContainer.vue";
 
 const filterBy = ref('collection')
@@ -63,46 +61,7 @@ function clickFilterBy(value) {
                 >All NFTs</div>
             </div>
             <div v-if="filterBy === 'all'" class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 my-4.75">
-                <!-- <div class="border border-black w-full px-5 h-42.5">
-                    <search-accordion-container title="Status">
-                        <template v-slot:content>
-                            <nftmx-button-slot>Buy Now</nftmx-button-slot>
-                            <nftmx-button-slot>On Auction</nftmx-button-slot>
-                            <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
-                            <nftmx-button-slot>Has Offers</nftmx-button-slot>
-                        </template>
-                    </search-accordion-container>
-                </div>
-                <div class="border border-black w-full px-5 h-42.5">
-                    <search-accordion-container title="Status">
-                        <template v-slot:content>
-                            <nftmx-button-slot>Buy Now</nftmx-button-slot>
-                            <nftmx-button-slot>On Auction</nftmx-button-slot>
-                            <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
-                            <nftmx-button-slot>Has Offers</nftmx-button-slot>
-                        </template>
-                    </search-accordion-container>
-                </div>
-                <div class="border border-black w-full px-5 h-42.5">
-                    <search-accordion-container title="Status">
-                        <template v-slot:content>
-                            <nftmx-button-slot>Buy Now</nftmx-button-slot>
-                            <nftmx-button-slot>On Auction</nftmx-button-slot>
-                            <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
-                            <nftmx-button-slot>Has Offers</nftmx-button-slot>
-                        </template>
-                    </search-accordion-container>
-                </div>
-                <div class="border border-black w-full px-5 h-42.5">
-                    <search-accordion-container title="Status">
-                        <template v-slot:content>
-                            <nftmx-button-slot>Buy Now</nftmx-button-slot>
-                            <nftmx-button-slot>On Auction</nftmx-button-slot>
-                            <nftmx-button-slot width="w-full" align="text-left pl-4" outline>New</nftmx-button-slot>
-                            <nftmx-button-slot>Has Offers</nftmx-button-slot>
-                        </template>
-                    </search-accordion-container>
-                </div> -->
+                
             </div>
             <div v-if="filterBy === 'collection'" class="pt-6 grid grid-cols-1 sm:grid-cols-2">
                 <!-- <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4">

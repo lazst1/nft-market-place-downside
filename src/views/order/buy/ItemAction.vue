@@ -1,25 +1,25 @@
 <script setup>
 import { ref, watchEffect } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import Ribbon from '@/core/components/Ribbon.vue';
-import DetailButton from '@/core/components/DetailButton.vue';
-import Icon from '@/core/components/Icon.vue'
+import Ribbon from '@/core/components/basic/Ribbon.vue';
+import DetailButton from '@/core/components/basic/DetailTab.vue';
+import Icon from '@/core/components/basic/Icon.vue'
 import { mdiHelpCircle } from '@mdi/js'
-import Timer from '@/core/components/Timer.vue'
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import NftmxSelect from '@/core/components/NftmxSelect.vue';
-import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
+import Timer from '@/core/components/timer/Timer.vue'
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
+import NftmxLineChart from '@/core/components/chart/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { mdiClose } from '@mdi/js'
 import MoreInfo from './MoreInfo.vue';
 import BuyModal from './BuyModal.vue';
 import SyndicationModal from './SyndicationModal.vue';
-import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
-import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
-import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
+import NftmxSelectNetwork from '@/core/components/basic/NftmxSelectNetwork.vue';
+import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
+import NftmxPriceCommon from '@/core/components/price/NftmxPriceCommon.vue';
 import moralisService from '@/core/services/moralis.service';
 import { useStore } from 'vuex';
-import { exchangeRate, TokenType } from '@/core/config';
+import { TokenType } from '@/core/config';
 import marketService from '@/core/services/market.service';
 import { roundTo } from '@/core/utils';
 
@@ -38,25 +38,25 @@ const nftCreator = ref('');
 
 const handleBuyModal = (value) => {
     buyModalActive.value = value;
-    moralisService.getBalance(store.state.user.walletAddress).then(res => {
-        balance.value = res.balance / exchangeRate;
+    moralisService.getBalance(store.getters['auth/walletAddress']).then(res => {
+        balance.value = store.getters['market/etherFromWei'](res.data.balance);
     })
 }
 
 const bnbPrice = ref(0);
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
-    bnbPrice.value = res.USD;
+    bnbPrice.value = res.data.USD;
 })
 
 watchEffect(() => {
     if (props.order.votes) {
-        vote.value = props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false);
+        vote.value = props.order.votes.find(item => item === store.getters['auth/userId'] ? true : false);
     }
 })
 watchEffect(() => {
     if (props.nft && props.nft.token_address) {
         moralisService.nftTransfers(props.nft.token_address, props.nft.token_id).then(res => {
-            nftCreator.value = res.result[res.result.length - 1].to_address;
+            nftCreator.value = res.data.result[res.data.result.length - 1].to_address;
         })
     }
 })
@@ -133,13 +133,13 @@ function handleVote() {
             <div class="lg:text-3xl flex justify-center mt-1.75">
                 <span class="text-primary-900 font-ibm-bold">
                     <nftmx-price-common
-                        :price="roundTo(parseInt(tokenPrice) / exchangeRate * bnbPrice)"
+                        :price="roundTo(store.getters['market/etherFromWei'](tokenPrice) * bnbPrice)"
                     />
                 </span>
                 <span class="text-tertiary-400">
                     (
                     <span class="font-sans">Ξ</span>
-                    {{ roundTo(parseInt(tokenPrice) / exchangeRate) }})
+                    {{ roundTo(store.getters['market/etherFromWei'](tokenPrice)) }})
                 </span>
             </div>
             <nftmx-button

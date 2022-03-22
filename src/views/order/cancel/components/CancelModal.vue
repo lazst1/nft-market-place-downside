@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watchEffect } from 'vue';
-import Overlay from '@/core/components/Overlay.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import Overlay from '@/core/components/modal/Overlay.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 
 const props = defineProps({
     modelValue: Boolean

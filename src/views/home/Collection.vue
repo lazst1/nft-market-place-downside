@@ -1,13 +1,13 @@
 <script setup>
-import Accordion from '@/core/container/Accordion.vue';
-import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
+import NftmxSaleCard from '@/core/components/cards/NftmxSaleCard.vue';
 import { useStore } from 'vuex';
 import { computed, onMounted, ref, watchEffect } from 'vue';
 import marketService from '@/core/services/market.service';
 import openseaService from '@/core/services/opensea.service';
-import AssetCard from '@/core/components/opensea/AssetCard.vue';
+import AssetCard from '@/core/components/cards/OpenseaAssetCard.vue';
 import { themeConfig } from '@/core/config';
-import NftmxDivider from '@/core/components/NftmxDivider.vue';
+import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
 
 const props = defineProps({
     collection: Object
@@ -24,10 +24,6 @@ const offset = ref(0);
 const limit = ref(2);
 const more = computed(() => allAssets.value.assets.length > 0 && assets.value.length < allAssets.value.assets.length);
 
-// marketService.getSaleOrders().then(res => {
-//     loading.value = false;
-//     orders.value = res.items;
-// })
 const retrieveAssets = (init) => {
     openseaService.retrieveAssets({ collection: props.collection.slug, cursor: allAssets.value.next }).then(res => {
         // console.log(res);

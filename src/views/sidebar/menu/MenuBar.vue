@@ -1,5 +1,5 @@
 <script setup>
-import NftmxDivider from '@/core/components/NftmxDivider.vue';
+import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
 import MainRouter from './components/MainRouter.vue';
 import Accordion from './components/Accordion.vue';
 import SubRouter from './components/SubRouter.vue';
@@ -7,10 +7,10 @@ import MenuFooter from './MenuFooter.vue';
 import SidebarContainer from '@/core/container/SidebarContainer.vue';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
-import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
+import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
 
 const store = useStore();
-const walletAddress = computed(() => store.getters['auth/getWalletAddress']);
+const walletAddress = computed(() => store.getters['auth/walletAdderss']);
 
 const toggleSidebar = () => {
     store.commit('app/TOGGLE_MENU', !store.state.app.menuOpened);

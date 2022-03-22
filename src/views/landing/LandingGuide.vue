@@ -1,12 +1,11 @@
 <script setup>
-import NftmxTypography from '@/core/components/NftmxTypography.vue';
 import LandingSection from './containers/LandingSection.vue';
 </script>
 
 <template>
     <landing-section black>
         <div class="font-press text-center pt-1 pb-10 text-white">
-            <nftmx-typography h1>Create and Sell Your NFTs</nftmx-typography>
+            <div class="text-xl sm:text-2xl lg:text-3xl">Create and Sell Your NFTs</div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 text-center">
             <div class="flex flex-col items-center px-1">

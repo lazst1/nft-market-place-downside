@@ -3,20 +3,20 @@ import { computed, onMounted, ref, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import NftmxSelect from '@/core/components/NftmxSelect.vue';
-import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
-import NftmxSellGrid from '@/core/components/NftmxSellGrid.vue';
-import NftmxFileUploader from '@/core/components/NftmxFileUploader.vue';
+import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
+import NftmxSelectNetwork from '@/core/components/basic/NftmxSelectNetwork.vue';
+import SettingItemRow from '@/core/components/basic/SettingItemRow.vue';
+import NftmxFileUploader from '@/core/components/file-uploader/NftmxFileUploader.vue';
 import NavBarSearch from '@/core/container/NavBarSearch.vue';
-import NftmxInput from '@/core/components/NftmxInput.vue';
-import NftmxTextarea from '@/core/components/NftmxTextarea.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxInput from '@/core/components/basic/NftmxInput.vue';
+import NftmxTextarea from '@/core/components/basic/NftmxTextarea.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 import { baseURL, defaultUser } from '@/core/config'
 import { useToast } from "vue-toastification";
 import { emailValidate } from '@/core/utils';
 
 const store = useStore();
-const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
+const walletAddress = computed(() => store.getters['auth/walletAdderss'])
 const name = ref();
 const profileImg = ref();
 const profileBanner = ref();
@@ -53,7 +53,7 @@ function save() {
 }
 
 watchEffect(() => {
-    const user = store.getters['auth/getUser'];
+    const user = store.getters['auth/user'];
     if (user) {
         name.value = user.name;
         bio.value = user.bio;
@@ -87,7 +87,7 @@ const onCopy = (e) => {
             <div class="col-span-2 font-press text-xl md:text-2.5xl 2xl:text-3xl">Profile Settings</div>
         </div>
         <div>
-            <nftmx-sell-grid class>
+            <setting-item-row class>
                 <template v-slot:item>
                     <div class="font-ibm-bold text-lg pt-3.5">Username</div>
                 </template>
@@ -96,8 +96,8 @@ const onCopy = (e) => {
                         <nftmx-input v-model="name" />
                     </div>
                 </template>
-            </nftmx-sell-grid>
-            <nftmx-sell-grid class="grid-cols-2 xl:grid-cols-3">
+            </setting-item-row>
+            <setting-item-row class="grid-cols-2 xl:grid-cols-3">
                 <template v-slot:item>
                     <div class="font-ibm-bold text-lg pt-2.5">Profile Image</div>
                 </template>
@@ -125,8 +125,8 @@ const onCopy = (e) => {
                         </div>
                     </div>
                 </template>
-            </nftmx-sell-grid>
-            <nftmx-sell-grid class="mt-10 grid-cols-2 xl:grid-cols-3">
+            </setting-item-row>
+            <setting-item-row class="mt-10 grid-cols-2 xl:grid-cols-3">
                 <template v-slot:item>
                     <div class="font-ibm-bold text-lg pt-3.5">Profile Banner</div>
                 </template>
@@ -154,8 +154,8 @@ const onCopy = (e) => {
                         </div>
                     </div>
                 </template>
-            </nftmx-sell-grid>
-            <nftmx-sell-grid class="mt-10">
+            </setting-item-row>
+            <setting-item-row class="mt-10">
                 <template v-slot:item>
                     <div class="font-ibm-bold text-lg pt-2.25">Bio</div>
                     <div
@@ -167,8 +167,8 @@ const onCopy = (e) => {
                         <nftmx-textarea v-model="bio" />
                     </div>
                 </template>
-            </nftmx-sell-grid>
-            <nftmx-sell-grid>
+            </setting-item-row>
+            <setting-item-row>
                 <template v-slot:item>
                     <div class="font-ibm-bold text-lg pt-3.5">Email Address</div>
                 </template>
@@ -181,8 +181,8 @@ const onCopy = (e) => {
                         >Please enter valid email</div>
                     </div>
                 </template>
-            </nftmx-sell-grid>
-            <nftmx-sell-grid class="mt-9.75">
+            </setting-item-row>
+            <setting-item-row class="mt-9.75">
                 <template v-slot:item>
                     <div class="font-ibm-bold text-lg pt-3.5">Links</div>
                 </template>
@@ -214,8 +214,8 @@ const onCopy = (e) => {
                         </div>
                     </div>
                 </template>
-            </nftmx-sell-grid>
-            <nftmx-sell-grid class="mt-9.75">
+            </setting-item-row>
+            <setting-item-row class="mt-9.75">
                 <template v-slot:item>
                     <div class="font-ibm-bold text-lg pt-3.5">Wallet Address</div>
                 </template>
@@ -235,7 +235,7 @@ const onCopy = (e) => {
                         </div>
                     </div>
                 </template>
-            </nftmx-sell-grid>
+            </setting-item-row>
         </div>
         <div class="mt-7.5 md:mt-25 mb-11 md:mb-20.75 flex justify-center">
             <nftmx-button

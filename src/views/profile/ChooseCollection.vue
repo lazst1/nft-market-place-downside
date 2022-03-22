@@ -2,10 +2,10 @@
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
-import Accordion from '@/core/container/Accordion.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 import GroupItem from './components/GroupItem.vue';
 import SubItem from './components/SubItem.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 
 const store = useStore();
 

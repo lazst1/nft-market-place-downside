@@ -1,12 +1,12 @@
 <script setup>
-import DetailButton from '@/core/components/DetailButton.vue';
-import Ribbon from '@/core/components/Ribbon.vue';
+import DetailButton from '@/core/components/basic/DetailTab.vue';
+import Ribbon from '@/core/components/basic/Ribbon.vue';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
-import Accordion from '@/core/container/Accordion.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 import { assetDetailTabs, defaultUser } from '@/core/config'
-import InfoModal from './components/InfoModal.vue'
-import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
+import InfoModal from './InfoModal.vue'
+import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
 import { toUpercaseFirstLetterOfString } from '@/core/utils'
 import { baseURL } from '@/core/config';
 

@@ -2,22 +2,22 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import NavBarItem from './NavBarItem.vue'
-import TopBar from '@/core/components/TopBar.vue';
-import Icon from '@/core/components/Icon.vue'
-import NftmxTooltip from '@/core/components/NftmxTooltip.vue';
+import TopBar from '@/core/components/basic/TopBar.vue';
+import Icon from '@/core/components/basic/Icon.vue'
+import NftmxTooltip from '@/core/components/basic/NftmxTooltip.vue';
 import MenuBar from '@/views/sidebar/menu/MenuBar.vue'
 import NotificationsBar from '@/views/sidebar/notification/NotificationsBar.vue';
-import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import NftmxBadge from '@/core/components/NftmxBadge.vue';
+import NftmxWalletAddress from '@/core/components/blockchain-address/NftmxWalletAddress.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import NftmxBadge from '@/core/components/basic/NftmxBadge.vue';
 import marketService from '@/core/services/market.service';
 
 const store = useStore();
-const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
+const walletAddress = computed(() => store.getters['auth/walletAdderss'])
 const orderLogs = ref([]);
 
 marketService.getOrderLogs(1, 20).then(res => {
-  orderLogs.value = res.items;
+  orderLogs.value = res.data.items;
 });
 
 const onClickOutside = () => {
@@ -29,7 +29,7 @@ const toggleSidebar = () => {
   store.commit('app/TOGGLE_NOTIFICATION_BAR', false);
 }
 const toggleNotificationBar = () => {
-  store.commit('app/TOGGLE_NOTIFICATION_BAR', !store.state.app.notificationOpened);
+  store.commit('app/TOGGLE_NOTIFICATION_BAR', !store.state.app.logBarOpened);
   store.commit('app/TOGGLE_MENU', false);
 }
 
@@ -83,7 +83,7 @@ const toggleNotificationBar = () => {
       :class="[store.state.app.menuOpened ? '-translate-x-0' : 'translate-x-full', 'transition']"
     />
     <notifications-bar
-      :class="[store.state.app.notificationOpened ? '-translate-x-0' : 'translate-x-full', 'transition']"
+      :class="[store.state.app.logBarOpened ? '-translate-x-0' : 'translate-x-full', 'transition']"
       :orderLogs="orderLogs"
     />
   </div>

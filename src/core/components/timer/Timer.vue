@@ -1,5 +1,5 @@
 <script setup>
-import NumberBlock from './NumberBlock.vue';
+import NumberBlock from '@/core/components/basic/NumberBlock.vue';
 
 defineProps({
     size: {

@@ -1,15 +1,15 @@
 <script setup>
-import NftmxModal from '@/core/components/NftmxModal.vue';
-import NftmxTable from '@/core/components/NftmxTable.vue';
-import NftmxThead from '@/core/components/NftmxThead.vue';
-import NftmxTh from '@/core/components/NftmxTh.vue';
-import NftmxTbody from '@/core/components/NftmxTbody.vue';
-import NftmxTd from '@/core/components/NftmxTd.vue';
-import NftmxTr from '@/core/components/NftmxTr.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxModal from '@/core/components/modal/NftmxModal.vue';
+import NftmxTable from '@/core/components/table/NftmxTable.vue';
+import NftmxThead from '@/core/components/table/NftmxThead.vue';
+import NftmxTh from '@/core/components/table/NftmxTh.vue';
+import NftmxTbody from '@/core/components/table/NftmxTbody.vue';
+import NftmxTd from '@/core/components/table/NftmxTd.vue';
+import NftmxTr from '@/core/components/table/NftmxTr.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 import { useStore } from 'vuex';
-import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
-import { exchangeRate, TokenType } from '@/core/config';
+import NftmxPriceCommon from '@/core/components/price/NftmxPriceCommon.vue';
+import { TokenType } from '@/core/config';
 import { roundTo } from '@/core/utils';
 import marketService from '@/core/services/market.service';
 import { computed, ref } from 'vue';
@@ -25,7 +25,7 @@ const props = defineProps({
 })
 const store = useStore();
 const fundError = ref(false);
-const tokenPrice = computed(() => roundTo(parseInt(props.order.tokenPrice) / exchangeRate))
+const tokenPrice = computed(() => roundTo(store.getters['market/etherFromWei'](props.order.tokenPrice)))
 
 async function buyOrder() {
     if (tokenPrice.value > props.balance) {
@@ -35,11 +35,11 @@ async function buyOrder() {
 
     const gas = await store.state.marketContract.methods.buyFixedPayOrder(
         parseInt(props.order.orderId)
-    ).estimateGas('', { from: store.state.user.walletAddress });
+    ).estimateGas('', { from: store.getters['auth/walletAddress'] });
 
     store.state.marketContract.methods.buyFixedPayOrder(
         parseInt(props.order.orderId)
-    ).send({ from: store.state.user.walletAddress, gas: gas, value: props.order.tokenPrice })
+    ).send({ from: store.getters['auth/walletAddress'], gas: gas, value: props.order.tokenPrice })
         .then(res => {
             router.push('/profile');
         })
@@ -50,7 +50,7 @@ async function buyOrder() {
 
 const bnbPrice = ref(0);
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
-    bnbPrice.value = res.USD;
+    bnbPrice.value = res.data.USD;
 })
 
 </script>

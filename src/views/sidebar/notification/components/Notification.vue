@@ -1,6 +1,6 @@
 <script setup>
-import { exchangeRate } from "@/core/config";
 import { formatDate, formatOrderStatus } from "@/core/utils";
+import { useStore } from "vuex";
 
 const props = defineProps({
     log: {
@@ -14,14 +14,13 @@ const props = defineProps({
     }
 });
 
+const store = useStore();
 const orderLog = {
     name: props.log.tokenName,
     img: '/images/nfts/item1-45x.png',
-    description: formatOrderStatus(props.log.orderStatus) + ' for ' + props.log.tokenPrice / exchangeRate + ' BNB',
+    description: formatOrderStatus(props.log.orderStatus) + ' for ' + store.getters['market/etherFromWei'](props.log.tokenPrice) + ' BNB',
     soldTime: formatDate(parseInt(props.log.soldTime) * 1000)
 }
-
-
 </script>
 
 <template>

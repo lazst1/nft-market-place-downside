@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { netExplorerURL } from '../config';
+import { netExplorerURL } from '@/core/config';
 
 const props = defineProps({
     address: {

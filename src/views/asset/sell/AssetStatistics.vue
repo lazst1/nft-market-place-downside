@@ -1,23 +1,23 @@
 <script setup>
 import { ref } from 'vue'
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import NftmxSelect from '@/core/components/NftmxSelect.vue';
-import Accordion from '@/core/container/Accordion.vue';
-import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
+import NftmxLineChart from '@/core/components/chart/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import NftmxModal from '@/core/components/NftmxModal.vue';
-import NftmxTable from '@/core/components/NftmxTable.vue';
-import NftmxThead from '@/core/components/NftmxThead.vue';
-import NftmxTh from '@/core/components/NftmxTh.vue';
-import NftmxTbody from '@/core/components/NftmxTbody.vue';
-import NftmxTd from '@/core/components/NftmxTd.vue';
-import NftmxTr from '@/core/components/NftmxTr.vue';
-import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
+import NftmxModal from '@/core/components/modal/NftmxModal.vue';
+import NftmxTable from '@/core/components/table/NftmxTable.vue';
+import NftmxThead from '@/core/components/table/NftmxThead.vue';
+import NftmxTh from '@/core/components/table/NftmxTh.vue';
+import NftmxTbody from '@/core/components/table/NftmxTbody.vue';
+import NftmxTd from '@/core/components/table/NftmxTd.vue';
+import NftmxTr from '@/core/components/table/NftmxTr.vue';
+import NftmxWalletAddress from '@/core/components/blockchain-address/NftmxWalletAddress.vue';
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
 import StatisticAccordion from './StatisticAccordion.vue'
 import AssetHistory from './AssetHistory.vue';
-import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
+import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
 
 const props = defineProps({
     modelValue: Boolean

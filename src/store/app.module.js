@@ -1,11 +1,9 @@
-import { themeConfig } from "@/core/config";
-
 export const app = {
     namespaced: true,
     state: {
         windowWidth: 0,
         menuOpened: false,
-        notificationOpened: false
+        logBarOpened: false
     },
     getters: {
 
@@ -18,7 +16,7 @@ export const app = {
             state.menuOpened = val
         },
         TOGGLE_NOTIFICATION_BAR(state, val) {
-            state.notificationOpened = val
+            state.logBarOpened = val
         }
     }
 }

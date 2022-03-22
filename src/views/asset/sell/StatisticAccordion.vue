@@ -1,8 +1,8 @@
 <script setup>
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
-import Accordion from '@/core/container/Accordion.vue';
-import NftmxSelect from '@/core/components/NftmxSelect.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
+import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
 
 const store = useStore();
 const items = [

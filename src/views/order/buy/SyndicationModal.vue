@@ -1,12 +1,12 @@
 <script setup>
-import NftmxModal from '@/core/components/NftmxModal.vue';
-import NftmxTable from '@/core/components/NftmxTable.vue';
-import NftmxThead from '@/core/components/NftmxThead.vue';
-import NftmxTh from '@/core/components/NftmxTh.vue';
-import NftmxTbody from '@/core/components/NftmxTbody.vue';
-import NftmxTd from '@/core/components/NftmxTd.vue';
-import NftmxTr from '@/core/components/NftmxTr.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxModal from '@/core/components/modal/NftmxModal.vue';
+import NftmxTable from '@/core/components/table/NftmxTable.vue';
+import NftmxThead from '@/core/components/table/NftmxThead.vue';
+import NftmxTh from '@/core/components/table/NftmxTh.vue';
+import NftmxTbody from '@/core/components/table/NftmxTbody.vue';
+import NftmxTd from '@/core/components/table/NftmxTd.vue';
+import NftmxTr from '@/core/components/table/NftmxTr.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 
 </script>
 

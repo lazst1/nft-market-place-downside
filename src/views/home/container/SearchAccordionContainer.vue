@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import Accordion from '@/core/container/Accordion.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 
 defineProps({
     title: String

@@ -1,7 +1,7 @@
 <script setup>
 import { useStore } from 'vuex'
 import { themeConfig } from '@/core/config';
-import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
+import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
 import marketService from '@/core/services/market.service';
 import { ref, watchEffect } from 'vue';
 import moralisService from '@/core/services/moralis.service';
@@ -17,10 +17,10 @@ const nftCreator = ref('');
 watchEffect(() => {
     if (props.asset && props.asset.token_address) {
         marketService.getTokenInfo(props.asset.token_address, props.asset.token_id).then(res => {
-            votes.value = res.votes || [];
+            votes.value = res.data.votes || [];
         });
         moralisService.nftTransfers(props.asset.token_address, props.asset.token_id).then(res => {
-            nftCreator.value = res.result[res.result.length-1].to_address;
+            nftCreator.value = res.data.result[res.data.result.length-1].to_address;
         })
     }
 })
@@ -64,7 +64,7 @@ const handleVote = () => {
                         <span class="text-primary-900">
                             <nftmx-wallet-address-pop
                                 class="text-primary-900"
-                                :address="store.state.user.walletAddress"
+                                :address="store.getters['auth/walletAddress']"
                             ></nftmx-wallet-address-pop>
                         </span>
                     </div>

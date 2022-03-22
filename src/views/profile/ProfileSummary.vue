@@ -3,22 +3,21 @@ import NftmxSummaryContainer from '@/core/container/NftmxSummaryContainer.vue';
 import { computed, ref, watchEffect } from 'vue';
 import { useStore } from 'vuex'
 import { themeConfig, baseURL, defaultUser } from '@/core/config';
-import NftmxWalletAddress from '@/core/components/NftmxWalletAddress.vue';
-import NftmxGroupIcon from '@/core/components/NftmxGroupIcon.vue';
-import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
+import NftmxWalletAddress from '@/core/components/blockchain-address/NftmxWalletAddress.vue';
+import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
 import { useToast } from 'vue-toastification';
 
 const store = useStore();
 const toast = useToast();
-const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
+const walletAddress = computed(() => store.getters['auth/walletAdderss'])
 const profileImg = ref();
 const profileBanner = ref();
 const name = ref();
 const joinedDate = ref();
-const user = computed(() => store.getters['auth/getUser']);
+const user = computed(() => store.getters['auth/user']);
 
 watchEffect(() => {
-    const user = store.getters['auth/getUser'];
+    const user = store.getters['auth/user'];
     profileBanner.value = user.profile_banner ? baseURL + user.profile_banner : defaultUser.profile_banner;
     profileImg.value = user.profile_img ? baseURL + user.profile_img : defaultUser.profile_img;
     name.value = user.name ? user.name : defaultUser.name;

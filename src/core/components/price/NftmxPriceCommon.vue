@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
-import NumberBlock from './NumberBlock.vue';
+import NumberBlock from '@/core/components/basic/NumberBlock.vue';
 
 const props = defineProps({
     price: {

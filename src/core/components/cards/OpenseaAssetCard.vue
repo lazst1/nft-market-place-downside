@@ -1,12 +1,11 @@
 <script setup>
-import Ribbon from '@/core/components/Ribbon.vue';
-import Icon from '@/core/components/Icon.vue'
-import SaleInfo from '@/core/components/SaleInfo.vue'
-import NftmxButton from '@/core/components/NftmxButton.vue'
+import Ribbon from '@/core/components/basic/Ribbon.vue';
+import Icon from '@/core/components/basic/Icon.vue'
+import SaleInfo from '@/core/components/cards/SaleInfo.vue'
+import NftmxButton from '@/core/components/basic/NftmxButton.vue'
 import { computed, onMounted, ref, watch, watchEffect } from 'vue';
-import Timer from '@/core/components/Timer.vue'
+import Timer from '@/core/components/timer/Timer.vue'
 import moralisService from '@/core/services/moralis.service';
-import { exchangeRate } from '@/core/config';
 import { TokenType } from '@/core/config';
 import { useStore } from 'vuex';
 

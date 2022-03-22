@@ -1,11 +1,10 @@
 <script setup>
 import { computed, ref } from 'vue'
-import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
-import Icon from '@/core/components/Icon.vue'
+import Icon from '@/core/components/basic/Icon.vue'
 import { mdiFilter, mdiCloseBox } from '@mdi/js'
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import TopBar from '@/core/components/TopBar.vue';
-import NftmxSearchInput from '../components/NftmxSearchInput.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import TopBar from '@/core/components/basic/TopBar.vue';
+import NftmxSearchInput from '@/core/components/basic/NftmxSearchInput.vue';
 </script>
 
 <template>

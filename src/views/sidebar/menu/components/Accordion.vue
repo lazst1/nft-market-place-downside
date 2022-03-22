@@ -1,5 +1,5 @@
 <script setup>
-import Accordion from '@/core/container/Accordion.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 import { ref } from '@vue/reactivity';
 
 defineProps({

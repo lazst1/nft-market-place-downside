@@ -1,5 +1,4 @@
 <script setup>
-import NftmxTypography from '@/core/components/NftmxTypography.vue';
 import HeadButton from './components/HeadButton.vue';
 
 </script>

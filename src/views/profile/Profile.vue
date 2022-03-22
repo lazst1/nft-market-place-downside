@@ -3,21 +3,21 @@ import { computed, ref, watchEffect } from 'vue';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex'
-import NftmxDivider from '@/core/components/NftmxDivider.vue';
+import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
 import CardsContainer from '@/core/container/CardsContainer.vue';
 import NavBarSearch from '@/core/container/NavBarSearch.vue';
-import NftmxSearchInput from '@/core/components/NftmxSearchInput.vue';
+import NftmxSearchInput from '@/core/components/basic/NftmxSearchInput.vue';
 import { marketAddress } from '@/core/config';
 import ProfileSummary from './ProfileSummary.vue';
 import ChooseCollection from './ChooseCollection.vue';
 import ChooseNftGroup from './ChooseNftGroup.vue';
-import OrderCard from './components/OrderCard.vue';
 import moralisService from '@/core/services/moralis.service';
 import erc721ABI from '@/core/config/erc721';
 import marketService from '@/core/services/market.service';
+import OrderCard from '@/core/components/cards/OrderCard.vue';
 
 const store = useStore();
-const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
+const walletAddress = computed(() => store.getters['auth/walletAdderss'])
 const orders = ref([]);
 const unhiddenOrders = computed(() => orders.value.filter(order => order.hiders.findIndex(id => id === store.state.user.id) === -1))
 const collected = computed(() => unhiddenOrders.value.filter(order => order.orderStatus === -1));
@@ -52,27 +52,26 @@ const counts = computed(() => {
 
 watchEffect(() => {
     if (walletAddress.value) {
-        moralisService.getMyNFTs(walletAddress.value, 100, 0).then(async nftData => {
-            const collectedNFTs = await JSON.parse(JSON.stringify(nftData));
-            const nfts = await Promise.all(collectedNFTs.result.map(async (nft, index) => {
+        marketService.getNFTsFromWallet(walletAddress.value).then(async res => {
+            const collectedNFTs = await JSON.parse(JSON.stringify(res.data));
+            const nfts = await Promise.all(collectedNFTs.map(async (nft, index) => {
                 const tokenContract = new store.state.web3.eth.Contract(
                     erc721ABI,
-                    store.state.web3.utils.toChecksumAddress(nft.token_address),
+                    store.state.web3.utils.toChecksumAddress(nft.tokenAddress),
                 );
 
-                const approvedAddress = await tokenContract.methods.getApproved(nft.token_id).call({
-                    from: walletAddress.value, gas: 210000
+                const approvedAddress = await tokenContract.methods.getApproved(nft.tokenId).call({
+                    from: walletAddress.value
                 }).then(res => res);
 
                 nft.approved = approvedAddress === marketAddress ? true : false;
-                const tokenInfo = await marketService.getTokenInfo(nft.token_address, nft.token_id);
                 const order = {
                     id: 'temp-order-' + index,
                     orderStatus: -1,
-                    tokenAddress: nft.token_address,
-                    tokenId: nft.token_id,
-                    votes: tokenInfo.votes || [],
-                    hiders: tokenInfo.hiders || [],
+                    tokenAddress: nft.tokenAddress,
+                    tokenId: nft.tokenId,
+                    votes: nft.votes,
+                    hiders: nft.hiders,
                     nft: nft
                 }
                 return order;
@@ -80,9 +79,9 @@ watchEffect(() => {
             orders.value = orders.value.concat(nfts);
             loadingNFTs.value = false;
         });
-        marketService.getMyOrders(store.state.user.id).then(async data => {
-            const nfts = await Promise.all(data.map(async order => {
-                const nft = await moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res);
+        marketService.getMyOrders(store.state.user.id).then(async res => {
+            const nfts = await Promise.all(res.data.map(async order => {
+                const nft = await moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res.data);
                 order.nft = nft;
                 order.votes = order.votes || [];
                 order.hiders = order.hiders || [];
@@ -139,10 +138,13 @@ const selectTab = (value) => {
 }
 
 const approve = async (order) => {
-    const gas = await store.state.marketContract.methods.approve(marketAddress, order.tokenId).estimateGas('', { from: store.state.user.walletAddress });
+    const tokenContract = new store.state.web3.eth.Contract(
+        erc721ABI,
+        store.state.web3.utils.toChecksumAddress(order.tokenAddress),
+    );
 
-    store.state.marketContract.methods.approve(marketAddress, order.tokenId).send({
-        from: store.state.user.walletAddress, gas: gas
+    tokenContract.methods.approve(marketAddress, order.tokenId).send({
+        from: store.state.user.walletAddress
     }).then(res => {
         const index = orders.value.findIndex(item => item.id === order.id);
         orders.value[index].nft.approved = true;
@@ -185,7 +187,7 @@ const hideNFT = (order, hide) => {
 const cancelOrder = (order) => {
     if (order.orderStatus === '0') {
         store.dispatch('market/cancelOrderBySeller', order.orderId)
-    } else if (order.orderStatus === '2' && order.buyerAddress === store.state.user.walletAddress) {
+    } else if (order.orderStatus === '2' && order.buyerAddress === store.getters['auth/walletAddress']) {
         store.dispatch('market/cancelOrderByBuyer', order.orderId)
     }
 }
@@ -311,6 +313,7 @@ const cancelOrder = (order) => {
                     :key="index"
                     :order="order"
                     class="bg-tertiary-800"
+                    @approve="approve"
                     @handle-vote="handleVote"
                     @hide-nft="hideNFT"
                     @cancel-order="cancelOrder"

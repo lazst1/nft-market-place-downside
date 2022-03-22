@@ -1,12 +1,9 @@
 <script setup>
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 import { mdiFilter, mdiCloseBox } from '@mdi/js'
-import CheckboxCell from '@/core/components/CheckboxCell.vue';
-import DropDown from '@/core/components/DropDown.vue';
-import DropDownItem from '@/core/components/DropDownItem.vue';
-import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
-import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
+import CheckboxCell from '@/core/components/basic/CheckboxCell.vue';
+import NftmxSaleCard from '@/core/components/cards/NftmxSaleCard.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex';
 import BrowseSearch from './BrowseSearch.vue';
@@ -20,11 +17,7 @@ const orders = ref([]);
 const loading = ref(true);
 
 watchEffect(() => {
-    if (store.state.user.walletAddress) {
-        // marketService.getSaleOrders(store.state.user.walletAddress).then(res => {
-        //     loading.value = false;
-        //     orders.value = res.items;
-        // })
+    if (store.getters['auth/walletAddress']) {
         openseaService.retrieveAssets({ limit: 10, offset: 0 }).then(res => {
             loading.value = false;
             orders.value = res.data.assets;

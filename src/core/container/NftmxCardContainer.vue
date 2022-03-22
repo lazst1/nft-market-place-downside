@@ -1,6 +1,6 @@
 <script setup>
-import Ribbon from '@/core/components/Ribbon.vue';
-import NftmxButton from '../components/NftmxButton.vue';
+import Ribbon from '@/core/components/basic/Ribbon.vue';
+import NftmxButton from '../components/basic/NftmxButton.vue';
 import { computed, ref } from 'vue';
 
 const props = defineProps({

@@ -1,5 +1,5 @@
 <script setup>
-import { roundTo } from '../utils'
+import { roundTo } from '@/core/utils'
 
 defineProps({
     unique: {

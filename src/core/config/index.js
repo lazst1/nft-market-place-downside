@@ -1,3 +1,9 @@
+export const baseURL = import.meta.env.VITE_APP_SERVER_URL;
+export const moralisChain = import.meta.env.VITE_MORALIS_CHAIN;
+export const netExplorerURL = import.meta.env.VITE_NET_EXPLORER_URL;
+export const cryptocompareApiKey = import.meta.env.VITE_CRYPTOCOMPARE_API_KEY;
+export const marketAddress = import.meta.env.VITE_MARKET_CONTRACT_ADDRESS;
+
 export const walletList = [
     {
         id: 'metamask',
@@ -37,14 +43,6 @@ export const walletList = [
     },
 ];
 
-export const baseURL = import.meta.env.VITE_APP_SERVER_URL;
-export const moralisChain = import.meta.env.VITE_MORALIS_CHAIN;
-export const netExplorerURL = import.meta.env.VITE_NET_EXPLORER_URL;
-export const cryptocompareApiKey = import.meta.env.VITE_CRYPTOCOMPARE_API_KEY;
-export const marketAddress = import.meta.env.VITE_MARKET_CONTRACT_ADDRESS;
-
-export const exchangeRate = 1000000000000000000;
-
 export const defaultUser = {
     bio: "",
     email: "",
@@ -55,8 +53,6 @@ export const defaultUser = {
     twitter: "",
     website: ""
 }
-
-export const DEFAULT_USER_ID = '00000000-0000-0000-0000-000000000000';
 
 export const saleType = {
     FIX_SALE: 'FIX-SALE',

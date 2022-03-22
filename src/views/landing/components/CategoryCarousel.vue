@@ -56,12 +56,12 @@
 <script setup>
 import { defineComponent, ref, watchEffect } from 'vue';
 import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
-import Ribbon from '@/core/components/Ribbon.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import NftmxProgressBar from '@/core/components/NftmxProgressBar.vue';
+import Ribbon from '@/core/components/basic/Ribbon.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import NftmxProgressBar from '@/core/components/basic/NftmxProgressBar.vue';
 import 'vue3-carousel/dist/carousel.css';
 import { themeConfig, syndications } from '@/core/config';
-import NftmxTrimString from '@/core/components/NftmxTrimString.vue';
+import NftmxTrimString from '@/core/components/basic/NftmxTrimString.vue';
 
 const windowSize = ref({
     width: 0,

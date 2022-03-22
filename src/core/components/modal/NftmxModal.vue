@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { mdiClose } from '@mdi/js'
 import Overlay from './Overlay.vue'
-import Icon from './Icon.vue'
+import Icon from '@/core/components/basic/Icon.vue'
 
 const props = defineProps({
   title: {

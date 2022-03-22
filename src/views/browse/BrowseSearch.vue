@@ -1,12 +1,10 @@
 <script setup>
 import { ref } from "@vue/reactivity";
-import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import Accordion from '@/core/container/Accordion.vue';
-import NftmxButtonSlot from '@/core/components/NftmxButtonSlot.vue';
-import NftmxDivider from '@/core/components/NftmxDivider.vue';
-import CheckboxCell from '@/core/components/CheckboxCell.vue';
-import NftmxSearchInput from "@/core/components/NftmxSearchInput.vue";
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
+import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
+import CheckboxCell from '@/core/components/basic/CheckboxCell.vue';
+import NftmxSearchInput from "@/core/components/basic/NftmxSearchInput.vue";
 
 
 const filterBy = ref('collection')

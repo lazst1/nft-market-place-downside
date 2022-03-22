@@ -1,16 +1,16 @@
 <script setup>
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import { saleType } from '@/core/config'
-import NftmxModal from '@/core/components/NftmxModal.vue';
+import NftmxModal from '@/core/components/modal/NftmxModal.vue';
 import { useRoute, useRouter } from 'vue-router';
-import DetailButton from '@/core/components/DetailButton.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
+import DetailButton from '@/core/components/basic/DetailTab.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import NftmxSelectNetwork from '@/core/components/basic/NftmxSelectNetwork.vue';
 import { useStore } from 'vuex';
 import { keyCodeNumberRange } from '@/core/utils';
-import NftmxToggle from '@/core/components/NftmxToggle.vue';
-import NftmxHashtag from '@/core/components/NftmxHashtag.vue';
-import NftmxDivider from '@/core/components/NftmxDivider.vue';
+import NftmxToggle from '@/core/components/basic/NftmxToggle.vue';
+import NftmxHashtag from '@/core/components/basic/NftmxHashtag.vue';
+import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
 import marketService from '@/core/services/market.service';
 import { useToast } from "vue-toastification";
 import Network from './Network.vue';
@@ -44,7 +44,7 @@ const toast = useToast();
 const period = computed(() => downsidePeriod.value ? parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000) : 0);
 
 marketService.getHashtagNames().then(res => {
-    hashtagOptions.value = res.map(item => {
+    hashtagOptions.value = res.data.map(item => {
         return {
             value: item.name,
             label: item.name
@@ -68,7 +68,7 @@ const createOrder = async () => {
         period.value,
         false,
         period.value
-    ).estimateGas('', { from: store.state.user.walletAddress });
+    ).estimateGas('', { from: store.getters['auth/walletAddress'] });
     store.state.marketContract.methods.createOrder(
         tokenAddress,
         token_id,
@@ -77,7 +77,7 @@ const createOrder = async () => {
         period.value,
         false,
         period.value
-    ).send({ from: store.state.user.walletAddress, gas: gas })
+    ).send({ from: store.getters['auth/walletAddress'], gas: gas })
         .then(res => {
             router.push('/profile');
         }).catch(err => { console.log('err ', err) });

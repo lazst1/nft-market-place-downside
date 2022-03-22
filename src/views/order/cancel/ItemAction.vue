@@ -1,20 +1,20 @@
 <script setup>
 import { ref, watchEffect } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import Ribbon from '@/core/components/Ribbon.vue';
-import DetailButton from '@/core/components/DetailButton.vue';
-import Icon from '@/core/components/Icon.vue'
-import Timer from '@/core/components/Timer.vue'
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import NftmxSelect from '@/core/components/NftmxSelect.vue';
-import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
+import Ribbon from '@/core/components/basic/Ribbon.vue';
+import DetailButton from '@/core/components/basic/DetailTab.vue';
+import Icon from '@/core/components/basic/Icon.vue'
+import Timer from '@/core/components/timer/Timer.vue'
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
+import NftmxLineChart from '@/core/components/chart/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
-import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
-import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
+import NftmxSelectNetwork from '@/core/components/basic/NftmxSelectNetwork.vue';
+import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
+import NftmxPriceCommon from '@/core/components/price/NftmxPriceCommon.vue';
 import moralisService from '@/core/services/moralis.service';
 import { useStore } from 'vuex';
-import { exchangeRate, TokenType } from '@/core/config';
+import { TokenType } from '@/core/config';
 import marketService from '@/core/services/market.service';
 import { roundTo } from '@/core/utils';
 import CancelModal from './components/CancelModal.vue';
@@ -38,18 +38,18 @@ const displayDate = date.toLocaleString('default', { month: 'long' }) + ' ' + da
 
 const bnbPrice = ref(0);
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
-    bnbPrice.value = res.USD;
+    bnbPrice.value = res.data.USD;
 })
 
 watchEffect(() => {
     if (props.order.votes) {
-        vote.value = props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false);
+        vote.value = props.order.votes.find(item => item === store.getters['auth/userId'] ? true : false);
     }
 })
 watchEffect(() => {
     if (props.nft && props.nft.token_address) {
         moralisService.nftTransfers(props.nft.token_address, props.nft.token_id).then(res => {
-            nftCreator.value = res.result[res.result.length - 1].to_address;
+            nftCreator.value = res.data.result[res.data.result.length - 1].to_address;
         })
     }
 })
@@ -71,10 +71,10 @@ function handleVote() {
 const cancelOrder = async (order) => {
     const gas = await store.state.marketContract.methods.claimDownsideProtectionAmount(
         props.order.orderId
-    ).estimateGas('', { from: store.state.user.walletAddress });
+    ).estimateGas('', { from: store.getters['auth/walletAddress'] });
     store.state.marketContract.methods.claimDownsideProtectionAmount(
         props.order.orderId
-    ).send({ from: store.state.user.walletAddress, gas: gas }).then(res => {
+    ).send({ from: store.getters['auth/walletAddress'], gas: gas }).then(res => {
         console.log('res: ', res);
     }).catch(err => {
         console.log('err: ', err);
@@ -119,12 +119,12 @@ const cancelOrder = async (order) => {
             <div class="text-lg">Last Sale</div>
             <div class="flex items-baseline text-5xl text-primary-900 font-ibm py-2">
                 <nftmx-price-common
-                    :price="roundTo(parseInt(tokenPrice) / exchangeRate * bnbPrice)"
+                    :price="roundTo(store.getters['market/etherFromWei'](tokenPrice) * bnbPrice)"
                 />
                 <span class="font-sans font-black text-lg text-tertiary-500">&nbsp;Ξ&nbsp;</span>
                 <span
                     class="text-lg text-tertiary-500"
-                >{{ roundTo(parseInt(tokenPrice) / exchangeRate) }}</span>
+                >{{ roundTo(store.getters['market/etherFromWei'](tokenPrice)) }}</span>
             </div>
             <div class="font-ibm-semi-bold text-sm text-tertiary-500 mt-2.75 mb-5">{{ displayDate }}</div>
         </div>

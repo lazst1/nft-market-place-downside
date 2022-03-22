@@ -1,11 +1,10 @@
 <script setup>
 import { ref, onMounted, watchEffect } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import Accordion from '@/core/container/Accordion.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import CardsContainer from '@/core/container/CardsContainer.vue';
-import NftmxItemCard from '@/core/components/NftmxItemCard.vue';
 import { saleType } from '@/core/config'
 import { useStore } from 'vuex';
 import AssetDetail from './AssetDetail.vue';
@@ -34,10 +33,10 @@ const nftCreator = ref({});
 watchEffect(() => {
     if (tokenAddress && tokenId) {
         moralisService.getNft(tokenAddress, tokenId).then(res => {
-            asset.value = res;
+            asset.value = res.data;
         })
         moralisService.nftTransfers(tokenAddress, tokenId).then(res => {
-            const creatorAddress = res.result[res.result.length - 1].to_address;
+            const creatorAddress = res.data.result[res.data.result.length - 1].to_address;
             authService.connectWallet(creatorAddress).then(res => {
                 nftCreator.value = res;
             })
@@ -76,14 +75,6 @@ const handleModal = (value) => {
                         >More From This Collections</div>
                     </div>
                 </template>
-
-                <!-- <cards-container class="mt-2 mb-2 place-items-center">
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                </cards-container>-->
             </accordion>
         </div>
         <div class="text-center pt-px mb-12">
