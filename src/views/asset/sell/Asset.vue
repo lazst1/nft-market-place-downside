@@ -16,9 +16,9 @@ import Ledger from './Ledger.vue';
 import AssetSellModal from './AssetSellModal.vue';
 import { useRoute, useRouter } from 'vue-router';
 import moralisService from '@/core/services/moralis.service';
-import MoreInfo from './MoreInfo.vue';
 import marketService from '@/core/services/market.service';
 import authService from '@/core/services/auth.service';
+import AssetInfo from '@/core/components/cards/AssetInfo.vue';
 
 const store = useStore();
 const router = useRouter();
@@ -55,8 +55,7 @@ const handleModal = (value) => {
         <div class="grid grid-cols-7 text-white gap-8 mt-4 lg:mt-9">
             <div class="col-span-7 lg:col-span-3">
                 <asset-user v-if="store.state.app.windowWidth < themeConfig.lg" :asset="asset" />
-                <asset-detail :nft="asset" :nftCreator="nftCreator" />
-                <!-- <more-info :nft="asset" :percent="0" :period="0" :nftCreator="nftCreator" /> -->
+                <asset-info :nft="asset" :nftCreator="nftCreator" />
             </div>
             <div class="col-span-7 lg:col-span-4 relative">
                 <asset-user v-if="store.state.app.windowWidth >= themeConfig.lg" :asset="asset" />

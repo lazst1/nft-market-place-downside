@@ -6,6 +6,7 @@ import ListGroupItem from '@/core/components/basic/ListGroupItem.vue';
 import ListGroupSubItem from '@/core/components/basic/ListGroupSubItem.vue';
 import ListGroupAccordion from '@/core/components/accordion/ListGroupAccordion.vue';
 import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
+import NftmxBadge from '@/core/components/basic/NftmxBadge.vue';
 
 const props = defineProps({
     selectedGroup: {
@@ -64,42 +65,61 @@ const selectTab = (value) => {
                 @click="selectGroup('COLLECTED')"
             >
                 Collected
-                <span class="font-ibm-light">{{ itemCounts.collected }}</span>
+                <nftmx-badge
+                    :active="computedGroup.key === 'COLLECTED'"
+                    :value="itemCounts.collected"
+                    class="-ml-1 -mt-2.25"
+                />
             </list-group-item>
             <list-group-item
                 :active="computedGroup.key === 'ON_SALE'"
                 @click="selectGroup('ON_SALE')"
             >
                 On Sale
-                <span class="font-ibm-light">{{ itemCounts.onSale }}</span>
+                <nftmx-badge
+                    :active="computedGroup.key === 'ON_SALE'"
+                    :value="itemCounts.onSale"
+                    class="-ml-1 -mt-2.25"
+                />
             </list-group-item>
             <list-group-item
                 :active="computedGroup.key === 'DOWNSIDE'"
                 @click="selectGroup('DOWNSIDE')"
             >
                 Downside Protection
-                <span class="font-ibm-light">{{ itemCounts.downside }}</span>
+                <nftmx-badge
+                    :active="computedGroup.key === 'DOWNSIDE'"
+                    :value="itemCounts.downside"
+                    class="-ml-1 -mt-2.25"
+                />
             </list-group-item>
             <list-group-item
                 :active="computedGroup.key === 'FAVORITE'"
                 @click="selectGroup('FAVORITE')"
             >
                 Favorite
-                <span class="font-ibm-light">{{ itemCounts.favorite }}</span>
+                <nftmx-badge
+                    :active="computedGroup.key === 'FAVORITE'"
+                    :value="itemCounts.favorite"
+                    class="-ml-1 -mt-2.25"
+                />
             </list-group-item>
             <list-group-item
                 :active="computedGroup.key === 'HIDDEN'"
                 @click="selectGroup('HIDDEN')"
             >
                 Hidden
-                <span class="font-ibm-light">{{ itemCounts.hidden }}</span>
+                <nftmx-badge
+                    :active="computedGroup.key === 'HIDDEN'"
+                    :value="itemCounts.hidden"
+                    class="-ml-1 -mt-2.25"
+                />
             </list-group-item>
-            <list-group-item
+            <!-- <list-group-item
                 :active="computedGroup.key === 'ACTIVITY'"
                 @click="selectGroup('ACTIVITY')"
             >
                 Activity
-                <span class="font-ibm-light">{{ itemCounts.activity }}</span>
             </list-group-item>
             <list-group-item
                 :active="computedGroup.key === 'Offers'"
@@ -107,7 +127,7 @@ const selectTab = (value) => {
             >
                 <span class="mr-4">Offers</span>
                 <font-awesome-icon :icon="['fas', 'sort-down']" class="relative -top-0.75" />
-            </list-group-item>
+            </list-group-item> -->
         </div>
         <div class="flex gap-10.5 ml-4 py-4 w-max" v-if="computedGroup.key === 'DOWNSIDE'">
             <list-group-item :active="selectedTab === 'ALL'" @click="selectTab('ALL')">
@@ -165,13 +185,13 @@ const selectTab = (value) => {
             Hidden
             <span class="font-ibm-light">{{ itemCounts.hidden }}</span>
         </list-group-sub-item>
-        <list-group-sub-item
+        <!-- <list-group-sub-item
             :active="computedGroup.key === 'ACTIVITY'"
             @click="selectGroup('ACTIVITY')"
         >
             Activity
             <span class="font-ibm-light">{{ itemCounts.activity }}</span>
-        </list-group-sub-item>
+        </list-group-sub-item> -->
     </list-group-accordion>
     <nftmx-divider v-if="store.state.app.windowWidth <= themeConfig.sm" />
 </template>

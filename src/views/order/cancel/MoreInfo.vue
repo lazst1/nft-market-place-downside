@@ -5,10 +5,10 @@ import { ref } from 'vue';
 import { useStore } from 'vuex';
 import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 import { assetDetailTabs, defaultUser } from '@/core/config'
-import InfoModal from './components/InfoModal.vue'
 import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
 import { toUpercaseFirstLetterOfString } from '@/core/utils'
 import { baseURL } from '@/core/config';
+import InsideModal from '@/core/components/modal/InsideModal.vue';
 
 const props = defineProps({
     percent: {
@@ -48,7 +48,7 @@ const cancelNFT = () => {
         :style="{ background: 'url(' + '/images/nfts/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#222222' }"
     >
         <ribbon :percent="percent" :period="period" big />
-        <info-modal
+        <inside-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[0]"
             @select-tab="selectTab"
@@ -65,8 +65,8 @@ const cancelNFT = () => {
                     nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
                 }}
             </div>
-        </info-modal>
-        <info-modal
+        </inside-modal>
+        <inside-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[1]"
             @select-tab="selectTab"
@@ -92,8 +92,8 @@ const cancelNFT = () => {
                     <span class="text-11">Twitter</span>
                 </div>
             </div>
-        </info-modal>
-        <info-modal
+        </inside-modal>
+        <inside-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[2]"
             @select-tab="selectTab"
@@ -110,8 +110,8 @@ const cancelNFT = () => {
                 <span class="font-ibm-medium">Blockchain</span>
                 <span>BSC Testnet</span>
             </div>
-        </info-modal>
-        <info-modal
+        </inside-modal>
+        <inside-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[3]"
             @select-tab="selectTab"
@@ -138,7 +138,7 @@ const cancelNFT = () => {
                     </div>
                 </div>
             </div>
-        </info-modal>
+        </inside-modal>
     </div>
     <div class="mt-4 mb-8 items-center">
         <div

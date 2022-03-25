@@ -53,9 +53,13 @@ export const getButtonColor = (color, isOutlined, hasHover) => {
   return base
 }
 
-export const getButtonHoverColor = (color, isOutlined, hasHover) => {
+export const getButtonHoverColor = (color, isOutlined, disabled) => {
   const base = [
     isOutlined ? '' : colorsBgHover[color]
   ]
+  if (disabled) {
+    base.push('cursor-not-allowed')
+  }
+
   return base
 }

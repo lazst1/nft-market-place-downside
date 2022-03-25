@@ -1,8 +1,10 @@
 export const baseURL = import.meta.env.VITE_APP_SERVER_URL;
-export const moralisChain = import.meta.env.VITE_MORALIS_CHAIN;
+export const mainChain = import.meta.env.VITE_MAIN_CHAIN;
 export const netExplorerURL = import.meta.env.VITE_NET_EXPLORER_URL;
 export const cryptocompareApiKey = import.meta.env.VITE_CRYPTOCOMPARE_API_KEY;
 export const marketAddress = import.meta.env.VITE_MARKET_CONTRACT_ADDRESS;
+
+export const publicPages = ['/', '/login', '/register', '/home'];
 
 export const walletList = [
     {
@@ -325,11 +327,6 @@ export const openseaTrendingCollections = [
         "logo": "https://lh3.googleusercontent.com/MTW_67KF7QCxvyUoijpQ30aQ8mD2Md5_xs1E9MXB0JqlYfZB7G48oFEp4aibAVC43f8D_QFgJA1seC61YljNyDaAzxhbY007rgUflYU=s120"
     },
     {
-        "name": "Art Blocks Curated",
-        "slug": "art-blocks",
-        "logo": "https://lh3.googleusercontent.com/GwnosrkaneKGEkWySxvTSzZ5bEUjWkRuQzLSNfrpgy2-gxYjoR3m5PohLT9Fzy0p1tohajZ1g-LFfF_ZLnS1GqlPNHPUaKUbDhbf=s120"
-    },
-    {
         "name": "RTFKT - MNLTH",
         "slug": "rtfkt-mnlth",
         "logo": "https://lh3.googleusercontent.com/gp39NTyxBPazqowYV9XTFxAU4eNk1i7FlmonHW4Zr7eS9UxEvrZ7f04rOLEhDxcuGxsbUx1Rm_N6Ky_Dp4A1ZQYHFAaEWj5YdBF0qg=s120"
@@ -508,11 +505,6 @@ export const openseaTrendingCollections = [
         "name": "gmoney Brick-Breaker",
         "slug": "gmoney-brick-breaker",
         "logo": "https://lh3.googleusercontent.com/rhV1R6QSRF53cnjDMQ1CBUoseUf9k5YSqMr0zTl3t9WjAw_Aa6pfFEMSnv9gTpd6DEn3Gz9U3ZnsVIZ761xx_KqcUfgRdRgsaC706g=s120"
-    },
-    {
-        "name": "THE META KONGZ",
-        "slug": "the-meta-kongz",
-        "logo": "https://lh3.googleusercontent.com/AX_uuKN-OFhtHXtzw5PJ3K-bGW5tg2svacBEv8xO_ii3UCEo6UTjqec4MiXFGP3gsxPD-p-W0d315pEvIOxG3pKNWfT3G8KvAgIl=s120"
     },
     {
         "name": "MultiverseVM",
@@ -698,11 +690,6 @@ export const openseaTrendingCollections = [
         "name": "Lazy Lions",
         "slug": "lazy-lions",
         "logo": "https://lh3.googleusercontent.com/kFZpw-bkoyH03qFbfqkwkkhHVxT7qclK_tYFmhU1K2HegU3v2wSMmhL6TIgw7Stx1KIoKs1sdJQ4My71ktXV7GygPBjaQZCACERt=s120"
-    },
-    {
-        "name": "Treeverse",
-        "slug": "treeverse",
-        "logo": "https://lh3.googleusercontent.com/qwYkDJYhJQsMO-cyIVqjbHLlvevSlGC21RUq6McPXTHeJ1WTXUjCdP7aHTaSSS3hbyLW3QkVUadO2a7DpNVnrkyuTHG71WwwuKiEsg=s120"
     },
     {
         "name": "FLUF World",
@@ -918,11 +905,6 @@ export const openseaTrendingCollections = [
         "name": "Women Unite",
         "slug": "womenunite",
         "logo": "https://lh3.googleusercontent.com/p8ivhYALfXcVdKq0mUPfsXqJIdCN8QYPyQ-ASxJY3q9X6rws4uX01uXutIp8zdVwNxWURnE0frPLgQyQ9qmrnT5-ZuNA1qE5vzwHMX8=s120"
-    },
-    {
-        "name": "METABUMZ-OFFICIAL",
-        "slug": "metabumz-official",
-        "logo": "https://lh3.googleusercontent.com/C0kjT4M9Iac_N2hFjOXqFb8fWWnnPH7FFHS5Wu31kg9r2hsbX21RB_TQIWnoEIZavQyrfMxKZZ-9eNMVdwzj-LUTbkNGToBHainDPwc=s120"
     },
     {
         "name": "FLUF World: Thingies",
@@ -1410,11 +1392,6 @@ export const openseaTrendingCollections = [
         "logo": "https://lh3.googleusercontent.com/Elp_bWKH4be7BFwUbM84JhRgggPwP1XM1akHPJsTksP88BJoY9NWt2ECMZpY-rI3l9wrNUFdekGVC7-6i4vn4Al4f9iQt4JgZ6Mgxw=s120"
     },
     {
-        "name": "Meta Toy Bricks",
-        "slug": "meta-toy-bricks",
-        "logo": "https://lh3.googleusercontent.com/h2USGSiKwaPNifADMBRxIh_gkLBvZnRFWv4LzQCW6ixYIy-fy_pbtHFvL1OJTBKFAIlZWY8RTp--rUcfkUwhY_Qs9P_f66KFqR9adg=s120"
-    },
-    {
         "name": "MoonCats",
         "slug": "acclimatedmooncats",
         "logo": "https://lh3.googleusercontent.com/RwIPOH0RftzOWtyC0WBnMx2X4_4Xqeimk5iT6I1xNQKSuRTVNwBY0PcA6MkCiX2dVP5U_MDbseAq3LoaJ7BY_xyTfLpeUsGtt2-WTA=s120"
@@ -1695,11 +1672,6 @@ export const openseaTrendingCollections = [
         "logo": "https://lh3.googleusercontent.com/mXN41aHt5_JXxfZdKO8C9txVMYfiKAf8cWppLf4z0Ax0D7AOi6Su8B8UcgwNH1Jp6eDeEkdM6uy9MlcaQ9u1EC5cs65DOjLiGYNcD0U=s120"
     },
     {
-        "name": "Art Blocks Playground",
-        "slug": "art-blocks-playground",
-        "logo": "https://lh3.googleusercontent.com/GwnosrkaneKGEkWySxvTSzZ5bEUjWkRuQzLSNfrpgy2-gxYjoR3m5PohLT9Fzy0p1tohajZ1g-LFfF_ZLnS1GqlPNHPUaKUbDhbf=s120"
-    },
-    {
         "name": "Junior Slotie",
         "slug": "junior-slotie",
         "logo": "https://lh3.googleusercontent.com/BWQtHF0nroL_9SOzMOZyToLArZJQNtU3moqwDqkLYrSbl7BjY8DxncXOOwwBFIJAbXbrbLLzgodWOstKEmsz3ZhhD5_X-9I63s6UTQ=s120"
@@ -1718,11 +1690,6 @@ export const openseaTrendingCollections = [
         "name": "findbalance",
         "slug": "findbalance",
         "logo": "https://lh3.googleusercontent.com/n7ShDI5_-frdTAv2RrN-8Bx7iMfoRjmlrBq2Ltgt1fJdiaZ7-Jf5xRj7uCpy-xQ3EHHV5bkIJigZmZ_gYXz4PgsSlOBaPaT_OGJh=s120"
-    },
-    {
-        "name": "Gaia Kronos",
-        "slug": "gaia-kronos",
-        "logo": "https://lh3.googleusercontent.com/4i1fVTYmdwPIYeLpbFdykieHtWBz_DqY_-JAgrgPzQ8AxtXjZBSEfg1JbHPCsdnOTt8J4ip6NFF9306IA7GsPC4Xw_SvnYAyjO5XzQ=s120"
     },
     {
         "name": "YEAR OF THE WOMAN",
@@ -1768,11 +1735,6 @@ export const openseaTrendingCollections = [
         "name": "THE SHIBOSHIS",
         "slug": "theshiboshis",
         "logo": "https://lh3.googleusercontent.com/9G_SbzGpWnId_ouP-rsTfv1UIeSaaayelyZVyo7eVETYp2uDXDXeH82Yvw4AchRHuKSrixHhGQ7ri5UUepQLaK9BpwhMH1yjImnXHA=s120"
-    },
-    {
-        "name": "Drawshop Kingdom Reverse",
-        "slug": "drawshop",
-        "logo": "https://lh3.googleusercontent.com/ZTk3z-AbXhHiUYi2krQgohfRkgsHeNz-F5_sk4U16_dgC3yxOdYpIx7xtrbY7hUKLolgz0tH5v0ezcQOAkHBKo5hfef1ZMJHR2CtjQk=s120"
     },
     {
         "name": "MidnightBreeze",

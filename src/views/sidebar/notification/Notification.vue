@@ -9,7 +9,7 @@ const props = defineProps({
             img: '/images/nfts/item1-45x.png',
             tokenName: 'Miss Atrbreellllll',
             description: 'Sold for 0.0005ETH',
-            soldTime: '7/12/2021, 4:21 AM'
+            updatedAt: '7/12/2021, 4:21 AM'
         }
     }
 });
@@ -19,7 +19,7 @@ const orderLog = {
     name: props.log.tokenName,
     img: '/images/nfts/item1-45x.png',
     description: formatOrderStatus(props.log.orderStatus) + ' for ' + store.getters['market/etherFromWei'](props.log.tokenPrice) + ' BNB',
-    soldTime: formatDate(parseInt(props.log.soldTime) * 1000)
+    updatedAt: formatDate(props.log.updatedAt)
 }
 </script>
 
@@ -36,7 +36,7 @@ const orderLog = {
             <div
                 class="truncate text-11 font-ibm-bold text-tertiary-500 mt-2"
             >{{ orderLog.description }}</div>
-            <div class="truncate text-11 text-tertiary-500 mt-1">{{ orderLog.soldTime }}</div>
+            <div class="truncate text-11 text-tertiary-500 mt-1">{{ orderLog.updatedAt }}</div>
         </div>
     </div>
 </template>

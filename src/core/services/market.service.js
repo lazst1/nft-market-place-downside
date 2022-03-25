@@ -6,6 +6,9 @@ class MatketService {
     getOrder(id) {
         return http.get(`orders/${id}`);
     }
+    getSaleOrders(walletAddress) {
+        return http.get(`orders/sale?walletAddress=${walletAddress}`);
+    }
 
     // ledger
     soldItems(page = defaultPagination.page, limit = defaultPagination.limit) {
@@ -70,6 +73,10 @@ class MatketService {
 
     getNFTsFromWallet(walletAddress) {
         return http.get(`tokens/wallet?address=${walletAddress}`);
+    }
+
+    getOpenseaAssetsFromCollection(data) {
+        return http.get(`tokens/opensea/assets?slug=${data.collection}&cursor=${data.cursor}`);
     }
 }
 

@@ -10,8 +10,6 @@ import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
 import NftmxLineChart from '@/core/components/chart/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import { mdiClose } from '@mdi/js'
-import MoreInfo from './MoreInfo.vue';
 import BuyModal from './BuyModal.vue';
 import SyndicationModal from './SyndicationModal.vue';
 import NftmxSelectNetwork from '@/core/components/basic/NftmxSelectNetwork.vue';
@@ -25,16 +23,33 @@ import { roundTo } from '@/core/utils';
 
 const props = defineProps({
     order: Object,
-    tokenPrice: String,
-    nft: Object
+    nft: Object,
+    nftCreator: Object
 })
-
 const buyModalActive = ref(false);
 const syndicationModalActive = ref(false);
 const store = useStore();
 const balance = ref();
 const vote = ref(false);
-const nftCreator = ref('');
+const creatorAddress = ref('');
+const tokenPrice = ref(0);
+const bnbPrice = ref(0);
+
+marketService.getUSDFromToken(TokenType.BNB).then(res => {
+    bnbPrice.value = res.data.USD;
+})
+
+watchEffect(() => {
+    if (props.order.id) {
+        vote.value = props.order.votes.find(item => item === store.getters['auth/userId'] ? true : false);
+        tokenPrice.value = store.getters['market/etherFromWei'](props.order.tokenPrice);
+    }
+})
+watchEffect(() => {
+    if (props.nftCreator) {
+        creatorAddress.value = props.nftCreator.walletAddress;
+    }
+})
 
 const handleBuyModal = (value) => {
     buyModalActive.value = value;
@@ -42,26 +57,7 @@ const handleBuyModal = (value) => {
         balance.value = store.getters['market/etherFromWei'](res.data.balance);
     })
 }
-
-const bnbPrice = ref(0);
-marketService.getUSDFromToken(TokenType.BNB).then(res => {
-    bnbPrice.value = res.data.USD;
-})
-
-watchEffect(() => {
-    if (props.order.votes) {
-        vote.value = props.order.votes.find(item => item === store.getters['auth/userId'] ? true : false);
-    }
-})
-watchEffect(() => {
-    if (props.nft && props.nft.token_address) {
-        moralisService.nftTransfers(props.nft.token_address, props.nft.token_id).then(res => {
-            nftCreator.value = res.data.result[res.data.result.length - 1].to_address;
-        })
-    }
-})
-
-function handleVote() {
+const handleVote = () => {
     vote.value = !vote.value;
     if (vote.value) {
         marketService.vote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
@@ -90,7 +86,7 @@ function handleVote() {
             <div>
                 Created by
                 <span class="text-primary-900">
-                    <nftmx-wallet-address-pop class="text-primary-900" :address="nftCreator"></nftmx-wallet-address-pop>
+                    <nftmx-wallet-address-pop class="text-primary-900" :address="creatorAddress"></nftmx-wallet-address-pop>
                 </span> |&nbsp;
             </div>
             <div>
@@ -132,14 +128,12 @@ function handleVote() {
             </div>
             <div class="lg:text-3xl flex justify-center mt-1.75">
                 <span class="text-primary-900 font-ibm-bold">
-                    <nftmx-price-common
-                        :price="roundTo(store.getters['market/etherFromWei'](tokenPrice) * bnbPrice)"
-                    />
+                    <nftmx-price-common :price="roundTo(tokenPrice * bnbPrice)" />
                 </span>
                 <span class="text-tertiary-400">
                     (
                     <span class="font-sans">Ξ</span>
-                    {{ roundTo(store.getters['market/etherFromWei'](tokenPrice)) }})
+                    {{ roundTo(tokenPrice) }})
                 </span>
             </div>
             <nftmx-button
@@ -150,13 +144,7 @@ function handleVote() {
             />
         </div>
     </div>
-    <buy-modal
-        v-model="buyModalActive"
-        :order="order"
-        :nft="nft"
-        :tokenPrice="tokenPrice"
-        :balance="balance"
-    />
+    <buy-modal v-model="buyModalActive" :order="order" :nft="nft" :balance="balance" />
     <syndication-modal v-model="syndicationModalActive" />
 </template>
 

@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { mdiClose } from '@mdi/js'
 import Overlay from './Overlay.vue'
 import Icon from '@/core/components/basic/Icon.vue'
+import { $vfm } from 'vue-final-modal'
 
 const props = defineProps({
   title: {
@@ -44,12 +45,19 @@ const confirmCancel = mode => {
 
 const confirm = () => confirmCancel('confirm')
 
-const cancel = () => confirmCancel('cancel')
+const cancel = () => {
+  $vfm.hide('testModal');
+}
 </script>
 
 <template>
-  <vue-final-modal classes="w-full flex justify-center" name="sellModal" esc-to-close fit-parent>
-    <div class="h-full bg-tertiary-900 text-white overflow-auto xl:w-modal-md 3xl:w-modal-big">
+  <vue-final-modal
+    classes="w-full flex items-center justify-center"
+    name="testModal"
+    esc-to-close
+    fit-parent
+  >
+    <div class="h-fit bg-tertiary-900 text-white overflow-auto xl:w-modal-md 3xl:w-modal-big">
       <div class="text-right text-xl p-5">
         <font-awesome-icon
           :icon="['fas', 'times']"
@@ -57,26 +65,9 @@ const cancel = () => confirmCancel('cancel')
           @click="cancel"
         />
       </div>
+      <slot />
     </div>
   </vue-final-modal>
-  <!-- <overlay v-show="value" @overlay-click="cancel">
-    <div class="h-full z-50 overflow-auto modal" @click="cancel">
-      <div class="h-1/6" />
-      <div
-        @click.stop
-        :class="[big ? 'xl:w-modal-md 3xl:w-modal-big' : secondary ? 'w-test' : 'w-full', 'bg-tertiary-900 text-white']"
-      >
-        <div class="text-right text-xl p-5">
-          <font-awesome-icon
-            :icon="['fas', 'times']"
-            class="cursor-pointer hover:text-tertiary-400 transition"
-            @click="cancel"
-          />
-        </div>
-        <slot />
-      </div>
-    </div>
-  </overlay>-->
 </template>
 
 <style scoped>

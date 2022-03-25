@@ -17,7 +17,7 @@ import marketService from '@/core/services/market.service';
 import OrderCard from '@/core/components/cards/OrderCard.vue';
 
 const store = useStore();
-const walletAddress = computed(() => store.getters['auth/walletAdderss'])
+const walletAddress = computed(() => store.getters['auth/walletAddress'])
 const orders = ref([]);
 const unhiddenOrders = computed(() => orders.value.filter(order => order.hiders.findIndex(id => id === store.state.user.id) === -1))
 const collected = computed(() => unhiddenOrders.value.filter(order => order.orderStatus === -1));
@@ -27,11 +27,27 @@ const downsideOrdersSold = computed(() => unhiddenOrders.value.filter(order => o
 const downsideOrders = computed(() => unhiddenOrders.value.filter(order => (order.buyerAddress === walletAddress.value && order.orderStatus === '2') || (order.sellerAddress === walletAddress.value && order.orderStatus === '2')))
 const favoriteOrders = computed(() => {
     const filteredOrders = unhiddenOrders.value.filter(order => order.votes.findIndex(id => id === store.state.user.id) > -1)
-    return filteredOrders.filter((order, index) => filteredOrders.findIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId) === index);
+    return filteredOrders.filter((order, index) => {
+        const firstIndex = filteredOrders.findIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId);
+        const lastIndex = filteredOrders.findLastIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId);
+        if (firstIndex === lastIndex) {
+            return true
+        };
+        const bigIndex = parseInt(filteredOrders[lastIndex].orderStatus) > parseInt(filteredOrders[firstIndex].orderStatus) ? lastIndex : firstIndex;
+        return bigIndex === index;
+    });
 })
 const hiddenOrders = computed(() => {
     const filteredOrders = orders.value.filter(order => order.hiders.findIndex(id => id === store.state.user.id) > -1)
-    return filteredOrders.filter((order, index) => filteredOrders.findIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId) === index);
+    return filteredOrders.filter((order, index) => {
+        const firstIndex = filteredOrders.findIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId);
+        const lastIndex = filteredOrders.findLastIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId);
+        if (firstIndex === lastIndex) {
+            return true
+        };
+        const bigIndex = parseInt(filteredOrders[lastIndex].orderStatus) > parseInt(filteredOrders[firstIndex].orderStatus) ? lastIndex : firstIndex;
+        return bigIndex === index;
+    });
 })
 const loadingOrders = ref(true);
 const loadingNFTs = ref(true);
@@ -52,7 +68,11 @@ const counts = computed(() => {
 
 watchEffect(() => {
     if (walletAddress.value) {
+        orders.value = [];
+        loadingNFTs.value = true;
+        loadingOrders.value = true;
         marketService.getNFTsFromWallet(walletAddress.value).then(async res => {
+            console.log('===================', res);
             const collectedNFTs = await JSON.parse(JSON.stringify(res.data));
             const nfts = await Promise.all(collectedNFTs.map(async (nft, index) => {
                 const tokenContract = new store.state.web3.eth.Contract(
@@ -184,14 +204,14 @@ const hideNFT = (order, hide) => {
         })
     }
 }
-const cancelOrder = (order) => {
-    if (order.orderStatus === '0') {
-        store.dispatch('market/cancelOrderBySeller', order.orderId)
-    } else if (order.orderStatus === '2' && order.buyerAddress === store.getters['auth/walletAddress']) {
-        store.dispatch('market/cancelOrderByBuyer', order.orderId)
-    }
+const cancelOrder = async (order) => {
+    store.state.marketContract.methods.cancelOrder(
+        order.orderId
+    ).send({ from: walletAddress.value }).then(res => {
+        const index = orders.value.findIndex(item => item.id === order.id);
+        orders.value[index].orderStatus = -1;
+    });
 }
-
 
 </script>
 

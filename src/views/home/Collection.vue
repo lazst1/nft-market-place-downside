@@ -4,8 +4,7 @@ import NftmxSaleCard from '@/core/components/cards/NftmxSaleCard.vue';
 import { useStore } from 'vuex';
 import { computed, onMounted, ref, watchEffect } from 'vue';
 import marketService from '@/core/services/market.service';
-import openseaService from '@/core/services/opensea.service';
-import AssetCard from '@/core/components/cards/OpenseaAssetCard.vue';
+import OpenseaAssetCard from '@/core/components/cards/OpenseaAssetCard.vue';
 import { themeConfig } from '@/core/config';
 import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
 
@@ -25,8 +24,8 @@ const limit = ref(2);
 const more = computed(() => allAssets.value.assets.length > 0 && assets.value.length < allAssets.value.assets.length);
 
 const retrieveAssets = (init) => {
-    openseaService.retrieveAssets({ collection: props.collection.slug, cursor: allAssets.value.next }).then(res => {
-        // console.log(res);
+    marketService.getOpenseaAssetsFromCollection({ collection: props.collection.slug, cursor: allAssets.value.next }).then(res => {
+        console.log(res);
         loading.value = false;
         allAssets.value = {
             assets: [
@@ -95,7 +94,7 @@ watchEffect(() => {
                 <div
                     class="grid gap-4.5 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
                 >
-                    <asset-card v-for="(asset, index) in assets" :key="index" :asset="asset" />
+                    <opensea-asset-card v-for="(asset, index) in assets" :key="index" :asset="asset" />
                     <!-- <nftmx-sale-card v-for="(order, index) in orders" :data="order" :key="index"></nftmx-sale-card> -->
                 </div>
                 <div

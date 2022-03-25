@@ -5,13 +5,7 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import ConnectWallet from './ConnectWallet.vue';
 import NftmxWalletCard from '@/core/components/cards/NftmxWalletCard.vue';
 import { walletList } from '@/core/config';
-import { useRouter } from 'vue-router'
 
-const router = useRouter();
-const loggedIn = localStorage.getItem('isLoggedIn');
-if (loggedIn) {
-    router.push('/profile')
-}
 const selectedWallet = ref(walletList[0]);
 
 </script>

@@ -143,7 +143,7 @@ module.exports = {
         'summary-xs': '249px',
         'summary-sm': '300px',
         'asset-img': '500px',
-        'asset-img-lg': '528px',
+        'asset-img-lg': '520px',
         'home-lg': '865px',
         'home-md': '700px',
         'home-sm': '320px',

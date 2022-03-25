@@ -9,7 +9,7 @@ import { useToast } from 'vue-toastification';
 
 const store = useStore();
 const toast = useToast();
-const walletAddress = computed(() => store.getters['auth/walletAdderss'])
+const walletAddress = computed(() => store.getters['auth/walletAddress'])
 const profileImg = ref();
 const profileBanner = ref();
 const name = ref();

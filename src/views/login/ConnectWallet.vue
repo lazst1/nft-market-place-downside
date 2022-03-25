@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 import { useToast } from "vue-toastification";
+import { mainChain } from '@/core/config'
 
 defineProps({
     wallet: {
@@ -21,7 +22,7 @@ const connect = async () => {
             .then(accounts => {
                 ethereum.request({ method: 'eth_chainId' })
                     .then(chain => {
-                        if (chain !== '0x61') {
+                        if (chain !== mainChain) {
                             toast.error('Please switch to BSC Testnet');
                             store.dispatch('auth/login', null)
                         } else {

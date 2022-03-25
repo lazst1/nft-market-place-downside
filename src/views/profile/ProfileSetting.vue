@@ -16,7 +16,7 @@ import { useToast } from "vue-toastification";
 import { emailValidate } from '@/core/utils';
 
 const store = useStore();
-const walletAddress = computed(() => store.getters['auth/walletAdderss'])
+const walletAddress = computed(() => store.getters['auth/walletAddress'])
 const name = ref();
 const profileImg = ref();
 const profileBanner = ref();

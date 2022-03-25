@@ -10,7 +10,7 @@ import ListGroupItem from '@/core/components/basic/ListGroupItem.vue';
 import ListGroupSubItem from '@/core/components/basic/ListGroupSubItem.vue';
 
 const store = useStore();
-const walletAddress = computed(() => store.getters['auth/walletAdderss']);
+const walletAddress = computed(() => store.getters['auth/walletAddress']);
 
 const toggleSidebar = () => {
     store.commit('app/TOGGLE_MENU', !store.state.app.menuOpened);

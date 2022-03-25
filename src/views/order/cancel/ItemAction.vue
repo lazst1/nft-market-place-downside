@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import Ribbon from '@/core/components/basic/Ribbon.vue';
 import DetailButton from '@/core/components/basic/DetailTab.vue';
@@ -17,21 +17,21 @@ import { useStore } from 'vuex';
 import { TokenType } from '@/core/config';
 import marketService from '@/core/services/market.service';
 import { roundTo } from '@/core/utils';
-import CancelModal from './components/CancelModal.vue';
 import { formatAMPM } from '@/core/utils'
+import NftmxCancelModal from '@/core/components/modal/NftmxCancelModal.vue';
 
 const props = defineProps({
     order: Object,
-    tokenPrice: String,
-    nft: Object
+    nft: Object,
+    nftCreator: Object
 })
 
-const buyModalActive = ref(false);
-const syndicationModalActive = ref(false);
 const store = useStore();
-const balance = ref();
+const walletAddress = computed(() => store.getters['auth/walletAddress'])
+const balance = ref(0);
 const vote = ref(false);
-const nftCreator = ref('');
+const tokenPrice = ref(0);
+const creatorAddress = ref('');
 const openCancelModal = ref(false);
 const date = new Date();
 const displayDate = date.toLocaleString('default', { month: 'long' }) + ' ' + date.getDay() + ', ' + date.getFullYear() + ' at ' + formatAMPM(date) + ' UTC'
@@ -42,15 +42,14 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
 })
 
 watchEffect(() => {
-    if (props.order.votes) {
+    if (props.order.id) {
         vote.value = props.order.votes.find(item => item === store.getters['auth/userId'] ? true : false);
+        tokenPrice.value = store.getters['market/etherFromWei'](props.order.tokenPrice);
     }
 })
 watchEffect(() => {
-    if (props.nft && props.nft.token_address) {
-        moralisService.nftTransfers(props.nft.token_address, props.nft.token_id).then(res => {
-            nftCreator.value = res.data.result[res.data.result.length - 1].to_address;
-        })
+    if (props.nftCreator) {
+        creatorAddress.value = props.nftCreator.walletAddress;
     }
 })
 
@@ -69,12 +68,9 @@ function handleVote() {
     }
 }
 const cancelOrder = async (order) => {
-    const gas = await store.state.marketContract.methods.claimDownsideProtectionAmount(
-        props.order.orderId
-    ).estimateGas('', { from: store.getters['auth/walletAddress'] });
     store.state.marketContract.methods.claimDownsideProtectionAmount(
         props.order.orderId
-    ).send({ from: store.getters['auth/walletAddress'], gas: gas }).then(res => {
+    ).send({ from: walletAddress.value }).then(res => {
         console.log('res: ', res);
     }).catch(err => {
         console.log('err: ', err);
@@ -99,7 +95,7 @@ const cancelOrder = async (order) => {
             <div>
                 Created by
                 <span class="text-primary-900">
-                    <nftmx-wallet-address-pop class="text-primary-900" :address="nftCreator"></nftmx-wallet-address-pop>
+                    <nftmx-wallet-address-pop class="text-primary-900" :address="creatorAddress"></nftmx-wallet-address-pop>
                 </span> |&nbsp;
             </div>
             <div>
@@ -118,13 +114,9 @@ const cancelOrder = async (order) => {
         <div>
             <div class="text-lg">Last Sale</div>
             <div class="flex items-baseline text-5xl text-primary-900 font-ibm py-2">
-                <nftmx-price-common
-                    :price="roundTo(store.getters['market/etherFromWei'](tokenPrice) * bnbPrice)"
-                />
+                <nftmx-price-common :price="roundTo(tokenPrice * bnbPrice)" />
                 <span class="font-sans font-black text-lg text-tertiary-500">&nbsp;Ξ&nbsp;</span>
-                <span
-                    class="text-lg text-tertiary-500"
-                >{{ roundTo(store.getters['market/etherFromWei'](tokenPrice)) }}</span>
+                <span class="text-lg text-tertiary-500">{{ roundTo(tokenPrice) }}</span>
             </div>
             <div class="font-ibm-semi-bold text-sm text-tertiary-500 mt-2.75 mb-5">{{ displayDate }}</div>
         </div>
@@ -137,7 +129,7 @@ const cancelOrder = async (order) => {
             />
         </div>
     </div>
-    <cancel-modal v-model="openCancelModal" @confirm="cancelOrder" />
+    <nftmx-cancel-modal v-model="openCancelModal" @confirm="cancelOrder" />
 </template>
 
 <style scoped>

@@ -45,7 +45,7 @@ export const auth = {
         },
     },
     getters: {
-        walletAdderss: (state, getters, rootState) => {
+        walletAddress: (state, getters, rootState) => {
             return rootState.user && rootState.user.walletAddress ? rootState.user.walletAddress : ''
         },
         userId: (state, getters, rootState) => {

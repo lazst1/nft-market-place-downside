@@ -5,6 +5,7 @@ import { useStore } from 'vuex';
 import { useToast } from 'vue-toastification';
 import { useRouter } from 'vue-router';
 import NftmxLayout from './layouts/NftmxLayout.vue';
+import { publicPages, mainChain } from '@/core/config'
 
 const store = useStore();
 const toast = useToast();
@@ -14,30 +15,52 @@ if (typeof window.ethereum !== 'undefined') {
   ethereum
     .request({ method: 'eth_accounts' })
     .then(accounts => {
-      ethereum.request({ method: 'eth_chainId' })
-        .then(chain => {
-          if (chain !== '0x61') {
-            toast.error('Please switch to BSC Testnet');
-            store.dispatch('auth/login', null).then(res => {
-              router.push('/login');
-            })
-          } else {
-            store.dispatch("auth/login", accounts[0]);
+      console.log('===========eth_accounts===========', accounts);
+      if (accounts.length === 0) {
+        // MetaMask is locked or the user has not connected any accounts
+        store.dispatch('auth/login', null).then(res => {
+          const authRequired = !publicPages.includes(router.currentRoute.value.path);
+          if (authRequired) {
+            router.push('/login');
           }
-        }).catch(err => {
-          consolr.log('err ', err);
-        })
+        });
+      } else {
+        ethereum.request({ method: 'eth_chainId' })
+          .then(chain => {
+            if (chain !== mainChain) {
+              toast.error('Please switch to BSC Testnet');
+              store.dispatch('auth/login', null).then(res => {
+                const authRequired = !publicPages.includes(router.currentRoute.value.path);
+                if (authRequired) {
+                  router.push('/login');
+                }
+              })
+            } else {
+              store.dispatch("auth/login", accounts[0]).then(res => {
+                if (router.currentRoute.value.path === '/login') {
+                  router.push('/profile');
+                }
+              });
+            }
+          }).catch(err => {
+            consolr.log('err ', err);
+          })
+      }
     })
   ethereum.on('accountsChanged', function (accounts) {
+    console.log('===========accountsChanged===========', accounts);
     if (accounts.length === 0) {
       // MetaMask is locked or the user has not connected any accounts
       store.dispatch('auth/login', null).then(res => {
-        router.push('/login');
+        const authRequired = !publicPages.includes(router.currentRoute.value.path);
+        if (authRequired) {
+          router.push('/login');
+        }
       });
     } else {
       ethereum.request({ method: 'eth_chainId' })
         .then(chain => {
-          if (chain !== '0x61') {
+          if (chain !== mainChain) {
             toast.error('Please switch to BSC Testnet');
             // store.dispatch('auth/login', null).then(res => {
             //   router.push('/login');
@@ -55,11 +78,27 @@ if (typeof window.ethereum !== 'undefined') {
     }
   })
   ethereum.on('chainChanged', (chainId) => {
-    if (chainId !== '0x61') {
+    console.log('===========chainChanged===========', chainId);
+    if (chainId !== mainChain) {
       toast.error('Please switch to BSC Testnet')
       store.dispatch('auth/login', null).then(res => {
-        router.push('/login')
+        const authRequired = !publicPages.includes(router.currentRoute.value.path);
+        if (authRequired) {
+          router.push('/login');
+        }
       })
+    } else {
+      ethereum
+        .request({ method: 'eth_accounts' })
+        .then(accounts => {
+          if (accounts.length > 0) {
+            store.dispatch("auth/login", accounts[0]).then(res => {
+              if (router.currentRoute.value.path === '/login') {
+                router.push('/profile');
+              }
+            });
+          }
+        })
     }
   });
 }

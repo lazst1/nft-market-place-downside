@@ -5,19 +5,21 @@ import { ref } from 'vue';
 import { useStore } from 'vuex';
 import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 import { assetDetailTabs, defaultUser } from '@/core/config'
-import InfoModal from './components/InfoModal.vue'
 import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
 import { toUpercaseFirstLetterOfString } from '@/core/utils'
-import { baseURL } from '@/core/config';
+import { baseURL, themeConfig } from '@/core/config';
+import InsideModal from '@/core/components/modal/InsideModal.vue';
+import ListGroupItem from '@/core/components/basic/ListGroupItem.vue';
+import ListGroupSubItem from '@/core/components/basic/ListGroupSubItem.vue';
 
 const props = defineProps({
     percent: {
         type: Number,
-        default: 100
+        default: -1
     },
     period: {
         type: Number,
-        default: 365
+        default: -1
     },
     nft: Object,
     nftCreator: {
@@ -44,11 +46,11 @@ const cancelNFT = () => {
 
 <template>
     <div
-        class="relative overflow-hidden p-6 w-full h-asset-img-lg border border-black"
+        class="relative overflow-hidden w-full h-asset-img-lg border border-black"
         :style="{ background: 'url(' + '/images/nfts/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#222222' }"
     >
-        <ribbon :percent="percent" :period="period" big />
-        <info-modal
+        <ribbon v-if="percent > -1" :percent="percent" :period="period" big />
+        <inside-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[0]"
             @select-tab="selectTab"
@@ -65,8 +67,8 @@ const cancelNFT = () => {
                     nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
                 }}
             </div>
-        </info-modal>
-        <info-modal
+        </inside-modal>
+        <inside-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[1]"
             @select-tab="selectTab"
@@ -92,8 +94,8 @@ const cancelNFT = () => {
                     <span class="text-11">Twitter</span>
                 </div>
             </div>
-        </info-modal>
-        <info-modal
+        </inside-modal>
+        <inside-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[2]"
             @select-tab="selectTab"
@@ -110,8 +112,8 @@ const cancelNFT = () => {
                 <span class="font-ibm-medium">Blockchain</span>
                 <span>BSC Testnet</span>
             </div>
-        </info-modal>
-        <info-modal
+        </inside-modal>
+        <inside-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[3]"
             @select-tab="selectTab"
@@ -123,11 +125,13 @@ const cancelNFT = () => {
                 <div
                     class="text-tertiary-500 text-sm 3xl:leading-6"
                 >If you are a buyer, think of NFT.mx as a new strategic staking program with upside from selling the NFT, while also providing the option to cancel your investment and get a 100% refund with your original tokens.</div>
-                <div class="flex flex-col gap-6">
+                <div class="flex flex-col gap-6" v-if="period > -1">
                     <div class="flex justify-around">
                         <div class="text-center">
                             <div class="font-ibm-bold text-lg">Days left</div>
-                            <div class="text-3.5xl text-primary-800 -mt-0.75">{{period}}/{{period}}</div>
+                            <div
+                                class="text-3.5xl text-primary-800 -mt-0.75"
+                            >{{ period + '/' + period }}</div>
                         </div>
                         <div class="text-center">
                             <div class="font-ibm-bold text-lg">Protection</div>
@@ -136,38 +140,36 @@ const cancelNFT = () => {
                     </div>
                 </div>
             </div>
-        </info-modal>
+        </inside-modal>
     </div>
     <div class="mt-4 mb-8 items-center">
-        <div
-            :class="[open ? 'h-30' : 'h-0', 'relative flex w-full text-sm font-ibm items-baseline']"
-        >
+        <div :class="['relative flex w-full text-sm font-ibm items-baseline']">
             <div v-if="store.state.app.windowWidth >= 1920" class="flex-1 flex px-5">
-                <detail-button
+                <list-group-item
                     v-for="(name, i) in assetDetailTabs"
                     :key="i"
                     @click="selectTab(name === tab ? 'Please select' : name)"
                     :active="name === tab"
-                >{{ name }}</detail-button>
+                >{{ name }}</list-group-item>
             </div>
             <accordion
-                v-if="store.state.app.windowWidth < 1920"
+                v-if="store.state.app.windowWidth < themeConfig.xl3"
                 :border="false"
                 :sidebar="true"
                 v-model="open"
                 @handle-click="handleClick"
                 :handleEmit="true"
-                class="absolute top-0 width"
+                class="top-0 width"
             >
                 <template v-slot:caption>
-                    <detail-button class="text-sm pt-1.5 font-ibm-light">{{ tab }}</detail-button>
+                    <list-group-item class="text-sm pt-1.5">{{ tab }}</list-group-item>
                 </template>
-                <detail-button
+                <list-group-sub-item
                     v-for="(name, i) in assetDetailTabs"
                     :key="i"
                     @click="selectTab(name === tab ? 'Please select' : name)"
                     :active="name === tab"
-                >{{ name }}</detail-button>
+                >{{ name }}</list-group-sub-item>
             </accordion>
             <div class="flex-1"></div>
             <div class="flex object-right">

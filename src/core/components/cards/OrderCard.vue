@@ -10,6 +10,7 @@ import marketService from '@/core/services/market.service';
 const props = defineProps({
     order: Object,
 });
+
 const emit = defineEmits(['handle-vote', 'hide-nft', 'cancel-order', 'approve']);
 
 const store = useStore();
@@ -36,7 +37,7 @@ const hideNFT = (hide) => {
     emit('hide-nft', props.order, hide);
 }
 const cancelOrder = () => {
-    // emit('cancel-order', props.order);
+    emit('cancel-order', props.order);
 }
 
 </script>

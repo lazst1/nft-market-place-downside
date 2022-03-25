@@ -39,7 +39,7 @@ const handleVote = () => {
         >
             <div
                 class="relative w-full overflow-hidden pt-73per"
-                :style="{ background: `url(${asset.image_url})`, backgroundSize: !asset.collection.display_data.card_display_style || asset.collection.display_data.card_display_style === 'padded' ? 'contain' : asset.collection.display_data.card_display_style, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'black' }"
+                :style="{ background: `url(${asset.image_url})`, backgroundSize: !asset.card_display_style || asset.card_display_style === 'padded' ? 'contain' : asset.card_display_style, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundColor: 'black' }"
             >
                 <ribbon
                     :percent="(Math.random() * 100).toFixed()"

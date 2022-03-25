@@ -40,6 +40,7 @@ const reverseValue = ref(false);
 const hashtagValue = ref();
 const hashtagOptions = ref([]);
 const toast = useToast();
+const disabled = ref(false);
 
 const period = computed(() => downsidePeriod.value ? parseInt((downsidePeriod.value.end - downsidePeriod.value.start) / 1000) : 0);
 
@@ -56,19 +57,14 @@ const createOrder = async () => {
     const token_id = parseInt(tokenId);
     const price = nftPrice.value;
     const rate = downsideRate.value * 100;
-    if (!price || !rate || !period.value) return;
+    if (!price || !rate || !period.value) {
+        toast.error('Please fill out the fields');
+        return;
+    };
 
+    disabled.value = true;
     createHashTags();
 
-    const gas = await store.state.marketContract.methods.createOrder(
-        tokenAddress,
-        token_id,
-        store.state.web3.utils.toWei(price, 'ether'),
-        rate,
-        period.value,
-        false,
-        period.value
-    ).estimateGas('', { from: store.getters['auth/walletAddress'] });
     store.state.marketContract.methods.createOrder(
         tokenAddress,
         token_id,
@@ -77,10 +73,13 @@ const createOrder = async () => {
         period.value,
         false,
         period.value
-    ).send({ from: store.getters['auth/walletAddress'], gas: gas })
+    ).send({ from: store.getters['auth/walletAddress'] })
         .then(res => {
             router.push('/profile');
-        }).catch(err => { console.log('err ', err) });
+        }).catch(err => {
+            console.log('err ', err);
+            disabled.value = false
+        });
 }
 
 const createHashTags = () => {
@@ -159,10 +158,7 @@ const cancel = () => {
                 >
                     <div class="flex">
                         Choose a collection
-                        <font-awesome-icon
-                            :icon="['fas', 'question-circle']"
-                            class="text-11 ml-1"
-                        />
+                        <font-awesome-icon :icon="['fas', 'question-circle']" class="text-11 ml-1" />
                     </div>
                     <div class="grid grid-cols-1 xl:grid-cols-2 mt-3 pb-0.75 gap-4.5 relative">
                         <collection />
@@ -175,10 +171,7 @@ const cancel = () => {
                     </div>
                     <div class="flex mt-6">
                         Type of sale
-                        <font-awesome-icon
-                            :icon="['fas', 'question-circle']"
-                            class="text-11 ml-1"
-                        />
+                        <font-awesome-icon :icon="['fas', 'question-circle']" class="text-11 ml-1" />
                     </div>
                     <div class="flex my-3">
                         <nftmx-button
@@ -198,10 +191,7 @@ const cancel = () => {
                     </div>
                     <div class="flex mt-8">
                         Price
-                        <font-awesome-icon
-                            :icon="['fas', 'question-circle']"
-                            class="text-11 ml-1"
-                        />
+                        <font-awesome-icon :icon="['fas', 'question-circle']" class="text-11 ml-1" />
                     </div>
                     <div class="flex flex-wrap sm:flex-nowrap mt-3.5 mb-6 font-ibm text-sm">
                         <network class="w-full xl:w-1/3" color="black" />
@@ -214,10 +204,7 @@ const cancel = () => {
                     </div>
                     <div class="flex pt-0.75">
                         Days of protection to offer
-                        <font-awesome-icon
-                            :icon="['fas', 'question-circle']"
-                            class="text-11 ml-1"
-                        />
+                        <font-awesome-icon :icon="['fas', 'question-circle']" class="text-11 ml-1" />
                     </div>
                     <div class="mb-7">
                         <div
@@ -246,10 +233,7 @@ const cancel = () => {
                     </div>
                     <div class="flex pt-0.5">
                         Downside Protection to Offer
-                        <font-awesome-icon
-                            :icon="['fas', 'question-circle']"
-                            class="text-11 ml-1"
-                        />
+                        <font-awesome-icon :icon="['fas', 'question-circle']" class="text-11 ml-1" />
                     </div>
                     <div class="flex mt-3.5 mb-4 font-ibm text-sm">
                         <input
@@ -314,10 +298,7 @@ const cancel = () => {
                     <nftmx-divider class="mt-9 mb-6" />
                     <div class="flex pt-0.75">
                         Fees
-                        <font-awesome-icon
-                            :icon="['fas', 'question-circle']"
-                            class="text-11 ml-1"
-                        />
+                        <font-awesome-icon :icon="['fas', 'question-circle']" class="text-11 ml-1" />
                     </div>
                     <div class="mt-4">
                         <div class="flex py-1 text-xs font-ibm-medium text-tertiary-500">
@@ -333,6 +314,7 @@ const cancel = () => {
                     </div>
                     <div class="w-full mt-9 pt-0.5 pb-2.5 mb-17">
                         <nftmx-button
+                            :disabled="disabled"
                             color="primary"
                             label="COMPLETE LISTING"
                             class="w-full font-press text-sm lg:text-lg"

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, } from 'vue-router'
 import _private from './routes/private'
 import _public from './routes/public'
+import { publicPages } from '@/core/config'
 
 const routes = [
     ..._private,
@@ -16,7 +17,6 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/', '/login', '/register', '/home'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('isLoggedIn');
     // trying to access a restricted page + not logged in

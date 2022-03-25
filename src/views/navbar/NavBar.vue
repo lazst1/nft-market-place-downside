@@ -13,7 +13,7 @@ import NftmxBadge from '@/core/components/basic/NftmxBadge.vue';
 import marketService from '@/core/services/market.service';
 
 const store = useStore();
-const walletAddress = computed(() => store.getters['auth/walletAdderss'])
+const walletAddress = computed(() => store.getters['auth/walletAddress'])
 const orderLogs = ref([]);
 
 marketService.getOrderLogs(1, 20).then(res => {
@@ -50,7 +50,7 @@ const toggleNotificationBar = () => {
           <nav-bar-item v-if="walletAddress">
             <div @click="toggleNotificationBar">
               <font-awesome-icon :icon="['fas', 'bell']" class="text-lg text-white" />
-              <nftmx-badge :value="orderLogs.length" />
+              <nftmx-badge anim :value="orderLogs.length" class="-ml-2 -mt-1.5" />
             </div>
           </nav-bar-item>
           <nav-bar-item class="hidden lg:block">
