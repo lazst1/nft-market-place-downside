@@ -27,7 +27,6 @@ const props = defineProps({
         default: defaultUser
     }
 })
-
 const store = useStore();
 const open = ref(false);
 const tab = ref('Please select');
@@ -102,11 +101,11 @@ const cancelNFT = () => {
         >
             <div class="text-11 flex justify-between">
                 <span class="font-ibm-medium">Contract Address</span>
-                <nftmx-wallet-address-pop class="text-primary-900" :address="nft.token_address" />
+                <nftmx-wallet-address-pop class="text-primary-900" :address="nft.tokenAddress" />
             </div>
             <div class="text-11 flex justify-between mt-4">
                 <span class="font-ibm-medium">Token ID</span>
-                <span>{{ nft.token_id }}</span>
+                <span>{{ nft.tokenId }}</span>
             </div>
             <div class="text-11 flex justify-between mt-4">
                 <span class="font-ibm-medium">Blockchain</span>

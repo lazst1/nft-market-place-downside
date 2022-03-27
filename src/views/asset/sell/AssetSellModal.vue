@@ -217,7 +217,8 @@ const cancel = () => {
                                 <font-awesome-icon
                                     :icon="['fas', 'calendar-alt']"
                                     class="text-lg ml-0.75 mr-0.5"
-                                />6 Months
+                                />
+                                {{ period / 86400 + ' days' }}
                             </div>
                         </div>
                         <v-date-picker

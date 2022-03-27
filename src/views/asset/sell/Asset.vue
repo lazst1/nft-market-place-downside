@@ -33,7 +33,11 @@ const nftCreator = ref({});
 watchEffect(() => {
     if (tokenAddress && tokenId) {
         moralisService.getNft(tokenAddress, tokenId).then(res => {
-            asset.value = res.data;
+            asset.value = {
+                ...res.data,
+                tokenAddress: res.data.token_address,
+                tokenId: res.data.token_id
+            };
         })
         moralisService.nftTransfers(tokenAddress, tokenId).then(res => {
             const creatorAddress = res.data.result[res.data.result.length - 1].to_address;

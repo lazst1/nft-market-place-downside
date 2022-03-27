@@ -43,7 +43,7 @@ marketService.getOrder(orderId).then(res => {
         <div class="grid grid-cols-7 text-white gap-8 mt-11">
             <div class="col-span-7 lg:col-span-3 lg:mr-6.25">
                 <order-info
-                    :asset="order"
+                    :nft="order"
                     :percent="order.protectionRate / 100"
                     :period="order.protectionTime / 86400"
                     :nftCreator="nftCreator"
