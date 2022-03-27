@@ -11,7 +11,7 @@ import moralisService from '@/core/services/moralis.service';
 import AssetHistory from '@/views/asset/sell/AssetHistory.vue';
 import authService from '@/core/services/auth.service';
 import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
-import AssetInfo from '@/core/components/asset/AssetInfo.vue';
+import OrderInfo from '@/core/components/asset/OrderInfo.vue';
 
 const store = useStore();
 const route = useRoute();
@@ -46,7 +46,7 @@ onMounted(() => {
     <body-container>
         <div class="grid grid-cols-7 text-white gap-8 mt-11">
             <div class="col-span-7 lg:col-span-3 lg:mr-6.25">
-                <asset-info
+                <order-info
                     :nft="nft"
                     :percent="order.protectionRate / 100"
                     :period="order.protectionTime / 86400"
