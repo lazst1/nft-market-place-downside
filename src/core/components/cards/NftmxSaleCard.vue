@@ -16,6 +16,7 @@ const props = defineProps({
 
 const store = useStore();
 const vote = ref(props.order.votes.find(item => item === store.getters['auth/userId'] ? true : false));
+const voteCount = ref(props.order.votes.length);
 const card = ref(null);
 const transferred = ref('not');
 const price = ref(0);
@@ -59,10 +60,10 @@ function handleVote() {
                 <div class="flex text-white">
                     <div class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16">{{ order.name }}</div>
                     <div class="text-xs flex mt-1.5">
-                        <span class="pr-1 text-tertiary-400">{{ 0 }}</span>
+                        <span class="pr-1 text-tertiary-400">{{ voteCount }}</span>
                         <font-awesome-icon
                             :icon="['fas', 'thumbs-up']"
-                            :class="[false ? 'text-primary-900' : 'text-white', 'cursor-pointer hover:text-primary-900']"
+                            :class="[vote ? 'text-primary-900' : 'text-white', 'cursor-pointer hover:text-primary-900']"
                             @click="handleVote()"
                         />
                     </div>
