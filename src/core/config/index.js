@@ -2301,11 +2301,6 @@ export const openseaTrendingCollections = [
         "logo": "https://lh3.googleusercontent.com/o5Tt1FbaINxqvS47-r3weuCEaTKGbc5yZJS0yXtDyBDwVeyYVWr7angBivb3iGXKc_1Q-a-DBwxu_VMynRnPbJHVnkt4u1pbBTDz"
     },
     {
-        "name": "BomulPlanet Season One",
-        "slug": "bomulplanet-season1",
-        "logo": "https://lh3.googleusercontent.com/ZktcTx7XSxAE9eFJ0Oe5qG2psnMjXS8CMoOSZoQ6YG2RnYaD2IbmB_Go03WHDqf9ZflBcOU_4BZ4egCQ711cjtv-LIezdFbhBYZr1Q=s120"
-    },
-    {
         "name": "Degenz",
         "slug": "degenz",
         "logo": "https://lh3.googleusercontent.com/vH7gGLr1U-MQ2wS_Xtxhd5UcA_y-vs4RNFIvh6_2I2zVIf9pahLQB8Om5_q80FbbOAWioTFyP5Pof7EpdY4zfrCuNEzGDWVE9bTy=s120"

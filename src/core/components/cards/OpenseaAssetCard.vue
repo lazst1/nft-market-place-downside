@@ -8,12 +8,15 @@ import Timer from '@/core/components/timer/Timer.vue'
 import moralisService from '@/core/services/moralis.service';
 import { TokenType } from '@/core/config';
 import { useStore } from 'vuex';
+import marketService from '@/core/services/market.service';
 
 const props = defineProps({
     asset: Object
 })
 
 const store = useStore();
+const vote = ref(props.asset.votes.find(item => item === store.getters['auth/userId'] ? true : false));
+const voteCount = ref(props.asset.votes.length);
 const windowWidth = computed(() => store.state.app.windowWidth);
 const card = ref(null);
 const transferred = ref('not');
@@ -29,7 +32,16 @@ onMounted(() => {
 })
 
 const handleVote = () => {
-
+    vote.value = !vote.value;
+    if (vote.value) {
+        marketService.vote(props.asset.tokenAddress, props.asset.tokenId, store.state.user.id).then(res => {
+            voteCount.value++;
+        });
+    } else {
+        marketService.cancelVote(props.asset.tokenAddress, props.asset.tokenId, store.state.user.id).then(res => {
+            voteCount.value--;
+        });
+    }
 }
 </script>
 
@@ -53,10 +65,10 @@ const handleVote = () => {
                 <div class="flex text-white">
                     <div class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16">{{ asset.name }}</div>
                     <div class="text-xs flex mt-1.5">
-                        <span class="pr-1 text-tertiary-400">{{ 0 }}</span>
+                        <span class="pr-1 text-tertiary-400">{{ voteCount }}</span>
                         <font-awesome-icon
                             :icon="['fas', 'thumbs-up']"
-                            :class="[false ? 'text-primary-900' : 'text-white', 'cursor-pointer hover:text-primary-900']"
+                            :class="[vote ? 'text-primary-900' : 'text-white', 'cursor-pointer hover:text-primary-900']"
                             @click="handleVote()"
                         />
                     </div>

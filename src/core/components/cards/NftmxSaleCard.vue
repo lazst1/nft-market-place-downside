@@ -25,7 +25,7 @@ marketService.getUSDFromToken(TokenType.BNB).then(res => {
     price.value = store.getters['market/etherFromWei'](props.order.tokenPrice) * res.data.USD;
 });
 
-function handleVote() {
+const handleVote = () => {
     vote.value = !vote.value;
     if (vote.value) {
         marketService.vote(props.order.tokenAddress, props.order.tokenId, store.state.user.id).then(res => {
