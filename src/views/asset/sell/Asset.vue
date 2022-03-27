@@ -18,7 +18,7 @@ import { useRoute, useRouter } from 'vue-router';
 import moralisService from '@/core/services/moralis.service';
 import marketService from '@/core/services/market.service';
 import authService from '@/core/services/auth.service';
-import AssetInfo from '@/core/components/asset/AssetInfo.vue';
+import OrderInfo from '@/core/components/asset/OrderInfo.vue';
 
 const store = useStore();
 const router = useRouter();
@@ -55,7 +55,7 @@ const handleModal = (value) => {
         <div class="grid grid-cols-7 text-white gap-8 mt-4 lg:mt-9">
             <div class="col-span-7 lg:col-span-3">
                 <asset-user v-if="store.state.app.windowWidth < themeConfig.lg" :asset="asset" />
-                <asset-info :nft="asset" :nftCreator="nftCreator" />
+                <order-info :nft="asset" :nftCreator="nftCreator" />
             </div>
             <div class="col-span-7 lg:col-span-4 relative">
                 <asset-user v-if="store.state.app.windowWidth >= themeConfig.lg" :asset="asset" />
