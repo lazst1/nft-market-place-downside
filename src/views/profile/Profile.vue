@@ -3,21 +3,21 @@ import { computed, ref, watchEffect } from 'vue';
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex'
-import NftmxDivider from '@/core/components/NftmxDivider.vue';
+import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
 import CardsContainer from '@/core/container/CardsContainer.vue';
-import NavBarSearch from '@/core/container/NavBarSearch.vue';
-import NftmxSearchInput from '@/core/components/NftmxSearchInput.vue';
+import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
+import NftmxSearchInput from '@/core/components/basic/NftmxSearchInput.vue';
 import { marketAddress } from '@/core/config';
 import ProfileSummary from './ProfileSummary.vue';
 import ChooseCollection from './ChooseCollection.vue';
 import ChooseNftGroup from './ChooseNftGroup.vue';
-import OrderCard from './components/OrderCard.vue';
 import moralisService from '@/core/services/moralis.service';
 import erc721ABI from '@/core/config/erc721';
 import marketService from '@/core/services/market.service';
+import OrderCard from '@/core/components/cards/OrderCard.vue';
 
 const store = useStore();
-const walletAddress = computed(() => store.getters['auth/getWalletAddress'])
+const walletAddress = computed(() => store.getters['auth/walletAddress'])
 const orders = ref([]);
 const unhiddenOrders = computed(() => orders.value.filter(order => order.hiders.findIndex(id => id === store.state.user.id) === -1))
 const collected = computed(() => unhiddenOrders.value.filter(order => order.orderStatus === -1));
@@ -27,11 +27,27 @@ const downsideOrdersSold = computed(() => unhiddenOrders.value.filter(order => o
 const downsideOrders = computed(() => unhiddenOrders.value.filter(order => (order.buyerAddress === walletAddress.value && order.orderStatus === '2') || (order.sellerAddress === walletAddress.value && order.orderStatus === '2')))
 const favoriteOrders = computed(() => {
     const filteredOrders = unhiddenOrders.value.filter(order => order.votes.findIndex(id => id === store.state.user.id) > -1)
-    return filteredOrders.filter((order, index) => filteredOrders.findIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId) === index);
+    return filteredOrders.filter((order, index) => {
+        const firstIndex = filteredOrders.findIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId);
+        const lastIndex = filteredOrders.findLastIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId);
+        if (firstIndex === lastIndex) {
+            return true
+        };
+        const bigIndex = parseInt(filteredOrders[lastIndex].orderStatus) > parseInt(filteredOrders[firstIndex].orderStatus) ? lastIndex : firstIndex;
+        return bigIndex === index;
+    });
 })
 const hiddenOrders = computed(() => {
     const filteredOrders = orders.value.filter(order => order.hiders.findIndex(id => id === store.state.user.id) > -1)
-    return filteredOrders.filter((order, index) => filteredOrders.findIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId) === index);
+    return filteredOrders.filter((order, index) => {
+        const firstIndex = filteredOrders.findIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId);
+        const lastIndex = filteredOrders.findLastIndex(item => item.tokenAddress === order.tokenAddress && item.tokenId === order.tokenId);
+        if (firstIndex === lastIndex) {
+            return true
+        };
+        const bigIndex = parseInt(filteredOrders[lastIndex].orderStatus) > parseInt(filteredOrders[firstIndex].orderStatus) ? lastIndex : firstIndex;
+        return bigIndex === index;
+    });
 })
 const loadingOrders = ref(true);
 const loadingNFTs = ref(true);
@@ -46,33 +62,35 @@ const counts = computed(() => {
         downsideSold: downsideOrdersSold.value.length,
         favorite: favoriteOrders.value.length,
         hidden: hiddenOrders.value.length,
-        activity: 0,
+        bundled: 0,
     }
 })
 
 watchEffect(() => {
     if (walletAddress.value) {
-        moralisService.getMyNFTs(walletAddress.value, 100, 0).then(async nftData => {
-            const collectedNFTs = await JSON.parse(JSON.stringify(nftData));
-            const nfts = await Promise.all(collectedNFTs.result.map(async (nft, index) => {
+        orders.value = [];
+        loadingNFTs.value = true;
+        loadingOrders.value = true;
+        marketService.getNFTsFromWallet(walletAddress.value).then(async res => {
+            const collectedNFTs = await JSON.parse(JSON.stringify(res.data));
+            const nfts = await Promise.all(collectedNFTs.map(async (nft, index) => {
                 const tokenContract = new store.state.web3.eth.Contract(
                     erc721ABI,
-                    store.state.web3.utils.toChecksumAddress(nft.token_address),
+                    store.state.web3.utils.toChecksumAddress(nft.tokenAddress),
                 );
 
-                const approvedAddress = await tokenContract.methods.getApproved(nft.token_id).call({
-                    from: walletAddress.value, gas: 210000
+                const approvedAddress = await tokenContract.methods.getApproved(nft.tokenId).call({
+                    from: walletAddress.value
                 }).then(res => res);
 
                 nft.approved = approvedAddress === marketAddress ? true : false;
-                const tokenInfo = await marketService.getTokenInfo(nft.token_address, nft.token_id);
                 const order = {
                     id: 'temp-order-' + index,
                     orderStatus: -1,
-                    tokenAddress: nft.token_address,
-                    tokenId: nft.token_id,
-                    votes: tokenInfo.votes || [],
-                    hiders: tokenInfo.hiders || [],
+                    tokenAddress: nft.tokenAddress,
+                    tokenId: nft.tokenId,
+                    votes: nft.votes,
+                    hiders: nft.hiders,
                     nft: nft
                 }
                 return order;
@@ -80,9 +98,9 @@ watchEffect(() => {
             orders.value = orders.value.concat(nfts);
             loadingNFTs.value = false;
         });
-        marketService.getMyOrders(store.state.user.id).then(async data => {
-            const nfts = await Promise.all(data.map(async order => {
-                const nft = await moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res);
+        marketService.getMyOrders(store.state.user.id).then(async res => {
+            const nfts = await Promise.all(res.data.map(async order => {
+                const nft = await moralisService.getNft(order.tokenAddress, order.tokenId).then(res => res.data);
                 order.nft = nft;
                 order.votes = order.votes || [];
                 order.hiders = order.hiders || [];
@@ -106,13 +124,13 @@ const selectGroup = (value) => {
             selectedGroup.value = { key: 'DOWNSIDE', name: 'Downside Protection' };
             break;
         case 'FAVORITE':
-            selectedGroup.value = { key: 'FAVORITE', name: 'Favorite' };
+            selectedGroup.value = { key: 'FAVORITE', name: 'My Favorite' };
             break;
         case 'HIDDEN':
             selectedGroup.value = { key: 'HIDDEN', name: 'Hidden' };
             break;
-        case 'ACTIVITY':
-            selectedGroup.value = { key: 'ACTIVITY', name: 'Activity' };
+        case 'BUNDLED':
+            selectedGroup.value = { key: 'BUNDLED', name: 'Bundled' };
             break;
         case 'OFFERS':
             selectedGroup.value = { key: 'OFFERS', name: 'Offers' };
@@ -139,10 +157,13 @@ const selectTab = (value) => {
 }
 
 const approve = async (order) => {
-    const gas = await store.state.marketContract.methods.approve(marketAddress, order.tokenId).estimateGas('', { from: store.state.user.walletAddress });
+    const tokenContract = new store.state.web3.eth.Contract(
+        erc721ABI,
+        store.state.web3.utils.toChecksumAddress(order.tokenAddress),
+    );
 
-    store.state.marketContract.methods.approve(marketAddress, order.tokenId).send({
-        from: store.state.user.walletAddress, gas: gas
+    tokenContract.methods.approve(marketAddress, order.tokenId).send({
+        from: store.state.user.walletAddress
     }).then(res => {
         const index = orders.value.findIndex(item => item.id === order.id);
         orders.value[index].nft.approved = true;
@@ -182,14 +203,14 @@ const hideNFT = (order, hide) => {
         })
     }
 }
-const cancelOrder = (order) => {
-    if (order.orderStatus === '0') {
-        store.dispatch('market/cancelOrderBySeller', order.orderId)
-    } else if (order.orderStatus === '2' && order.buyerAddress === store.state.user.walletAddress) {
-        store.dispatch('market/cancelOrderByBuyer', order.orderId)
-    }
+const cancelOrder = async (order) => {
+    store.state.marketContract.methods.cancelOrder(
+        order.orderId
+    ).send({ from: walletAddress.value }).then(res => {
+        const index = orders.value.findIndex(item => item.id === order.id);
+        orders.value[index].orderStatus = -1;
+    });
 }
-
 
 </script>
 
@@ -198,15 +219,15 @@ const cancelOrder = (order) => {
     <profile-summary />
     <body-container>
         <choose-collection />
-        <nftmx-divider class="mt-4.75 mb-3"></nftmx-divider>
-        <div class="2xl:flex justify-between text-white font-ibm-semi-bold text-sm pt-0.5">
+        <nftmx-divider />
+        <div class="2xl:flex justify-between text-white font-ibm-medium text-sm">
             <choose-nft-group
                 :counts="counts"
                 :selectedGroup="selectedGroup"
                 @select-group="selectGroup"
                 @select-tab="selectTab"
             />
-            <nftmx-search-input class="bg-tertiary-800 mt-3.25 2xl:my-0.75 sm:ml-4" />
+            <nftmx-search-input class="bg-tertiary-800 mt-5 sm:mt-3.75 2xl:mt-7.25 sm:ml-4" />
         </div>
         <div v-if="selectedGroup.key === 'COLLECTED'" class="mt-12 2xl:mt-11 mb-22">
             <cards-container v-if="selectedGroup.key === 'COLLECTED'" class="place-items-center">
@@ -311,6 +332,7 @@ const cancelOrder = (order) => {
                     :key="index"
                     :order="order"
                     class="bg-tertiary-800"
+                    @approve="approve"
                     @handle-vote="handleVote"
                     @hide-nft="hideNFT"
                     @cancel-order="cancelOrder"
@@ -346,7 +368,7 @@ const cancelOrder = (order) => {
                 class="h-96 font-ibm-bold text-tertiary-500 text-lg flex items-center justify-center"
             >No orders found</div>
         </div>
-        <div v-if="selectedGroup.key === 'ACTIVITY'" class="mt-12 2xl:mt-11 mb-22">
+        <div v-if="selectedGroup.key === 'BUNDLED'" class="mt-12 2xl:mt-11 mb-22">
             <div
                 class="h-96 font-ibm-bold text-tertiary-500 text-lg flex items-center justify-center"
             >No orders found</div>

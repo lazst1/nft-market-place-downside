@@ -1,57 +1,55 @@
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import Ribbon from '@/core/components/Ribbon.vue';
-import DetailButton from '@/core/components/DetailButton.vue';
-import Icon from '@/core/components/Icon.vue'
-import { mdiThumbUp, mdiHelpCircle, mdiMenu } from '@mdi/js'
-import Timer from '@/core/components/Timer.vue'
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import NftmxSelect from '@/core/components/NftmxSelect.vue';
-import NftmxLineChart from '@/core/components/NftmxLineChart.vue';
+import Ribbon from '@/core/components/basic/Ribbon.vue';
+import DetailButton from '@/core/components/basic/DetailTab.vue';
+import Icon from '@/core/components/basic/Icon.vue'
+import Timer from '@/core/components/timer/Timer.vue'
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
+import NftmxLineChart from '@/core/components/chart/NftmxLineChart.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
-import NftmxWalletAddressPop from '@/core/components/NftmxWalletAddressPop.vue';
-import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
+import NftmxSelectNetwork from '@/core/components/basic/NftmxSelectNetwork.vue';
+import NftmxWalletAddressPop from '@/core/components/blockchain-address/NftmxWalletAddressPop.vue';
+import NftmxPriceCommon from '@/core/components/price/NftmxPriceCommon.vue';
 import moralisService from '@/core/services/moralis.service';
 import { useStore } from 'vuex';
-import { exchangeRate, TokenType } from '@/core/config';
+import { TokenType } from '@/core/config';
 import marketService from '@/core/services/market.service';
 import { roundTo } from '@/core/utils';
-import CancelModal from './components/CancelModal.vue';
 import { formatAMPM } from '@/core/utils'
+import NftmxCancelModal from '@/core/components/modal/NftmxCancelModal.vue';
 
 const props = defineProps({
     order: Object,
-    tokenPrice: String,
-    nft: Object
+    nft: Object,
+    nftCreator: Object
 })
 
-const buyModalActive = ref(false);
-const syndicationModalActive = ref(false);
 const store = useStore();
-const balance = ref();
+const walletAddress = computed(() => store.getters['auth/walletAddress'])
+const balance = ref(0);
 const vote = ref(false);
-const nftCreator = ref('');
+const tokenPrice = ref(0);
+const creatorAddress = ref('');
 const openCancelModal = ref(false);
 const date = new Date();
 const displayDate = date.toLocaleString('default', { month: 'long' }) + ' ' + date.getDay() + ', ' + date.getFullYear() + ' at ' + formatAMPM(date) + ' UTC'
 
 const bnbPrice = ref(0);
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
-    bnbPrice.value = res.USD;
+    bnbPrice.value = res.data.USD;
 })
 
 watchEffect(() => {
-    if (props.order.votes) {
-        vote.value = props.order.votes.find(item => item === store.getters['auth/getUserId'] ? true : false);
+    if (props.order.id) {
+        vote.value = props.order.votes.find(item => item === store.getters['auth/userId'] ? true : false);
+        tokenPrice.value = store.getters['market/etherFromWei'](props.order.tokenPrice);
     }
 })
 watchEffect(() => {
-    if (props.nft && props.nft.token_address) {
-        moralisService.nftTransfers(props.nft.token_address, props.nft.token_id).then(res => {
-            nftCreator.value = res.result[res.result.length - 1].to_address;
-        })
+    if (props.nftCreator) {
+        creatorAddress.value = props.nftCreator.walletAddress;
     }
 })
 
@@ -70,13 +68,9 @@ function handleVote() {
     }
 }
 const cancelOrder = async (order) => {
-    const gas = await store.state.marketContract.methods.claimDownsideProtectionAmount(
-        props.order.orderId
-    ).estimateGas('', { from: store.state.user.walletAddress });
     store.state.marketContract.methods.claimDownsideProtectionAmount(
         props.order.orderId
-    ).send({ from: store.state.user.walletAddress, gas: gas }).then(res => {
-        console.log('res: ', res);
+    ).send({ from: walletAddress.value }).then(res => {
     }).catch(err => {
         console.log('err: ', err);
     });
@@ -100,7 +94,7 @@ const cancelOrder = async (order) => {
             <div>
                 Created by
                 <span class="text-primary-900">
-                    <nftmx-wallet-address-pop class="text-primary-900" :address="nftCreator"></nftmx-wallet-address-pop>
+                    <nftmx-wallet-address-pop class="text-primary-900" :address="creatorAddress"></nftmx-wallet-address-pop>
                 </span> |&nbsp;
             </div>
             <div>
@@ -119,13 +113,9 @@ const cancelOrder = async (order) => {
         <div>
             <div class="text-lg">Last Sale</div>
             <div class="flex items-baseline text-5xl text-primary-900 font-ibm py-2">
-                <nftmx-price-common
-                    :price="roundTo(parseInt(tokenPrice) / exchangeRate * bnbPrice)"
-                />
+                <nftmx-price-common :price="roundTo(tokenPrice * bnbPrice)" />
                 <span class="font-sans font-black text-lg text-tertiary-500">&nbsp;Ξ&nbsp;</span>
-                <span
-                    class="text-lg text-tertiary-500"
-                >{{ roundTo(parseInt(tokenPrice) / exchangeRate) }}</span>
+                <span class="text-lg text-tertiary-500">{{ roundTo(tokenPrice) }}</span>
             </div>
             <div class="font-ibm-semi-bold text-sm text-tertiary-500 mt-2.75 mb-5">{{ displayDate }}</div>
         </div>
@@ -138,7 +128,7 @@ const cancelOrder = async (order) => {
             />
         </div>
     </div>
-    <cancel-modal v-model="openCancelModal" @confirm="cancelOrder" />
+    <nftmx-cancel-modal v-model="openCancelModal" @confirm="cancelOrder" />
 </template>
 
 <style scoped>

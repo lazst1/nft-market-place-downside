@@ -1,19 +1,17 @@
 <script setup>
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 import { mdiFilter, mdiCloseBox } from '@mdi/js'
-import CheckboxCell from '@/core/components/CheckboxCell.vue';
-import DropDown from '@/core/components/DropDown.vue';
-import NavBarItem from '@/core/components/NavBarItem.vue'
-import DropDownItem from '@/core/components/DropDownItem.vue';
-import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
-import Accordion from '@/core/container/Accordion.vue';
-import NftmxTable from '@/core/components/NftmxTable.vue';
-import NftmxThead from '@/core/components/NftmxThead.vue';
-import NftmxTh from '@/core/components/NftmxTh.vue';
-import NftmxTbody from '@/core/components/NftmxTbody.vue';
-import NftmxTd from '@/core/components/NftmxTd.vue';
-import NftmxTr from '@/core/components/NftmxTr.vue';
+import CheckboxCell from '@/core/components/basic/CheckboxCell.vue';
+import DropDown from '@/core/components/basic/DropDown.vue';
+import DropDownItem from '@/core/components/basic/DropDownItem.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
+import NftmxTable from '@/core/components/table/NftmxTable.vue';
+import NftmxThead from '@/core/components/table/NftmxThead.vue';
+import NftmxTh from '@/core/components/table/NftmxTh.vue';
+import NftmxTbody from '@/core/components/table/NftmxTbody.vue';
+import NftmxTd from '@/core/components/table/NftmxTd.vue';
+import NftmxTr from '@/core/components/table/NftmxTr.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 </script>
 
@@ -36,9 +34,9 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
                     :iconAfter="mdiCloseBox"
                     class="hover:bg-tertiary-600"
                 />
-                <nav-bar-item>
+                <div>
                     <span class="text-sm text-primary-900 mx-2">Clear All</span>
-                </nav-bar-item>
+                </div>
             </div>
             <div class="grid sm:grid-cols-2 mt-4 lg:mt-0 lg:justify-end lg:justify-self-end justify-self-start">
                 <div class="">
@@ -54,7 +52,6 @@ import NftmxFooter from '@/core/container/NftmxFooter.vue';
                     <drop-down
                         title="Event type"
                     >
-                        <nav-bar-search-input small></nav-bar-search-input>
                         <drop-down-item>
                             <checkbox-cell><div class="text-xs pt-1">ETH Address</div></checkbox-cell>
                         </drop-down-item>

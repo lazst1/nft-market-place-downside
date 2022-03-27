@@ -1,5 +1,4 @@
 <script setup>
-import NftmxTypography from '@/core/components/NftmxTypography.vue';
 import LandingSection from './containers/LandingSection.vue';
 
 </script>
@@ -7,7 +6,7 @@ import LandingSection from './containers/LandingSection.vue';
 <template>
     <landing-section black>
         <div class="font-press text-center mt-0.75">
-            <nftmx-typography h1>Downside Protection</nftmx-typography>
+            <div class="text-xl sm:text-2xl lg:text-3xl">Downside Protection</div>
         </div>
         <div class="grid sm:grid-cols-2 sm:gap-10 text-center mt-6 lg:mt-12">
             <div class="flex flex-col gap-7">

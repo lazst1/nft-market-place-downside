@@ -13,7 +13,7 @@
                             class="absolute top-1 -right-1 bg-primary-700 bg-opacity-60 font-ibm-medium px-4 py-2"
                         >
                             <div class="text-sm">10%-100% / 7-365</div>
-                            <div class="text-xxs">Downside Protection</div>
+                            <div class="text-11">Downside Protection</div>
                             <div
                                 class="w-2 h-2 absolute right-0.5 -bottom-1 bg-primary-900 bg-opacity-60 rotate-45 -z-10"
                             ></div>
@@ -56,12 +56,12 @@
 <script setup>
 import { defineComponent, ref, watchEffect } from 'vue';
 import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
-import Ribbon from '@/core/components/Ribbon.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import NftmxProgressBar from '@/core/components/NftmxProgressBar.vue';
+import Ribbon from '@/core/components/basic/Ribbon.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import NftmxProgressBar from '@/core/components/basic/NftmxProgressBar.vue';
 import 'vue3-carousel/dist/carousel.css';
 import { themeConfig, syndications } from '@/core/config';
-import NftmxTrimString from '@/core/components/NftmxTrimString.vue';
+import NftmxTrimString from '@/core/components/basic/NftmxTrimString.vue';
 
 const windowSize = ref({
     width: 0,

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import Accordion from '@/core/container/Accordion.vue';
-import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
+import NftmxSaleCard from '@/core/components/cards/NftmxSaleCard.vue';
 
 defineProps({
     title: String,

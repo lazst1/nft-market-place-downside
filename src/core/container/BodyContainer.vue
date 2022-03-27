@@ -1,5 +1,5 @@
 <script setup>
-import NavBarSearch from '@/core/container/NavBarSearch.vue';
+import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
 import { ref } from 'vue';
 import NftmxFooter from './NftmxFooter.vue';
 
@@ -24,7 +24,7 @@ const handleFooter = (value) => {
 <template>
     <nav-bar-search v-if="searchAble"></nav-bar-search>
     <div
-        :class="[padding ? 'px-5.5 sm:px-10 md:px-16 lg:px-20 py-4' : '', 'bg-tertiary-900 font-ibm cursor-default']"
+        :class="[padding ? 'px-5 sm:px-10 md:px-16 xl:px-22 py-4' : '', 'bg-tertiary-900 font-ibm cursor-default']"
         :style="{ paddingBottom: footerHeight + 'px' }"
     >
         <div class="max-w-8xl mx-auto">

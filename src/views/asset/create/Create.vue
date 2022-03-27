@@ -1,23 +1,23 @@
 <script setup>
 import BodyContainer from '@/core/container/BodyContainer.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
-import NftmxSelect from '@/core/components/NftmxSelect.vue';
-import NftmxSelectNetwork from '@/core/components/NftmxSelectNetwork.vue';
-import NftmxSellGrid from '@/core/components/NftmxSellGrid.vue';
-import NftmxFileUploader from '@/core/components/NftmxFileUploader.vue';
+import NftmxSelect from '@/core/components/basic/NftmxSelect.vue';
+import NftmxSelectNetwork from '@/core/components/basic/NftmxSelectNetwork.vue';
+import SettingItemRow from '@/core/components/basic/SettingItemRow.vue';
+import NftmxFileUploader from '@/core/components/file-uploader/NftmxFileUploader.vue';
 
 </script>
 
 <template>
     <body-container>
-        <nftmx-sell-grid class="my-2.5">
+        <setting-item-row class="my-2.5">
             <template v-slot:value>
                 <div class="col-span-2 font-press text-3xl">
                     Create an NFT
                 </div>
             </template>
-        </nftmx-sell-grid>
-        <nftmx-sell-grid class="mt-13.5">
+        </setting-item-row>
+        <setting-item-row class="mt-13.5">
             <template v-slot:item>
                 <div class="font-ibm-bold text-lg pt-3.5">
                     Blockchain
@@ -28,8 +28,8 @@ import NftmxFileUploader from '@/core/components/NftmxFileUploader.vue';
                     <nftmx-select-network />
                 </div>
             </template>
-        </nftmx-sell-grid>
-        <nftmx-sell-grid class="mt-10">
+        </setting-item-row>
+        <setting-item-row class="mt-10">
             <template v-slot:item>
                 <div class="font-ibm-bold text-lg pt-3">
                     Image, Video, Audio, or 3D Model
@@ -53,6 +53,6 @@ import NftmxFileUploader from '@/core/components/NftmxFileUploader.vue';
                     </div>
                 </div>
             </template>
-        </nftmx-sell-grid>
+        </setting-item-row>
     </body-container>
 </template>

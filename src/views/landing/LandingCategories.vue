@@ -1,7 +1,6 @@
 <script setup>
 import LandingSection from './containers/LandingSection.vue';
-import NftmxTypography from '@/core/components/NftmxTypography.vue';
-import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
+import NftmxPriceCommon from '@/core/components/price/NftmxPriceCommon.vue';
 import CategoryCarousel from './components/CategoryCarousel.vue';
 import SectionButton from './components/SectionButton.vue';
 
@@ -10,7 +9,7 @@ import SectionButton from './components/SectionButton.vue';
 <template>
     <landing-section>
         <div class="font-press text-center pt-1 text-white">
-            <nftmx-typography h1>All Categories</nftmx-typography>
+            <div class="text-xl sm:text-2xl lg:text-3xl">All Categories</div>
         </div>
         <div class="mt-4">
             <category-carousel></category-carousel>

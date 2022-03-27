@@ -1,38 +1,28 @@
 <script setup>
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 import { mdiFilter, mdiCloseBox } from '@mdi/js'
-import CheckboxCell from '@/core/components/CheckboxCell.vue';
-import DropDown from '@/core/components/DropDown.vue';
-import NavBarItem from '@/core/components/NavBarItem.vue'
-import DropDownItem from '@/core/components/DropDownItem.vue';
-import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
-import NavBarSearchInput from '@/core/components/NavBarSearchInput.vue';
+import CheckboxCell from '@/core/components/basic/CheckboxCell.vue';
+import NftmxSaleCard from '@/core/components/cards/NftmxSaleCard.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import { useStore } from 'vuex';
 import BrowseSearch from './BrowseSearch.vue';
 import marketService from '@/core/services/market.service';
 import { computed, ref, watchEffect } from 'vue';
-import openseaService from '../../core/services/opensea.service';
 
 const store = useStore();
-
+const walletAddress = computed(() => store.getters['auth/walletAddress']);
 const orders = ref([]);
 const loading = ref(true);
 
 watchEffect(() => {
-    if (store.state.user.walletAddress) {
-        // marketService.getSaleOrders(store.state.user.walletAddress).then(res => {
-        //     loading.value = false;
-        //     orders.value = res.items;
-        // })
-        openseaService.retrieveAssets({ limit: 10, offset: 0 }).then(res => {
+    if (walletAddress.value) {
+        marketService.getSaleOrders(walletAddress.value).then(res => {
             loading.value = false;
-            orders.value = res.data.assets;
-        });
+            orders.value = res.data.items;
+        })
     }
 })
-
 </script>
 
 <template>
@@ -49,15 +39,15 @@ watchEffect(() => {
                     label="List Price Available"
                     :small="true"
                     :iconAfter="mdiCloseBox"
-                    class="hover:bg-transparent hover:text-primary-900 h-9"
+                    class="hover:bg-transparent hover:text-primary-900 h-9 text-xs"
                 />
             </div>
-            <span class="text-primary-900 text-xxs ml-4">Clear All</span>
+            <span class="text-primary-900 text-11 ml-4">Clear All</span>
         </div>
         <div
-            class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5"
+            class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5 mt-10"
         >
-            <!-- <nftmx-sale-card v-for="(order, index) in orders" :data="order" :key="index"></nftmx-sale-card> -->
+            <nftmx-sale-card v-for="(order, index) in orders" :order="order" :key="index"></nftmx-sale-card>
             <!-- <nftmx-sale-card v-for="index in 2" :key="index"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{syndication:false}"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{auction:true}"></nftmx-sale-card>

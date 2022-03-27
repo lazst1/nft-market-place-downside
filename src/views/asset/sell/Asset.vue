@@ -1,25 +1,24 @@
 <script setup>
 import { ref, onMounted, watchEffect } from 'vue'
 import BodyContainer from '@/core/container/BodyContainer.vue';
-import NftmxButton from '@/core/components/NftmxButton.vue';
-import Accordion from '@/core/container/Accordion.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
 import NftmxFooter from '@/core/container/NftmxFooter.vue';
 import CardsContainer from '@/core/container/CardsContainer.vue';
-import NftmxItemCard from '@/core/components/NftmxItemCard.vue';
 import { saleType } from '@/core/config'
 import { useStore } from 'vuex';
 import AssetDetail from './AssetDetail.vue';
 import AssetStatistics from './AssetStatistics.vue';
-import AssetUser from './AssetUser.vue';
+import AssetUser from '@/core/components/asset/AssetUser.vue';
 import { themeConfig } from '@/core/config';
-import NavBarSearch from '@/core/container/NavBarSearch.vue';
+import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
 import Ledger from './Ledger.vue';
 import AssetSellModal from './AssetSellModal.vue';
 import { useRoute, useRouter } from 'vue-router';
 import moralisService from '@/core/services/moralis.service';
-import MoreInfo from './MoreInfo.vue';
 import marketService from '@/core/services/market.service';
 import authService from '@/core/services/auth.service';
+import AssetInfo from '@/core/components/asset/AssetInfo.vue';
 
 const store = useStore();
 const router = useRouter();
@@ -34,10 +33,10 @@ const nftCreator = ref({});
 watchEffect(() => {
     if (tokenAddress && tokenId) {
         moralisService.getNft(tokenAddress, tokenId).then(res => {
-            asset.value = res;
+            asset.value = res.data;
         })
         moralisService.nftTransfers(tokenAddress, tokenId).then(res => {
-            const creatorAddress = res.result[res.result.length - 1].to_address;
+            const creatorAddress = res.data.result[res.data.result.length - 1].to_address;
             authService.connectWallet(creatorAddress).then(res => {
                 nftCreator.value = res;
             })
@@ -56,8 +55,7 @@ const handleModal = (value) => {
         <div class="grid grid-cols-7 text-white gap-8 mt-4 lg:mt-9">
             <div class="col-span-7 lg:col-span-3">
                 <asset-user v-if="store.state.app.windowWidth < themeConfig.lg" :asset="asset" />
-                <asset-detail :nft="asset" :nftCreator="nftCreator" />
-                <!-- <more-info :nft="asset" :percent="0" :period="0" :nftCreator="nftCreator" /> -->
+                <asset-info :nft="asset" :nftCreator="nftCreator" />
             </div>
             <div class="col-span-7 lg:col-span-4 relative">
                 <asset-user v-if="store.state.app.windowWidth >= themeConfig.lg" :asset="asset" />
@@ -76,14 +74,6 @@ const handleModal = (value) => {
                         >More From This Collections</div>
                     </div>
                 </template>
-
-                <!-- <cards-container class="mt-2 mb-2 place-items-center">
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                    <nftmx-item-card forMore class="bg-tertiary-700"></nftmx-item-card>
-                </cards-container>-->
             </accordion>
         </div>
         <div class="text-center pt-px mb-12">

@@ -1,19 +1,15 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
-import NftmxCardsAccordion from '@/core/components/NftmxCardsAccordion.vue';
-import NftmxDivider from '@/core/components/NftmxDivider.vue';
-import Accordion from '@/core/container/Accordion.vue';
-import NftmxSaleCard from '@/core/components/NftmxSaleCard.vue';
+import NftmxDivider from '@/core/components/basic/NftmxDivider.vue';
+import Accordion from '@/core/components/accordion/BasicAccordion.vue';
+import NftmxSaleCard from '@/core/components/cards/NftmxSaleCard.vue';
 import AccordionContainer from './container/AccordionContainer.vue';
-import Assets1 from './components/Assets1.vue';
-import Assets2 from './components/Assets2.vue';
 import marketService from '@/core/services/market.service';
-import { exchangeRate } from '@/core/config';
 import { roundTo } from '@/core/utils';
 import { useStore } from 'vuex';
 import { TokenType, openseaTrendingCollections } from '@/core/config';
-import openseaService from '../../core/services/opensea.service';
-import Collection from './components/Collection.vue';
+import openseaService from '@/core/services/opensea.service';
+import Collection from './Collection.vue';
 
 const soldItems = ref([]);
 const canceledItems = ref([]);
@@ -31,17 +27,17 @@ const more = computed(() => allCollections.value.length > collections.value.leng
 const store = useStore();
 const bnbPrice = ref(0);
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
-    bnbPrice.value = res.USD;
+    bnbPrice.value = res.data.USD;
 })
 marketService.soldItems().then(res => {
-    soldItems.value = res;
-    selectedItems.value = res;
+    soldItems.value = res.data;
+    selectedItems.value = res.data;
 });
 marketService.canceledItems().then(res => {
-    canceledItems.value = res;
+    canceledItems.value = res.data;
 });
 marketService.listedItems().then(res => {
-    listedItems.value = res;
+    listedItems.value = res.data;
 });
 const retrieveCollections = () => {
     openseaService.retrieveCollections({ offset: retrieveOffset.value, limit: retrieveLimit.value }).then(res => {
@@ -99,7 +95,7 @@ const loadMoreCollection = () => {
             </div>
             <div class="border border-black my-6.75 bg-tertiary-800">
                 <div
-                    class="grid grid-cols-4 border-b border-black font-ibm-semi-bold text-xxs text-center"
+                    class="grid grid-cols-4 border-b border-black font-ibm-semi-bold text-11 text-center"
                 >
                     <div
                         @click="selectLedger('SOLD')"
@@ -119,7 +115,7 @@ const loadMoreCollection = () => {
                     >CREATED</div>
                 </div>
                 <div
-                    class="grid grid-cols-2 border-b border-black font-ibm-medium text-xxs text-tertiary-500"
+                    class="grid grid-cols-2 border-b border-black font-ibm-medium text-11 text-tertiary-500"
                 >
                     <div class="border-r border-black pt-3.5 pb-2.75 pl-3">Items</div>
                     <div class="pt-3.5 pb-2.75 pl-3">Price (USD)</div>
@@ -130,8 +126,8 @@ const loadMoreCollection = () => {
                             :class="[index === selectedItems.items.length - 1 ? 'pb-6.25' : 'pb-1', 'text-white border-r border-black pt-5 pl-3']"
                         >{{ item.tokenName }}</div>
                         <div
-                            :class="[item.tokenPrice / exchangeRate * bnbPrice > 300 ? 'text-red-900' : item.tokenPrice / exchangeRate * bnbPrice < 1 ? 'text-white' : 'text-primary-900', index === selectedItems.items.length - 1 ? 'pb-6.25' : 'pb-1', 'pt-5 pl-3']"
-                        >{{ roundTo(item.tokenPrice / exchangeRate * bnbPrice) }}</div>
+                            :class="[store.getters['market/etherFromWei'](item.tokenPrice) * bnbPrice > 300 ? 'text-red-900' : store.getters['market/etherFromWei'](item.tokenPrice) * bnbPrice < 1 ? 'text-white' : 'text-primary-900', index === selectedItems.items.length - 1 ? 'pb-6.25' : 'pb-1', 'pt-5 pl-3']"
+                        >{{ roundTo(store.getters['market/etherFromWei'](item.tokenPrice) * bnbPrice) }}</div>
                     </template>
                 </div>
             </div>

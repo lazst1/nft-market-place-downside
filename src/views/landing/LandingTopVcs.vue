@@ -1,7 +1,6 @@
 <script setup>
 import LandingSection from './containers/LandingSection.vue';
-import NftmxTypography from '@/core/components/NftmxTypography.vue';
-import NftmxPriceCommon from '@/core/components/NftmxPriceCommon.vue';
+import NftmxPriceCommon from '@/core/components/price/NftmxPriceCommon.vue';
 import SectionButton from './components/SectionButton.vue';
 
 </script>
@@ -9,12 +8,12 @@ import SectionButton from './components/SectionButton.vue';
 <template>
     <landing-section>
         <div class="font-press text-center pt-1 text-white">
-            <nftmx-typography h1>Top Decentralized VCs</nftmx-typography>
+            <div class="text-xl sm:text-2xl lg:text-3xl">Top Decentralized VCs</div>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-7 xl:gap-x-9 mt-4">
             <div v-for="i in 8" :key="i" class="border-b border-black">
                 <div class="flex py-8 gap-6 2xl:gap-9">
-                    <div class="font-bold text-2xl">1</div>
+                    <div class="text-2xl">1</div>
                     <div class="flex items-center">
                         <div
                             :style="{ background: 'url(' + '/images/nfts/item1-45x.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'contain' }"

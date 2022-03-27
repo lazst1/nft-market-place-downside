@@ -1,5 +1,5 @@
 <script setup>
-import NftmxButton from '@/core/components/NftmxButton.vue';
+import NftmxButton from '@/core/components/basic/NftmxButton.vue';
 
 defineProps({
     to: String,

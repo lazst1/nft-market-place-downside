@@ -1,5 +1,4 @@
 <script setup>
-import NftmxTypography from '@/core/components/NftmxTypography.vue';
 import { computed, onMounted, onUpdated, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
@@ -27,7 +26,7 @@ watch(windowWidth, val => {
     <div ref="footer" class="bottom-0 w-full font-ibm absolute">
         <div class="bg-black text-white pt-6 pb-7 px-8">
             <p
-                class="text-center text-sm sm:text-xg text-primary-900 font-press leading-6 sm:leading-9"
+                class="text-center text-sm sm:text-19 text-primary-900 font-press leading-6 sm:leading-9"
             >NFT.mx is a fully decentralized protocol</p>
             <p
                 class="text-center text-sm pb-px"
@@ -36,7 +35,7 @@ watch(windowWidth, val => {
         <div v-if="extend" class="bg-tertiary-900 text-center pt-12">
             <div class="max-w-screen-3xl mx-auto pb-24.25">
                 <div class="text-white font-press px-4 pt-9.75 pb-2 sm:pb-6 lg:pb-12.5">
-                    <nftmx-typography h1>For developers and marketers</nftmx-typography>
+                    <div class="text-xl sm:text-2xl lg:text-3xl">For developers and marketers</div>
                 </div>
                 <div
                     class="grid grid-cols-1 lg:grid-cols-3 px-5.5 sm:px-10 md:px-16 lg:px-22 sm:gap-10 lg:gap-32"
@@ -102,7 +101,8 @@ watch(windowWidth, val => {
     font-size: 0.81rem;
     line-height: 1.5rem;
 }
-.text-xb {
+.text-19 {
     font-size: 19px;
+    line-height: 28px;
 }
 </style>
