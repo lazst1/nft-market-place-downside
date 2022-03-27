@@ -33,8 +33,14 @@ const token = computed(() => props.asset.tokenAddress ? props.asset : defaultAss
 const offerModalActive = ref(false);
 const store = useStore();
 const balance = ref();
-const vote = computed(() => token.value.votes.find(item => item === store.getters['auth/userId'] ? true : false));
+const vote = ref(false);
 const bnbPrice = ref(0);
+
+watchEffect(() => {
+    if (props.asset.tokenAddress) {
+        vote.value = props.asset.votes.find(item => item === store.getters['auth/userId'] ? true : false);
+    }
+})
 
 marketService.getUSDFromToken(TokenType.BNB).then(res => {
     bnbPrice.value = res.data.USD;
@@ -47,12 +53,15 @@ const handleOfferModal = (value) => {
     })
 }
 const handleVote = () => {
+    console.log('=======================', token.value)
     vote.value = !vote.value;
     if (vote.value) {
         marketService.vote(props.asset.tokenAddress, props.asset.tokenId, store.state.user.id).then(res => {
+            console.log('asdfasdfasdf')
         });
     } else {
         marketService.cancelVote(props.asset.tokenAddress, props.asset.tokenId, store.state.user.id).then(res => {
+            console.log('werqerqwerq')
         });
     }
 }
