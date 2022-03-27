@@ -71,7 +71,6 @@ const cancelOrder = async (order) => {
     store.state.marketContract.methods.claimDownsideProtectionAmount(
         props.order.orderId
     ).send({ from: walletAddress.value }).then(res => {
-        console.log('res: ', res);
     }).catch(err => {
         console.log('err: ', err);
     });

@@ -72,7 +72,6 @@ watchEffect(() => {
         loadingNFTs.value = true;
         loadingOrders.value = true;
         marketService.getNFTsFromWallet(walletAddress.value).then(async res => {
-            console.log('===================', res);
             const collectedNFTs = await JSON.parse(JSON.stringify(res.data));
             const nfts = await Promise.all(collectedNFTs.map(async (nft, index) => {
                 const tokenContract = new store.state.web3.eth.Contract(

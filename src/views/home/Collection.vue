@@ -25,7 +25,6 @@ const more = computed(() => allAssets.value.assets.length > 0 && assets.value.le
 
 const retrieveAssets = (init) => {
     marketService.getOpenseaAssetsFromCollection({ collection: props.collection.slug, cursor: allAssets.value.next }).then(res => {
-        console.log(res);
         loading.value = false;
         allAssets.value = {
             assets: [

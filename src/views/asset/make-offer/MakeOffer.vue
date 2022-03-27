@@ -21,7 +21,6 @@ const asset = ref({});
 
 marketService.getAsset(tokenAddress, tokenId).then(res => {
     asset.value = res.data;
-    console.log(res);
 });
 </script>
 

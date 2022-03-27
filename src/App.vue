@@ -15,7 +15,6 @@ if (typeof window.ethereum !== 'undefined') {
   ethereum
     .request({ method: 'eth_accounts' })
     .then(accounts => {
-      console.log('===========eth_accounts===========', accounts);
       if (accounts.length === 0) {
         // MetaMask is locked or the user has not connected any accounts
         store.dispatch('auth/login', null).then(res => {
@@ -48,7 +47,6 @@ if (typeof window.ethereum !== 'undefined') {
       }
     })
   ethereum.on('accountsChanged', function (accounts) {
-    console.log('===========accountsChanged===========', accounts);
     if (accounts.length === 0) {
       // MetaMask is locked or the user has not connected any accounts
       store.dispatch('auth/login', null).then(res => {
@@ -78,7 +76,6 @@ if (typeof window.ethereum !== 'undefined') {
     }
   })
   ethereum.on('chainChanged', (chainId) => {
-    console.log('===========chainChanged===========', chainId);
     if (chainId !== mainChain) {
       toast.error('Please switch to BSC Testnet')
       store.dispatch('auth/login', null).then(res => {
