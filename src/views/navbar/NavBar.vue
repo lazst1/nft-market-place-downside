@@ -60,7 +60,7 @@ const toggleNotificationBar = () => {
                 color="primary"
                 label="List NFT"
                 outline
-                class="h-6 w-37 font-ibm-bold transition text-white"
+                class="h-6 w-37 font-ibm-bold transition text-white text-xs"
               />
             </div>
           </nav-bar-item>

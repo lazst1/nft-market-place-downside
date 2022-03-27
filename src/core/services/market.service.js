@@ -78,6 +78,10 @@ class MatketService {
     getOpenseaAssetsFromCollection(data) {
         return http.get(`tokens/opensea/assets?slug=${data.collection}&cursor=${data.cursor}`);
     }
+
+    getAsset(tokenAddress, tokenId) {
+        return http.get(`tokens/opensea/asset?tokenAddress=${tokenAddress}&tokenId=${tokenId}`);
+    }
 }
 
 export default new MatketService();

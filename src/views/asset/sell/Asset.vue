@@ -9,7 +9,7 @@ import { saleType } from '@/core/config'
 import { useStore } from 'vuex';
 import AssetDetail from './AssetDetail.vue';
 import AssetStatistics from './AssetStatistics.vue';
-import AssetUser from './AssetUser.vue';
+import AssetUser from '@/core/components/asset/AssetUser.vue';
 import { themeConfig } from '@/core/config';
 import NavBarSearch from '@/core/components/search/NavBarSearch.vue';
 import Ledger from './Ledger.vue';
@@ -18,7 +18,7 @@ import { useRoute, useRouter } from 'vue-router';
 import moralisService from '@/core/services/moralis.service';
 import marketService from '@/core/services/market.service';
 import authService from '@/core/services/auth.service';
-import AssetInfo from '@/core/components/cards/AssetInfo.vue';
+import AssetInfo from '@/core/components/asset/AssetInfo.vue';
 
 const store = useStore();
 const router = useRouter();

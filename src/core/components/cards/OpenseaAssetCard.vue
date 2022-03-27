@@ -18,6 +18,7 @@ const windowWidth = computed(() => store.state.app.windowWidth);
 const card = ref(null);
 const transferred = ref('not');
 const price = ref(0);
+const open = ref(false);
 
 onMounted(() => {
     if (props.asset.last_sale && props.asset.last_sale.created_date) {
@@ -28,7 +29,7 @@ onMounted(() => {
 })
 
 const handleVote = () => {
-    
+
 }
 </script>
 
@@ -36,6 +37,8 @@ const handleVote = () => {
     <div ref="card" class="w-full">
         <div
             class="transition hover:shadow-[0_0px_12px_0px_rgb(0_0_0_/_0.1),_0_0px_0px_0px_rgb(0_0_0_/_0.1);] hover:shadow-primary-700"
+            @mouseover="open = true"
+            @mouseleave="open = false"
         >
             <div
                 class="relative w-full overflow-hidden pt-73per"
@@ -46,7 +49,7 @@ const handleVote = () => {
                     :period="(Math.random() * 365).toFixed()"
                 />
             </div>
-            <div class="px-4.5 pt-5.5 pb-6 bg-tertiary-700">
+            <div class="relative px-4.5 pt-5.5 pb-6 bg-tertiary-700">
                 <div class="flex text-white">
                     <div class="flex-1 text-base font-ibm-bold leading-6 pr-2 h-16">{{ asset.name }}</div>
                     <div class="text-xs flex mt-1.5">
@@ -64,6 +67,16 @@ const handleVote = () => {
                 >Current auction ends in</div>
                 <div class="pt-3 w-fit mx-auto max-w-full">
                     <timer />
+                </div>
+                <div
+                    :class="[open ? 'h-15' : 'h-0', 'absolute overflow-hidden bottom-0 left-0 w-full transition-all']"
+                >
+                    <nftmx-button
+                        :to="{ name: 'make_offer', params: { tokenAddress: asset.tokenAddress, tokenId: asset.tokenId } }"
+                        color="black"
+                        label="MAKE AN OFFER"
+                        class="transition-all w-full font-press text-sm h-15"
+                    />
                 </div>
             </div>
         </div>

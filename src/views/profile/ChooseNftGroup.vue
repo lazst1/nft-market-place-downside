@@ -37,8 +37,8 @@ const computedCount = computed(() => {
             return itemCounts.value.favorite;
         case 'HIDDEN':
             return itemCounts.value.hidden;
-        case 'ACTIVITY':
-            return itemCounts.value.activity;
+        case 'BUNDLED':
+            return itemCounts.value.bundled;
         default:
             break;
     }
@@ -59,7 +59,7 @@ const selectTab = (value) => {
         v-if="store.state.app.windowWidth > themeConfig.sm"
         class="overflow-auto mt-7.5 text-13 tracking-wider"
     >
-        <div class="flex gap-10.5 py-2 w-max ml-4">
+        <div class="flex gap-8 py-2 w-max ml-4">
             <list-group-item
                 :active="computedGroup.key === 'COLLECTED'"
                 @click="selectGroup('COLLECTED')"
@@ -68,6 +68,17 @@ const selectTab = (value) => {
                 <nftmx-badge
                     :active="computedGroup.key === 'COLLECTED'"
                     :value="itemCounts.collected"
+                    class="-ml-1 -mt-2.25"
+                />
+            </list-group-item>
+            <list-group-item
+                :active="computedGroup.key === 'BUNDLED'"
+                @click="selectGroup('BUNDLED')"
+            >
+                Bundled
+                <nftmx-badge
+                    :active="computedGroup.key === 'BUNDLED'"
+                    :value="itemCounts.bundled"
                     class="-ml-1 -mt-2.25"
                 />
             </list-group-item>
@@ -86,7 +97,7 @@ const selectTab = (value) => {
                 :active="computedGroup.key === 'DOWNSIDE'"
                 @click="selectGroup('DOWNSIDE')"
             >
-                Downside Protection
+                Under Downside Protection
                 <nftmx-badge
                     :active="computedGroup.key === 'DOWNSIDE'"
                     :value="itemCounts.downside"
@@ -97,7 +108,7 @@ const selectTab = (value) => {
                 :active="computedGroup.key === 'FAVORITE'"
                 @click="selectGroup('FAVORITE')"
             >
-                Favorite
+                My Favorite
                 <nftmx-badge
                     :active="computedGroup.key === 'FAVORITE'"
                     :value="itemCounts.favorite"
@@ -115,19 +126,6 @@ const selectTab = (value) => {
                     class="-ml-1 -mt-2.25"
                 />
             </list-group-item>
-            <!-- <list-group-item
-                :active="computedGroup.key === 'ACTIVITY'"
-                @click="selectGroup('ACTIVITY')"
-            >
-                Activity
-            </list-group-item>
-            <list-group-item
-                :active="computedGroup.key === 'Offers'"
-                @click="selectGroup('OFFERS')"
-            >
-                <span class="mr-4">Offers</span>
-                <font-awesome-icon :icon="['fas', 'sort-down']" class="relative -top-0.75" />
-            </list-group-item> -->
         </div>
         <div class="flex gap-10.5 ml-4 py-4 w-max" v-if="computedGroup.key === 'DOWNSIDE'">
             <list-group-item :active="selectedTab === 'ALL'" @click="selectTab('ALL')">
@@ -161,6 +159,13 @@ const selectTab = (value) => {
             :active="computedGroup.key === 'ON_SALE'"
             @click="selectGroup('ON_SALE')"
         >
+            Bundled
+            <span class="font-ibm-light">{{ itemCounts.bundled }}</span>
+        </list-group-sub-item>
+        <list-group-sub-item
+            :active="computedGroup.key === 'ON_SALE'"
+            @click="selectGroup('ON_SALE')"
+        >
             On Sale
             <span class="font-ibm-light">{{ itemCounts.onSale }}</span>
         </list-group-sub-item>
@@ -168,14 +173,14 @@ const selectTab = (value) => {
             :active="computedGroup.key === 'DOWNSIDE'"
             @click="selectGroup('DOWNSIDE')"
         >
-            Downside Protection
+            Under Downside Protection
             <span class="font-ibm-light">{{ itemCounts.downside }}</span>
         </list-group-sub-item>
         <list-group-sub-item
             :active="computedGroup.key === 'FAVORITE'"
             @click="selectGroup('FAVORITE')"
         >
-            Favorite
+            My Favorite
             <span class="font-ibm-light">{{ itemCounts.favorite }}</span>
         </list-group-sub-item>
         <list-group-sub-item
@@ -185,13 +190,6 @@ const selectTab = (value) => {
             Hidden
             <span class="font-ibm-light">{{ itemCounts.hidden }}</span>
         </list-group-sub-item>
-        <!-- <list-group-sub-item
-            :active="computedGroup.key === 'ACTIVITY'"
-            @click="selectGroup('ACTIVITY')"
-        >
-            Activity
-            <span class="font-ibm-light">{{ itemCounts.activity }}</span>
-        </list-group-sub-item> -->
     </list-group-accordion>
     <nftmx-divider v-if="store.state.app.windowWidth <= themeConfig.sm" />
 </template>

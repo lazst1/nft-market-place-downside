@@ -62,7 +62,7 @@ const counts = computed(() => {
         downsideSold: downsideOrdersSold.value.length,
         favorite: favoriteOrders.value.length,
         hidden: hiddenOrders.value.length,
-        activity: 0,
+        bundled: 0,
     }
 })
 
@@ -125,13 +125,13 @@ const selectGroup = (value) => {
             selectedGroup.value = { key: 'DOWNSIDE', name: 'Downside Protection' };
             break;
         case 'FAVORITE':
-            selectedGroup.value = { key: 'FAVORITE', name: 'Favorite' };
+            selectedGroup.value = { key: 'FAVORITE', name: 'My Favorite' };
             break;
         case 'HIDDEN':
             selectedGroup.value = { key: 'HIDDEN', name: 'Hidden' };
             break;
-        case 'ACTIVITY':
-            selectedGroup.value = { key: 'ACTIVITY', name: 'Activity' };
+        case 'BUNDLED':
+            selectedGroup.value = { key: 'BUNDLED', name: 'Bundled' };
             break;
         case 'OFFERS':
             selectedGroup.value = { key: 'OFFERS', name: 'Offers' };
@@ -369,7 +369,7 @@ const cancelOrder = async (order) => {
                 class="h-96 font-ibm-bold text-tertiary-500 text-lg flex items-center justify-center"
             >No orders found</div>
         </div>
-        <div v-if="selectedGroup.key === 'ACTIVITY'" class="mt-12 2xl:mt-11 mb-22">
+        <div v-if="selectedGroup.key === 'BUNDLED'" class="mt-12 2xl:mt-11 mb-22">
             <div
                 class="h-96 font-ibm-bold text-tertiary-500 text-lg flex items-center justify-center"
             >No orders found</div>

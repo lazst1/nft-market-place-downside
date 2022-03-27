@@ -6,6 +6,7 @@ import Create from '@/views/asset/create/Create.vue'
 import Profile from '@/views/profile/Profile.vue'
 import ProfileSetting from '@/views/profile/ProfileSetting.vue'
 import Asset from '@/views/asset/sell/Asset.vue'
+import MakeOffer from '@/views/asset/make-offer/MakeOffer.vue'
 
 export default [
     {
@@ -29,7 +30,7 @@ export default [
             title: 'BuyOrder'
         },
         path: '/order/buy/:orderId',
-        name: 'buyOrder',
+        name: 'buy_order',
         component: BuyOrder
     },
     {
@@ -73,5 +74,13 @@ export default [
         path: '/profile-setting',
         name: 'profile_setting',
         component: ProfileSetting
+    },
+    {
+        meta: {
+            title: 'MakeOffer'
+        },
+        path: '/make-offer/:tokenAddress/:tokenId',
+        name: 'make_offer',
+        component: MakeOffer
     }
 ]

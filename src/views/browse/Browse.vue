@@ -39,15 +39,15 @@ watchEffect(() => {
                     label="List Price Available"
                     :small="true"
                     :iconAfter="mdiCloseBox"
-                    class="hover:bg-transparent hover:text-primary-900 h-9"
+                    class="hover:bg-transparent hover:text-primary-900 h-9 text-xs"
                 />
             </div>
             <span class="text-primary-900 text-11 ml-4">Clear All</span>
         </div>
         <div
-            class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5"
+            class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mb-11 pb-0.5 mt-10"
         >
-            <nftmx-sale-card v-for="(order, index) in orders" :data="order" :key="index"></nftmx-sale-card>
+            <nftmx-sale-card v-for="(order, index) in orders" :order="order" :key="index"></nftmx-sale-card>
             <!-- <nftmx-sale-card v-for="index in 2" :key="index"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{syndication:false}"></nftmx-sale-card>
             <nftmx-sale-card v-for="index in 2" :key="index" :data="{auction:true}"></nftmx-sale-card>

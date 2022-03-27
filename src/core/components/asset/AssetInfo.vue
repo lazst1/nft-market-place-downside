@@ -13,19 +13,7 @@ import ListGroupItem from '@/core/components/basic/ListGroupItem.vue';
 import ListGroupSubItem from '@/core/components/basic/ListGroupSubItem.vue';
 
 const props = defineProps({
-    percent: {
-        type: Number,
-        default: -1
-    },
-    period: {
-        type: Number,
-        default: -1
-    },
-    nft: Object,
-    nftCreator: {
-        type: Object,
-        default: defaultUser
-    }
+    asset: Object
 })
 
 const store = useStore();
@@ -47,9 +35,8 @@ const cancelNFT = () => {
 <template>
     <div
         class="relative overflow-hidden w-full h-asset-img-lg border border-black"
-        :style="{ background: 'url(' + '/images/nfts/img10.png' + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#222222' }"
+        :style="{ background: 'url(' + asset.image_url + ')', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#222222' }"
     >
-        <ribbon v-if="percent > -1" :percent="percent" :period="period" big />
         <inside-modal
             :title="toUpercaseFirstLetterOfString(tab)"
             v-if="tab === assetDetailTabs[0]"
@@ -59,12 +46,12 @@ const cancelNFT = () => {
                 Created by
                 <nftmx-wallet-address-pop
                     class="text-primary-900"
-                    :address="nftCreator.walletAddress"
+                    :address="asset.creator.address"
                 />
             </div>
             <div class="text-11 text-tertiary-500 mt-4">
                 {{
-                    nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
+                    asset.description
                 }}
             </div>
         </inside-modal>
@@ -74,13 +61,10 @@ const cancelNFT = () => {
             @select-tab="selectTab"
         >
             <div class="flex gap-6 items-start">
-                <img
-                    :src="nftCreator.profile_img ? baseURL + nftCreator.profile_img : defaultUser.profile_img"
-                    class="w-21 h-21 object-cover"
-                />
+                <img :src="asset.creator.profile_img_url" class="w-21 h-21 object-cover" />
                 <div class="text-11 text-tertiary-500 leading-5">
                     {{
-                        nftCreator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
+                        asset.creator.bio || '3D CryptoPunks only 100 different Punks will be available. Supply for each Punks: 1/1'
                     }}
                 </div>
             </div>
@@ -102,15 +86,15 @@ const cancelNFT = () => {
         >
             <div class="text-11 flex justify-between">
                 <span class="font-ibm-medium">Contract Address</span>
-                <nftmx-wallet-address-pop class="text-primary-900" :address="nft.token_address" />
+                <nftmx-wallet-address-pop class="text-primary-900" :address="asset.tokenAddress" />
             </div>
             <div class="text-11 flex justify-between mt-4">
                 <span class="font-ibm-medium">Token ID</span>
-                <span>{{ nft.token_id }}</span>
+                <span>{{ asset.tokenId }}</span>
             </div>
             <div class="text-11 flex justify-between mt-4">
                 <span class="font-ibm-medium">Blockchain</span>
-                <span>BSC Testnet</span>
+                <span>Ethereum</span>
             </div>
         </inside-modal>
         <inside-modal
@@ -125,20 +109,6 @@ const cancelNFT = () => {
                 <div
                     class="text-tertiary-500 text-sm 3xl:leading-6"
                 >If you are a buyer, think of NFT.mx as a new strategic staking program with upside from selling the NFT, while also providing the option to cancel your investment and get a 100% refund with your original tokens.</div>
-                <div class="flex flex-col gap-6" v-if="period > -1">
-                    <div class="flex justify-around">
-                        <div class="text-center">
-                            <div class="font-ibm-bold text-lg">Days left</div>
-                            <div
-                                class="text-3.5xl text-primary-800 -mt-0.75"
-                            >{{ period + '/' + period }}</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="font-ibm-bold text-lg">Protection</div>
-                            <div class="text-3.5xl text-primary-800 -mt-0.75">{{ percent }}%</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </inside-modal>
     </div>
