@@ -40,19 +40,17 @@ marketService.listedItems().then(res => {
     listedItems.value = res.data;
 });
 const retrieveCollections = () => {
-    openseaService.retrieveCollections({ offset: retrieveOffset.value, limit: retrieveLimit.value }).then(res => {
-        // const validCollections = res.data.collections.filter(item => item.safelist_request_status === 'verified');
-        const validCollections = openseaTrendingCollections.sort(() => 0.5 - Math.random());
-        // console.log(res.data, validCollections)
-        retrieveOffset.value += retrieveLimit.value;
-        // if (validCollections.length === 0) {
-        //     retrieveCollections();
-        //     return;
-        // }
-        // console.log('success===', validCollections);
-        allCollections.value = validCollections;
-        loadMoreCollection();
-    })
+    // const validCollections = res.data.collections.filter(item => item.safelist_request_status === 'verified');
+    const validCollections = openseaTrendingCollections.sort(() => 0.5 - Math.random());
+    // console.log(res.data, validCollections)
+    retrieveOffset.value += retrieveLimit.value;
+    // if (validCollections.length === 0) {
+    //     retrieveCollections();
+    //     return;
+    // }
+    // console.log('success===', validCollections);
+    allCollections.value = validCollections;
+    loadMoreCollection();
 }
 
 onMounted(() => {

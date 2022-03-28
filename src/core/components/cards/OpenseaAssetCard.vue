@@ -6,16 +6,19 @@ import NftmxButton from '@/core/components/basic/NftmxButton.vue'
 import { computed, onMounted, ref, watch, watchEffect } from 'vue';
 import Timer from '@/core/components/timer/Timer.vue'
 import moralisService from '@/core/services/moralis.service';
-import { TokenType } from '@/core/config';
+import { TokenType, mainChain } from '@/core/config';
 import { useStore } from 'vuex';
 import marketService from '@/core/services/market.service';
+import { useToast } from 'vue-toastification';
 
 const props = defineProps({
     asset: Object
 })
 
 const store = useStore();
-const vote = ref(props.asset.votes.find(item => item === store.getters['auth/userId'] ? true : false));
+const toast = useToast();
+const userId = computed(() => store.getters['auth/userId']);
+const vote = ref(props.asset.votes.find(item => item === userId.value ? true : false));
 const voteCount = ref(props.asset.votes.length);
 const windowWidth = computed(() => store.state.app.windowWidth);
 const card = ref(null);
@@ -41,6 +44,41 @@ const handleVote = () => {
         marketService.cancelVote(props.asset.tokenAddress, props.asset.tokenId, store.state.user.id).then(res => {
             voteCount.value--;
         });
+    }
+}
+
+const connect = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+        ethereum
+            .request({ method: 'eth_requestAccounts' })
+            .then(accounts => {
+                ethereum.request({ method: 'eth_chainId' })
+                    .then(chain => {
+                        if (chain !== mainChain) {
+                            toast.error('Please switch to BSC Testnet');
+                            store.dispatch('auth/login', null)
+                        } else {
+                            handleLogin(accounts)
+                        }
+                    })
+            })
+            .catch((err) => {
+                if (err.code === 4001) {
+                    // EIP-1193 userRejectedRequest error
+                    // If this happens, the user rejected the connection request.
+                    toast.error('Please connect to MetaMask')
+                } else {
+                    toast.error(err.message)
+                }
+            });
+    } else {
+        toast.error('Please install MetaMask')
+    }
+}
+
+const handleLogin = (accounts) => {
+    if (accounts.length === 0) {
+        toast.error('Please connect to MetaMask')
     }
 }
 </script>
@@ -84,10 +122,17 @@ const handleVote = () => {
                     :class="[open ? 'h-15' : 'h-0', 'absolute overflow-hidden bottom-0 left-0 w-full transition-all']"
                 >
                     <nftmx-button
+                        v-if="userId"
                         :to="{ name: 'make_offer', params: { tokenAddress: asset.tokenAddress, tokenId: asset.tokenId } }"
                         color="black"
                         label="MAKE AN OFFER"
                         class="transition-all w-full font-press text-sm h-15"
+                    />
+                    <nftmx-button
+                        v-else
+                        label="CONNECT WALLET"
+                        class="transition-all w-full font-press text-xs h-15 bg-black hover:bg-tertiary-900 text-white"
+                        @click="connect"
                     />
                 </div>
             </div>
