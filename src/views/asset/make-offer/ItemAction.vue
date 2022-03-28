@@ -56,11 +56,9 @@ const handleVote = () => {
     vote.value = !vote.value;
     if (vote.value) {
         marketService.vote(props.asset.tokenAddress, props.asset.tokenId, store.state.user.id).then(res => {
-            console.log('asdfasdfasdf')
         });
     } else {
         marketService.cancelVote(props.asset.tokenAddress, props.asset.tokenId, store.state.user.id).then(res => {
-            console.log('werqerqwerq')
         });
     }
 }
