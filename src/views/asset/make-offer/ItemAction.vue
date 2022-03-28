@@ -53,7 +53,6 @@ const handleOfferModal = (value) => {
     })
 }
 const handleVote = () => {
-    console.log('=======================', token.value)
     vote.value = !vote.value;
     if (vote.value) {
         marketService.vote(props.asset.tokenAddress, props.asset.tokenId, store.state.user.id).then(res => {
