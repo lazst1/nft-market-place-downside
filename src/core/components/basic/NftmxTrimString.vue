@@ -3,15 +3,14 @@ defineProps({
     line: {
         type: Number,
         default: 1
-    }
+    },
+    text: String
 })
 
 </script>
 
 <template>
-    <div class="truncated" :style="{'-webkit-line-clamp': line}">
-        <slot />
-    </div>
+    <div class="truncated" :style="{ '-webkit-line-clamp': line }">{{ text }}</div>
 </template>
 
 <style scoped>

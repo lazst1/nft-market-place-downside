@@ -43,7 +43,7 @@ const tokenImage = ref(props.image || 'images/nfts/img10.png')
                 label="Approve To List"
                 color="primary"
                 outline
-                class="font-press z-10 text-primary-400 mx-2 h-13.5"
+                class="font-press z-10 text-xs text-primary-400 mx-2 h-13.25"
                 @click="emit('approve')"
             />
         </div>
