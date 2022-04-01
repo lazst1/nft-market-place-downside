@@ -143,12 +143,13 @@ const cancelNFT = () => {
     </div>
     <div class="mt-4 mb-8 items-center">
         <div :class="['relative flex w-full text-sm font-ibm items-baseline']">
-            <div v-if="store.state.app.windowWidth >= 1920" class="flex-1 flex px-5">
+            <div v-if="store.state.app.windowWidth >= 1920" class="flex-1 flex px-5 gap-7">
                 <list-group-item
                     v-for="(name, i) in assetDetailTabs"
                     :key="i"
                     @click="selectTab(name === tab ? 'Please select' : name)"
                     :active="name === tab"
+                    class="min-w-max"
                 >{{ name }}</list-group-item>
             </div>
             <accordion

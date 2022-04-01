@@ -392,11 +392,6 @@ export const openseaTrendingCollections = [
         "logo": "https://lh3.googleusercontent.com/p4WnHUMHJ68cmFAO2Acs6XxhHF34eAg-GceS6AIaL3J07rW9q65mm3hMIanZV4blWaVCsXmPwe5qCh5949WezQ7X5uH6dtydvana=s120"
     },
     {
-        "name": "Metroverse",
-        "slug": "metroverse",
-        "logo": "https://lh3.googleusercontent.com/sHO92R4xynTQtuC-DZ1B5qC5ZJe3n3Y46iufDza_sDXHuSj1zhhguoj-YjKN0pxh3b0Lg0Rz8Cp_BQliEh1o_-puGOVDDH8H7bzqcQ=s120"
-    },
-    {
         "name": "Blockchain Bandits Official",
         "slug": "blockchain-bandits-official",
         "logo": "https://lh3.googleusercontent.com/6UFfIlJbT4Y7JjOaJxOBJQczYas7Ybt26TMw2JMXirfVXGgKvRbo9FEB4-jaJ_C3sxDnWL9GsRPvvmmRgvC4Jw0utTSgwS8mxjb-ew=s120"
