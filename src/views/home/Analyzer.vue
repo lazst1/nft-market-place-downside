@@ -10,7 +10,7 @@ import AnalyzerCardContainer from './container/AnalyzerCardContainer.vue';
         class="grid lg:grid-cols-2 3xl:flex justify-center 3xl:justify-between pt-10.5 pb-2.75 px-22"
     >
         <analyzer-card-container>
-            <div class="h-9 flex">
+            <div class="h-9 flex justify-center">
                 Decentralized Venture Capital
                 <nftmx-help class="text-8" />
             </div>

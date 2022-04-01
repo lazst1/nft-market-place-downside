@@ -9,5 +9,5 @@ defineProps({
 </script>
 
 <template>
-    {{text.length < length ? text : text.slice(0, length) + ' ...'}}
+    <span>{{ text.length < length ? text : text.slice(0, length) + ' ...' }}</span>
 </template>

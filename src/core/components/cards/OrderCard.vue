@@ -6,6 +6,7 @@ import TextCompression from '@/core/components/basic/TextCompression.vue';
 import { useStore } from 'vuex';
 import NftmxCancelModal from '@/core/components/modal/NftmxCancelModal.vue';
 import marketService from '@/core/services/market.service';
+import NftmxTrimString from '@/core/components/basic/NftmxTrimString.vue';
 
 const props = defineProps({
     order: Object,
@@ -49,67 +50,80 @@ const cancelOrder = () => {
         @approve="approve"
     >
         <div>
-            <div :class="['h-24', 'mb-0.5']">
-                <div class="text-tertiary-400 text-11">{{ order.nft.name ? order.nft.name : '' }}</div>
-                <div
-                    class="text-white font-ibm-medium text-sm leading-5.25 my-0.75"
-                >{{ metadata.name ? metadata.name : 'Unnamed' }}</div>
-                <div class="text-tertiary-400 font-ibm-light text-11 leading-5.25">
-                    <text-compression
-                        :text="metadata.description ? metadata.description : 'No description'"
-                        :length="40"
-                    />
-                </div>
-            </div>
-            <div class="flex items-center font-ibm-semi-bold mt-1">
-                <div class="text-sm flex flex-1 items-center">
-                    <div class="relative">
+            <div class="h-24 mb-0.5 relative">
+                <div class="flex justify-between gap-4">
+                    <div>
                         <div
-                            @click.prevent
-                            v-show="option"
-                            class="absolute w-52 bottom-5 -ml-5 px-5.5 py-3.25 bg-black text-white hover:text-primary-900 leading-9.5 font-ibm-light text-xs"
-                        >
-                            <router-link
-                                v-if="order.orderStatus === -1"
-                                :to="{ name: 'asset', params: { tokenAddress: order.tokenAddress, tokenId: order.tokenId } }"
-                                class="text-white hover:text-primary-700 cursor-pointer"
-                            >List for Sale</router-link>
-                            <router-link
-                                :to="{ name: 'cancelOrder', params: { orderId: order.id } }"
-                                v-if="order.orderStatus === '2' && order.buyerAddress === store.getters['auth/walletAddress']"
-                                class="text-white hover:text-primary-700 cursor-pointer"
-                            >Cancel buying</router-link>
-                            <div
-                                v-if="order.orderStatus === '0'"
-                                class="text-white hover:text-primary-700 cursor-pointer"
-                                @click="openCancel"
-                            >Cancel selling</div>
-                            <div class="text-white hover:text-primary-700 cursor-pointer">Copy link</div>
-                            <div class="text-white hover:text-primary-700 cursor-pointer">Transfer</div>
-                            <div
-                                class="text-white hover:text-primary-700 cursor-pointer"
-                            >Make profile picture</div>
-                            <div
-                                v-if="order.hiders.findIndex(id => id === store.state.user.id) === -1"
-                                class="text-white hover:text-primary-700 cursor-pointer"
-                                @click="hideNFT(true)"
-                            >Hide</div>
-                            <div
-                                v-if="order.hiders.findIndex(id => id === store.state.user.id) > -1"
-                                class="text-white hover:text-primary-700 cursor-pointer"
-                                @click="hideNFT(false)"
-                            >Unhide</div>
-                            <div class="text-white hover:text-primary-700 cursor-pointer">Unbundle</div>
-                        </div>
+                            class="text-tertiary-400 text-11"
+                        >{{ order.nft.name ? order.nft.name : '' }}</div>
+                        <div
+                            class="text-white font-ibm-medium text-sm leading-5.25 my-0.75"
+                        >{{ metadata.name ? metadata.name : 'Unnamed' }}</div>
                     </div>
                     <div
                         v-click-outside="onClickOutside"
                         @click="option = !option"
                         @click.prevent
-                        class="pr-3 mr-px transition text-white hover:text-primary-900 text-lg cursor-pointer"
+                        class="transition text-white hover:text-primary-900 text-lg cursor-pointer"
                     >
                         <font-awesome-icon :icon="['fas', 'ellipsis-v']" />
                     </div>
+                    <div class="absolute -right-5 bottom-25">
+                        <div
+                            @click.prevent
+                            v-show="option"
+                            class="w-52 px-5.5 py-3.25 bg-black text-white hover:text-primary-900 leading-9.5 font-ibm-light text-xs"
+                        >
+                            <router-link
+                                v-if="order.orderStatus === -1"
+                                :to="{ name: 'asset', params: { tokenAddress: order.tokenAddress, tokenId: order.tokenId } }"
+                                class="transition text-white hover:text-primary-700 cursor-pointer"
+                            >List for Sale</router-link>
+                            <!-- <router-link
+                                :to="{ name: 'cancelOrder', params: { orderId: order.id } }"
+                                v-if="order.orderStatus === '2' && order.buyerAddress === store.getters['auth/walletAddress']"
+                                class="transition text-white hover:text-primary-700 cursor-pointer"
+                            >Cancel buying</router-link> -->
+                            <div
+                                v-if="order.orderStatus === '0'"
+                                class="transition text-white hover:text-primary-700 cursor-pointer"
+                                @click="openCancel"
+                            >Cancel selling</div>
+                            <div
+                                class="transition text-white hover:text-primary-700 cursor-pointer"
+                            >Copy link</div>
+                            <div
+                                class="transition text-white hover:text-primary-700 cursor-pointer"
+                            >Transfer</div>
+                            <div
+                                class="transition text-white hover:text-primary-700 cursor-pointer"
+                            >Make profile picture</div>
+                            <div
+                                v-if="order.hiders.findIndex(id => id === store.state.user.id) === -1"
+                                class="transition text-white hover:text-primary-700 cursor-pointer"
+                                @click="hideNFT(true)"
+                            >Hide</div>
+                            <div
+                                v-if="order.hiders.findIndex(id => id === store.state.user.id) > -1"
+                                class="transition text-white hover:text-primary-700 cursor-pointer"
+                                @click="hideNFT(false)"
+                            >Unhide</div>
+                            <div
+                                v-if="order.bundled"
+                                class="transition text-white hover:text-primary-700 cursor-pointer"
+                            >Unbundle</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-tertiary-400 font-ibm-light text-11 leading-5.25">
+                    <nftmx-trim-string
+                        :text="metadata.description ? metadata.description : 'No description'"
+                        :line="2"
+                    />
+                </div>
+            </div>
+            <div class="flex items-center font-ibm-semi-bold mt-1">
+                <div class="text-sm flex flex-1 items-center">
                     <checkbox-cell @click.stop border="border-tertiary-500" small>
                         <span class="text-xs relative text-tertiary-500 -ml-2">Sell</span>
                     </checkbox-cell>
